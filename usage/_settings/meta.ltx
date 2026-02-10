@@ -1,0 +1,341 @@
+[settings]
+gamedata_path_mod = C:\iP\Games\STALKER - SoC [1.0004]\gamedata
+gamedata_path_original = C:\iP\mod\UEgamedata (v1.0006)
+
+; gamedata_path_original
+; Это путь до папки gamedata с игровыми ресурсами оригинальной игры.
+; Как минимум там должны содержаться все конфиги (папка config).
+; Если gamedata мода уже содержит все использующиеся в игре конфиги, то можно не указывать.
+
+; ----------------------------------------------------------------
+
+[features]
+; Флаги, использующиеся пока только в spawn_inspector.py
+iPv20 = False
+iPv30 = False
+
+; ----------------------------------------------------------------
+
+[spawn]
+; TODO: необходимо указать все файлы alife_*.ltx (ACDC)
+; spawns\iP.ACDC\core\ACDC\alife_l01_escape.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l02_garbage.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l03_agroprom.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l03u_agr_underground.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l04_darkvalley.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l04u_labx18.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l05_bar.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l06_rostok.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l07_military.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l08_yantar.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l08u_brainlab.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l10_radar.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l10u_bunker.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l11_pripyat.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l12_stancia.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l12_stancia_2.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l12u_control_monolith.ltx
+; spawns\iP.ACDC\core\ACDC\alife_l12u_sarcofag.ltx
+; spawns\iP.ACDC\core\ACDC\_script_l10_radar.ltx
+
+; ----------------------------------------------------------------
+
+[trade]
+; Секция с коэффициентами покупки торговцами предметов.
+file_path = config\misc\trade_trader.ltx    ; config\misc\trade.ltx
+buy_section = trader_generic_buy            ; trade_buy_all
+
+; ----------------------------------------------------------------
+
+[level_gvids]
+; vanilla game.graph
+l01_escape              = 0
+l02_garbage             = 252
+l03_agroprom            = 416
+l03u_agr_underground    = 703
+l04_darkvalley          = 811
+l04u_labx18             = 1109
+l05_bar                 = 1168
+l06_rostok              = 1308
+l08_yantar              = 1438
+l08u_brainlab           = 1529
+l07_military            = 1545
+l10_radar               = 1862
+l11_pripyat             = 2117
+l12_stancia             = 2273
+l12u_sarcofag           = 2402
+l12u_control_monolith   = 2467
+l12_stancia_2           = 2517
+l10u_bunker             = 2661
+stohe_selo              = 2792
+ai_test                 = 2798
+ai_test2                = 2841
+jim_dark                = 2885
+slipch_al_test          = 2890
+plecha_selo             = 2929
+ai_test_new             = 2931
+koan_test               = 2959
+l05_bar_hw              = 2964
+l03_agroprom_hw         = 3115
+l03u_agr_underground_hw = 3403
+
+; ----------------------------------------------------------------
+
+; Группировка секций инвентарных предметов
+; Наличие здесь класса в некоторых скриптах используется как критерий инвентарного предмета.
+[inv_class_to_type]
+
+ARTEFACT    = T_ART
+SCRPTART    = T_ART
+
+WP_AK74     = T_WPN
+WP_BM16     = T_WPN
+WP_GROZA    = T_WPN
+WP_HPSA     = T_WPN
+WP_LR300    = T_WPN
+WP_PM       = T_WPN
+WP_RG6      = T_WPN
+WP_RPG7     = T_WPN
+WP_SHOTG    = T_WPN
+WP_SVD      = T_WPN
+WP_SVU      = T_WPN
+WP_USP45    = T_WPN
+WP_VAL      = T_WPN
+WP_VINT     = T_WPN
+WP_WALTH    = T_WPN
+
+AMMO        = T_AMMO
+
+A_M209      = T_PROJ
+A_OG7B      = T_PROJ
+A_VOG25     = T_PROJ
+
+G_F1        = T_GREN
+G_RGD5      = T_GREN
+
+W_GLAUNC    = T_ADDON
+WP_SCOPE    = T_ADDON
+W_SILENC    = T_ADDON
+
+E_STLK      = T_OUTFIT
+
+D_SIMDET    = T_OTHER
+II_ANTIR    = T_OTHER
+II_ATTCH    = T_OTHER
+II_BANDG    = T_OTHER
+II_BOTTL    = T_OTHER
+II_FOOD     = T_OTHER
+II_MEDKI    = T_OTHER
+
+TORCH_S     = T_HIDDEN
+WP_BINOC    = T_HIDDEN
+WP_KNIFE    = T_HIDDEN
+
+; ----------------------------------------------------------------
+
+; Группировка секций мобов (NPC и монстры)
+; Наличие здесь класса в некоторых скриптах используется как критерий моба.
+[mob_class_to_type]
+
+; AI_TRD_S - Сидорович (m_trader)
+
+AI_STL_S    = T_STALKER
+
+SM_BLOOD    = T_MONSTER
+SM_BOARW    = T_MONSTER
+SM_DOG_S    = T_MONSTER
+SM_FLESH    = T_MONSTER
+SM_P_DOG    = T_MONSTER
+SM_BURER    = T_MONSTER
+SM_CAT_S    = T_MONSTER
+IP_CAT_S    = T_MONSTER
+SM_CHIMS    = T_MONSTER
+IP_CHM_A    = T_MONSTER
+IP_CHM_P    = T_MONSTER
+SM_WOLK     = T_MONSTER
+IP_CHM_S    = T_MONSTER
+IP_WLK_S    = T_MONSTER
+IP_IZL_S    = T_MONSTER
+IP_CTR_S    = T_MONSTER
+IP_GRG_S    = T_MONSTER
+IP_ZOM_P    = T_MONSTER
+IP_ZOM_Y    = T_MONSTER
+IP_PLT_S    = T_MONSTER
+IP_DOG_B    = T_MONSTER
+IP_DOG_T    = T_MONSTER
+SM_CONTR    = T_MONSTER
+SM_IZLOM    = T_MONSTER
+SM_POLTR    = T_MONSTER
+SM_GIANT    = T_MONSTER
+IP_GIG_P    = T_MONSTER
+SM_ZOMBI    = T_MONSTER
+SM_SNORK    = T_MONSTER
+SM_TUSHK    = T_MONSTER
+SM_RAT      = T_MONSTER
+SM_DOG_P    = T_MONSTER
+SM_DOG_F    = T_MONSTER
+
+; ----------------------------------------------------------------
+
+; Классы аномальных зон
+[is_anomaly_class]
+Z_MBALD     = true  ; CSE_ALifeAnomalousZone    ; CMosquitoBald     ; zone_mosquito_bald
+Z_MINCER    = true  ; CSE_ALifeAnomalousZone    ; CMincer           ; zone_mincer
+Z_ACIDF     = true  ; CSE_ALifeAnomalousZone    ; CMosquitoBald     ; zone_acid_fog
+Z_GALANT    = true  ; CSE_ALifeAnomalousZone    ; CMincer           ; zone_galantine
+Z_RADIO     = true  ; CSE_ALifeAnomalousZone    ; CRadioactiveZone  ; zone_radioactive
+Z_BFUZZ     = true  ; CSE_ALifeZoneVisual       ; CHairsZone        ; zone_bfuzz
+Z_RUSTYH    = true  ; CSE_ALifeZoneVisual       ; CHairsZone        ; zone_rusty_hair
+Z_AMEBA     = true  ; CSE_ALifeZoneVisual       ; CAmebaZone        ; ameba_zone
+Z_NOGRAV    = true  ; CSE_ALifeAnomalousZone    ; CNoGravityZone    ; nogravity_zone
+Z_DEAD      = true  ; CSE_ALifeAnomalousZone    ; CMosquitoBald     ; zone_dead
+Z_TORRID    = true  ; CSE_ALifeTorridZone       ; CTorridZone       ; torrid_zone
+ZS_BFUZZ    = true  ; se_zones.se_zone_visual   ; CHairsZone        ; zone_bfuzz_s
+ZS_MBALD    = true  ; se_zones.se_zone_anom     ; CMosquitoBald     ; zone_mbald_s
+ZS_GALAN    = true  ; se_zones.se_zone_anom     ; CMincer           ; zone_galant_s
+ZS_MINCE    = true  ; se_zones.se_zone_anom     ; CMincer           ; zone_mincer_s
+
+; Классы, распознающиеся как аномалии в _g.IsAnomaly
+[is_anomaly_class2]
+Z_AMEBA     = true
+ZS_BFUZZ    = true
+ZS_MBALD    = true
+ZS_GALAN    = true
+ZS_MINCE    = true
+
+; ----------------------------------------------------------------
+
+[ignore_sections]
+
+; --unique_items--
+outfit_novice_m1
+outfit_bandit_m1
+outfit_dolg_m1
+outfit_killer_m1
+outfit_specnaz_m1
+outfit_stalker_m1
+outfit_stalker_m2
+outfit_svoboda_m1
+outfit_exo_m1
+wpn_ak74_m1
+wpn_abakan_m1
+wpn_fort_m1
+wpn_ak74u_m1
+wpn_mp5_m1
+wpn_groza_m1
+wpn_spas12_m1
+wpn_winchester_m1
+wpn_l85_m1
+wpn_lr300_m1
+wpn_svd_m1
+wpn_sig_m1
+wpn_eagle_m1
+wpn_colt_m1
+wpn_val_m1
+wpn_mp5_m2
+wpn_abakan_m2
+wpn_l85_m2
+wpn_sig_m2
+wpn_rg6_m1
+wpn_walther_m1
+wpn_pm_arena
+wpn_mp5_arena
+wpn_toz34_arena
+wpn_spas12_arena
+wpn_ak74_arena
+wpn_bm16_arena
+wpn_ak74u_arena
+wpn_val_arena
+wpn_groza_arena
+wpn_fn2000_arena
+wpn_g36_arena
+hunters_toz
+
+; --multiplayer--
+mp_wpn_rpg7
+mp_ammo_11.43x23_fmj
+mp_ammo_11.43x23_hydro
+mp_ammo_12x70_buck
+mp_ammo_12x76_dart
+mp_ammo_12x76_zhekan
+mp_ammo_5.45x39_ap
+mp_ammo_5.45x39_fmj
+mp_ammo_5.56x45_ap
+mp_ammo_5.56x45_ss190
+mp_ammo_7.62x54_7h1
+mp_ammo_7.62x54_7h14
+mp_ammo_7.62x54_ap
+mp_ammo_9x18_fmj
+mp_ammo_9x18_pbp
+mp_ammo_9x18_pmm
+mp_ammo_9x19_fmj
+mp_ammo_9x19_pbp
+mp_ammo_9x39_ap
+mp_ammo_9x39_pab9
+mp_ammo_9x39_sp5
+mp_ammo_gauss
+
+; --not in use--
+ammo_9x18_pbp
+
+; --auxiliary sections--
+ammo_12x76_zhekan_heli
+grenade_f1_test
+grenade_rgd5_test
+guitar_a
+harmonica_a
+attachable_item
+yad
+ip_quest_item
+wpn_addon_scope_dummy
+
+; --testing utilities--
+ip_test
+test_outfit
+
+; --extra items--
+ecolog_device
+hand_radio
+
+; --T_HIDDEN--
+device_torch
+wpn_binoc
+wpn_knife
+
+; --build monsters--
+m_burer_e
+m_cat_e
+m_chimera_e
+m_fracture_e
+m_rat_e
+m_zombie_e
+
+; --other monsters--
+; aes_snork
+; bloodsucker_mil
+; dog_strong_respawn_1
+; dog_strong_respawn_2
+; m_bloodsucker_e
+; m_boar_e
+; m_controller_e
+; m_dog_e
+; m_flesh_e
+; m_gigant_e
+; m_poltergeist_e
+; m_poltergeist_normal
+; m_poltergeist_tele_outdoor
+; m_pseudodog_e
+; m_snork_e
+; m_tushkano_e
+; psy_dog_phantom
+; psy_dog_radar
+; snork_indoor
+; snork_jumper
+; snork_outdoor
+; zombie_strong_respawn_1
+; zombie_strong_respawn_2
+; zombie_weak_respawn_1
+; zombie_weak_respawn_2
+; zombie_weak_respawn_3
+
+; ----------------------------------------------------------------

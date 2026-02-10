@@ -1,0 +1,191 @@
+
+;## iP: Monolith (Novice) ##
+[_ip_monolith_1n]
+_genmode = 2
+class = ip_monolith_1n
+community = monolith
+rank = 1n
+reputation = -50, 50
+money = 5, 50
+w0 = wpn_ak74u, wpn_mp5
+w1 = wpn_pb, wpn_pm
+w2 = wpn_wincheaster1300
+items = grenade_rgd5 (1, prob=0.2)
+include_supplies = character_drugs, character_food, character_items
+include = character_criticals, character_dialogs
+
+[ip_monolith_1n1]:_ip_monolith_1n
+visual = actors\monolit\stalker_mo1n_head_1
+snd_config = characters_voice\human_04\monolith\  ;human_02
+
+[ip_monolith_1n2]:_ip_monolith_1n
+visual = actors\monolit\stalker_mo1n_hood_9
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+[ip_monolith_1n3]:_ip_monolith_1n
+visual = actors\monolit\stalker_mo1n_mask
+snd_config = characters_voice\human_04\monolith\  ;human_01
+
+
+;## iP: Monolith (Experienced) ##
+[_ip_monolith_2e]
+_genmode = 2
+class = ip_monolith_2e
+community = monolith
+rank = 2e
+reputation = -50, 50
+money = 10, 100
+w0 = None
+w1 = wpn_fort, wpn_colt1911, wpn_sig220, wpn_beretta
+w2 = wpn_spas12, wpn_ak74, wpn_lr300
+items = grenade_rgd5 (1, prob=0.5)
+include_supplies = character_drugs, character_food, character_items
+include = character_criticals, character_dialogs
+
+[ip_monolith_2e1]:_ip_monolith_2e
+visual = actors\monolit\stalker_mo_head_1
+snd_config = characters_voice\human_04\monolith\  ;human_02
+
+[ip_monolith_2e2]:_ip_monolith_2e
+visual = actors\monolit\stalker_mo_hood_9
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+[ip_monolith_2e3]:_ip_monolith_2e
+visual = actors\monolit\stalker_mo_mask
+snd_config = characters_voice\human_04\monolith\  ;human_01
+
+[ip_monolith_2e4]:_ip_monolith_2e
+visual = actors\monolit\stalker_mo_nauchniy
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+
+;## iP: Monolith (Experienced, Sniper) ##
+[_ip_monolith_2e_sniper]
+_genmode = 2
+class = ip_monolith_2e_sniper
+community = monolith
+rank = 2e
+reputation = -50, 50
+money = 10, 100
+w1 = wpn_fort, wpn_colt1911, wpn_sig220, wpn_beretta
+w2 = wpn_svd
+items = None
+include_supplies = character_drugs, character_food
+include = character_criticals, character_dialogs
+
+[ip_monolith_2e_sniper1]:_ip_monolith_2e_sniper
+visual = actors\monolit\stalker_mo_head_1
+snd_config = characters_voice\human_04\monolith\  ;human_02
+
+[ip_monolith_2e_sniper2]:_ip_monolith_2e_sniper
+visual = actors\monolit\stalker_mo_hood_9
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+[ip_monolith_2e_sniper3]:_ip_monolith_2e_sniper
+visual = actors\monolit\stalker_mo_mask
+snd_config = characters_voice\human_04\monolith\  ;human_01
+
+
+;## iP: Monolith (Veteran) ##
+[_ip_monolith_3v]
+_genmode = 2
+class = ip_monolith_3v
+community = monolith
+rank = 3v
+reputation = -50, 50
+money = 20, 200
+w0 = None
+w1 = wpn_fort, wpn_beretta, wpn_usp
+w2 = wpn_abakan, wpn_val, wpn_g36, wpn_groza, wpn_sig550
+items = grenade_f1 (1, prob=0.5)
+include_supplies = character_drugs, character_food, character_items
+include = character_criticals, character_dialogs
+
+[ip_monolith_3v1]:_ip_monolith_3v
+visual = actors\monolit\stalker_mo_head_1
+snd_config = characters_voice\human_04\monolith\  ;human_02
+
+[ip_monolith_3v2]:_ip_monolith_3v
+visual = actors\monolit\stalker_mo_hood_9
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+[ip_monolith_3v3]:_ip_monolith_3v
+visual = actors\monolit\stalker_mo_mask
+snd_config = characters_voice\human_04\monolith\  ;human_01
+
+[ip_monolith_3v4]:_ip_monolith_3v
+visual = actors\monolit\stalker_mo_nauchniy
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+
+;## iP: Monolith (Veteran, Sniper) ##
+[_ip_monolith_3v_sniper]
+_genmode = 2
+class = ip_monolith_3v_sniper
+community = monolith
+rank = 3v
+reputation = -50, 50
+money = 20, 200
+w1 = wpn_fort, wpn_beretta, wpn_usp
+w2 = wpn_svd, wpn_svu
+items = None
+include_supplies = character_drugs, character_food
+include = character_criticals, character_dialogs
+
+[ip_monolith_3v_sniper1]:_ip_monolith_3v_sniper
+visual = actors\monolit\stalker_mo_head_1
+snd_config = characters_voice\human_04\monolith\  ;human_02
+
+[ip_monolith_3v_sniper2]:_ip_monolith_3v_sniper
+visual = actors\monolit\stalker_mo_hood_9
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+[ip_monolith_3v_sniper3]:_ip_monolith_3v_sniper
+visual = actors\monolit\stalker_mo_mask
+snd_config = characters_voice\human_04\monolith\  ;human_01
+
+
+;## iP: Monolith (Veteran, Exo) ##
+[ip_monolith_3v_exo]:_ip_monolith_3v
+class = ip_monolith_3v_exo
+w0 = None
+visual = actors\monolit\stalker_mo_exo
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+
+;## iP: Monolith (Master) ##
+[_ip_monolith_4m]
+_genmode = 2
+class = ip_monolith_4m
+community = monolith
+rank = 4m
+reputation = -50, 50
+money = 40, 400
+w1 = 
+w2 = wpn_fn2000
+include_supplies = character_drugs, character_food, character_items
+include = character_criticals, character_dialogs
+
+[ip_monolith_4m1]:_ip_monolith_4m
+visual = actors\monolit\stalker_mo_exo
+snd_config = characters_voice\human_04\monolith\  ;human_03
+
+
+;## iP: Monolith (Master, Sniper) ##
+[_ip_monolith_4m_sniper]
+_genmode = 2
+class = ip_monolith_4m_sniper
+community = monolith
+rank = 4m
+reputation = -50, 50
+money = 40, 400
+w1 = wpn_usp
+w2 = wpn_gauss
+items = None
+include_supplies = character_drugs, character_food
+include = character_criticals, character_dialogs
+
+[ip_monolith_4m_sniper1]:_ip_monolith_4m_sniper
+visual = actors\monolit\stalker_mo_exo
+snd_config = characters_voice\human_04\monolith\  ;human_03
+

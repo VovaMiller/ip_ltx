@@ -1,0 +1,11 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.extraPaths": [
+        "./src/ip_ltx"
+    ],
+    "[python]": {
+        "editor.rulers": [
+            79
+        ]
+    }
+}
