@@ -1,3 +1,7 @@
+"""
+    * class Section
+    * class Ini
+"""
 import re
 import os.path
 from collections import OrderedDict
@@ -295,12 +299,10 @@ class Ini:
             else:
                 self.gdp_o = None
 
-
     def _exception(self, msg: str):
         msg_ext = f"{self._name} | {msg}" if len(self._name) > 0 else msg
         print_error(msg_ext)
         raise Exception(msg_ext)
-
 
     def read_raw(self, raw: str, fp_src: str = ""):
         """ Считать данные с текста.

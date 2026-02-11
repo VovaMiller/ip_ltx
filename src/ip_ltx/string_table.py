@@ -14,10 +14,16 @@ def _read_string_table():
         TODO. Нужна поддержка #include внутри xml-файлов (см. string_table_includes)
     """
     ini_localization = Ini(_name="localization.ltx", ini_meta=meta_ini())
+    if ini_localization.gdp_m is None:
+        raise Exception(
+            "Ini object for localization.ltx was not initialized properly"
+        )
     ini_localization.read("config\\localization.ltx", inside_gamedata=True, encoding=None)
     st_sect = ini_localization.s.get("string_table", None)
     if st_sect is None:
-        raise Exception("section [string_table] was not found in localization.ltx")
+        raise Exception(
+            "section [string_table] was not found in localization.ltx"
+        )
     xmls = st_sect._fields.get("files", None)
     xmls = [xml_name.strip() for xml_name in xmls.split(",")] if xmls is not None else []
     

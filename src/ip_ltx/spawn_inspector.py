@@ -8,6 +8,7 @@ from ip_ltx import Ini
 from ini import meta_ini, system_ini, spawn_ini, game_ini
 from spawn import get_spawn
 from treasure_manager import treasure_manager_ini, treasure_by_sid
+from utils import cast_safe
 
 _OK = True
 
@@ -62,7 +63,14 @@ def _check_upd_fields_consistency():
                 updv = section.field(updk)
                 unequal = False
                 if k == "condition":
-                    unequal = (abs(float(v) - (float(updv) / 255)) > 0.01)
+                    vf = cast_safe(v, float, defval=None)
+                    updvf = cast_safe(updv, float, defval=None)
+                    if (vf is None) or (updvf is None):
+                        # TODO: по факту могут быть и равны, но здесь скорее
+                        #       проблема неожиданных типов данных
+                        unequal = True
+                    else:
+                        unequal = (abs(vf - (updvf / 255)) > 0.01)
                 else:
                     unequal = (v != updv)
                 if unequal:
@@ -343,7 +351,7 @@ def _invariant_names_as_prefixes():
             if trie_n.has_subtrie(sname):
                 not_safe = []
                 for k in trie_n.iterkeys(prefix=sname):
-                    if k[len(sname):len(sname)+1].isdigit():
+                    if str(k[len(sname):len(sname)+1]).isdigit():
                         not_safe.append(k)
                 if len(not_safe) > 0:
                     _print1("names below are not safe for section name '{}'".format(sname))

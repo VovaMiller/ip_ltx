@@ -27,7 +27,7 @@ class SpawnEntriesCollector:
         spawn = get_spawn()
         entries = SpawnEntriesPool()
         for treasure_section in ini_tm.sections():
-            obj = spawn.story_object(treasure_section.get_number("target"))
+            obj = spawn.story_object(treasure_section.get_uint("target"))
             if obj._level in levels:
                 entries.merge(obj._loot)
         self.result.merge(entries)
@@ -189,7 +189,7 @@ def tm__extract_loot_each(fn, show_strings=False, show_visual=False):
     with open(fn, "w", encoding="utf-8") as file:
         for treasure_section in ini_tm.sections():
             treasure_id = treasure_section.id
-            obj = spawn.story_object(treasure_section.get_number("target"))
+            obj = spawn.story_object(treasure_section.get_uint("target"))
             if show_strings:
                 name_id = treasure_section.get_string("name", "?")
                 name_txt = st.get(name_id, name_id)
@@ -214,7 +214,7 @@ def tm__extract_position(fn):
     spawn = get_spawn()
     with open(fn, "w", encoding="utf-8") as file:
         for treasure_section in ini_tm.sections():
-            obj = spawn.story_object(treasure_section.get_number("target"))
+            obj = spawn.story_object(treasure_section.get_uint("target"))
             str_pos = ",".join([str(p) for p in obj.position])
             file.write(f"{{\"{treasure_section.id}\", {{{str_pos}}}}},\n")
 
@@ -228,7 +228,7 @@ def tm__count_by_levels(fn):
     # counting
     cnt_by_lvl = {}
     for treasure_section in ini_tm.sections():
-        obj = spawn.story_object(treasure_section.get_number("target"))
+        obj = spawn.story_object(treasure_section.get_uint("target"))
         if obj._level not in cnt_by_lvl:
             cnt_by_lvl[obj._level] = 0
         cnt_by_lvl[obj._level] += 1

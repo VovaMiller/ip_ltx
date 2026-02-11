@@ -4,6 +4,7 @@ from pathlib import Path
 from collections import OrderedDict
 
 from ini import game_ini
+from utils import print_warning, print_error
 
 # ----------------------------------------------------------------
 
@@ -46,28 +47,40 @@ def run(f, tag, kwargs={}):
 
 def main():
     if len(sys.argv) <= 1:
-        print("! no input provided")
+        print_error("no input provided")
         return
     ini_game = game_ini()
     if not ini_game.section_exist("story_ids"):
-        print("! game.ltx doesn't have section [story_ids]")
+        print_error("game.ltx doesn't have section [story_ids]")
         return
-    requested = OrderedDict([(id, False) for id in sys.argv[1:]])
+    requested: OrderedDict[str, bool] = OrderedDict(
+        [(id, False) for id in sys.argv[1:]]
+    )
     data = OrderedDict()
     for _sid, _id in ini_game.section("story_ids").fields():
-        if not _sid.isdigit() or not _id.startswith('"') or not _id.endswith('"'):
-            print("! section [story_ids], unexpected line format ({} = {})".format(_sid, _id))
+        if (
+            not _sid.isdigit() or
+            (_id is None) or
+            not _id.startswith('"') or
+            not _id.endswith('"')
+        ):
+            print_warning((
+                f"section [story_ids], unexpected line format"
+                f" ({_sid if _id is None else f"{_sid} = {_id}"})"
+            ))
             continue
         story_id = int(_sid)
         id = _id[1:-1]
         if id in requested:
             if requested[id]:
-                print("! section [story_ids]: duplicate id found (\"{}\")".format(id))
+                print_warning(
+                    f"section [story_ids]: duplicate id found (\"{id}\")"
+                )
             else:
                 requested[id] = True
                 data[story_id] = id
     if len(requested) != len(data):
-        print("! some ids were not found")
+        print_error("some ids were not found")
 
     print("-"*64)
     for id, fl in requested.items():

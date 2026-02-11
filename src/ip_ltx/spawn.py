@@ -10,59 +10,59 @@ from utils import print_error
 # ----------------------------------------------------------------
 
 class SpawnObject:
-    """ Спавн-объект """
+    """Спавн-объект"""
 
     def __init__(self):
         self._errors: list[str] = []
-        """ Список сообщений об ошибках, возникших на этапе инициализации """
+        """Список сообщений об ошибках, возникших на этапе инициализации"""
 
         self._src: str = ""
-        """ Источник секции, по которой произведена инициализация """
+        """Источник секции, по которой произведена инициализация"""
 
         self._id: str = ""
-        """ ID секции, по которой произведена инициализация """
+        """ID секции, по которой произведена инициализация"""
 
         self.section_name: str = ""
-        """ cse_abstract: section_name """
+        """cse_abstract: section_name"""
 
         self.name: str = ""
-        """ cse_abstract: name """
+        """cse_abstract: name"""
 
         self.position: tuple[float, float, float] = (0, 0, 0)
-        """ cse_abstract: position """
+        """cse_abstract: position"""
 
         self.direction: tuple[float, float, float] = (0, 0, 0)
-        """ cse_abstract: direction """
+        """cse_abstract: direction"""
 
         self.game_vertex_id: int = -1
-        """ cse_alife_object: game_vertex_id """
+        """cse_alife_object: game_vertex_id"""
 
         self.level_vertex_id: int = -1
-        """ cse_alife_object: level_vertex_id """
+        """cse_alife_object: level_vertex_id"""
 
         self.object_flags: int = -1
-        """ cse_alife_object: object_flags """
+        """cse_alife_object: object_flags"""
 
         self.custom_data: Ini = Ini(_name="custom_data")
-        """ cse_alife_object: custom_data """
+        """cse_alife_object: custom_data"""
 
         self.story_id: int = -1
-        """ cse_alife_object: story_id """
+        """cse_alife_object: story_id"""
 
         self._class: str = ""
-        """ Поле class из секции объекта """
+        """Поле class из секции объекта"""
 
         self._level: str = ""
-        """ Имя локации объекта """
+        """Имя локации объекта"""
 
         self._loot: SpawnEntriesPool = SpawnEntriesPool()
-        """ Лут [spawn] и/или [spawn_tm] из custom_data """
+        """Лут [spawn] и/или [spawn_tm] из custom_data"""
 
     def init(self, section: Section):
-        """ Инициализация по секции
+        """Инициализация по секции
 
-            :param section: Секция, по которой производится инициализация
-            :raises Exception: при ошибке инициализации какого-либо поля
+        :param section: Секция, по которой производится инициализация
+        :raises Exception: при ошибке инициализации какого-либо поля
         """
 
         self._errors.clear()
@@ -201,22 +201,22 @@ class SpawnObject:
 # ----------------------------------------------------------------
 
 class Spawn:
-    """ Хранилище всех спавн-объектов """
+    """Хранилище всех спавн-объектов"""
 
     def __init__(self):
         self._so: OrderedDict[str, SpawnObject] = OrderedDict()
-        """ Основное хранилище. Не рекомендуется использовать напрямую """
+        """Основное хранилище. Не рекомендуется использовать напрямую"""
         
         self._id_by_sid: dict[int, str] = {}
-        """ Вспомогательная структура для быстрого поиска по story_id """
+        """Вспомогательная структура для быстрого поиска по story_id"""
 
     def init(self, silent: bool = False):
-        """ Инициализация всех спавн-объектов.
+        """Инициализация всех спавн-объектов
 
-            :param silent: Выводить ли сообщения об ошибках инициализации
-            :raises Exception: если хотя бы один объект не удалось
-                инициализировать полноценно; исключение можно проигнорировать,
-                но тогда из хранилища будут исключены все проблемные объекты
+        :param silent: Выводить ли сообщения об ошибках инициализации
+        :raises Exception: если хотя бы один объект не удалось
+            инициализировать полноценно; исключение можно проигнорировать,
+            но тогда из хранилища будут исключены все проблемные объекты
         """
         self._so.clear()
         self._id_by_sid.clear()
@@ -244,29 +244,30 @@ class Spawn:
             raise Exception("spawn data was not initialized properly")
 
     def object(self, id: str) -> SpawnObject:
-        """ Получение спавн-объекта по его id
+        """Получение спавн-объекта по его id
 
-            :param id: ID спавн-объекта
-            :raises Exception: если спавн-объекта с указанным ID
-                не существует
+        :param id: ID спавн-объекта
+        :raises Exception: если спавн-объекта с указанным ID
+            не существует
         """
         if id not in self._so:
             raise Exception(f"spawn object [{id}] doesn't exist")
         return self._so[id]
     
     def story_object(self, sid: int) -> SpawnObject:
-        """ Получение спавн-объекта по его story_id
+        """Получение спавн-объекта по его story_id
 
-            :param sid: story_id спавн-объекта
-            :raises Exception: если спавн-объекта с указанным story_id
-                не существует
+        :param sid: story_id спавн-объекта
+        :raises Exception: если спавн-объекта с указанным story_id
+            не существует
         """
         if sid not in self._id_by_sid:
             raise Exception(f"spawn object with story_id={sid} doesn't exist")
         return self._so[self._id_by_sid[sid]]
     
     def objects(self):
-        """ Получение всех спавн-объектов """
+        """Получение всех спавн-объектов
+        """
         return self._so.values()
 
 # ----------------------------------------------------------------
@@ -274,7 +275,7 @@ class Spawn:
 _SPAWN = None
 
 def get_spawn() -> Spawn:
-    """ Получить единый экземпляр класса Spawn
+    """Получить единый экземпляр класса Spawn
     """
     global _SPAWN
     if _SPAWN is None:
