@@ -1,8 +1,8 @@
 import re
 import os.path
 
-from ip_ltx import Ini
-from ini import meta_ini
+from .ip_ltx import Ini
+from .ini import meta_ini
 
 
 _BUY_K = None

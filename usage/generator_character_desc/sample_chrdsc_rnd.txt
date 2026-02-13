@@ -16,7 +16,7 @@ visual = actors\novice\novice_sk1_antigas
 snd_config = characters_voice\human_03\stalker\
 w1 = 
 w2 = wpn_groza
-items = device_torch,1, grenade_f1,1
+items = device_torch (1), grenade_f1 (1)
 
 [val_ip_stalker_1]:_val_stalkers
 name = GENERATE_NAME_stalker
@@ -28,7 +28,7 @@ visual = actors\novice\novice_sk1_bandage
 snd_config = characters_voice\human_02\stalker\
 w1 = 
 w2 = wpn_ak74u
-items = device_torch,1, grenade_rgd5,0.5
+items = device_torch (1), grenade_rgd5 (1, prob=0.5)
 
 [val_ip_stalker_2]:_val_stalkers
 name = GENERATE_NAME_stalker
@@ -40,7 +40,7 @@ visual = actors\novice\novice_sk1_face_3
 snd_config = characters_voice\human_01\stalker\
 w1 = 
 w2 = wpn_wincheaster1300
-items = device_torch,1, grenade_rgd5,0.5
+items = device_torch (1), grenade_rgd5 (1, prob=0.5)
 
 [val_ip_stalker_3]:_val_stalkers
 name = GENERATE_NAME_stalker
@@ -52,6 +52,6 @@ visual = actors\novice\novice_sk1_mask
 snd_config = characters_voice\human_01\stalker\
 w1 = 
 w2 = wpn_mp5
-items = device_torch,1, grenade_rgd5,0.5
+items = device_torch (1), grenade_rgd5 (1, prob=0.5)
 
 ; ----------------------------------------------------------------

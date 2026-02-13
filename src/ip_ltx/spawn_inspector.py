@@ -1,14 +1,16 @@
+"""Инспектор данных all.spawn"""
+
 import re
 import os.path
 import pygtrie
 from collections import OrderedDict
 
-import db
-from ip_ltx import Ini
-from ini import meta_ini, system_ini, spawn_ini, game_ini
-from spawn import get_spawn
-from treasure_manager import treasure_manager_ini, treasure_by_sid
-from utils import cast_safe
+from .db import OBJECT_FLAGS
+from .ip_ltx import Ini
+from .ini import meta_ini, system_ini, spawn_ini, game_ini
+from .spawn import get_spawn
+from .treasure_manager import treasure_manager_ini, treasure_by_sid
+from .utils import cast_safe
 
 _OK = True
 
@@ -289,7 +291,7 @@ def _check_box_wood_01():
 def _check_offline():
     # Проверка, не находится ли объект в оффлайне.
     for obj in get_spawn().objects():
-        if (obj.object_flags & db.object_flags.flSwitchOnline) == 0:
+        if (obj.object_flags & OBJECT_FLAGS.flSwitchOnline) == 0:
             _print1("object '{}' is offline".format(obj.name))
 
 def _check_visual():

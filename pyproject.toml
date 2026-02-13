@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ip_ltx"
+version = "3.0.0"
+description = "Python utils for working with S.T.A.L.K.E.R. SoC ltx-files"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Vova Miller", email = "vovamiller_97@mail.ru"},
+]
+dependencies = [
+    "pygtrie>=2.5.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/VovaMiller/ip_ltx"
+"Bug Reports" = "https://github.com/VovaMiller/ip_ltx/issues"
+"Funding" = "https://vk.cc/ccolu7"
+"Source" = "https://github.com/VovaMiller/ip_ltx"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["src"]
+extend-exclude = [
+    "backup/",
+    "usage-TEMP/",
+    "*.egg-info",
+    "*.egg",
+    "__pycache__",
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+# select = ["E", "W", "F", "I", "B", "C4"]
+# ignore = ["E501"]

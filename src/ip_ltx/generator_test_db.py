@@ -3,7 +3,7 @@ import traceback
 from pathlib import Path
 from collections import OrderedDict
 
-from ini import meta_ini, system_ini
+from .ini import meta_ini, system_ini
 
 # ----------------------------------------------------------------
 
@@ -63,7 +63,7 @@ def generate_sections(fn):
 
 # ----------------------------------------------------------------
 
-def run(f, tag, kwargs={}):
+def _run(f, tag, kwargs={}):
     fn = "{}__{}.txt".format(Path(__file__).stem, tag)
     try:
         f(fn, **kwargs)
@@ -75,16 +75,15 @@ def run(f, tag, kwargs={}):
     else:
         print("+ {}".format(fn), flush=True)
 
+# ----------------------------------------------------------------
 
-def main():
-    print("-"*64)
+def generate():
+    """Сгенерировать статические таблицы для ip_test (ip_test_db.script)
+    """
+    print("-"*80)
     ini_system = system_ini()
     print("mod:", ini_system.gdp_m)
     print("SoC:", ini_system.gdp_o or "--")
-    print("-"*64)
-    run(generate_sections,  "sections")
-    print("-"*64)
-
-
-if __name__ == "__main__":
-    main()
+    print("-"*80)
+    _run(generate_sections,  "sections")
+    print("-"*80)

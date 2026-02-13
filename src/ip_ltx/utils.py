@@ -1,4 +1,7 @@
+import os
 import sys
+
+os.system("")  # enables colors for Windows consoles
 
 class ANSI_COLOR_CODE:
     DEF = '\033[0m'

@@ -1,12 +1,12 @@
 {
     "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticMode": "openFilesOnly",  // workspace | openFilesOnly
     "python.analysis.extraPaths": [
         "./src/ip_ltx"
     ],
     "[python]": {
         "editor.rulers": [
-            79
+            88  // 79
         ]
     },
-    "python.analysis.diagnosticMode": "workspace"
 }

@@ -1,16 +1,18 @@
+"""Сводка по разному типу лута в игре"""
+
 import os.path
 import traceback
 import math
 from pathlib import Path
 from collections import OrderedDict
 
-import db
-from ini import meta_ini, system_ini, spawn_ini
-from treasure_manager import treasure_manager_ini, treasure_by_sid
-from treasure_manager_ext import SpawnEntry, SpawnEntriesPool
-from string_table import string_table
-from spawn import get_spawn
-from utils import print_warning, print_error
+from .db import ADDON_FLAGS
+from .ini import meta_ini, system_ini, spawn_ini
+from .treasure_manager import treasure_manager_ini, treasure_by_sid
+from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
+from .string_table import string_table
+from .spawn import get_spawn
+from .utils import print_warning, print_error
 
 # ----------------------------------------------------------------
 
@@ -126,9 +128,9 @@ class SpawnEntriesCollector:
                                 extra_ammo = (ammo_class[ammo_type], min(ammo_elapsed, ammo_mag_size))
                                 unload = True
                         addon_flags = ini_spawn.get_uint(obj._id, "upd:addon_flags")
-                        scope       = ((addon_flags & db.addon_flags.scope) != 0)
-                        launcher    = ((addon_flags & db.addon_flags.launcher) != 0)
-                        silencer    = ((addon_flags & db.addon_flags.silencer) != 0)
+                        scope       = ((addon_flags & ADDON_FLAGS.scope) != 0)
+                        launcher    = ((addon_flags & ADDON_FLAGS.launcher) != 0)
+                        silencer    = ((addon_flags & ADDON_FLAGS.silencer) != 0)
                     
                     # Запись собранной инфы
                     params = "{}{}{}{}{}{}".format(
@@ -448,25 +450,6 @@ def summary(
 
 # ----------------------------------------------------------------
 
-def validate():
-    try:
-        ini_meta = meta_ini()
-        ini_system = system_ini()
-        ini_spawn = spawn_ini()
-        ini_tm = treasure_manager_ini()
-        spawn = get_spawn()
-    except Exception as e:
-        prefix = "[{}]".format(os.path.basename(__file__))
-        tab = " "*len(prefix)
-        print(prefix,   "Mandatory data validation failed:")
-        print(tab,      "\"{}\"".format(str(e)))
-        print(tab,      "Program will be stopped!")
-        print(tab,      "See messages above.")
-        print("")
-        # print(traceback.format_exc())
-        return False
-    return True
-        
 def run(f, tag, kwargs={}):
     fn = "{}__{}.txt".format(Path(__file__).stem, tag)
     try:
@@ -543,38 +526,24 @@ def run_summary(group_name, levels):
 
 # ----------------------------------------------------------------
 
-def main():
-    if not validate():
-        return
+def _validation():
+    try:
+        ini_meta = meta_ini()
+        ini_system = system_ini()
+        ini_spawn = spawn_ini()
+        ini_tm = treasure_manager_ini()
+        spawn = get_spawn()
+    except Exception as e:
+        prefix = "[{}]".format(os.path.basename(__file__))
+        tab = " "*len(prefix)
+        print(prefix,   "Mandatory data validation failed:")
+        print(tab,      "\"{}\"".format(str(e)))
+        print(tab,      "Program will be stopped!")
+        print(tab,      "See messages above.")
+        print("")
+        # print(traceback.format_exc())
+        return 1
+    return 0
 
-    # Summaries
-    levels_all = [
-        "l01_escape", "l02_garbage", "l03_agroprom", "l04_darkvalley",
-        "l05_bar", "l06_rostok", "l07_military", "l08_yantar",
-        "l08u_brainlab", "l10_radar", "l11_pripyat", "l12_stancia"
-    ]
-    run_summary("all", levels_all)
-    run_summary(
-        "all_but_l11_l12",
-        [level for level in levels_all if level not in ["l11_pripyat", "l12_stancia"]]
-    )
-    run_summary(
-        "custom",
-        ["l01_escape", "l02_garbage", "l03_agroprom", "l04_darkvalley", "l05_bar", "l06_rostok",
-        "l07_military", "l08_yantar", "l08u_brainlab"]
-    )
-    for level in levels_all:
-        run_summary(level, [level])
-    
-    # Other
-    run(tm__count_by_levels, "tm-counts")
-    run(tm__extract_loot_each, "tm-each", dict(show_strings=True, show_visual=True))
-    # run(tm__extract_position, "tm-position")
-    run(tm__calculate_prob_w, "tm-prob_w")
-
-
-
-
-
-if __name__ == "__main__":
-    main()
+if _validation():
+    raise Exception("Mandatory data validation failed")

@@ -2,9 +2,9 @@ import xml.etree.ElementTree as ET
 import os.path
 from pathlib import Path
 
-from ip_ltx import Ini
-from ini import meta_ini
-from utils import print_warning
+from .ip_ltx import Ini
+from .ini import meta_ini
+from .utils import print_warning
 
 
 _STRING_TABLE = None

@@ -1,5 +1,5 @@
-from ini import meta_ini
-from utils import print_warning
+from .ini import meta_ini
+from .utils import print_warning
 
 
 _LEVEL_GVIDS: list[tuple[str, int]] | None = None

@@ -1,12 +1,14 @@
+"""Извлечение кастомной информации из конфигов"""
+
 import re
 import math
 import traceback
 from collections import OrderedDict
 from pathlib import Path
 
-from ini import meta_ini, system_ini
-from string_table import string_table
-from utils import print_warning
+from .ini import meta_ini, system_ini
+from .string_table import string_table
+from .utils import print_warning
 
 # ----------------------------------------------------------------
 
@@ -370,118 +372,3 @@ def run(f, tag, kwargs={}):
         print("", flush=True)
     else:
         print("+ {}".format(fn), flush=True)
-
-def main():
-
-    run(extract_fields, "all__class", dict(precond=has_class, fields=["class"]))
-    run(extract_fields, "all__cost", dict(precond=has_cost, fields=["cost"]))
-    run(extract_fields, "all__$spawn", dict(precond=has_spawn_path, fields=["$spawn"]))
-    
-    run(extract_fields, "INV__class", dict(precond=is_inv_item__any2, fields=["class"]))
-    run(extract_fields, "INV__visual", dict(precond=is_inv_item__any2, fields=["visual"]))
-    
-    run(extract_fields, "mutant_parts", dict(
-        precond=is_mutant_part, fields=["cost", "inv_name"], fields_pp=[to_uint, translate_string]
-    ))
-    
-    run(extract_fields, "arts", dict(
-        precond=is_art, fields=["cost", "inv_name"], fields_pp=[to_uint, translate_string]
-    ))
-    
-    run(extract_fields, "outfit", dict(
-        precond=is_outfit,
-        fields=["cost", "inv_name", "artefact_count"],
-        fields_pp=[to_uint, translate_string, str]
-    ))
-    run(extract_fields, "outfit__cost__sorted", dict(
-        precond=is_outfit, fields=["cost"], fields_pp=[to_uint], sort=1
-    ))
-    # run(extract_fields, "outfit__anomprots", dict(precond=is_outfit, fields=[
-        # "burn_protection", "shock_protection", "chemical_burn_protection"
-    # ]))
-
-
-    run(extract_fields, "addon__cost", dict(
-        precond=is_addon,
-        fields=["cost", "inv_name"],
-        fields_pp=[to_uint, translate_string]
-    ))
-    run(extract_fields, "addon__scopes", dict(
-        precond=is_addon_scope,
-        fields=["cost", "inv_name", "scope_texture", "scope_zoom_factor", "scope_dynamic_zoom"],
-        fields_pp=[to_uint, translate_string, scope_type, str, str]
-    ))
-    run(extract__addon_to_wpn, "addon__to_wpn")
-
-
-    run(extract_fields, "ammo", dict(
-        precond=lambda s: is_ammo(s) or is_projectile(s) or is_grenade(s),
-        fields=["class", "inv_name", "cost", "box_size"],
-        fields_pp=[lambda v: meta_ini().get_string("inv_class_to_type", v, "?"), translate_string, str, str],
-        sort=1
-    ))
-    run(extract_fields, "ammo__k_hit", dict(precond=is_ammo, fields=["k_hit"]))
-    # run(extract_fields, "ammo__cost", dict(precond=is_ammo, fields=["cost", "box_size"]))
-    run(extract__ammo_to_wpn, "ammo__to_wpn")
-
-    run(extract_fields, "wpn", dict(
-        precond=is_wpn2, fields=["cost", "inv_name"], fields_pp=[to_uint, translate_string]
-    ))
-    run(extract_fields, "wpn__desc", dict(
-        precond=is_wpn2, fields=["description"], fields_pp=[translate_string], as_blocks=True
-    ))
-    run(extract_fields, "wpn__cost__sorted", dict(
-        precond=is_wpn2, fields=["cost"], fields_pp=[to_uint], sort=1
-    ))
-    # run(extract_fields, "wpn__cam", dict(precond=is_wpn2, fields=[
-        # "cam_relax_speed",
-        # "cam_dispersion", "cam_dispersion_inc", "cam_dispertion_frac",
-        # "cam_max_angle", "cam_max_angle_horz",
-        # "cam_step_angle_horz"
-    # ]))
-    # run(extract_fields, "wpn__condition_shot_dec", dict(precond=is_wpn2, fields=["condition_shot_dec"]))
-    # run(extract_fields, "wpn__fire_dispersion_condition_factor", dict(precond=is_wpn2, fields=[
-        # "fire_dispersion_condition_factor"
-    # ]))
-    # run(extract_fields, "wpn__aim", dict(precond=is_wpn2, fields=["use_aim_bullet", "time_to_aim"]))
-    # run(extract_fields, "wpn__Dispersion", dict(precond=is_wpn2, fields=["fire_dispersion_base"]))
-    run(extract_fields, "wpn__Dispersion__sorted", dict(
-        precond=is_wpn2, fields=["fire_dispersion_base"], fields_pp=[to_float], sort=1
-    ))
-    # run(extract_fields, "wpn__hit_power", dict(precond=is_wpn2, fields=["hit_power"]))
-    # run(extract_fields, "wpn__hit_impulse", dict(precond=is_wpn2, fields=["hit_impulse"]))
-    run(extract_fields, "wpn__type", dict(precond=is_wpn2, fields=[
-        "ef_main_weapon_type", "ef_weapon_type", "animation_slot", "slot"
-    ]))
-    # run(extract_fields, "wpn__slot", dict(precond=is_wpn2, fields=["slot"]))
-    # run(extract_fields, "wpn__cam_relax_speed", dict(precond=is_wpn2, fields=[
-        # "cam_relax_speed", "cam_relax_speed_ai"
-    # ]))
-    # run(extract_fields, "wpn__ammo_mag_size", dict(precond=is_wpn2, fields=["ammo_mag_size"]))
-    # run(extract_fields, "wpn__fire_modes", dict(precond=is_wpn2, fields=["fire_modes"]))
-    # run(extract_fields, "wpn__control_inertion_factor", dict(precond=is_wpn2, fields=["control_inertion_factor"]))
-    run(extract_fields, "wpn__addon_scope", dict(precond=is_wpn, fields=[
-        "scope_status", "scope_name"
-    ]))
-    run(extract_fields, "wpn__addon_silencer", dict(precond=is_wpn2, fields=[
-        "silencer_status", "silencer_name"
-    ]))
-    run(extract_fields, "wpn__addon_launcher", dict(precond=is_wpn2, fields=[
-        "grenade_launcher_status", "grenade_launcher_name"
-    ]))
-    run(extract_fields, "wpn__inv_weight", dict(
-        precond=is_wpn2, fields=["inv_weight"], fields_pp=[to_float], sort=1
-    ))
-    
-    # run(extract_fields, "monsters", dict(precond=is_monster, fields=[]))
-    run(extract_fields, "monsters__visual", dict(precond=is_monster, fields=["visual"]))
-    # run(extract_fields, "monsters__health_hit_part", dict(precond=is_monster, fields=["health_hit_part"]))
-    run(extract_monsters_health, "monsters__health", dict(hit_power_wound=2.5, hit_power_fire_wound=0.5))
-    
-    run(extract_fields, "anomaly", dict(
-        precond=is_anomaly, fields=["can_be_deactivated"]
-    ))
-
-
-if __name__ == "__main__":
-    main()

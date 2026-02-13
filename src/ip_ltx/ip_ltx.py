@@ -1,24 +1,17 @@
+"""Базовые классы для работы с ltx-файлами.
+
+* class Section
+* class Ini
 """
-    * class Section
-    * class Ini
-"""
-import re
+
 import os.path
+import re
 from collections import OrderedDict
 from pathlib import Path
 from typing import Self
 
-from utils import print_error, cast_safe
+from .utils import cast_safe, print_error
 
-
-__VERSION__ = "2.1 (2026-02-01)"
-# __VERSION__ = "2.0.1 (2025-06-22)"
-# __VERSION__ = "2.0 (2025-06-18)"
-# __VERSION__ = "1.4 (20250611)"
-# __VERSION__ = "1.3.1 (20220124)"
-# __VERSION__ = "1.2 (20210820)"
-
-# ----------------------------------------------------------------
 
 class Section:
     """ Класс одной секции ltx-файла.

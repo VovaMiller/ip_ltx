@@ -1,12 +1,12 @@
 
 
-class addon_flags:
+class ADDON_FLAGS:
     scope    = 1
     launcher = 2
     silencer = 4
 
 
-class object_flags:
+class OBJECT_FLAGS:
     flUseSwitches       = 1     # 0x00000001
     flSwitchOnline      = 2     # 0x00000002
     flSwitchOffline     = 4     # 0x00000004

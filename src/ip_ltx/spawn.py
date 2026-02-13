@@ -1,11 +1,11 @@
 import os.path
 from collections import OrderedDict
 
-from ip_ltx import Section, Ini
-from ini import system_ini, spawn_ini
-from level import get_lvl_by_gvid
-from treasure_manager_ext import SpawnEntry, SpawnEntriesPool
-from utils import print_error
+from .ip_ltx import Section, Ini
+from .ini import system_ini, spawn_ini
+from .level import get_lvl_by_gvid
+from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
+from .utils import print_error
 
 # ----------------------------------------------------------------
 

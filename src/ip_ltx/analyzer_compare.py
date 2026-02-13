@@ -1,13 +1,13 @@
-import sys
 import traceback
 from pathlib import Path
 
-from ini import system_ini
-from utils import print_warning, print_error
+from .ip_ltx import Section
+from .ini import system_ini
+from .utils import print_warning, print_error
 
 # ----------------------------------------------------------------
 
-def compare_sections(fn, s1, s2):
+def compare_sections(fn: str, s1: Section, s2: Section):
     # collecting diff info
     fields_unique_1 = [k for k in s1._fields.keys() if k not in s2._fields]
     fields_unique_2 = [k for k in s2._fields.keys() if k not in s1._fields]
@@ -54,18 +54,6 @@ def compare_sections(fn, s1, s2):
 
 # ----------------------------------------------------------------
 
-def read_input():
-    ids = None
-    if len(sys.argv) > 1:
-        ids = sys.argv[1:]
-    if ids is None:
-        print("> ALL")
-    else:
-        print(">", len(ids), "tasks:")
-        for id in ids:
-            print("> ", id)
-    return ids
-
 def run(f, tag, kwargs={}):
     fn = "{}__{}.txt".format(Path(__file__).stem, tag)
     try:
@@ -80,15 +68,7 @@ def run(f, tag, kwargs={}):
     else:
         print("+ {}".format(fn), flush=True)
 
-def main():
-    # reading arguments
-    if len(sys.argv) < 3:
-        print_error("Expected 2 arguments, got {len(sys.argv)-1}")
-        return
-    if len(sys.argv) > 3:
-        print_warning("Ignoring all the arguments after the second one")
-    s1_id, s2_id = sys.argv[1], sys.argv[2]
-
+def compare(s1_id: str, s2_id: str):
     # getting sections
     ini_system = system_ini()
     if ini_system.section_exist(s1_id):
@@ -104,7 +84,3 @@ def main():
 
     # compare
     run(compare_sections, f"{s1.id}__{s2.id}", dict(s1=s1, s2=s2))
-
-
-if __name__ == "__main__":
-    main()

@@ -1,7 +1,7 @@
 import os.path
 
-from ip_ltx import Ini, Section
-from ini import meta_ini
+from .ip_ltx import Ini, Section
+from .ini import meta_ini
 
 # ----------------------------------------------------------------
 

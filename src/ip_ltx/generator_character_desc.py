@@ -1,15 +1,16 @@
+"""Генерация характеристик NPC"""
+
 import re
-import sys
 import os.path
 import traceback
 import itertools
 from os import mkdir
 from random import randint
 
-from ip_ltx import Ini
-from ini import system_ini
-from treasure_manager_ext import SpawnEntry
-from utils import print_warning, print_error
+from .ip_ltx import Ini
+from .ini import system_ini
+from .treasure_manager_ext import SpawnEntry
+from .utils import print_warning, print_error
 
 
 OUTPUT_FOLDER = "xml"
@@ -508,14 +509,18 @@ def construct_fp_out(fp_in):
         raise Exception("xml file input is not supported")
     return "{}/{}.xml".format(OUTPUT_FOLDER, ifn)
 
+# ----------------------------------------------------------------
 
-def main():
-    if len(sys.argv) <= 1:
-        print("No input file provided!")
+def generate(fps: list[str]):
+    """Сгенерировать характеристики NPC по данным файлам.
+
+    :param fps: Список файлов с настройками характеристик.
+    """
+    if len(fps) == 0:
+        print_warning("zero-length input provided")
         return
     if not os.path.isdir(OUTPUT_FOLDER):
         mkdir(OUTPUT_FOLDER)
-    fps = sys.argv[1:]
     max_len_fps = max([len(fp) for fp in fps])
     for i, ifp in enumerate(fps):
         try:
@@ -532,6 +537,3 @@ def main():
                 "+ ({}/{}) {}{} -> {}".format(i+1, len(fps), ifp, " "*(max_len_fps-len(ifp)), ofp),
                 flush=True
             )
-
-if __name__ == "__main__":
-    main()

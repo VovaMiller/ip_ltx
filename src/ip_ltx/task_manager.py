@@ -1,9 +1,9 @@
 from collections import OrderedDict
 from pathlib import Path
 
-from ip_ltx import Ini, Section
-from ini import meta_ini
-from utils import print_warning
+from .ip_ltx import Ini, Section
+from .ini import meta_ini
+from .utils import print_warning
 
 # ----------------------------------------------------------------
 

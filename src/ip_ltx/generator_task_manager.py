@@ -1,8 +1,7 @@
-import sys
 import traceback
 from pathlib import Path
 
-from task_manager import TaskIterator
+from .task_manager import TaskIterator
 
 # ----------------------------------------------------------------
 
@@ -114,20 +113,7 @@ def generate_strings(fn, task_ids=None):
 
 # ----------------------------------------------------------------
 
-def read_input():
-    ids = None
-    if len(sys.argv) > 1:
-        ids = sys.argv[1:]
-    if ids is None:
-        print("> ALL")
-    else:
-        print(">", len(ids), "tasks:")
-        for id in ids:
-            print("> ", id)
-    return ids
-
-
-def run(f, tag, kwargs={}):
+def _run(f, tag, kwargs={}):
     fn = "{}__{}.txt".format(Path(__file__).stem, tag)
     try:
         f(fn, **kwargs)
@@ -141,14 +127,22 @@ def run(f, tag, kwargs={}):
     else:
         print("+ {}".format(fn), flush=True)
 
+# ----------------------------------------------------------------
 
-def main():
-    ids = read_input()
-    run(generate_tasks,     "task",     dict(task_ids=ids))
-    run(generate_icons,     "icon",     dict(task_ids=ids))
-    run(generate_articles,  "article",  dict(task_ids=ids))
-    run(generate_strings,   "string",   dict(task_ids=ids))
+def generate(ids: list[str] | None):
+    """Сгенерировать все необходимые для указанных второстепенных заданий файлы.
 
+    :param ids: список ID заданий из task_manager.ltx,
+        или None для генерации по всем заданиям
+    """
+    if ids is None:
+        print("> ALL")
+    else:
+        print(">", len(ids), "tasks:")
+        for id in ids:
+            print("> ", id)
 
-if __name__ == "__main__":
-    main()
+    _run(generate_tasks,     "task",     dict(task_ids=ids))
+    _run(generate_icons,     "icon",     dict(task_ids=ids))
+    _run(generate_articles,  "article",  dict(task_ids=ids))
+    _run(generate_strings,   "string",   dict(task_ids=ids))

@@ -1,10 +1,9 @@
-import sys
 import traceback
 from pathlib import Path
 from collections import OrderedDict
 
-from ini import game_ini
-from utils import print_warning, print_error
+from .ini import game_ini
+from .utils import print_warning, print_error
 
 # ----------------------------------------------------------------
 
@@ -32,7 +31,7 @@ def generate_strings(fn, data):
 
 # ----------------------------------------------------------------
 
-def run(f, tag, kwargs={}):
+def _run(f, tag, kwargs={}):
     fn = "{}__{}.txt".format(Path(__file__).stem, tag)
     try:
         f(fn, **kwargs)
@@ -44,17 +43,22 @@ def run(f, tag, kwargs={}):
     else:
         print("+ {}".format(fn), flush=True)
 
+# ----------------------------------------------------------------
 
-def main():
-    if len(sys.argv) <= 1:
-        print_error("no input provided")
+def generate(ids: list[str]):
+    """Сгенерировать все необходимые для указанных тайников файлы.
+
+    :param ids: список ID тайников из [story_ids] (game_story_ids.ltx)
+    """
+    if len(ids) == 0:
+        print_warning("zero-length input provided")
         return
     ini_game = game_ini()
     if not ini_game.section_exist("story_ids"):
         print_error("game.ltx doesn't have section [story_ids]")
         return
     requested: OrderedDict[str, bool] = OrderedDict(
-        [(id, False) for id in sys.argv[1:]]
+        [(id, False) for id in ids]
     )
     data = OrderedDict()
     for _sid, _id in ini_game.section("story_ids").fields():
@@ -82,16 +86,12 @@ def main():
     if len(requested) != len(data):
         print_error("some ids were not found")
 
-    print("-"*64)
+    print("-"*80)
     for id, fl in requested.items():
         print("{} {}".format("+" if fl else "-", id))
-    print("-"*64)
+    print("-"*80)
 
     if len(data) > 0:
-        run(generate_main,      "main",     dict(data=data))
-        run(generate_strings,   "string",   dict(data=data))
-        print("-"*64)
-
-
-if __name__ == "__main__":
-    main()
+        _run(generate_main,      "main",     dict(data=data))
+        _run(generate_strings,   "string",   dict(data=data))
+        print("-"*80)

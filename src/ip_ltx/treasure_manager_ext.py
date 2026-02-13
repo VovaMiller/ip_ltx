@@ -2,11 +2,12 @@
     * class SpawnEntry
     * class SpawnEntriesPool
 """
+
 import re
 import copy
 
-from ini import meta_ini, system_ini
-from trade import get_buy_k
+from .ini import meta_ini, system_ini
+from .trade import get_buy_k
 
 
 # ----------------------------------------------------------------

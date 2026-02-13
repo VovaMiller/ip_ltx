@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from ip_ltx import Ini
+from .ip_ltx import Ini
 
 
 _INI_META = None
