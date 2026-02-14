@@ -1,23 +1,29 @@
-"""Анализатор all.spawn
+"""Извлечение разной информации по объектам, определённым в all.spawn"""
 
-Извлечение разной информации по объектам с предварительным запуском инспектора
-"""
-
-import re
-import os.path
-import traceback
-from collections import OrderedDict
-from pathlib import Path
-
-from .ip_ltx import Ini
 from .ini import meta_ini, spawn_ini
-from .level import get_lvl_by_gvid
 from .spawn import get_spawn
 from .utils import print_warning, validate_data
 
 # ----------------------------------------------------------------
 
-def check_anomalies(fn):
+def check_anomalies(
+        fn: str,
+        levels: list[str],
+        level_for_details: str
+) -> None:
+    """Вывод разной информации по аномалиям.
+
+    1. Список всех аномалий с указанным ``story_id``.
+    2. Кол-во зон с ``restrictor_type = 2`` по каждой локации из ``levels``.
+    3. Список аномалий с их позициями, которые невидимы для мутантов и NPC.
+       Вывод только по локации, указанной в ``level_for_details``.
+
+    :param fn: Путь/имя файла для вывода.
+    :param levels: Список локаций, использующийся при выводе
+        некоторой информации (см. список выше).
+    :param level_for_details: Локация, по которой выводится
+        некоторая информации (см. список выше).
+    """
     ini_meta = meta_ini()
     ini_spawn = spawn_ini()
     spawn = get_spawn()
@@ -30,11 +36,6 @@ def check_anomalies(fn):
                     file.write("- {}\n".format(obj.name))
 
         # Кол-во зон, у которых restrictor_type = 2
-        levels = [
-            "l01_escape", "l02_garbage", "l03_agroprom", "l04_darkvalley",
-            "l05_bar", "l06_rostok", "l07_military", "l08_yantar", "l08u_brainlab",
-            "l10_radar", "l11_pripyat", "l12_stancia"
-        ]
         cnt_by_lvls = {}
         file.write("\n")
         file.write("Number of zones with restrictor_type = 2:\n")
@@ -45,7 +46,7 @@ def check_anomalies(fn):
             file.write("- {}: {}\n".format(lvl, cnt_by_lvls.get(lvl, 0)))
         
         # Список позиций аномалий на локации не с типом 2
-        level = "l03_agroprom"
+        level = level_for_details
         file.write("\n")
         file.write("Anomalies invisible by mobs ({}):\n".format(level))
         for obj in spawn.objects():
@@ -55,9 +56,17 @@ def check_anomalies(fn):
                 continue
             if ini_spawn.get_number(obj._id, "restrictor_type", -1) == 2:
                 continue
-            file.write("- {}: position={}\n".format(obj.name, ",".join(["{:.2f}".format(p) for p in obj.position])))
+            file.write("- {}: position={}\n".format(
+                obj.name,
+                ",".join(["{:.2f}".format(p) for p in obj.position])
+            ))
 
-def extract_mobs(fn, level):
+def extract_mobs(fn: str, level: str) -> None:
+    """Вывод некоторой информации по всем мобам (мутанты и NPC) на указанной локации.
+    
+    :param fn: Путь/имя файла для вывода.
+    :param level: Локация, по которой выводится информация.
+    """
     ini_meta = meta_ini()
     ini_spawn = spawn_ini()
     spawn = get_spawn()
@@ -65,7 +74,9 @@ def extract_mobs(fn, level):
     # Проверка типов
     for _class, _type in ini_meta.section("mob_class_to_type").fields():
         if (_type != "T_STALKER") and (_type != "T_MONSTER"):
-            ini_meta._exception("section [mob_class_to_type] has unexpected mob type '{}'".format(_type))
+            ini_meta._exception(
+                f"section [mob_class_to_type] has unexpected mob type '{_type}'"
+            )
 
     # Сборка инфы
     info = {}
@@ -111,7 +122,9 @@ def extract_mobs(fn, level):
             if obj.custom_data.line_exist("spawner", "cond"):
                 spawner = obj.custom_data.get_string("spawner", "cond")
             else:
-                print_warning(f"Creature '{obj.name}' has [spawner], but no 'cond' in it")
+                print_warning(
+                    f"Creature '{obj.name}' has [spawner], but no 'cond' in it"
+                )
                 
         gulag = ""
         if obj.custom_data.section_exist("smart_terrains"):
@@ -132,12 +145,23 @@ def extract_mobs(fn, level):
     with open(fn, "w", encoding="utf-8") as file:
         file.write("# {}\n".format(level))
         file.write("\n")
-        for _caption, _type in [("Monsters (alive only)", "T_MONSTER"), ("NPC (alive only)", "T_STALKER")]:
+        for _caption, _type in [
+            ("Monsters (alive only)", "T_MONSTER"),
+            ("NPC (alive only)", "T_STALKER")
+        ]:
             file.write("## {}\n".format(_caption))
             tab = 4 * (1 + max([len(mob["name"]) for mob in info[_type]]) // 4)
             for mob in info[_type]:
-                str_spawner = " {}".format(mob["spawner"]) if (len(mob["spawner"]) > 0) else ""
-                str_gulag = " ({})".format(mob["gulag"]) if (len(mob["gulag"]) > 0) else ""
+                str_spawner = (
+                    " {}".format(mob["spawner"])
+                    if (len(mob["spawner"]) > 0)
+                    else ""
+                )
+                str_gulag = (
+                    " ({})".format(mob["gulag"])
+                    if (len(mob["gulag"]) > 0)
+                    else ""
+                )
                 file.write("+ {}--[{}][t{}s{}g{}]{}{} {}\n".format(
                     mob["name"].ljust(tab),
                     mob["object_flags"],
@@ -146,22 +170,6 @@ def extract_mobs(fn, level):
                     mob["profile"]
                 ))
             file.write("\n")
-
-# ----------------------------------------------------------------
-
-def run(f, tag, kwargs={}):
-    fn = "{}__{}.txt".format(Path(__file__).stem, tag)
-    try:
-        f(fn, **kwargs)
-    except Exception as e:
-        print("")
-        print("! {}".format(fn))
-        # print("    {}".format(f.__name__))
-        # print("    {}".format(repr(e)))
-        print(traceback.format_exc())
-        print("", flush=True)
-    else:
-        print("+ {}".format(fn), flush=True)
 
 # ----------------------------------------------------------------
 

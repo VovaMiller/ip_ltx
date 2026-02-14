@@ -10,7 +10,7 @@ from .ip_ltx import Ini
 from .ini import meta_ini, system_ini, spawn_ini, game_ini
 from .spawn import get_spawn
 from .treasure_manager import treasure_manager_ini, treasure_by_sid
-from .utils import cast_safe
+from .utils import ANSI_COLOR_CODE, cast_safe, validate_data
 
 _OK = True
 
@@ -26,8 +26,9 @@ def _print2(msg):
 
 # ----------------------------------------------------------------
 
-def _check_name_duplicates():
-    # Проверка на отсутствие дубликатов name
+def _check_name_duplicates() -> None:
+    """Проверка на отсутствие дубликатов name.
+    """
     d = OrderedDict()
     for obj in get_spawn().objects():
         if re.match(r"^meshes\\brkbl#\d+\.ogf$", obj.name) is not None:
@@ -44,17 +45,24 @@ def _check_name_duplicates():
             for id in ids:
                 _print2("+ [{}]".format(id))
 
-def _check_level_correspondence():
-    # Объекты прописаны в файлах соответствующих локаций
+def _check_level_correspondence() -> None:
+    """Объекты прописаны в файлах соответствующих локаций.
+    """
     for obj in get_spawn().objects():
         if (len(obj._src) > 0) and (obj._src.find(obj._level) < 0):
             _print1("object '{}':".format(obj.name))
             _print2("+ on level '{}'".format(obj._level))
             _print2("+ defined in '{}'".format(obj._src))
 
-def _check_upd_fields_consistency():
-    # Значения указанных полей state и update совпадают
-    # health == upd:health, position == upd:position, g_team == upd:g_team, ...
+def _check_upd_fields_consistency() -> None:
+    """Значения указанных полей state и update совпадают.
+    
+    ``health == upd:health``, ``position == upd:position``,
+    ``g_team == upd:g_team``, ...
+
+    Также предусмотрен особый случай ``condition`` и ``upd:condition``,
+    где значения должны не совпадать, а скорее корректно соотноситься.
+    """
     for section in spawn_ini().sections():
         lines = []
         for k, v in section.fields():
@@ -76,22 +84,30 @@ def _check_upd_fields_consistency():
                 else:
                     unequal = (v != updv)
                 if unequal:
-                    lines.append("{}{}".format(k, "     = {}".format(v) if (v is not None) else ""))
-                    lines.append("{}{}".format(updk, " = {}".format(updv) if (updv is not None) else ""))
+                    lines.append("{}{}".format(
+                        k, "     = {}".format(v) if (v is not None) else ""
+                    ))
+                    lines.append("{}{}".format(
+                        updk, " = {}".format(updv) if (updv is not None) else ""
+                    ))
         if len(lines) > 0:
             _print1("object '{}':".format(section.get_string("name")))
             _print2("; parameters inconsistency")
             for line in lines:
                 _print2(line)
 
-def _check_story_ids():
-    """ Проверки story_id:
-            * Отсутствие дубликатов
-            * Проверка адекватности значения (0 < int < 65535)
-            * Проверка зарегистрированности в [story_ids]
-            * Отсутствие неиспользуемых story_id в [story_ids]
+def _check_story_ids() -> None:
+    """Ряд проверок story_id.
+
+    * Отсутствие дубликатов
+    * Проверка адекватности значения (0 < int < 65535)
+    * Проверка зарегистрированности в [story_ids]
+    * Отсутствие неиспользуемых story_id в [story_ids]
     """
-    story_ids = {int(story_id): label for story_id, label in game_ini().section("story_ids").fields()}
+    story_ids = {
+        int(story_id): label
+        for story_id, label in game_ini().section("story_ids").fields()
+    }
     d = OrderedDict()
     for obj in get_spawn().objects():
         if obj.story_id != -1:
@@ -112,36 +128,45 @@ def _check_story_ids():
             _print1("story_id '{}' is used more than once:".format(sid))
             for id in ids:
                 _print2("+ [{}]".format(id))
-    unused_sids = [sid for sid in story_ids.keys() if (sid not in d) and (sid != 65535)]
+    unused_sids = [
+        sid
+        for sid in story_ids.keys()
+        if (sid not in d) and (sid != 65535)
+    ]
     if len(unused_sids) > 0:
         _print1("unused story_id:")
         for sid in unused_sids:
             _print2("{} = \"{}\"".format(sid, story_ids[sid]))
 
-def _check_treasure_manager():
-    """ Проверки treasure_manager:
-            * [spawn] vs [spawn_tm]:
-              подразумевается, что [spawn_tm] используется только тайниками,
-              которые в свою очередь не используют [spawn].
-            * Отсутствие тайников без соответствующего объекта в спавне
-            * Отсутствие тайников без custom_data
-            * Отсутствие тайников с пустым лутом
-            * Отсутствие тайников с потенциально пустым лутом:
-              технически тайнику прописаны предметы,
-              но если на всех них висит параметр prob,
-              то возможна ситуация, что в игре тайник окажется пустым.
-            * Правильная подсказка при наведении на inventory_box:
-              на обычном inventory_box, который не является тайником,
-              не должно быть подсказки "Обыскать тайник" (st_search_treasure);
-              и наоборот, на тайниках должна быть только эта подсказка.
-            * (iP v3.0) Все тайники должны использовать строго секцию inventory_box;
-              иначе не будут срабатывать необходимые колбеки в bind_physic_object.script.
+def _check_treasure_manager() -> None:
+    """Ряд проверок treasure_manager.
+
+    * *(iP v3.0+)* [spawn] vs [spawn_tm]:
+      подразумевается, что [spawn_tm] используется только тайниками,
+      которые в свою очередь не используют [spawn].
+    * Отсутствие тайников без соответствующего объекта в спавне
+    * Отсутствие тайников без custom_data
+    * *(iP v2.0+)* Отсутствие тайников с пустым лутом
+    * *(iP v2.0+)* Отсутствие тайников с потенциально пустым лутом:
+      технически тайнику прописаны предметы,
+      но если на всех них висит параметр prob,
+      то возможна ситуация, что в игре тайник окажется пустым.
+    * Правильная подсказка при наведении на inventory_box:
+      на обычном inventory_box, который не является тайником,
+      не должно быть подсказки "Обыскать тайник" (``st_search_treasure``);
+      и наоборот, на тайниках должна быть только эта подсказка.
+    * *(iP v3.0+)* Все тайники должны использовать строго секцию inventory_box;
+      иначе не будут срабатывать необходимые колбеки в ``bind_physic_object.script``.
     """
     iPv20 = meta_ini().get_bool("features", "iPv20", False)
     iPv30 = meta_ini().get_bool("features", "iPv30", False)
     found_treasures = {}
     for obj in get_spawn().objects():
-        treasure_section = treasure_by_sid(obj.story_id) if (obj.story_id != -1) else None
+        treasure_section = (
+            treasure_by_sid(obj.story_id)
+            if (obj.story_id != -1)
+            else None
+        )
         if treasure_section is not None:
             # registered in treasure_manager
             found_treasures[treasure_section.id] = True
@@ -220,7 +245,9 @@ def _check_treasure_manager():
                         cfg_std = "scripts\\treasure_inventory_box_notm.ltx"
                         if cfg_obj == cfg_err:
                             _print1("object '{}':".format(obj.name))
-                            _print2("for non-treasure storages use another cfg reference")
+                            _print2(
+                                "for non-treasure storages use another cfg reference"
+                            )
                             _print2("(\"{}\")".format(cfg_std))
                     else:
                         for cd_sect in obj.custom_data.sections():
@@ -234,12 +261,11 @@ def _check_treasure_manager():
             _print1("treasure '{}':".format(treasure_id))
             _print2("+ has no associated spawn object")
 
-def _check_known_info():
-    """ Запрет на использование [known_info] в custom_data.
-        Связано с тем, что action,
-          прописанный внутри указанного инфопоршня,
-          может вызываться несколько раз.
-        Вместо этого используй ip_f.on_npc_corpse_used
+def _check_known_info() -> None:
+    """Запрет на использование [known_info] в custom_data.
+
+    Связано с тем, что action, прописанный внутри указанного инфопоршня,
+    может вызываться несколько раз. Вместо этого используй ``ip_f.on_npc_corpse_used``.
     """
     for obj in get_spawn().objects():
         if obj.custom_data.section_exist("known_info"):
@@ -247,15 +273,15 @@ def _check_known_info():
             _print2("+ custom_data has [known_info]")
             _print2("; avoid using it")
 
-def _check_space_restrictors():
-    # Проверка имён:
-    #   у объекта cse_alife_space_restrictor,
-    #   у которого restrictor_type - 0 или 2,
-    #   имя не должно являться префиксом имени
-    #   другого объекта cse_alife_space_restrictor.
-    # Обратный расклад чреват засорением лога,
-    #  а также игнорированием мутантами аномальных зон.
-    # Для деталей см. report_39.
+def _check_space_restrictors() -> None:
+    """Проверка имён зон на "префиксность".
+
+    Проверка имён: у объекта cse_alife_space_restrictor, у которого
+    restrictor_type - 0 или 2, имя не должно являться префиксом имени
+    другого объекта cse_alife_space_restrictor. Обратный расклад чреват
+    засорением лога, а также игнорированием мутантами аномальных зон.
+    Для деталей см. ``report_39``.
+    """
     ini_spawn = spawn_ini()
     trie = pygtrie.CharTrie()  # префиксное дерево
     zones = OrderedDict()
@@ -271,31 +297,40 @@ def _check_space_restrictors():
             _print2("+ restrictor_type = {}".format(rt))
             _print2("+ its name is a prefix of another restrictor's name")
 
-def _check_box_wood_01():
-    # Проверка деревянных коробок (physics\box\box_wood_01)
-    # Должны иметь секцию [drop_box]
-    # В противном случае их уничтожение не прибавит
-    #  счётчик в достижении "Крушитель" (ИП v3.0)
-    iPv30 = meta_ini().get_bool("features", "iPv30", False)
-    if iPv30:
-        ini_spawn = spawn_ini()
-        for obj in get_spawn().objects():
-            if obj._class == "P_DSTRBL":  # physic_destroyable_object
-                if ini_spawn.get_string(obj._id, "visual_name", "") == "physics\\box\\box_wood_01":
-                    if not obj.custom_data.section_exist("drop_box"):
-                        _print1("object '{}':".format(obj.name))
-                        _print2("+ is a destroyable wooden box")
-                        _print2("+ custom_data doesn't have [drop_box]")
-                        _print2("; required by 'ip_a_boxcrusher'")
+def _check_box_wood_01() -> None:
+    """Проверка наличия у деревянных коробок
+    (``physics\\box\\box_wood_01``)
+    секции [drop_box].
 
-def _check_offline():
-    # Проверка, не находится ли объект в оффлайне.
+    *iP v3.0+*
+
+    В противном случае их уничтожение не прибавит
+    счётчик в достижении "Крушитель" (ИП v3.0)
+    """
+    iPv30 = meta_ini().get_bool("features", "iPv30", False)
+    if not iPv30:
+        return
+    ini_spawn = spawn_ini()
+    for obj in get_spawn().objects():
+        if obj._class == "P_DSTRBL":  # physic_destroyable_object
+            visual_name = ini_spawn.get_string(obj._id, "visual_name", "")
+            if visual_name == "physics\\box\\box_wood_01":
+                if not obj.custom_data.section_exist("drop_box"):
+                    _print1("object '{}':".format(obj.name))
+                    _print2("+ is a destroyable wooden box")
+                    _print2("+ custom_data doesn't have [drop_box]")
+                    _print2("; required by 'ip_a_boxcrusher'")
+
+def _check_offline() -> None:
+    """Проверка, не находится ли объект в оффлайне.
+    """
     for obj in get_spawn().objects():
         if (obj.object_flags & OBJECT_FLAGS.flSwitchOnline) == 0:
             _print1("object '{}' is offline".format(obj.name))
 
-def _check_visual():
-    # Проверка корректности visual_name для инвентарных предметов.
+def _check_visual() -> None:
+    """Проверка корректности visual_name для инвентарных предметов.
+    """
     ini_system = system_ini()
     ini_spawn = spawn_ini()
     for obj in get_spawn().objects():
@@ -311,102 +346,122 @@ def _check_visual():
                 _print2("visual = {}".format(visual))
                 _print2("visual_name = {}".format(visual_name))
 
-def _invariant_names_as_prefixes():
-    # Инвариант:
-    #   имя любого объекта не должно являться префиксом имени другого объекта.
-    # Проверяемые имена:
-    #   [1] Имена изначально заспавненных объектов (all.spawn)
-    #   [2] Возможные имена заспавненных через скрипт объектов (section_name + id)
-    # Проверки:
-    #   [1]vs[1] - точная проверка
-    #   [1]vs[2] - проверка по избыточному условию
-    #   [2]vs[2] - не проверяется
-    # Инвариант экспериментальный. Скорее всего, он всё же бесполезный.
-    iPv30 = meta_ini().get_bool("features", "iPv30", False)
-    if iPv30:
-        trie_n = pygtrie.CharTrie()  # префиксное дерево имён всех объектов all.spawn
-        trie_sn = pygtrie.CharTrie()  # префиксное дерево имён всех секций system.ltx
-        names = []
-        snames = []
-        for obj in get_spawn().objects():
-            trie_n[obj.name] = True
-            names.append(obj.name)
-        for sect in system_ini().sections():
-            trie_sn[sect.id] = True
-            snames.append(sect.id)
-        # [1]vs[1]
-        for name in names:
-            if trie_n.has_subtrie(name):
-                _print1("name '{}' is a prefix:".format(name))
-                for k in trie_n.iterkeys(prefix=name):
-                    if k != name:
-                        _print2("+ '{}'".format(k))
-        # [1]vs[2] - 1/2
-        for name in names:
-            if trie_sn.has_subtrie(name):
-                _print1("name '{}' is a prefix:".format(name))
-                for k in trie_sn.iterkeys(prefix=name):
-                    if k != name:
-                        _print2("+ section_name = {}".format(k))
-        # [1]vs[2] - 2/2
-        for sname in snames:
-            if trie_n.has_subtrie(sname):
-                not_safe = []
-                for k in trie_n.iterkeys(prefix=sname):
-                    if str(k[len(sname):len(sname)+1]).isdigit():
-                        not_safe.append(k)
-                if len(not_safe) > 0:
-                    _print1("names below are not safe for section name '{}'".format(sname))
-                    for k in not_safe:
-                        _print2("+ '{}'".format(k))
+def _invariant_names_as_prefixes() -> None:
+    """ Инвариант: имя любого объекта не должно
+    являться префиксом имени другого объекта.
 
-def _check_weapons_on_level():
-    # Проверка наличия заспавненного на локации оружия,
-    #  которое по умолчанию попадает под условия ip_cleaner.
+    *iP v3.0+*
+    
+    Проверяемые имена:
+
+    * **[1]** Имена изначально заспавненных объектов (all.spawn)
+    * **[2]** Возможные имена заспавненных через скрипт объектов (section_name + id)
+
+    Проверки:
+
+    * [1]vs[1] - точная проверка
+    * [1]vs[2] - проверка по избыточному условию
+    * [2]vs[2] - не проверяется
+    
+    Инвариант экспериментальный. Скорее всего, он всё же бесполезный.
+    """
     iPv30 = meta_ini().get_bool("features", "iPv30", False)
-    if iPv30:
-        cleaner_cond__weapons = 0.899
-        ini_meta = meta_ini()
-        ini_spawn = spawn_ini()
-        death_ini = Ini(_name="death_generic.ltx", ini_meta=ini_meta)
-        death_ini.read("config\\misc\\death_generic.ltx", inside_gamedata=True, encoding=None)
-        for obj in get_spawn().objects():
-            # Объект должен быть оружием
-            if ini_meta.get_string("inv_class_to_type", obj._class, "") != "T_WPN":
-                continue
-            # Объект не должен быть квестовым
-            if death_ini.get_string("keep_items", obj.section_name, "false") == "true":
-                continue
-            # Объект не должен иметь story_id
-            if (obj.story_id is not None) and (-1 < obj.story_id < 65535):
-                continue
-            # Объект должен быть достаточно сломан
-            if ini_spawn.get_number(obj._id, "condition", None) > cleaner_cond__weapons:
-                continue
-            # Объект попадает под условия ip_cleaner
-            _print1("object '{}':".format(obj.name))
-            _print2("can be removed by ip_cleaner.script")
-            _print2("add story_id or increase condition (>{:.3f})".format(cleaner_cond__weapons))
+    if not iPv30:
+        return
+    trie_n = pygtrie.CharTrie()  # префиксное дерево имён всех объектов all.spawn
+    trie_sn = pygtrie.CharTrie()  # префиксное дерево имён всех секций system.ltx
+    names = []
+    snames = []
+    for obj in get_spawn().objects():
+        trie_n[obj.name] = True
+        names.append(obj.name)
+    for sect in system_ini().sections():
+        trie_sn[sect.id] = True
+        snames.append(sect.id)
+    # [1]vs[1]
+    for name in names:
+        if trie_n.has_subtrie(name):
+            _print1("name '{}' is a prefix:".format(name))
+            for k in trie_n.iterkeys(prefix=name):
+                if k != name:
+                    _print2("+ '{}'".format(k))
+    # [1]vs[2] - 1/2
+    for name in names:
+        if trie_sn.has_subtrie(name):
+            _print1("name '{}' is a prefix:".format(name))
+            for k in trie_sn.iterkeys(prefix=name):
+                if k != name:
+                    _print2("+ section_name = {}".format(k))
+    # [1]vs[2] - 2/2
+    for sname in snames:
+        if trie_n.has_subtrie(sname):
+            not_safe = []
+            for k in trie_n.iterkeys(prefix=sname):
+                if str(k[len(sname):len(sname)+1]).isdigit():
+                    not_safe.append(k)
+            if len(not_safe) > 0:
+                _print1("names below are not safe for section name '{}'".format(sname))
+                for k in not_safe:
+                    _print2("+ '{}'".format(k))
+
+def _check_weapons_on_level() -> None:
+    """Проверка наличия заспавненного на локации оружия,
+    которое по умолчанию попадает под условия ``ip_cleaner``.
+
+    *iP v3.0+*
+    """
+    iPv30 = meta_ini().get_bool("features", "iPv30", False)
+    if not iPv30:
+        return
+    cleaner_cond__weapons = 0.899
+    ini_meta = meta_ini()
+    ini_spawn = spawn_ini()
+    death_ini = Ini(_name="death_generic.ltx", ini_meta=ini_meta)
+    death_ini.read(
+        "config\\misc\\death_generic.ltx",
+        inside_gamedata=True, encoding=None
+    )
+    for obj in get_spawn().objects():
+        # Объект должен быть оружием
+        if ini_meta.get_string("inv_class_to_type", obj._class, "") != "T_WPN":
+            continue
+        # Объект не должен быть квестовым
+        if death_ini.get_string("keep_items", obj.section_name, "false") == "true":
+            continue
+        # Объект не должен иметь story_id
+        if (obj.story_id is not None) and (-1 < obj.story_id < 65535):
+            continue
+        # Объект должен быть достаточно сломан
+        if ini_spawn.get_number(obj._id, "condition", None) > cleaner_cond__weapons:
+            continue
+        # Объект попадает под условия ip_cleaner
+        _print1("object '{}':".format(obj.name))
+        _print2("can be removed by ip_cleaner.script")
+        _print2(f"add story_id or increase condition (>{cleaner_cond__weapons:.3f})")
 
 # ----------------------------------------------------------------
 
-def inspect_spawn():
-    """ Ряд проверок на адекватность, правильность,
-          консистентность, целостность данных спавна.
+def inspect_spawn() -> None:
+    """Ряд проверок на адекватность, правильность,
+    консистентность, целостность данных спавна.
     """
     global _OK
     try:
-        ini_meta = meta_ini()
-        ini_system = system_ini()
-        ini_spawn = spawn_ini()
-        ini_game = game_ini()
-        spawn = get_spawn()
-        ini_tm = treasure_manager_ini()
+        validate_data([
+            meta_ini,
+            system_ini,
+            spawn_ini,
+            game_ini,
+            get_spawn,
+            treasure_manager_ini,
+        ])
     except Exception as e:
-        _print1("Mandatory data validation failed:")
-        _print2("\"{}\"".format(str(e)))
-        _print2("Can't initiate spawn inspection!")
-        _print2("See messages above.")
+        print((
+            f"{ANSI_COLOR_CODE.RED}"
+            f"Can't initiate spawn inspection!"
+            f"{ANSI_COLOR_CODE.DEF}"
+        ), end="\n\n")
+        _OK = False
     else:
         _check_name_duplicates()
         _check_level_correspondence()
@@ -422,5 +477,8 @@ def inspect_spawn():
         _check_weapons_on_level()
     finally:
         if _OK:
-            print("[{}] OK".format(os.path.basename(__file__)))
+            print((
+                f"[{os.path.basename(__file__)}] "
+                f"{ANSI_COLOR_CODE.GREEN}OK{ANSI_COLOR_CODE.DEF}"
+            ))
         print("", end="", flush=True)
