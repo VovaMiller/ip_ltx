@@ -1,13 +1,26 @@
-import traceback
-from pathlib import Path
+"""Функции для сравнения секций"""
 
-from .ip_ltx import Section
 from .ini import system_ini
-from .utils import print_warning, print_error
+from .utils import run
 
 # ----------------------------------------------------------------
 
-def compare_sections(fn: str, s1: Section, s2: Section):
+def _compare_sections(fn: str, s1_id: str, s2_id: str) -> None:
+    """Сравнение двух секций и вывод различий в текстовый файл.
+    
+    :param fn: Путь/имя файла для вывода.
+    :param s1_id: ID первой секции.
+    :param s2_id: ID второй секции.
+    """
+    # getting sections
+    ini_system = system_ini()
+    if not ini_system.section_exist(s1_id):
+        raise Exception(f"Section '{s1_id}' doesn't exist")
+    if not ini_system.section_exist(s2_id):
+        raise Exception(f"Section '{s2_id}' doesn't exist")
+    s1 = ini_system.section(s1_id)
+    s2 = ini_system.section(s2_id)
+
     # collecting diff info
     fields_unique_1 = [k for k in s1._fields.keys() if k not in s2._fields]
     fields_unique_2 = [k for k in s2._fields.keys() if k not in s1._fields]
@@ -54,33 +67,16 @@ def compare_sections(fn: str, s1: Section, s2: Section):
 
 # ----------------------------------------------------------------
 
-def run(f, tag, kwargs={}):
-    fn = "{}__{}.txt".format(Path(__file__).stem, tag)
-    try:
-        f(fn, **kwargs)
-    except Exception as e:
-        print("")
-        print("! {}".format(fn))
-        # print("    {}".format(f.__name__))
-        # print("    {}".format(repr(e)))
-        print(traceback.format_exc())
-        print("", flush=True)
-    else:
-        print("+ {}".format(fn), flush=True)
-
-def compare(s1_id: str, s2_id: str):
-    # getting sections
-    ini_system = system_ini()
-    if ini_system.section_exist(s1_id):
-        s1 = ini_system.section(s1_id)
-    else:
-        print_error(f"Section '{s1_id}' doesn't exist")
-        return
-    if ini_system.section_exist(s2_id):
-        s2 = ini_system.section(s2_id)
-    else:
-        print_error(f"Section '{s2_id}' doesn't exist")
-        return
-
-    # compare
-    run(compare_sections, f"{s1.id}__{s2.id}", dict(s1=s1, s2=s2))
+def compare(s1_id: str, s2_id: str) -> None:
+    """Обёртка для запуска функции ``_compare_sections``.
+    
+    * Безопасный запуск: все исключения будут перехвачены.
+    * Имя выходного файла составляется из ID сравниваемых секций.
+    
+    :param s1_id: ID первой секции.
+    :param s2_id: ID второй секции.
+    """
+    run(_compare_sections, f"{s1_id}__{s2_id}",
+        s1_id=s1_id,
+        s2_id=s2_id
+    )
