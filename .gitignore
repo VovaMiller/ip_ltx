@@ -1,5 +1,5 @@
 /backup/
-/usage-TEMP/
+/docs/
 *.egg-info
 *.egg
 __pycache__

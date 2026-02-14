@@ -13,7 +13,7 @@ from .ip_ltx import Ini
 from .ini import meta_ini, spawn_ini
 from .level import get_lvl_by_gvid
 from .spawn import get_spawn
-from .utils import print_warning
+from .utils import print_warning, validate_data
 
 # ----------------------------------------------------------------
 
@@ -165,22 +165,8 @@ def run(f, tag, kwargs={}):
 
 # ----------------------------------------------------------------
 
-def _validation():
-    try:
-        ini_meta = meta_ini()
-        ini_spawn = spawn_ini()
-        spawn = get_spawn()
-    except Exception as e:
-        prefix = "[{}]".format(os.path.basename(__file__))
-        tab = " "*len(prefix)
-        print(prefix,   "Mandatory data validation failed:")
-        print(tab,      "\"{}\"".format(str(e)))
-        print(tab,      "Program will be stopped!")
-        print(tab,      "See messages above.")
-        print("")
-        # print(traceback.format_exc())
-        return 1
-    return 0
-
-if _validation():
-    raise Exception("Mandatory data validation failed")
+validate_data([
+    meta_ini,
+    spawn_ini,
+    get_spawn,
+])

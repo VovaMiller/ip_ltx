@@ -1,6 +1,7 @@
 import os
 import sys
 import traceback
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -46,6 +47,35 @@ def cast_safe(val, _type, defval=None):
         return _type(val)
     except (ValueError, TypeError):
         return defval
+
+# ----------------------------------------------------------------
+
+def validate_data(funcs: list[Callable[[], Any]]) -> None:
+    """Вспомогательная функция для валидации данных,
+    конструируемых посредством singleton-классов.
+
+    :param funcs: Список функций, возвращающих экземпляр singleton-класса.
+    :type funcs: list[Callable[[], Any]]
+    :raises Exception: если валидация не пройдена.
+    """
+    if "sphinx" in sys.modules:
+        # Ничего не валидировать, если модули подгружаются для документации.
+        return
+    try:
+        for func in funcs:
+            func_name = func.__name__
+            func()
+    except Exception as e:
+        msg = f"Mandatory data validation failed ({func_name})"
+        print("")
+        print((
+            f"{ANSI_COLOR_CODE.RED}"
+            f"! {msg}"
+            f"{ANSI_COLOR_CODE.DEF}"
+        ))
+        print(traceback.format_exc())
+        print("", flush=True)
+        raise Exception(msg)
 
 # ----------------------------------------------------------------
 

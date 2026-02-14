@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ip_ltx"
-version = "3.0.2"
+version = "3.0.3"
 description = "Python utils for working with S.T.A.L.K.E.R. SoC ltx-files"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -28,7 +28,7 @@ target-version = "py312"
 src = ["src"]
 extend-exclude = [
     "backup/",
-    "usage-TEMP/",
+    "docs/",
     "*.egg-info",
     "*.egg",
     "__pycache__",
