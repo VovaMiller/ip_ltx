@@ -7,7 +7,7 @@ from collections.abc import Callable
 
 from .ip_ltx import Section
 from .ini import meta_ini, system_ini
-from .string_table import string_table
+from .xml_data.string_table import string_table
 from .utils import print_warning
 
 # ----------------------------------------------------------------
@@ -179,7 +179,7 @@ def to_uint(v: str | None) -> int:
     """Преобразование значения поля в неотрицательное целое число.
     При невозможности преобразования выдаст ``-1``.
     """
-    return int(v) if ((v is not None) and v.isdigit()) else -1
+    return int(v) if ((v is not None) and v.isdecimal()) else -1
 
 def to_int(v: str | None) -> int:
     """Преобразование значения поля в целое число.
@@ -482,7 +482,7 @@ def extract_monsters_health(
         d[section.id] = OrderedDict()
         for k in dmg_sect.lines():
             try:
-                values = [float(vv) for vv in dmg_sect.get_numbers(k, True)]
+                values = [float(vv) for vv in dmg_sect.get_floats(k, True)]
             except ValueError:
                 del d[section.id]
                 print_warning((

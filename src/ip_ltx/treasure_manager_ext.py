@@ -60,7 +60,7 @@ class SpawnEntry:
             comma = params.find(",")
             if comma < 0:
                 # count
-                if params.isdigit():
+                if params.isdecimal():
                     self.count = int(params)
                 else:
                     try:
@@ -71,7 +71,7 @@ class SpawnEntry:
                 raise Exception("Invalid syntax")
             else:
                 # count
-                if params[:comma].isdigit():
+                if params[:comma].isdecimal():
                     self.count = int(params[:comma])
                 else:
                     try:
@@ -100,7 +100,7 @@ class SpawnEntry:
                 tmp = re.search(r"box_size=([0-9\.]+)", params)
                 if tmp is not None:
                     tmp = tmp.group(1)
-                    if tmp.isdigit():
+                    if tmp.isdecimal():
                         self.box_size = int(tmp)
                     else:
                         self.box_size = float(tmp)

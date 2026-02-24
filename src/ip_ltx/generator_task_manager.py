@@ -130,7 +130,7 @@ def generate_strings(
     :param tab: Отступ, используемый при выводе в файл.
     """
     with open(fn, "w", encoding="utf-8") as file:
-        file.write("<?xml version=\"1.0\" encoding=\"windows-1251\" ?>\n")
+        file.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n")
         file.write("<string_table>\n")
         for task_id, task_sect in TaskIterator(task_ids=task_ids, include_storyline=False):
             task_text = task_sect._fields.get("text", None)

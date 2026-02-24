@@ -1,13 +1,21 @@
-import traceback
-from pathlib import Path
+"""Генерация конфигов, необходимых для тайников из treasure_manager"""
+
 from collections import OrderedDict
 
 from .ini import game_ini
-from .utils import print_warning, print_error
+from .utils import print_warning, print_error, run
 
 # ----------------------------------------------------------------
 
-def generate_main(fn, data):
+def generate_main(
+        fn: str,
+        data: OrderedDict[int, str]
+) -> None:
+    """Генерация конфига для ``treasure_manager.ltx``.
+    
+    :param fn: Путь/имя файла для вывода.
+    :param data: Словарь тайников (ключ - story_id, значение - id тайника)
+    """
     with open(fn, "w", encoding="utf-8") as file:
         file.write("[list]\n")
         file.write("\n".join(data.values()))
@@ -15,40 +23,44 @@ def generate_main(fn, data):
 
         for target, id in data.items():
             file.write("\n")
-            file.write("[{}]\n".format(id))
-            file.write("target = {}\n".format(target))
-            file.write("name = {}_name\n".format(id))
-            file.write("description = {}_desc\n".format(id))
+            file.write(f"[{id}]\n")
+            file.write(f"target = {target}\n")
+            file.write(f"name = {id}_name\n")
+            file.write(f"description = {id}_desc\n")
 
-def generate_strings(fn, data):
-    tab = "    "
+def generate_strings(
+        fn: str,
+        data: OrderedDict[int, str],
+        tab: str = "    "
+) -> None:
+    """Генерация шаблонов для ``string_table``.
+    
+    :param fn: Путь/имя файла для вывода.
+    :param data: Словарь тайников (ключ - story_id, значение - id тайника)
+    :param tab: Отступ, используемый при выводе в файл.
+    """
     with open(fn, "w", encoding="utf-8") as file:
         for id in data.values():
-            for str_id in ["{}_name".format(id), "{}_desc".format(id)]:
-                file.write("{}<string id=\"{}\">\n".format(tab*1, str_id))
-                file.write("{}<text>__TODO__</text>\n".format(tab*2))
-                file.write("{}</string>\n".format(tab*1))
+            for str_id in [f"{id}_name", f"{id}_desc"]:
+                file.write(f"{tab*1}<string id=\"{str_id}\">\n")
+                file.write(f"{tab*2}<text>__TODO__</text>\n")
+                file.write(f"{tab*1}</string>\n")
 
 # ----------------------------------------------------------------
 
-def _run(f, tag, kwargs={}):
-    fn = "{}__{}.txt".format(Path(__file__).stem, tag)
-    try:
-        f(fn, **kwargs)
-    except Exception as e:
-        print("")
-        print("! {}".format(fn))
-        print(traceback.format_exc())
-        print("", flush=True)
-    else:
-        print("+ {}".format(fn), flush=True)
+def generate(
+        ids: list[str],
+        tab: str = "    "
+) -> None:
+    """Сгенерировать все необходимые конфиги для указанных тайников.
 
-# ----------------------------------------------------------------
+    *iP v3.0+*
 
-def generate(ids: list[str]):
-    """Сгенерировать все необходимые для указанных тайников файлы.
-
-    :param ids: список ID тайников из [story_ids] (game_story_ids.ltx)
+    * :func:`generate_main`
+    * :func:`generate_strings`
+    
+    :param ids: список ID тайников из [story_ids] (``game_story_ids.ltx``)
+    :param tab: Отступ, используемый при выводе в файлы.
     """
     if len(ids) == 0:
         print_warning("zero-length input provided")
@@ -63,7 +75,7 @@ def generate(ids: list[str]):
     data = OrderedDict()
     for _sid, _id in ini_game.section("story_ids").fields():
         if (
-            not _sid.isdigit() or
+            not _sid.isdecimal() or
             (_id is None) or
             not _id.startswith('"') or
             not _id.endswith('"')
@@ -92,6 +104,6 @@ def generate(ids: list[str]):
     print("-"*80)
 
     if len(data) > 0:
-        _run(generate_main,      "main",     dict(data=data))
-        _run(generate_strings,   "string",   dict(data=data))
+        run(generate_main,      "main",     data=data)
+        run(generate_strings,   "string",   data=data, tab=tab)
         print("-"*80)

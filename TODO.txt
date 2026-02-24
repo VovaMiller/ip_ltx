@@ -1,3 +1,0 @@
-
-- string_table.py: _read_string_table
-    ; Нужна поддержка #include внутри xml-файлов (см. string_table_includes)

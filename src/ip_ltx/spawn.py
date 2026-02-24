@@ -79,7 +79,7 @@ class SpawnObject:
 
         self.position = (0, 0, 0)
         try:
-            tmp = section.get_numbers("position")
+            tmp = section.get_floats("position")
         except Exception as e:
             self._errors.append(str(e))
         else:
@@ -93,7 +93,7 @@ class SpawnObject:
 
         self.direction = (0, 0, 0)
         try:
-            tmp = section.get_numbers("direction")
+            tmp = section.get_floats("direction")
         except Exception as e:
             self._errors.append(str(e))
         else:
@@ -138,7 +138,7 @@ class SpawnObject:
 
         self.story_id = -1
         try:
-            tmp = section.get_number("story_id", -1)
+            tmp = section.get_int("story_id", -1)
         except Exception as e:
             self._errors.append(str(e))
         else:

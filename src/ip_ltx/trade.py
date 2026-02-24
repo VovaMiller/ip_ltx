@@ -45,7 +45,7 @@ def _init_buy_k():
     for k in sect._fields.keys():
         v = None
         try:
-            nums = sect.get_numbers(k, mandatory=False)
+            nums = sect.get_floats(k, mandatory=False)
         except:
             print((
                 "! [{}] Wrong value format: '{} = {}' (file '{}', section [{}]). "

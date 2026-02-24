@@ -1,18 +1,18 @@
-import sys
-import traceback
-from pathlib import Path
+"""Генератор статических таблиц для утилиты ``ip_test``"""
+
 from collections import OrderedDict
 
 from .ini import meta_ini, system_ini
+from .utils import run
 
 # ----------------------------------------------------------------
 
-class SectionGroup:
-    def __init__(self, name):
-        self.name = name
-        self.sections = []
+def _generate_sections(fn: str) -> None:
+    class SectionGroup:
+        def __init__(self, name):
+            self.name = name
+            self.sections = []
 
-def generate_sections(fn):
     ini_meta = meta_ini()
     ini_system = system_ini()
     group_by_type = OrderedDict([
@@ -53,37 +53,29 @@ def generate_sections(fn):
         tab = 4
         for group in group_by_type.values():
             if len(group.sections) > 0:
-                offset = ((5 + max([len(sect_id) for sect_id in group.sections]) + (tab - 1)) // tab) * tab
+                offset = ((
+                    5 + max([len(sect_id) for sect_id in group.sections]) + (tab - 1)
+                ) // tab) * tab
                 file.write("\n{} = {{\n".format(group.name))
                 for sect_id in group.sections:
-                    file.write("{}[\"{}\"]{}= true,\n".format(" "*tab, sect_id, " "*(offset - 4 - len(sect_id))))
+                    file.write("{}[\"{}\"]{}= true,\n".format(
+                        " "*tab,
+                        sect_id,
+                        " "*(offset - 4 - len(sect_id))
+                    ))
                 file.write("}}\n".format())
             else:
                 file.write("\n{} = {{}}\n".format(group.name))
 
 # ----------------------------------------------------------------
 
-def _run(f, tag, kwargs={}):
-    fn = "{}__{}.txt".format(Path(__file__).stem, tag)
-    try:
-        f(fn, **kwargs)
-    except Exception as e:
-        print("")
-        print("! {}".format(fn))
-        print(traceback.format_exc())
-        print("", flush=True)
-    else:
-        print("+ {}".format(fn), flush=True)
-
-# ----------------------------------------------------------------
-
-def generate():
-    """Сгенерировать статические таблицы для ip_test (ip_test_db.script)
+def generate() -> None:
+    """Сгенерировать статические таблицы для ``ip_test`` (``ip_test_db.script``)
     """
     print("-"*80)
     ini_system = system_ini()
     print("mod:", ini_system.gdp_m)
     print("SoC:", ini_system.gdp_o or "--")
     print("-"*80)
-    _run(generate_sections,  "sections")
+    run(_generate_sections,  "sections")
     print("-"*80)

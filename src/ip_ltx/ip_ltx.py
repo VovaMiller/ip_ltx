@@ -7,6 +7,7 @@
 import os.path
 import re
 from collections import OrderedDict
+from collections.abc import Callable
 from pathlib import Path
 from typing import Self
 
@@ -14,17 +15,7 @@ from .utils import cast_safe, print_error
 
 
 class Section:
-    """ Класс одной секции ltx-файла.
-
-        * Section::line_exist(field)
-        * Section::get_string(field, defval=None)
-        * Section::get_strings(field, mandatory=True)
-        * Section::get_uint(field, defval=None)
-        * Section::get_number(field, defval=None)
-        * Section::get_numbers(field, mandatory=True)
-        * Section::get_bool(field, defval=None)
-        * Section::get_items(field, mandatory=True)
-    """
+    """ Класс одной секции ltx-файла."""
     id: str
     _fields: OrderedDict[str, str | None]
     _src: str
@@ -45,10 +36,27 @@ class Section:
             self._fields = init._fields.copy()
             self._src = _src if (len(_src) > 0) else init._src
 
-    def _exception(self, msg: str):
-        msg_ext = f"{self._src} | {msg}" if len(self._src) > 0 else msg
-        # print_error(msg_ext)
-        raise Exception(msg_ext)
+
+    class Error(Exception):
+        """Исключение, вызываемое классом :class:`Section`.
+
+        :param src: Источник, откуда была считана секция (например, имя файла).
+        :param id: ID секции.
+        :param msg: Тело сообщения об ошибке.
+        """
+        def __init__(self, src: str, id: str, msg: str):
+            super().__init__(
+                f"({src}) [{id}] {msg}"
+                if len(src) > 0
+                else f"[{id}] {msg}"
+            )
+            self.src = src
+            self.id = id
+            self.msg = msg
+
+    def _raise(self, msg: str):
+        raise Section.Error(self._src, self.id, msg)
+
 
     def overwrite(self, sect: Self):
         """ Записывает поверх поля секции sect.
@@ -59,7 +67,7 @@ class Section:
 
     def field(self, k: str) -> str | None:
         if k not in self._fields:
-            self._exception("section [{}] doesn't have field '{}'".format(self.id, k))
+            self._raise(f"field '{k}' is absent")
         return self._fields[k]
 
     def lines(self):
@@ -72,130 +80,182 @@ class Section:
     def line_exist(self, k: str) -> bool:
         return (k in self._fields)
 
-    def get_string(self, k: str, defval: str | None = None) -> str:
-        """ Получить значение поля k как string.
-            Если поля нет, или оно без значения, то:
-                - defval is None: выдаст Exception
-                - defval is not None: вернёт defval
-        """
-        r = self._fields.get(k, None)
-        if r is not None:
-            return str(r)
-        if defval is None:
-            reason = "None value" if (k in self._fields) else "non-existent field"
-            self._exception("[{}]::{} can't be read as <string> ({})".format(self.id, k, reason))
-        return defval
+    def line_exist_with_value(self, k: str) -> bool:
+        return (k in self._fields) and (self._fields[k] is not None)
 
-    def get_strings(self, k: str, mandatory: bool = True) -> list[str]:
-        """ Получить значение поля k как список из string.
-            Подразумевается, что каждая строка разделена запятой.
-            Если поля нет, или оно без значения, то:
-                - mandatory=True: выдаст Exception
-                - mandatory=False: вернёт пустой список
-        """
-        r = self._fields.get(k, None)
-        if r is not None:
-            r = str(r)
-            if len(r) == 0:
-                return []
-            return [vv.strip() for vv in r.split(",")]
-        if mandatory:
-            self._exception("[{}]::{} can't be read as a list of strings ({})".format(
-                self.id, k,
-                "None value" if (k in self._fields) else "non-existent field"
-            ))
-        return []
 
-    def get_uint(self, k: str, defval: int | None = None) -> int:
-        """ Получить значение поля k как неотрицательное целое число.
-            Если поля нет, или оно без значения, то:
-                - defval is None: выдаст Exception
-                - defval is not None: вернёт defval
-            Если конвертация значения невозможна, то выдаёт Exception.
-        """
-        r = self._fields.get(k, None)
-        if r is not None:
-            r = str(r)
-            if r.isdigit():
-                return int(r)
-            self._exception("[{}]::{} can't be read as <uint>".format(self.id, k))
-        if defval is None:
-            reason = "None value" if (k in self._fields) else "non-existent field"
-            self._exception("[{}]::{} can't be read as <uint> ({})".format(self.id, k, reason))
-        return defval
+    @staticmethod
+    def r_float(v: str) -> float | None:
+        return cast_safe(v, float, defval=None)
+    
+    @staticmethod
+    def r_int(v: str) -> int | None:
+        return cast_safe(v, int, defval=None)
 
-    def get_number(self, k: str, defval: int | float | None = None) -> int | float:
-        """ Получить значение поля k как число.
-            Если указано целое число, то вернёт int.
-            В противном случае вернёт float.
-            Если конвертация значения невозможна, то выдаёт Exception.
-            Если поля нет, или оно без значения, то:
-                - defval is None: выдаст Exception
-                - defval is not None: вернёт defval
+    @staticmethod
+    def r_uint(v: str) -> int | None:
+        return int(v) if v.isdecimal() else None
+    
+    @staticmethod
+    def r_bool(v: str) -> bool | None:
+        match v.strip().lower():
+            case "on" | "yes" | "true" | "1":
+                return True
+            case "off" | "no" | "false" | "0":
+                return False
+        return None
+
+
+    def get_elem[R](
+            self,
+            type_caster: Callable[[str], R | None],
+            type_label: str,
+            k: str,
+            defval: R | None
+    ) -> R:
+        """Получить значение поля с нужным типом.
+
+        Базовый метод для ряда других методов (``get_*``).
+
+        :param type_caster: Функция для конвертации значения поля в нужный тип,
+            возвращающая ``None`` в случае невозможности конвертации.
+        :param type_label: Текстовое обозначения типа.
+            Используется в сообщении исключения.
+        :param k: Имя поля.
+        :param defval: Значение по умолчанию.
+            Определяет поведение функции в случае,
+            когда указанного поля нет или оно без значения.
+        
+        :raises Exception: в двух случаях:
+        
+            1. Конвертация значения поля невозможна.
+            2. ``defval is None`` и при этом указанного поля нет или оно без значения.
+
+        :return: Преобразованное в нужный тип значение поля,
+            либо ``defval``, если он не ``None``
+            и указанного поля нет или оно без значения.
         """
         r = self._fields.get(k, None)
         if r is not None:
-            r = str(r)
-            r = cast_safe(r, int, cast_safe(r, float))
+            r = type_caster(r)
             if r is not None:
                 return r
-            self._exception("[{}]::{} can't be read as a number".format(self.id, k))
+            self._raise(f"field '{k}' can't be read as *{type_label}*")
         if defval is None:
-            reason = "None value" if (k in self._fields) else "non-existent field"
-            self._exception("[{}]::{} can't be read as a number ({})".format(self.id, k, reason))
+            why = "None value" if (k in self._fields) else "non-existent"
+            self._raise(f"field '{k}' can't be read as *{type_label}*: {why}")
         return defval
 
-    def get_numbers(self, k: str, mandatory: bool = True) -> list[int | float]:
-        """ Получить значение поля k как список из чисел.
-            Каждое число - float (или int, где это возможно).
-            Подразумевается, что числа разделены запятой.
-            Если конвертация хотя бы одного числа невозможна,
-              то выдаёт Exception.
-            Если поля нет, или оно без значения, то:
-                - mandatory=True: выдаст Exception
-                - mandatory=False: вернёт пустой список
+    def get_string(self, k: str, defval: str | None = None) -> str:
+        """Получить значение поля k как обычную строку (str).
+        О деталях работы см. :func:`get_elem`.
         """
-        r = self._fields.get(k, None)
-        if r is not None:
-            r = str(r)
-            nums = []
-            if len(r) == 0:
-                return nums
-            for i, s in enumerate([vv.strip() for vv in r.split(",")]):
-                num = cast_safe(s, int, cast_safe(s, float))
-                if num is None:
-                    self._exception("[{}]::{} can't be read as a list of numbers ({})".format(
-                        self.id, k,
-                        "value #{} is not a number".format(i+1)
+        return self.get_elem(str, "str", k, defval)
+
+    def get_float(self, k: str, defval: float | None = None) -> float:
+        """Получить значение поля k как число с плавающей точкой (float).
+        О деталях работы см. :func:`get_elem`.
+        """
+        return self.get_elem(Section.r_float, "float", k, defval)
+
+    def get_int(self, k: str, defval: int | None = None) -> int:
+        """Получить значение поля k как целое число (int).
+        О деталях работы см. :func:`get_elem`.
+        """
+        return self.get_elem(Section.r_int, "int", k, defval)
+    
+    def get_uint(self, k: str, defval: int | None = None) -> int:
+        """Получить значение поля k как неотрицательное целое число.
+        О деталях работы см. :func:`get_elem`.
+        """
+        return self.get_elem(Section.r_uint, "uint", k, defval)
+    
+    def get_bool(self, k: str, defval: bool | None = None) -> bool:
+        """Получить значение поля k как bool.
+        О деталях работы см. :func:`get_elem`.
+        """
+        return self.get_elem(Section.r_bool, "bool", k, defval)
+
+
+    def get_elems[R](
+            self,
+            type_caster: Callable[[str], R | None],
+            type_label: str,
+            k: str,
+            mandatory: bool
+    ) -> list[R]:
+        """Получить значение поля как список элементов нужного типа.
+        Подразумевается, что элементы разделены запятой.
+
+        Базовый метод для ряда других методов (``get_*s``).
+
+        :param type_caster: Функция для конвертации элементов в нужный тип,
+            возвращающая ``None`` в случае невозможности конвертации.
+        :param type_label: Текстовое обозначения типа.
+            Используется в сообщении исключения.
+        :param k: Имя поля.
+        :param mandatory: Обязательное ли это поле.
+            Определяет поведение функции в случае,
+            когда указанного поля нет или оно без значения.
+        
+        :raises Exception: в двух случаях:
+        
+            1. Конвертация значения хотя бы одного элемента невозможна.
+            2. ``mandatory == True`` и при этом
+               указанного поля нет или оно без значения.
+
+        :return: Построенный по значению поля список элементов нужного типа,
+            либо пустоый список, если ``mandatory == False``
+            и указанного поля нет или оно без значения.
+        """
+        v = self._fields.get(k, None)
+        if v is not None:
+            if len(v.strip()) == 0:
+                return []
+            r = []
+            for i, rr in enumerate([type_caster(vv.strip()) for vv in v.split(",")]):
+                if rr is None:
+                    self._raise((
+                        f"field '{k}' can't be read as *list[{type_label}]*"
+                        f": value #{i+1} is invalid"
                     ))
-                nums.append(num)
-            return nums
+                r.append(rr)
+            return r
         if mandatory:
-            self._exception("[{}]::{} can't be read as a list of numbers ({})".format(
-                self.id, k,
-                "None value" if (k in self._fields) else "non-existent field"
-            ))
+            why = "None value" if (k in self._fields) else "non-existent"
+            self._raise(f"field '{k}' can't be read as *list[{type_label}]*: {why}")
         return []
 
-    def get_bool(self, k: str, defval: bool | None = None) -> bool:
-        """ Получить значение поля k как boolean.
-            Если конвертация значения невозможна, то выдаёт Exception.
-            Если поля нет, или оно без значения, то:
-                - defval is None: выдаст Exception
-                - defval is not None: вернёт defval
+    def get_strings(self, k: str, mandatory: bool = True) -> list[str]:
+        """Получить значение поля k как список из обычных строк.
+        О деталях работы см. :func:`get_elems`.
         """
-        r = self._fields.get(k, None)
-        if r is not None:
-            r = str(r).strip().lower()
-            if r in ["on", "yes", "true", "1"]:
-                return True
-            if r in ["off", "no", "false", "0"]:
-                return False
-            self._exception("[{}]::{} can't be read as <bool>".format(self.id, k))
-        if defval is None:
-            reason = "None value" if (k in self._fields) else "non-existent field"
-            self._exception("[{}]::{} can't be read as <bool> ({})".format(self.id, k, reason))
-        return defval
+        return self.get_elems(str, "str", k, mandatory)
+
+    def get_floats(self, k: str, mandatory: bool = True) -> list[float]:
+        """Получить значение поля k как список из чисел с плавающей точкой.
+        О деталях работы см. :func:`get_elems`.
+        """
+        return self.get_elems(Section.r_float, "float", k, mandatory)
+
+    def get_ints(self, k: str, mandatory: bool = True) -> list[int]:
+        """Получить значение поля k как список из целых чисел.
+        О деталях работы см. :func:`get_elems`.
+        """
+        return self.get_elems(Section.r_int, "int", k, mandatory)
+
+    def get_uints(self, k: str, mandatory: bool = True) -> list[int]:
+        """Получить значение поля k как список из неотрицательных целых чисел.
+        О деталях работы см. :func:`get_elems`.
+        """
+        return self.get_elems(Section.r_uint, "uint", k, mandatory)
+
+    def get_bools(self, k: str, mandatory: bool = True) -> list[bool]:
+        """Получить значение поля k как список из bool.
+        О деталях работы см. :func:`get_elems`.
+        """
+        return self.get_elems(Section.r_bool, "bool", k, mandatory)
+
 
     def get_items(self, k: str, mandatory: bool = True) -> list[tuple[str, int]]:
         """ Парсит строку вида "<section>,<count>,<section>,<section>,..."
@@ -231,10 +291,8 @@ class Section:
                 r.append((_section, _count))
             return r
         if mandatory:
-            self._exception("[{}]::{} can't be read ({})".format(
-                self.id, k,
-                "None value" if (k in self._fields) else "non-existent field"
-            ))
+            why = "None value" if (k in self._fields) else "non-existent"
+            self._raise(f"field '{k}' can't be read: {why}")
         return []
 
 
@@ -242,19 +300,7 @@ class Section:
 
 
 class Ini:
-    """ Класс, считывающий ltx-файл.
-        Аналог LUA-класса ini_file (CScriptIniFile).
-
-        * Ini::section_exist(section)
-        * Ini::line_exist(section, field)
-        * Ini::get_string(section, field, defval=None)
-        * Ini::get_strings(section, field, mandatory=True)
-        * Ini::get_uint(section, field, defval=None)
-        * Ini::get_number(section, field, defval=None)
-        * Ini::get_numbers(section, field, mandatory=True)
-        * Ini::get_bool(section, field, defval=None)
-        * Ini::get_items(section, field, mandatory=True)
-    """
+    """Класс, считывающий ltx-файл(ы). Аналог LUA-класса ini_file (CScriptIniFile)."""
     s: OrderedDict[str, Section]
     _name: str
     gdp_m: str | None
@@ -294,7 +340,7 @@ class Ini:
 
     def _exception(self, msg: str):
         msg_ext = f"{self._name} | {msg}" if len(self._name) > 0 else msg
-        print_error(msg_ext)
+        # print_error(msg_ext)
         raise Exception(msg_ext)
 
     def read_raw(self, raw: str, fp_src: str = ""):
@@ -582,68 +628,78 @@ class Ini:
             self._exception("section '{}' doesn't exist".format(id))
         return (k in self.s[id]._fields)
 
-    def get_string(self, id: str, k: str, defval: str | None = None) -> str:
-        """ Получить значение поля k секции id как string.
-            Выдаёт Exception, если указанной секции не существует.
-            В остальном, см. описание Section::get_string
-        """
-        section = self.s.get(id, None)
-        if section is None:
-            self._exception("section '{}' doesn't exist".format(id))
-        return section.get_string(k, defval)
 
-    def get_strings(self, id: str, k: str, mandatory: bool = True) -> list[str]:
-        """ Получить значение поля k секции id как список из string.
-            Подразумевается, что каждая строка разделена запятой.
-            Выдаёт Exception, если указанной секции не существует.
-            В остальном, см. описание Section::get_strings
+    def get_string(self, id: str, k: str, defval: str | None = None) -> str:
+        """Получить значение поля k секции id как обычную строку (str).
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_string`.
         """
-        section = self.s.get(id, None)
-        if section is None:
-            self._exception("section '{}' doesn't exist".format(id))
-        return section.get_strings(k, mandatory)
+        return self.section(id).get_string(k, defval)
+
+    def get_float(self, id: str, k: str, defval: float | None = None) -> float:
+        """Получить значение поля k секции id как число c плавающей точкой (float).
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_float`.
+        """
+        return self.section(id).get_float(k, defval)
+
+    def get_int(self, id: str, k: str, defval: int | None = None) -> int:
+        """Получить значение поля k секции id как целое число (int).
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_int`.
+        """
+        return self.section(id).get_int(k, defval)
 
     def get_uint(self, id: str, k: str, defval: int | None = None) -> int:
-        """ Получить значение поля k секции id как неотрицательное целое число.
-            Выдаёт Exception, если указанной секции не существует.
-            В остальном, см. описание Section::get_uint
+        """Получить значение поля k секции id как неотрицательное целое число.
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_uint`.
         """
-        section = self.s.get(id, None)
-        if section is None:
-            self._exception("section '{}' doesn't exist".format(id))
-        return section.get_uint(k, defval)
-
-    def get_number(self, id: str, k: str, defval: int | float | None = None) -> int | float:
-        """ Получить значение поля k секции id как число.
-            Выдаёт Exception, если указанной секции не существует.
-            В остальном, см. описание Section::get_number
-        """
-        section = self.s.get(id, None)
-        if section is None:
-            self._exception("section '{}' doesn't exist".format(id))
-        return section.get_number(k, defval)
-
-    def get_numbers(self, id: str, k: str, mandatory: bool = True) -> list[int | float]:
-        """ Получить значение поля k секции id как список из чисел.
-            Каждое число - float (или int, где это возможно).
-            Подразумевается, что числа разделены запятой.
-            Выдаёт Exception, если указанной секции не существует.
-            В остальном, см. описание Section::get_numbers
-        """
-        section = self.s.get(id, None)
-        if section is None:
-            self._exception("section '{}' doesn't exist".format(id))
-        return section.get_numbers(k, mandatory)
+        return self.section(id).get_uint(k, defval)
 
     def get_bool(self, id: str, k: str, defval: bool | None = None) -> bool:
-        """ Получить значение поля k секции id как boolean.
-            Выдаёт Exception, если указанной секции не существует.
-            В остальном, см. описание Section::get_bool
+        """Получить значение поля k секции id как bool.
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_bool`.
         """
-        section = self.s.get(id, None)
-        if section is None:
-            self._exception("section '{}' doesn't exist".format(id))
-        return section.get_bool(k, defval)
+        return self.section(id).get_bool(k, defval)
+
+
+    def get_strings(self, id: str, k: str, mandatory: bool = True) -> list[str]:
+        """Получить значение поля k секции id как список из обычных строк.
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_strings`.
+        """
+        return self.section(id).get_strings(k, mandatory)
+
+    def get_floats(self, id: str, k: str, mandatory: bool = True) -> list[float]:
+        """Получить значение поля k секции id как список из чисел с плавающей точкой.
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_floats`.
+        """
+        return self.section(id).get_floats(k, mandatory)
+
+    def get_ints(self, id: str, k: str, mandatory: bool = True) -> list[int]:
+        """Получить значение поля k секции id как список из целых чисел.
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_ints`.
+        """
+        return self.section(id).get_ints(k, mandatory)
+
+    def get_uints(self, id: str, k: str, mandatory: bool = True) -> list[int]:
+        """Получить значение поля k секции id как список из неотрицательных целых чисел.
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_uints`.
+        """
+        return self.section(id).get_uints(k, mandatory)
+
+    def get_bools(self, id: str, k: str, mandatory: bool = True) -> list[bool]:
+        """Получить значение поля k секции id как список из bool.
+        Кидает исключение, если указанной секции не существует.
+        В остальном, см. :func:`Section.get_bools`.
+        """
+        return self.section(id).get_bools(k, mandatory)
+
 
     def get_items(self, id: str, k: str, mandatory: bool = True) -> list[tuple[str, int]]:
         """ Парсит строку вида "<section>,<count>,<section>,<section>,..."
@@ -651,7 +707,4 @@ class Ini:
             Выдаёт Exception, если указанной секции не существует.
             В остальном, см. описание Section::get_items
         """
-        section = self.s.get(id, None)
-        if section is None:
-            self._exception("section '{}' doesn't exist".format(id))
-        return section.get_items(k, mandatory)
+        return self.section(id).get_items(k, mandatory)

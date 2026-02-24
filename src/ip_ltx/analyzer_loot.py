@@ -9,7 +9,7 @@ from .db import ADDON_FLAGS
 from .ini import meta_ini, system_ini, spawn_ini
 from .treasure_manager import treasure_manager_ini, treasure_by_sid
 from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
-from .string_table import string_table
+from .xml_data.string_table import string_table
 from .spawn import get_spawn
 from .utils import ANSI_COLOR_CODE, print_warning, print_error, validate_data
 
@@ -57,7 +57,7 @@ class SpawnEntriesCollector:
                 if treasure_by_sid(obj.story_id) is None:
                     entries.merge(obj._loot)
             elif obj._class == "AI_STL_S":
-                if ini_spawn.get_number(obj._id, "health") < 0.01:
+                if ini_spawn.get_float(obj._id, "health") < 0.01:
                     if obj.custom_data.section_exist("dont_touch_old_loot"):
                         entries.merge(obj._loot)
         self.result.merge(entries)
@@ -121,7 +121,7 @@ class SpawnEntriesCollector:
                 cond = ini_spawn.get_uint(obj._id, "upd:condition")
                 cond = cond / 255
             else:
-                cond = ini_spawn.get_number(obj._id, "condition")
+                cond = ini_spawn.get_float(obj._id, "condition")
             if _type == "T_AMMO":
                 ammo_left = ini_spawn.get_uint(obj._id, "upd:ammo_left")
                 cfg_box_size = ini_system.get_uint(sname, "box_size")

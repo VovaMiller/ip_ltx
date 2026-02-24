@@ -40,7 +40,7 @@ def check_anomalies(
         file.write("\n")
         file.write("Number of zones with restrictor_type = 2:\n")
         for obj in spawn.objects():
-            if ini_spawn.get_number(obj._id, "restrictor_type", -1) == 2:
+            if ini_spawn.get_int(obj._id, "restrictor_type", -1) == 2:
                 cnt_by_lvls[obj._level] = cnt_by_lvls.get(obj._level, 0) + 1
         for lvl in levels:
             file.write("- {}: {}\n".format(lvl, cnt_by_lvls.get(lvl, 0)))
@@ -54,7 +54,7 @@ def check_anomalies(
                 continue
             if not ini_meta.get_bool("is_anomaly_class2", obj._class, False):
                 continue
-            if ini_spawn.get_number(obj._id, "restrictor_type", -1) == 2:
+            if ini_spawn.get_int(obj._id, "restrictor_type", -1) == 2:
                 continue
             file.write("- {}: position={}\n".format(
                 obj.name,
@@ -106,7 +106,7 @@ def extract_mobs(fn: str, level: str) -> None:
         health = None
         g_team, g_squad, g_group = None, None, None
         try:
-            health = section.get_number("health")
+            health = section.get_float("health")
             g_team = section.get_uint("g_team")
             g_squad = section.get_uint("g_squad")
             g_group = section.get_uint("g_group")

@@ -3,11 +3,16 @@ META_FILEPATH = "../_settings/meta.ltx"
 def main():
     from ip_ltx.generator_character_desc import generate
 
-    generate([
-        "sample_chrdsc_monolith.txt",
-        "sample_chrdsc_rnd.txt",
-        "sample_chrdsc_test.txt",
-    ])
+    generate(
+        [
+            "sample_chrdsc_monolith.ltx",
+            "sample_chrdsc_rnd.ltx",
+            "sample_chrdsc_test.ltx",
+        ],
+        independent_input=False,
+        output_dir="output",
+        tab="\t"
+    )
 
 # ----------------------------------------------------------------
 

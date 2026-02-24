@@ -397,7 +397,7 @@ def _invariant_names_as_prefixes() -> None:
         if trie_n.has_subtrie(sname):
             not_safe = []
             for k in trie_n.iterkeys(prefix=sname):
-                if str(k[len(sname):len(sname)+1]).isdigit():
+                if str(k[len(sname):len(sname)+1]).isdecimal():
                     not_safe.append(k)
             if len(not_safe) > 0:
                 _print1("names below are not safe for section name '{}'".format(sname))
@@ -432,7 +432,7 @@ def _check_weapons_on_level() -> None:
         if (obj.story_id is not None) and (-1 < obj.story_id < 65535):
             continue
         # Объект должен быть достаточно сломан
-        if ini_spawn.get_number(obj._id, "condition", None) > cleaner_cond__weapons:
+        if ini_spawn.get_float(obj._id, "condition", None) > cleaner_cond__weapons:
             continue
         # Объект попадает под условия ip_cleaner
         _print1("object '{}':".format(obj.name))

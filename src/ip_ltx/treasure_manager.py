@@ -29,11 +29,7 @@ def _initialize():
         if not ini_0.section_exist(treasure_id):
             _exception("Treasure '{}' from [list] doesn't exist!".format(treasure_id))
         treasure_section = ini_0.section(treasure_id)
-        sid = treasure_section.get_number("target")
-        if (type(sid) != int) or (sid < 0):
-            _exception("Treasure '{}' has invalid 'target' value ()!".format(
-                treasure_id, treasure_section.get_string("target")
-            ))
+        sid = treasure_section.get_uint("target")
         if sid in id_by_sid:
             _exception("Target {} is used at least twice: see '{}' and '{}'".format(
                 sid, id_by_sid[sid], treasure_id
@@ -45,7 +41,7 @@ def _initialize():
     for sect in ini_0.sections():
         if sect.id not in ["list", "lvl_condlist", "lvl_adjacent"]:
             try:
-                target = sect.get_number("target")
+                target = sect.get_int("target")
             except:
                 _print("Unrecognized section: '{}'".format(sect.id))
             else:
