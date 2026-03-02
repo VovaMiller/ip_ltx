@@ -14,7 +14,7 @@ def _read_task_manager():
     ini.read("config\\misc\\task_manager.ltx", inside_gamedata=True)
 
     # reading [list]
-    tm_list = ini.s.get("list", None)
+    tm_list = ini._s.get("list", None)
     if tm_list is None:
         raise Exception("Mandatory section [list] was not found!")
     tm_list = list(tm_list._fields.keys())
@@ -22,7 +22,7 @@ def _read_task_manager():
     # reading each task
     tm = OrderedDict()
     for task_id in tm_list:
-        task_sect = ini.s.get(task_id, None)
+        task_sect = ini._s.get(task_id, None)
         if task_sect is None:
             raise Exception("Task '{}' from [list] doesn't exist!".format(task_id))
         task_type = task_sect._fields.get("type", None)
@@ -31,7 +31,7 @@ def _read_task_manager():
         tm[task_id] = Section(id=task_id, init=task_sect)
 
     # warn about unlisted task sections
-    for id, sect in ini.s.items():
+    for id, sect in ini._s.items():
         task_type = sect._fields.get("type", None)
         if task_type is None:
             continue

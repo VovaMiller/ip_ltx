@@ -43,6 +43,33 @@ def print_error(msg, prefix: bool = True, color: bool = True):
 
 # ----------------------------------------------------------------
 
+def read_file(fp: str) -> str:
+    """Основная функция для считывания содержимого файла.
+
+    При открытии пробует ряд основных кодировок:
+
+    * ``utf-8-sig`` (UTF-8, UTF-8-BOM)
+    * ``cp1251`` (Windows-1251)
+    * И стандартную для системы
+
+    :param fp: Путь до файла.
+    :raises OSError: при ошибке открытия файла.
+    :raises UnicodeDecodeError: если файл не удалось считать ни одной кодировкой.
+    :returns: Содержимое файла.
+    """
+    ENCODINGS = ["utf-8-sig", "cp1251", None]
+    for i, encoding in enumerate(ENCODINGS):
+        try:
+            with open(fp, "r", encoding=encoding) as file:
+                return file.read()
+        except UnicodeDecodeError:
+            if i == (len(ENCODINGS) - 1):
+                raise
+            continue
+    return ""
+
+# ----------------------------------------------------------------
+
 def cast_safe(val, _type, defval=None):
     try:
         return _type(val)

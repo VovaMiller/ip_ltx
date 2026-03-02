@@ -41,7 +41,7 @@ def _init_buy_k():
         return buy_k, buy_k_regex
 
     # reading data
-    sect = ini_trade.s[buy_section]
+    sect = ini_trade._s[buy_section]
     for k in sect._fields.keys():
         v = None
         try:

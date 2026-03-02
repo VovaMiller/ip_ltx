@@ -364,12 +364,12 @@ def summary(
         raise Exception("meta-file doesn't have mandatory section [ignore_sections]")
 
     # Запоминаем порядковые номера типов предметов для финальной сортировки
-    for _class, _type in ini_meta.s["inv_class_to_type"]._fields.items():
+    for _class, _type in ini_meta._s["inv_class_to_type"]._fields.items():
         if _type not in _types:
             _types[_type] = len(_types)
     
     # Запоминаем порядковые номера секций предметов для финальной сортировки
-    _sections = {id: i for i, id in enumerate(ini_system.s.keys())}
+    _sections = {id: i for i, id in enumerate(ini_system._s.keys())}
 
     # Сборка необходимых вхождений
     sec = SpawnEntriesCollector()
@@ -398,7 +398,7 @@ def summary(
     # Дополнение невстреченными предметами через их нулевое количество.
     if show_unlisted_items:
         _section_exists = {se.name: True for se in entries.pool.values()}
-        for id, sect in ini_system.s.items():
+        for id, sect in ini_system._s.items():
             _class = sect.get_string("class", "")
             _type = ini_meta.get_string("inv_class_to_type", _class, "")
             if len(_type) == 0:

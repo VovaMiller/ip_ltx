@@ -15,7 +15,7 @@ def _read_string_table() -> dict[str, str]:
         raise Exception(
             "Ini object for localization.ltx was not initialized properly"
         )
-    ini_localization.read("config\\localization.ltx", inside_gamedata=True, encoding=None)
+    ini_localization.read("config\\localization.ltx", inside_gamedata=True)
     lang = ini_localization.get_string("string_table", "language")
     xml_names = ini_localization.get_strings("string_table", "files", mandatory=True)
     xml_paths = [f"text\\{lang}\\{fn}.xml" for fn in xml_names]

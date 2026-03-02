@@ -982,7 +982,7 @@ def form_characters(
     :raises CharacterFactory.IncompleteError: при ошибке в конфигурации.
     """
     ini_cfg = Ini(_name=os.path.basename(fp_in))
-    ini_cfg.read(fp_in, encoding=None)
+    ini_cfg.read(fp_in)
     cf_list: list[CharacterFactory] = []
     ok = True
     for section in ini_cfg.sections():

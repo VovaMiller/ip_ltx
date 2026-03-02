@@ -419,7 +419,7 @@ def _check_weapons_on_level() -> None:
     death_ini = Ini(_name="death_generic.ltx", ini_meta=ini_meta)
     death_ini.read(
         "config\\misc\\death_generic.ltx",
-        inside_gamedata=True, encoding=None
+        inside_gamedata=True
     )
     for obj in get_spawn().objects():
         # Объект должен быть оружием

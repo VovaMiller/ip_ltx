@@ -43,13 +43,13 @@ class SpawnEntry:
         # pulling data from system.ltx
         ini_meta = meta_ini()
         ini_system = system_ini()
-        _section = ini_system.s.get(name, None)
+        _section = ini_system._s.get(name, None)
         if _section is None:
             raise Exception("section '{}' doesn't exist".format(name))
         _class = _section._fields.get("class", None)
         if _class is None:
             raise Exception("section '{}' has no 'class' field".format(name))
-        self._type = ini_meta.s["inv_class_to_type"]._fields.get(_class, None)
+        self._type = ini_meta._s["inv_class_to_type"]._fields.get(_class, None)
         if self._type is None:
             raise Exception("section '{}' has unexpected class ('{}')".format(name, _class))
 

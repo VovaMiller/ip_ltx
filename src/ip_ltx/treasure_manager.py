@@ -34,7 +34,7 @@ def _initialize():
             _exception("Target {} is used at least twice: see '{}' and '{}'".format(
                 sid, id_by_sid[sid], treasure_id
             ))
-        ini.s[treasure_id] = Section(id=treasure_id, init=treasure_section, _src=tm_fn)
+        ini._s[treasure_id] = Section(id=treasure_id, init=treasure_section, _src=tm_fn)
         id_by_sid[sid] = treasure_id
 
     # warn about unlisted treasure sections

@@ -21,12 +21,12 @@ def _read_ini_meta():
 
 def _read_ini_system():
     ini = Ini(_name="system.ltx", ini_meta=meta_ini())
-    ini.read("config\\system.ltx", inside_gamedata=True, encoding=None)
+    ini.read("config\\system.ltx", inside_gamedata=True)
     return ini
 
 def _read_ini_spawn():
     ini = Ini(_name="all.spawn", ini_meta=meta_ini())
-    sect_db = meta_ini().s.get("spawn", None)
+    sect_db = meta_ini()._s.get("spawn", None)
     if sect_db is None:
         raise Exception("meta-file doesn't have mandatory section [spawn]")
     for path in sect_db._fields.keys():
@@ -35,7 +35,7 @@ def _read_ini_spawn():
 
 def _read_ini_game():
     ini = Ini(_name="game.ltx", ini_meta=meta_ini())
-    ini.read("config\\game.ltx", inside_gamedata=True, encoding=None)
+    ini.read("config\\game.ltx", inside_gamedata=True)
     return ini
 
 # ----------------------------------------------------------------
