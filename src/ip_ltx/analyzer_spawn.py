@@ -74,7 +74,7 @@ def extract_mobs(fn: str, level: str) -> None:
     # Проверка типов
     for _class, _type in ini_meta.section("mob_class_to_type").fields():
         if (_type != "T_STALKER") and (_type != "T_MONSTER"):
-            ini_meta._exception(
+            ini_meta._raise(
                 f"section [mob_class_to_type] has unexpected mob type '{_type}'"
             )
 

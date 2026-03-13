@@ -1,0 +1,26 @@
+# id                       cost                        inv_name  artefact_count
+novice_outfit              1000                  Кожаная куртка            None
+bandit_outfit              3000               Бандитская куртка            None
+killer_outfit              6000             Комбинезон наемника            None
+monolit_outfit            10000             Комбинезон монолита            None
+specops_outfit            12000           Бронекостюм Берилл-5М            None
+military_outfit           40000           Армейский бронекостюм            None
+stalker_outfit            15000             Комбинезон сталкера            None
+scientific_outfit         30000               Комбинезон "СЕВА"            None
+exo_outfit                50000                      Экзоскелет            None
+svoboda_light_outfit      10000      Комбинезон "Ветер свободы"            None
+svoboda_heavy_outfit      12500      Комбинезон "Страж свободы"            None
+dolg_outfit               14000            ПСЗ-9д "Броня Долга"            None
+dolg_scientific_outfit    25000  ПСЗ-9Мд "Универсальная защита"            None
+ecolog_outfit             15000                 ССП-99 "Эколог"            None
+protection_outfit         24000              Комбинезон ССП-99М            None
+soldier_outfit             5000                  Кожаная куртка            None
+outfit_novice_m1           1000              Аномальная кожанка            None
+outfit_bandit_m1           3000               Кольчужная куртка            None
+outfit_dolg_m1            14000                Охотничий ПСЗ-9д            None
+outfit_killer_m1           6000              Укрепленный комбез            None
+outfit_specnaz_m1         12000                 Лечебный Берилл            None
+outfit_stalker_m1         15000             Комбинезон Призрака            None
+outfit_stalker_m2         18000              Комбинезон туриста            None
+outfit_svoboda_m1         10000               Комбез Свободы М2            None
+outfit_exo_m1             50000              Экзоскелет ПНБ-4УЗ            None

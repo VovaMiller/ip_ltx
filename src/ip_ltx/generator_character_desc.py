@@ -6,10 +6,10 @@ import traceback
 import itertools
 import random
 from collections import Counter
-from os import mkdir
+from collections.abc import Callable
 from pathlib import Path, PureWindowsPath
-from pathvalidate import is_valid_filename, is_valid_filepath
-from typing import Callable, TextIO
+from pathvalidate import is_valid_filepath
+from typing import TextIO
 
 from .ip_ltx import Ini, Section
 from .ini import system_ini
@@ -570,7 +570,11 @@ class CharacterFactory:
 
         # Filling: <a0>, <a1>, <a2>
         self.a0, self.a1, self.a2 = [], [], []
-        for w, a in zip([self.w0, self.w1, self.w2], [self.a0, self.a1, self.a2]):
+        for field, w, a in zip(
+            ["w0", "w1", "w2"],
+            [self.w0, self.w1, self.w2],
+            [self.a0, self.a1, self.a2]
+        ):
             for wse in w:
                 if wse is None:
                     a.append(None)
@@ -579,7 +583,8 @@ class CharacterFactory:
                         wse.name, "ammo_class", mandatory=False
                     )
                     if len(ammo_sections) > 0:
-                        a.append(SpawnEntry(ammo_sections[0], "1"))
+                        context = f"{field}@{self._id}"
+                        a.append(SpawnEntry(ammo_sections[0], "1", context))
                     else:
                         self._warn(f"Can't get ammo for '{wse.name}'")
                         a.append(None)
@@ -749,7 +754,8 @@ class CharacterFactory:
                 name = tmp.group(1)
                 params = "1"
             try:
-                se = SpawnEntry(name, params)
+                context = f"{field}@{section.id}"
+                se = SpawnEntry(name, params, context)
             except Exception as e:
                 raise Err(f"{e} (elem #{i+1})")
             else:
@@ -981,7 +987,7 @@ def form_characters(
     :param tab: Отступ, используемый при выводе в файл.
     :raises CharacterFactory.IncompleteError: при ошибке в конфигурации.
     """
-    ini_cfg = Ini(_name=os.path.basename(fp_in))
+    ini_cfg = Ini(name=os.path.basename(fp_in))
     ini_cfg.read(fp_in)
     cf_list: list[CharacterFactory] = []
     ok = True

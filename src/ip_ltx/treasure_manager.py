@@ -17,13 +17,13 @@ def _print(msg):
 def _initialize():
     tm_fp = "config\\misc\\treasure_manager.ltx"
     tm_fn = os.path.basename(tm_fp)
-    ini_0 = Ini(_name="treasure_manager.ltx", ini_meta=meta_ini())
+    ini_0 = Ini(name="treasure_manager.ltx", ini_meta=meta_ini())
     ini_0.read(tm_fp, inside_gamedata=True)
     if not ini_0.section_exist("list"):
         _exception("Mandatory section [list] was not found!")
     
     # reading each treasure
-    ini = Ini(_name="treasure_manager.ltx")
+    ini = Ini(name="treasure_manager.ltx")
     id_by_sid = {}
     for treasure_id, _ in ini_0.section("list").fields():
         if not ini_0.section_exist(treasure_id):

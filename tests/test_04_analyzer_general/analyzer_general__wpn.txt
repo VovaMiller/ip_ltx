@@ -1,0 +1,65 @@
+# id                   cost               inv_name
+wpn_ak74               2000               Акм 74/2
+wpn_ak74u              1000              Акм 74/2У
+wpn_fn2000            17000                ФТ 200М
+wpn_rpg7              10000                 РПГ-7у
+wpn_rg-6              12000              Бульдог-6
+wpn_vintorez          12000             Винтарь ВС
+wpn_lr300              5000                ТРс 301
+wpn_mp5                1100               Гадюка 5
+wpn_val                9000      Спецавтомат "ВЛА"
+wpn_gauss             25000            Гаусс-пушка
+wpn_groza             10000               Гром С14
+wpn_hpsa                500                ХПСС-1м
+wpn_pm                  280                    ПМм
+wpn_pb                  300                   ПБ1с
+wpn_walther             800             Волкер П9м
+wpn_usp                1500            УДП Компакт
+wpn_fort                350             Фора-12Мк2
+wpn_toz34               500                 ТОС-34
+wpn_svd               15000                 СВДм 2
+wpn_svu               10000                 СВУмк2
+wpn_l85                4000                   ИЛ86
+wpn_bm16                400       Обрез двустволки
+wpn_spas12             2000                 СПСА14
+wpn_wincheaster1300    2150              Чейзер 13
+wpn_colt1911           1100               Кора-919
+wpn_beretta             900                  Марта
+wpn_desert_eagle       2500          Черный ястреб
+wpn_sig220             1200             СИП-т М200
+wpn_sig550             6500                 СГИ 5к
+wpn_abakan             2500                 Обокан
+wpn_g36               18000                   ГП37
+wpn_ak74_m1            2000     Скоростр. Акм 74/2
+wpn_abakan_m1          2500     Обокан снайперский
+wpn_fort_m1             350              Фора-15Мк
+wpn_ak74u_m1           1000      Акм 74/2У спецназ
+wpn_mp5_m1             1100          Гадюка 5 9х18
+wpn_groza_m1          10000            "Гром" 5.45
+wpn_spas12_m1          2000       СПСА-14 нарезной
+wpn_winchester_m1      2150          Боевой чейзер
+wpn_l85_m1             4000           ИЛ 86 Баланс
+wpn_lr300_m1           5000    ТРс 301 снайперская
+wpn_svd_m1            15000  СВДм 2 "Дальнобойщик"
+wpn_sig_m1             6500          Штурмовой СИП
+wpn_eagle_m1           2500            Большой Бэн
+wpn_colt_m1            1100         Бесшумная кора
+wpn_val_m1             9000        Снайперский ВЛА
+wpn_mp5_m2             1100     Бесшумная Гадюка 5
+wpn_abakan_m2          2500       Обокан штурмовой
+wpn_l85_m2             4000      Облегченная ИЛ 86
+wpn_sig_m2             6500        СИП снайперский
+wpn_rg6_m1            12000         Бульдог-6 м209
+wpn_walther_m1          800            Волкер 9х18
+wpn_pm_arena            280                    ПМм
+wpn_mp5_arena          1100               Гадюка 5
+wpn_toz34_arena         400       Обрез двустволки
+wpn_spas12_arena       2000                 СПСА14
+wpn_ak74_arena         2000               Акм 74/2
+wpn_bm16_arena          400       Обрез двустволки
+wpn_ak74u_arena        1000              Акм 74/2У
+wpn_val_arena          9000      Спецавтомат "ВЛА"
+wpn_groza_arena       10000               Гром С14
+wpn_fn2000_arena      17000                ФТ 200М
+wpn_g36_arena         18000                   ГП37
+hunters_toz             400       Обрез двустволки

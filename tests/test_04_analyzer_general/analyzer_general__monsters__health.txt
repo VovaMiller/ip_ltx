@@ -1,0 +1,510 @@
+# hit_power (wound) = 2.5
+# hit_power (fire_wound) = 0.5
+# bone | wound | fire_wound (super fire_wound)
+
+; m_flesh_e
+default         11      54
+bip01_pelvis    3       14
+bip01_spine     3       14
+bip01_neck      3       14
+bip01_head      2       7 (2)
+
+; flesh_weak
+default         8       14
+bip01_pelvis    2       4
+bip01_spine     2       4
+bip01_neck      2       4
+bip01_head      1       2 (1)
+
+; flesh_normal
+default         11      20
+bip01_pelvis    3       5
+bip01_spine     3       5
+bip01_neck      3       5
+bip01_head      2       3 (1)
+
+; flesh_strong
+default         16      27
+bip01_pelvis    4       7
+bip01_spine     4       7
+bip01_neck      4       7
+bip01_head      2       4 (1)
+
+; m_bloodsucker_e
+default         1       29
+bip01_spine     1       29
+bip01_spine1    1       29
+bip01_spine2    1       29
+bip01_spine3    1       29
+bip01_neck      1       29
+bip01_head      1       15 (3)
+
+; bloodsucker_weak
+default         4       12
+bip01_spine     4       12
+bip01_spine1    4       12
+bip01_spine2    4       12
+bip01_spine3    4       12
+bip01_neck      4       12
+bip01_head      2       6 (2)
+
+; bloodsucker_normal
+default         4       17
+bip01_spine     4       17
+bip01_spine1    4       17
+bip01_spine2    4       17
+bip01_spine3    4       17
+bip01_neck      4       17
+bip01_head      2       9 (2)
+
+; bloodsucker_strong
+default         4       23
+bip01_spine     4       23
+bip01_spine1    4       23
+bip01_spine2    4       23
+bip01_spine3    4       23
+bip01_neck      4       23
+bip01_head      2       12 (3)
+
+; bloodsucker_arena
+default         4       23
+bip01_spine     4       23
+bip01_spine1    4       23
+bip01_spine2    4       23
+bip01_spine3    4       23
+bip01_neck      4       23
+bip01_head      2       12 (3)
+
+; bloodsucker_mil
+default         4       23
+bip01_spine     4       23
+bip01_spine1    4       23
+bip01_spine2    4       23
+bip01_spine3    4       23
+bip01_neck      4       23
+bip01_head      2       12 (3)
+
+; m_dog_e
+default         1       5
+bip01_pelvis    1       3
+bip01_spine     1       3
+bip01_spine1    1       3
+bip01_neck      1       3
+bip01_head      1       2 (1)
+
+; dog_weak
+default         2       5
+bip01_pelvis    1       3
+bip01_spine     1       3
+bip01_spine1    1       3
+bip01_neck      1       3
+bip01_head      1       2 (1)
+
+; dog_normal
+default         2       8
+bip01_pelvis    1       4
+bip01_spine     1       4
+bip01_spine1    1       4
+bip01_neck      1       4
+bip01_head      1       2 (1)
+
+; dog_strong
+default         3       12
+bip01_pelvis    2       6
+bip01_spine     2       6
+bip01_spine1    2       6
+bip01_neck      2       6
+bip01_head      1       3 (1)
+
+; m_boar_e
+default         1       14
+bip01_pelvis    1       14
+bip01_spine     1       14
+bip01_spine1    1       14
+bip01_neck      1       14
+bip01_head      1       7 (2)
+
+; boar_weak
+default         1       8
+bip01_pelvis    1       8
+bip01_spine     1       8
+bip01_spine1    1       8
+bip01_neck      1       8
+bip01_head      1       4 (1)
+
+; boar_normal
+default         1       10
+bip01_pelvis    1       10
+bip01_spine     1       10
+bip01_spine1    1       10
+bip01_neck      1       10
+bip01_head      1       5 (1)
+
+; boar_strong
+default         2       14
+bip01_pelvis    2       14
+bip01_spine     2       14
+bip01_spine1    2       14
+bip01_neck      2       14
+bip01_head      1       7 (2)
+
+; m_pseudodog_e
+default         3       14
+bip01_pelvis    1       4
+bip01_spine     1       4
+bip01_spine1    1       4
+bip01_neck      1       4
+bip01_head      1       2 (1)
+
+; pseudodog_weak
+default         14      14
+bip01_pelvis    4       4
+bip01_spine     4       4
+bip01_spine1    4       4
+bip01_neck      4       4
+bip01_head      2       2 (1)
+
+; pseudodog_normal
+default         14      17
+bip01_pelvis    4       5
+bip01_spine     4       5
+bip01_spine1    4       5
+bip01_neck      4       5
+bip01_head      2       3 (1)
+
+; pseudodog_strong
+default         20      23
+bip01_pelvis    6       7
+bip01_spine     6       7
+bip01_spine1    6       7
+bip01_neck      6       7
+bip01_head      3       4 (1)
+
+; pseudodog_arena
+default         20      23
+bip01_pelvis    6       7
+bip01_spine     6       7
+bip01_spine1    6       7
+bip01_neck      6       7
+bip01_head      3       4 (1)
+
+; psy_dog
+default         20      23
+bip01_pelvis    6       7
+bip01_spine     6       7
+bip01_spine1    6       7
+bip01_neck      6       7
+bip01_head      3       4 (1)
+
+; psy_dog_phantom
+default         14      14
+bip01_pelvis    4       4
+bip01_spine     4       4
+bip01_spine1    4       4
+bip01_neck      4       4
+bip01_head      2       2 (1)
+
+; psy_dog_radar
+default         20      23
+bip01_pelvis    6       7
+bip01_spine     6       7
+bip01_spine1    6       7
+bip01_neck      6       7
+bip01_head      3       4 (1)
+
+; burer_arena
+default         16      160
+bip01_pelvis    4       40
+bip01_spine     3       27
+bip01_spine1    3       27
+bip01_neck      3       27
+bip01_head      1       8
+
+; m_burer_normal
+default         16      160
+bip01_pelvis    4       40
+bip01_spine     3       27
+bip01_spine1    3       27
+bip01_neck      3       27
+bip01_head      1       8
+
+; m_burer_normal_black
+default         16      160
+bip01_pelvis    4       40
+bip01_spine     3       27
+bip01_spine1    3       27
+bip01_neck      3       27
+bip01_head      1       8
+
+; burer_indoor
+default         16      160
+bip01_pelvis    4       40
+bip01_spine     3       27
+bip01_spine1    3       27
+bip01_neck      3       27
+bip01_head      1       8
+
+; burer_outdoor
+default         16      160
+bip01_pelvis    4       40
+bip01_spine     3       27
+bip01_spine1    3       27
+bip01_neck      3       27
+bip01_head      1       8
+
+; m_gigant_e
+default         40      40
+bone01          40      40
+bip01_pelvis    40      40
+bip01_spine     40      40
+bip01_neck      40      40
+bip01_head      20      20 (4)
+
+; m_gigant_normal
+default         40      40
+bone01          40      40
+bip01_pelvis    40      40
+bip01_spine     40      40
+bip01_neck      40      40
+bip01_head      20      20 (4)
+
+; gigant_normal
+default         40      40
+bone01          40      40
+bip01_pelvis    40      40
+bip01_spine     40      40
+bip01_neck      40      40
+bip01_head      20      20 (4)
+
+; gigant_strong
+default         40      40
+bone01          40      40
+bip01_pelvis    40      40
+bip01_spine     40      40
+bip01_neck      40      40
+bip01_head      20      20 (4)
+
+; m_controller_e
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20 (4)
+
+; m_controller_normal
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20 (4)
+
+; m_controller_normal_fat
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20 (4)
+
+; m_controller_old
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20 (4)
+
+; m_controller_old_fat
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20 (4)
+
+; controller_tubeman
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20 (4)
+
+; m_poltergeist_e
+default         2       2
+bip01_pelvis    2       2
+bip01_spine     2       2
+bip01_spine1    2       2
+bip01_neck      2       2
+bip01_head      1       1
+
+; m_poltergeist_normal
+default         2       2
+bip01_pelvis    2       2
+bip01_spine     2       2
+bip01_spine1    2       2
+bip01_neck      2       2
+bip01_head      1       1
+
+; m_poltergeist_normal_tele
+default         2       2
+bip01_pelvis    2       2
+bip01_spine     2       2
+bip01_spine1    2       2
+bip01_neck      2       2
+bip01_head      1       1
+
+; m_poltergeist_tele_outdoor
+default         2       2
+bip01_pelvis    2       2
+bip01_spine     2       2
+bip01_spine1    2       2
+bip01_neck      2       2
+bip01_head      1       1
+
+; m_poltergeist_normal_flame
+default         2       2
+bip01_pelvis    2       2
+bip01_spine     2       2
+bip01_spine1    2       2
+bip01_neck      2       2
+bip01_head      1       1
+
+; m_poltergeist_strong_flame
+default         2       7
+bip01_pelvis    2       7
+bip01_spine     2       7
+bip01_spine1    2       7
+bip01_neck      2       7
+bip01_head      1       4
+
+; zombie_weak
+default         2       10
+bip01_pelvis    2       10
+bip01_spine     2       10
+bip01_spine1    2       10
+bip01_neck      2       10
+bip01_head      1       5
+
+; zombie_normal
+default         4       20
+bip01_pelvis    4       20
+bip01_spine     4       20
+bip01_spine1    4       20
+bip01_neck      4       20
+bip01_head      2       10
+
+; zombie_strong
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20
+
+; zombie_immortal
+default         8       40
+bip01_pelvis    8       40
+bip01_spine     8       40
+bip01_spine1    8       40
+bip01_neck      8       40
+bip01_head      4       20
+
+; m_snork_e
+default         1       23
+bip01_pelvis    1       12
+bip01_spine     1       12
+bip01_spine1    1       12
+bip01_neck      1       12
+bip01_head      1       6 (2)
+
+; snork_weak
+default         2       14
+bip01_pelvis    1       7
+bip01_spine     1       7
+bip01_spine1    1       7
+bip01_neck      1       7
+bip01_head      1       4 (1)
+
+; snork_normal
+default         4       20
+bip01_pelvis    2       10
+bip01_spine     2       10
+bip01_spine1    2       10
+bip01_neck      2       10
+bip01_head      1       5 (1)
+
+; snork_strong
+default         8       34
+bip01_pelvis    4       17
+bip01_spine     4       17
+bip01_spine1    4       17
+bip01_neck      4       17
+bip01_head      2       9 (2)
+
+; aes_snork
+default         8       34
+bip01_pelvis    4       17
+bip01_spine     4       17
+bip01_spine1    4       17
+bip01_neck      4       17
+bip01_head      2       9 (2)
+
+; snork_arena
+default         8       34
+bip01_pelvis    4       17
+bip01_spine     4       17
+bip01_spine1    4       17
+bip01_neck      4       17
+bip01_head      2       9 (2)
+
+; snork_indoor
+default         2       14
+bip01_pelvis    1       7
+bip01_spine     1       7
+bip01_spine1    1       7
+bip01_neck      1       7
+bip01_head      1       4 (1)
+
+; snork_outdoor
+default         2       14
+bip01_pelvis    1       7
+bip01_spine     1       7
+bip01_spine1    1       7
+bip01_neck      1       7
+bip01_head      1       4 (1)
+
+; snork_jumper
+default         2       14
+bip01_pelvis    1       7
+bip01_spine     1       7
+bip01_spine1    1       7
+bip01_neck      1       7
+bip01_head      1       4 (1)
+
+; m_tushkano_e
+default         1       1
+bip01_pelvis    1       1
+bip01_spine     1       1
+bip01_spine1    1       1
+bip01_neck      1       1
+bip01_head      1       1 (1)
+
+; m_tushkano_normal
+default         1       1
+bip01_pelvis    1       1
+bip01_spine     1       1
+bip01_spine1    1       1
+bip01_neck      1       1
+bip01_head      1       1 (1)
+
+; tushkano_normal
+default         1       1
+bip01_pelvis    1       1
+bip01_spine     1       1
+bip01_spine1    1       1
+bip01_neck      1       1
+bip01_head      1       1 (1)
+

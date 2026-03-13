@@ -1,0 +1,6 @@
+# id                              cost        inv_name
+wpn_addon_scope                    200    Прицел ПСО-1
+wpn_addon_scope_susat              200    Прицел SUSAT
+wpn_addon_silencer                 100       Глушитель
+wpn_addon_grenade_launcher         250  ГП-25 "Костёр"
+wpn_addon_grenade_launcher_m203    250            M203

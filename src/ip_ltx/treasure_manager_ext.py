@@ -8,6 +8,7 @@ import copy
 
 from .ini import meta_ini, system_ini
 from .trade import get_buy_k
+from .utils import print_warning
 
 
 # ----------------------------------------------------------------
@@ -18,7 +19,7 @@ class SpawnEntry:
         Также поддерживает [spawn_tm] из iP v3.0
     """
 
-    def __init__(self, name, params):
+    def __init__(self, name, params, context=""):
         """ Инициализация строки "name = params"
             Поддерживает нецелые count и box_size.
 
@@ -28,7 +29,16 @@ class SpawnEntry:
             @arg params <str>
                 * Параметры спавна.
                 * Оно же - value из строки секции спавна.
+            @arg context <str>
+                * Контекст данного вхождения.
+                * Например, ``custom_data@mil_inventory_box_0033``.
+                * Например, ``all.spawn@mil_wpn_ak74u``.
+                * Используется только в сообщениях об ошибках (warning, error).
         """
+        def _warn(msg: str) -> None:
+            print_warning(f"{context} | {msg}")
+
+        self.context = context
         self.name = name
         self.count = 1
         self.prob = None    # percentage
@@ -113,43 +123,58 @@ class SpawnEntry:
 
         # appropriateness of ammo-specific options
         if (self.box_size is not None) and (self._type != "T_AMMO"):
-            raise Exception("option 'box_size' is used with non-ammo section")
+            _warn(f"Ignoring option 'box_size': [{name}] is not an ammo")
+            self.box_size = None
 
         # appropriateness of weapon-specific options
         if (self._type != "T_WPN"):
             if self.scope:
-                raise Exception("option 'scope' is used with non-weapon section")
+                _warn(f"Ignoring option 'scope': [{name}] is not a weapon")
+                self.scope = False
             if self.silencer:
-                raise Exception("option 'silencer' is used with non-weapon section")
+                _warn(f"Ignoring option 'silencer': [{name}] is not a weapon")
+                self.silencer = False
             if self.launcher:
-                raise Exception("option 'launcher' is used with non-weapon section")
+                _warn(f"Ignoring option 'launcher': [{name}] is not a weapon")
+                self.launcher = False
             if self.unload:
-                raise Exception("option 'unload' is used with non-weapon section")
+                _warn(f"Ignoring option 'unload': [{name}] is not a weapon")
+                self.unload = False
         else:
             # Status check: scope
             if self.scope and (str(_section._fields.get("scope_status", "0")) != "2"):
-                raise Exception("Scope is not attachable for this weapon")
+                _warn(f"Ignoring option 'scope': not attachable for [{name}]")
+                self.scope = False
 
             # Status check: silencer
             if self.silencer and (str(_section._fields.get("silencer_status", "0")) != "2"):
-                raise Exception("Silencer is not attachable for this weapon")
+                _warn(f"Ignoring option 'silencer': not attachable for [{name}]")
+                self.silencer = False
 
             # Status check: launcher
             if self.launcher and (str(_section._fields.get("grenade_launcher_status", "0")) != "2"):
-                raise Exception("Launcher is not attachable for this weapon")
+                _warn(f"Ignoring option 'launcher': not attachable for [{name}]")
+                self.launcher = False
 
-            # Multiscope support
+            # Scope name check & Multiscope support
             if self.scope:
-                # Disallow scope for base section
-                scope_name = _section._fields.get("scope_name", None)
-                if scope_name is None:
-                    raise Exception("scope_name is not specified for this weapon")
-                if (scope_name == "") or (scope_name == "wpn_addon_scope_dummy"):
-                    raise Exception("Scope must not be attached to a base-section weapon")
+                scope_name = _section.get_string("scope_name", "")
+                if len(scope_name) == 0:
+                    _warn(f"Ignoring option 'scope': [{name}] has no scope_name")
+                    self.scope = False
+                elif scope_name == "wpn_addon_scope_dummy":
+                    _warn((
+                        f"Forbidden scope [{scope_name}] is attached to [{name}]. "
+                        f"Probably, [{name}] is a base multiscope weapon section "
+                        "and is not supposed to have an attached scope."
+                    ))
             else:
-                # Forced scope for multiscope section
                 if len(_section.get_string("scope_respawn", "")) > 0:
-                    raise Exception("Scope must be attached to a multiscope-section weapon")
+                    _warn((
+                        f"Missing option 'scope' for [{name}]"
+                        " (multiscope weapon section is supposed"
+                        " to have an attached scope)"
+                    ))
 
         # Unifying some params
         if self.cond == 100:
@@ -271,7 +296,7 @@ class SpawnEntriesPool:
     def __init__(self):
         self.pool = {}
 
-    def add(self, se: "SpawnEntry"):
+    def add(self, se: SpawnEntry):
         s = se.signature()
         if s in self.pool:
             self.pool[s].count += se.count
@@ -363,27 +388,27 @@ class SpawnEntriesPool:
                 se.prob = None
             if se.scope:
                 addon_name = ini_system.get_string(se.name, "scope_name")
-                buffer.add(SpawnEntry(addon_name, str(se.count)))
+                buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
                 se.scope = False
                 scope_respawn = ini_system.get_string(se.name, "scope_respawn", "")
                 if len(scope_respawn) > 0:
                     se.name = scope_respawn
             if se.silencer:
                 addon_name = ini_system.get_string(se.name, "silencer_name")
-                buffer.add(SpawnEntry(addon_name, str(se.count)))
+                buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
                 se.silencer = False
             if se.launcher:
                 addon_name = ini_system.get_string(se.name, "grenade_launcher_name")
-                buffer.add(SpawnEntry(addon_name, str(se.count)))
+                buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
                 se.launcher = False
             if not se.unload and (se._type == "T_WPN"):
                 ammo_class = ini_system.get_strings(se.name, "ammo_class")[0]
                 _ammo_type = ini_meta.get_string("inv_class_to_type", ini_system.get_string(ammo_class, "class"))
                 ammo_mag_size = ini_system.get_uint(se.name, "ammo_mag_size")
                 if _ammo_type == "T_AMMO":
-                    buffer_ammo.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count)))
+                    buffer_ammo.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count), se.context))
                 else:
-                    buffer.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count)))
+                    buffer.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count), se.context))
                 se.unload = True
             if se._type == "T_AMMO":
                 box_size = se.box_size

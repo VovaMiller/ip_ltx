@@ -10,7 +10,7 @@ _STRING_TABLE = None
 def _read_string_table() -> dict[str, str]:
     """ Считывает xml-файлы с string_table в словарь.
     """
-    ini_localization = Ini(_name="localization.ltx", ini_meta=meta_ini())
+    ini_localization = Ini(name="localization.ltx", ini_meta=meta_ini())
     if ini_localization.gdp_m is None:
         raise Exception(
             "Ini object for localization.ltx was not initialized properly"

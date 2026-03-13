@@ -80,7 +80,7 @@ class SpawnEntriesCollector:
             if obj.custom_data.section_exist("drop_box"):
                 items = obj.custom_data.get_items("drop_box", "items", mandatory=False)
                 for item, count in items:
-                    entries.add(SpawnEntry(item, str(count)))
+                    entries.add(SpawnEntry(item, str(count), f"custom_data@{obj.name}"))
         self.result.merge(entries)
 
     def from_level_items(self, levels: list[str] = []) -> None:
@@ -158,10 +158,11 @@ class SpawnEntriesCollector:
                 "" if not unload else " unload"
             )
             params = "1" if (len(params) == 0) else "1," + params
-            entries.add(SpawnEntry(sname, params))
+            context = f"all.spawn@{obj.name}"
+            entries.add(SpawnEntry(sname, params, context))
             if extra_ammo is not None:
                 ammo_name, ammo_size = extra_ammo
-                entries.add(SpawnEntry(ammo_name, f"1, box_size={ammo_size}"))
+                entries.add(SpawnEntry(ammo_name, f"1, box_size={ammo_size}", context))
         self.result.merge(entries)
 
 # ----------------------------------------------------------------

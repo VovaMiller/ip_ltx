@@ -31,7 +31,7 @@ def _init_buy_k():
         return buy_k, buy_k_regex
 
     # reading file
-    ini_trade = Ini(_name=os.path.basename(file_path), ini_meta=ini_meta)
+    ini_trade = Ini(name=os.path.basename(file_path), ini_meta=ini_meta)
     ini_trade.read(file_path, inside_gamedata=True)
     if not ini_trade.section_exist(buy_section):
         print((

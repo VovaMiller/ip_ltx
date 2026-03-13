@@ -10,7 +10,7 @@ from .utils import print_warning
 _TASK_MANAGER = None
 
 def _read_task_manager():
-    ini = Ini(_name="task_manager.ltx", ini_meta=meta_ini())
+    ini = Ini(name="task_manager.ltx", ini_meta=meta_ini())
     ini.read("config\\misc\\task_manager.ltx", inside_gamedata=True)
 
     # reading [list]

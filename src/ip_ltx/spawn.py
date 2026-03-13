@@ -43,7 +43,7 @@ class SpawnObject:
         self.object_flags: int = -1
         """cse_alife_object: object_flags"""
 
-        self.custom_data: Ini = Ini(_name="custom_data")
+        self.custom_data: Ini = Ini(name="custom_data")
         """cse_alife_object: custom_data"""
 
         self.story_id: int = -1
@@ -130,6 +130,11 @@ class SpawnObject:
             self.object_flags = tmp
 
         self.custom_data.clear()
+        self.custom_data._name = (
+            f"custom_data@{self.name}"
+            if len(self.name) > 0
+            else "custom_data"
+        )
         try:
             self.custom_data.read_raw(section.get_string("custom_data", ""))
         except Exception as e:
@@ -177,11 +182,12 @@ class SpawnObject:
         
         self._loot.clear()
         _success = True
+        context = f"custom_data@{self.name}" if len(self.name) > 0 else ""
         for ssid in ["spawn", "spawn_tm"]:
             if self.custom_data.section_exist(ssid):
                 for k, v in self.custom_data.section(ssid).fields():
                     try:
-                        self._loot.add(SpawnEntry(k, v))
+                        self._loot.add(SpawnEntry(k, v, context))
                     except Exception as e:
                         self._errors.append((
                             f"can't process loot entry"

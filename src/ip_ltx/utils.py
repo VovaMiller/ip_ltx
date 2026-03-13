@@ -23,8 +23,12 @@ class ANSI_COLOR_CODE:
 
 # ----------------------------------------------------------------
 
+# Лишний пробел в конце необходим
+#  для корректного распознавания строк
+#  при изменении размера окна консоли.
+
 def print_warning(msg, prefix: bool = True, color: bool = True):
-    msg_fmt = "{}{}{}{}".format(
+    msg_fmt = "{}{}{}{} ".format(
         ANSI_COLOR_CODE.YELLOW if color else "",
         "~ " if prefix else "",
         msg,
@@ -33,7 +37,7 @@ def print_warning(msg, prefix: bool = True, color: bool = True):
     print(msg_fmt, file=sys.stderr)
 
 def print_error(msg, prefix: bool = True, color: bool = True):
-    msg_fmt = "{}{}{}{}".format(
+    msg_fmt = "{}{}{}{} ".format(
         ANSI_COLOR_CODE.RED if color else "",
         "! " if prefix else "",
         msg,
@@ -70,7 +74,11 @@ def read_file(fp: str) -> str:
 
 # ----------------------------------------------------------------
 
-def cast_safe(val, _type, defval=None):
+def cast_safe[R,D](
+        val: Any,
+        _type: Callable[[Any], R],
+        defval: D = None
+) -> R | D:
     try:
         return _type(val)
     except (ValueError, TypeError):
@@ -315,11 +323,14 @@ def read_xml(
     lines_output = []
     for i, line in enumerate(lines_input):
         if line.startswith("#include"):
-            rr = re.match(r"#include\s*\"(.+?)\"", line)
-            if rr is not None:
-                lines_output.extend(read_xml(rr.group(1), gd_path_main, gd_path_alt))
+            parts = line.split('"')
+            if len(parts) > 1:
+                if len(parts) != 3:
+                    _warn(f"Strange #include syntax: line {i+1}")
+                part_fp = parts[1].strip()
+                lines_output.extend(read_xml(part_fp, gd_path_main, gd_path_alt))
             else:
-                _warn(f"Ignoring odd #include on the line {i+1}")
+                _warn(f"Invalid #include syntax: line {i+1}")
         else:
             lines_output.append(_process_line(line))
 

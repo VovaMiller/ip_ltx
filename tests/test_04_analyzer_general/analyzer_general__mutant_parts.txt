@@ -1,0 +1,9 @@
+# id                      cost            inv_name
+mutant_flesh_eye           300          Глаз плоти
+mutant_boar_leg            800       Копыто кабана
+mutant_dog_tail            500        Хвост собаки
+mutant_psevdodog_tail     1500  Хвост псевдособаки
+mutant_krovosos_jaw       3000  Щупальца кровососа
+mutant_burer_hand         2000   mutant_burer_hand
+mutant_zombie_hand         200  mutant_zombie_hand
+mutant_snork_leg          1100        Стопа снорка

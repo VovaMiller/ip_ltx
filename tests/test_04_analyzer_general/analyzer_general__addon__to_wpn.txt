@@ -1,0 +1,9 @@
+# <addon> = <weapons>
+
+wpn_addon_scope = wpn_abakan, wpn_abakan_m2, wpn_ak74, wpn_ak74_arena, wpn_ak74_m1, wpn_val_m1
+wpn_addon_scope_susat = wpn_lr300
+
+wpn_addon_silencer = wpn_beretta, wpn_desert_eagle, wpn_eagle_m1, wpn_fort, wpn_fort_m1, wpn_lr300, wpn_mp5, wpn_mp5_arena, wpn_mp5_m1, wpn_sig220, wpn_usp
+
+wpn_addon_grenade_launcher = wpn_ak74, wpn_ak74_arena, wpn_ak74_m1
+wpn_addon_grenade_launcher_m203 = wpn_lr300, wpn_lr300_m1, wpn_sig550, wpn_sig_m2

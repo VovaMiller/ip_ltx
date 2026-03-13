@@ -416,7 +416,7 @@ def _check_weapons_on_level() -> None:
     cleaner_cond__weapons = 0.899
     ini_meta = meta_ini()
     ini_spawn = spawn_ini()
-    death_ini = Ini(_name="death_generic.ltx", ini_meta=ini_meta)
+    death_ini = Ini(name="death_generic.ltx", ini_meta=ini_meta)
     death_ini.read(
         "config\\misc\\death_generic.ltx",
         inside_gamedata=True

@@ -15,17 +15,17 @@ def _read_ini_meta():
         meta_fp = str(Path(os.getcwd()).joinpath(Path("_meta.ltx")))
     if not os.path.isfile(meta_fp):
         raise FileNotFoundError(meta_fp)
-    ini = Ini(_name=os.path.basename(meta_fp))
+    ini = Ini(name=os.path.basename(meta_fp))
     ini.read(meta_fp)
     return ini
 
 def _read_ini_system():
-    ini = Ini(_name="system.ltx", ini_meta=meta_ini())
+    ini = Ini(name="system.ltx", ini_meta=meta_ini())
     ini.read("config\\system.ltx", inside_gamedata=True)
     return ini
 
 def _read_ini_spawn():
-    ini = Ini(_name="all.spawn", ini_meta=meta_ini())
+    ini = Ini(name="all.spawn", ini_meta=meta_ini())
     sect_db = meta_ini()._s.get("spawn", None)
     if sect_db is None:
         raise Exception("meta-file doesn't have mandatory section [spawn]")
@@ -34,7 +34,7 @@ def _read_ini_spawn():
     return ini
 
 def _read_ini_game():
-    ini = Ini(_name="game.ltx", ini_meta=meta_ini())
+    ini = Ini(name="game.ltx", ini_meta=meta_ini())
     ini.read("config\\game.ltx", inside_gamedata=True)
     return ini
 

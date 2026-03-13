@@ -1,0 +1,26 @@
+# id                       cost
+novice_outfit              1000
+outfit_novice_m1           1000
+bandit_outfit              3000
+outfit_bandit_m1           3000
+soldier_outfit             5000
+killer_outfit              6000
+outfit_killer_m1           6000
+monolit_outfit            10000
+svoboda_light_outfit      10000
+outfit_svoboda_m1         10000
+specops_outfit            12000
+outfit_specnaz_m1         12000
+svoboda_heavy_outfit      12500
+dolg_outfit               14000
+outfit_dolg_m1            14000
+stalker_outfit            15000
+ecolog_outfit             15000
+outfit_stalker_m1         15000
+outfit_stalker_m2         18000
+protection_outfit         24000
+dolg_scientific_outfit    25000
+scientific_outfit         30000
+military_outfit           40000
+exo_outfit                50000
+outfit_exo_m1             50000
