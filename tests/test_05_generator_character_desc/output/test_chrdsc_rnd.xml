@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- This file was generated using "ip_ltx.generator_character_desc" -->
+<!-- https://github.com/VovaMiller/ip_ltx -->
+<xml>
+	<specific_character id="esc_wolf" team_default="1">
+		<name>esc_wolf_name</name>
+		<icon>ui_npc_u_stalker_neytral_balon_1</icon>
+		<bio>esc_wolf_bio</bio>
+		<class>esc_wolf</class>
+		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0" />
+		<rank>434</rank>
+		<reputation>5</reputation>
+		<visual>actors\neytral\stalker_neytral_balon_1</visual>
+		<snd_config>characters_voice\human_01\stalker\</snd_config>
+		<crouch_type>-1</crouch_type>
+		<supplies>
+			[spawn] \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
+			wpn_ak74u \n
+			ammo_5.45x39_fmj \n
+			device_torch \n
+			hand_radio \n
+#include "gameplay\character_drugs.xml"
+#include "gameplay\character_food.xml"
+#include "gameplay\character_items.xml"
+		</supplies>
+#include "gameplay\character_criticals_1.xml"
+		<start_dialog>escape_lager_volk_talk</start_dialog>
+		<actor_dialog>dm_cool_info_dialog</actor_dialog>
+		<actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
+		<actor_dialog>tm_wolf_dialog</actor_dialog>
+		<actor_dialog>tm_wolf_reward</actor_dialog>
+	</specific_character>
+	<specific_character id="esc_fanat" team_default="1">
+		<name>esc_fanat_name</name>
+		<icon>ui_npc_u_stalker_neytral_rukzak_3</icon>
+		<bio>esc_fanat_bio</bio>
+		<class>esc_fanat</class>
+		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0" />
+		<rank>502</rank>
+		<reputation>10</reputation>
+		<visual>actors\neytral\stalker_neytral_rukzak_3</visual>
+		<snd_config>characters_voice\human_01\stalker\</snd_config>
+		<crouch_type>-1</crouch_type>
+		<supplies>
+			[spawn] \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
+			wpn_ak74u \n
+			ammo_5.45x39_fmj \n
+#include "gameplay\character_drugs.xml"
+#include "gameplay\character_food.xml"
+#include "gameplay\character_items.xml"
+		</supplies>
+#include "gameplay\character_criticals_1.xml"
+		<start_dialog>escape_lager_leader_hello</start_dialog>
+		<actor_dialog>dm_cool_info_dialog</actor_dialog>
+		<actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
+	</specific_character>
+	<specific_character id="esc_fox" team_default="1">
+		<name>esc_fox_name</name>
+		<icon>ui_npc_u_stalker_neytral_balon_4</icon>
+		<bio>esc_fox_bio</bio>
+		<class>esc_fox</class>
+		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0" />
+		<rank>338</rank>
+		<reputation>-3</reputation>
+		<visual>actors\neytral\stalker_neytral_balon_4</visual>
+		<snd_config>characters_voice\human_01\stalker\</snd_config>
+		<crouch_type>-1</crouch_type>
+		<supplies>
+			[spawn] \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
+			wpn_bm16 \n
+			ammo_12x70_buck \n
+			device_torch \n
+#include "gameplay\character_drugs.xml"
+#include "gameplay\character_food.xml"
+#include "gameplay\character_items.xml"
+		</supplies>
+#include "gameplay\character_criticals_1.xml"
+		<start_dialog>escape_fox_hello_dialog</start_dialog>
+		<actor_dialog>dm_cool_info_dialog</actor_dialog>
+		<actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
+	</specific_character>
+</xml>

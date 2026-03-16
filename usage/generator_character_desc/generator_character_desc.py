@@ -8,7 +8,6 @@ def main():
         [
             "sample_chrdsc_monolith.ltx",
             "sample_chrdsc_rnd.ltx",
-            "sample_chrdsc_test.ltx",
         ],
         independent_input=False,
         output_dir="output",
