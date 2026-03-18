@@ -1,0 +1,28 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l10_radar
+
+[metrics]
+cost = 85600
+cost_trade = 55850
+game_objects_count = 22.0
+
+[summary]
+af_gold_fish        = 1
+af_dummy_spring     = 1
+af_dummy_dummy      = 1
+af_dummy_battery    = 1
+af_fuzz_kolobok     = 1
+
+monolit_outfit          = 2
+specops_outfit          = 1
+svoboda_heavy_outfit    = 1
+dolg_outfit             = 1
+
+antirad = 2
+medkit  = 10

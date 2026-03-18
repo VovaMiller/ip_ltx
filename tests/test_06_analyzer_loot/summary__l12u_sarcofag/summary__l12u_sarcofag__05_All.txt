@@ -1,0 +1,31 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l12u_sarcofag
+
+[metrics]
+cost = 122130
+cost_trade = 78978
+game_objects_count = 34.0
+
+[summary]
+af_night_star   = 1
+af_gold_fish    = 1
+af_soul         = 1
+
+ammo_5.56x45_ap = 6
+ammo_9x39_pab9  = 4
+
+grenade_f1  = 4
+
+exo_outfit  = 2
+
+antirad         = 5
+medkit          = 3
+medkit_army     = 1
+medkit_scientic = 2
+bandage         = 4

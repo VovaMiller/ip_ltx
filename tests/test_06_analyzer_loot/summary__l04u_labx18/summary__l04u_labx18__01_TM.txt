@@ -1,0 +1,25 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l04u_labx18
+
+[metrics]
+cost = 16660
+cost_trade = 10475
+game_objects_count = 12.0
+
+[summary]
+af_night_star   = 1
+
+wpn_walther = 1
+
+ammo_9x19_pbp   = 1, box_size=40
+
+monolit_outfit  = 1
+
+medkit_army = 2
+bandage     = 5

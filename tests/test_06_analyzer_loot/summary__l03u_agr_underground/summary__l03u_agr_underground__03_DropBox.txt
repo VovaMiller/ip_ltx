@@ -1,0 +1,25 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = True
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l03u_agr_underground
+
+[metrics]
+cost = 17370
+cost_trade = 11058
+game_objects_count = 18.0
+
+[summary]
+ammo_5.45x39_fmj    = 5
+ammo_12x76_zhekan   = 1
+
+grenade_f1      = 2
+grenade_rgd5    = 4
+
+stalker_outfit  = 1
+
+medkit  = 3
+bandage = 2

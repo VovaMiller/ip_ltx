@@ -1,0 +1,25 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l08u_brainlab
+
+[metrics]
+cost = 58313
+cost_trade = 27357
+game_objects_count = 18.0
+
+[summary]
+af_electra_moonlight    = 1
+
+wpn_vintorez    = 1
+wpn_groza       = 1, unload
+
+ammo_5.45x39_fmj    = 5
+ammo_9x39_ap        = 8
+
+specops_outfit  = 1
+ecolog_outfit   = 1

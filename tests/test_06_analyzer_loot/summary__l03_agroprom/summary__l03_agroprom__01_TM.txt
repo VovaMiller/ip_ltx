@@ -1,0 +1,53 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l03_agroprom
+
+[metrics]
+cost = 57652
+cost_trade = 33505
+game_objects_count = 127.0
+
+[summary]
+af_vyvert           = 2
+af_gravi            = 2
+af_fireball         = 1
+af_mincer_meat      = 1
+af_electra_sparkler = 2
+af_electra_flash    = 1
+af_ameba_slime      = 3
+af_ameba_slug       = 3
+af_rusty_kristall   = 1
+
+wpn_ak74        = 1
+wpn_walther     = 1
+wpn_colt1911    = 1
+
+ammo_9x19_pbp       = 1, box_size=40
+ammo_9x19_pbp       = 1, box_size=60
+ammo_9x19_pbp       = 2, box_size=80
+ammo_5.45x39_ap     = 1, box_size=100
+ammo_5.45x39_ap     = 1, box_size=45
+ammo_5.45x39_ap     = 1, box_size=70
+ammo_7.62x54_ap     = 1, box_size=60
+ammo_11.43x23_fmj   = 1, box_size=60
+
+grenade_rgd5    = 8
+
+wpn_addon_silencer  = 3
+
+killer_outfit   = 1
+
+bread           = 1
+conserva        = 2
+vodka           = 13
+antirad         = 7
+medkit          = 12
+medkit_army     = 2
+medkit_scientic = 1
+energy_drink    = 10
+bandage         = 17

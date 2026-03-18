@@ -1,0 +1,18 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l08u_brainlab
+
+[metrics]
+cost = 17113
+cost_trade = 5707
+game_objects_count = 2.0
+
+[summary]
+af_electra_moonlight    = 1
+
+wpn_vintorez    = 1

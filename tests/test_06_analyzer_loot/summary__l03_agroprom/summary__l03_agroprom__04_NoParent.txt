@@ -1,0 +1,23 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l03_agroprom
+
+[metrics]
+cost = 12540
+cost_trade = 7445
+game_objects_count = 8.0
+
+[summary]
+af_dummy_battery    = 1
+
+killer_outfit   = 1
+
+vodka           = 2
+antirad         = 1
+bandage         = 2
+quest_case_02   = 1

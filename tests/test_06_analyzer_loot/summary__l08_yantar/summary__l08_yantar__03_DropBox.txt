@@ -1,0 +1,18 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = True
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l08_yantar
+
+[metrics]
+cost = 430
+cost_trade = 322
+game_objects_count = 5.0
+
+[summary]
+medkit      = 1
+medkit_army = 1
+bandage     = 3

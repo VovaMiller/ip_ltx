@@ -1,0 +1,19 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l12_stancia_2
+
+[metrics]
+cost = 220100
+cost_trade = 143020
+game_objects_count = 6.0
+
+[summary]
+military_outfit = 3
+exo_outfit      = 2
+
+vodka   = 1

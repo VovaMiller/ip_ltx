@@ -24,7 +24,7 @@ import os
 import re
 from collections.abc import Callable
 from pathlib import Path
-from typing import Self, TextIO
+from typing import Literal, Self, TextIO
 
 from .utils import cast_safe, print_warning, read_file
 
@@ -441,7 +441,8 @@ class Section:
     def get_items(
             self,
             k: str,
-            mandatory: bool = True
+            mandatory: bool = True,
+            parsing_mode: Literal["comma", "vanilla", "vanilla_ext"] = "comma"
     ) -> list[tuple[str, int]]:
         """Парсит строку вида
         ``<section>,<count>,<section>,<section>,...``
@@ -457,6 +458,18 @@ class Section:
             * ``mandatory=True``: выдаст исключение
             * ``mandatory=False``: вернёт пустой список
         
+        :param parsing_mode: Как исходная строка будет преобразована в список:
+
+            * ``comma`` - обычное разбиение по запятым.
+            * ``vanilla`` - алгоритм, повторяющий LUA-функцию ``_g.parse_names``.
+              Не поддерживает точки и дефисы в элементах списка.
+              Не поддерживает отрицательные числа.
+            * ``vanilla_ext`` - алгоритм, повторяющий альтернативную LUA-функцию
+              ``parse_names``, использующуюся в скриптах ``se_respawn``,
+              ``task_manager``, ``treasure_manager``, ``xr_box``.
+              Поддерживает точки и дефисы внутри элементов списка.
+              Не поддерживает отрицательные числа.
+
         :raises Section.Error: если поля нет или оно без значения,
             и при этом ``mandatory=True``.
         :return: Список пар ``(<section>, <count>)``.
@@ -466,7 +479,15 @@ class Section:
             r = str(r)
             if len(r) == 0:
                 return []
-            t = [vv.strip() for vv in r.split(",")]
+            match parsing_mode:
+                case "comma":
+                    t = [vv.strip() for vv in r.split(",")]
+                case "vanilla":
+                    t = re.findall(r"([\w\\]+)[^\w\s]*", r)
+                case "vanilla_ext":
+                    t = re.findall(r"([\w\-.\\]+)[^\w\s]*", r)
+                case _:
+                    self._raise(f"get_items: unknown parsing_mode ({parsing_mode})")
             r = []
             n = len(t)
             i = 0
@@ -1071,7 +1092,8 @@ class Ini:
             self,
             id: str,
             k: str,
-            mandatory: bool = True
+            mandatory: bool = True,
+            parsing_mode: Literal["comma", "vanilla", "vanilla_ext"] = "comma"
     ) -> list[tuple[str, int]]:
         """Парсит строку вида
         ``<section>,<count>,<section>,<section>,...``
@@ -1079,4 +1101,4 @@ class Ini:
         Кидает исключение, если указанной секции не существует.
         В остальном, см. :func:`Section.get_items`.
         """
-        return self.section(id).get_items(k, mandatory)
+        return self.section(id).get_items(k, mandatory, parsing_mode)

@@ -1,0 +1,39 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l10_radar
+
+[metrics]
+cost = 107212
+cost_trade = 64601
+game_objects_count = 54.0
+
+[summary]
+af_gold_fish        = 1
+af_dummy_spring     = 1
+af_dummy_dummy      = 1
+af_dummy_battery    = 1
+af_fuzz_kolobok     = 2
+
+wpn_val = 1
+wpn_usp = 1
+
+ammo_9x39_ap        = 1, box_size=90
+ammo_11.43x23_hydro = 1, box_size=1
+
+ammo_vog-25p    = 5
+ammo_vog-25     = 5
+ammo_m209       = 9
+
+monolit_outfit          = 2
+specops_outfit          = 1
+svoboda_heavy_outfit    = 1
+dolg_outfit             = 1
+
+vodka   = 1
+antirad = 7
+medkit  = 10

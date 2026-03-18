@@ -1,0 +1,1548 @@
+; Вагон над мостом
+; Во время перегруппировки спрятал боеприпас в вагоне. Не забыть.
+;; physics\equipment_cache\equipment_pipe_02_case
+[esc_secret_bridge_vagon]           ;story_id = 5000
+ammo_5.45x39_ap = 1, box_size=30
+medkit_army = 2
+
+; Вещи погибшего в аномалии
+; Видел, как возле железнодорожного туннеля в лесу накрылся в аномалии какой-то сталкер, вроде шмотки неплохие были.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[esc_secret_anomaly_dead]           ;story_id = 5001
+bandit_outfit = 1
+
+; Крест у лагеря бандюков
+; Возле лагеря бандитов под крестом я спрятал хабар.
+;; physics\equipment_cache\equipment_cross_2_case
+[esc_secret_bandit_cross]           ;story_id = 5002
+af_medusa = 1
+
+; Бандитский склад
+; Перехваченный бандитами ящик обнаружен на чердаке центрального дома, надо подготовить отряд и отбить его.
+;; physics\equipment_cache\equipment_box_02_case
+[esc_secret_bandit_supply]          ;story_id = 5003
+af_mincer_meat = 1
+
+; Под крестом
+; Когда мы с братками отбивались от собак в погонах, я зарыл кое-какое добро под крестом. Пусть полежит.
+;; physics\equipment_cache\equipment_cross_1_case
+[esc_secret_under_cross]            ;story_id = 5004
+af_drops = 1
+
+; Убежище на чердаке
+; Рюкзак я сунул на чердак. Вернусь потом, пока никак.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[esc_secret_refuge]                 ;story_id = 5005
+medkit = 2
+bandage = 2
+conserva = 5
+
+; Сейф на ферме
+; На ферме нашел полузакопанный сейф, буду пока там хранить добро.
+;; physics\equipment_cache\equipment_seif_02_case
+[esc_secret_safe_farm]              ;story_id = 5006
+medkit = 5
+
+; Контейнер в вагоне
+; Ребятки шепнули, что в вагоне на мосту кто-то что-то прячет, надо заглянуть на обратном пути. Узнать бы кто...
+;; physics\equipment_cache\equipment_pipe_02_case
+[esc_secret_vagon_container]        ;story_id = 5007
+af_rusty_thorn = 1
+
+; Товар сталкера
+; Спрятал товар под самой крышей, в домике возле моста.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[esc_secret_stalker_things]         ;story_id = 5008
+af_rusty_thorn = 1
+
+; Вещи около моста
+; Шмотье спрятал в одном из ящиков недалеко от моста. Все, завязываю. Ухожу из Зоны, прощайте, братки! Не забуду мать родную.
+;; physics\equipment_cache\equipment_box_02_case
+[esc_secret_box_bridge]             ;story_id = 5009
+bandit_outfit = 1
+ammo_9x18_pmm = 1, box_size=40
+wpn_pb = 1
+
+; Рюкзак возле деревни
+; Недалеко от лагеря новичков сгинул какой-то сталкер, надо бы посмотреть его добро.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[esc_secret_village_rucksack]       ;story_id = 5010
+wpn_pb = 1
+ammo_9x18_fmj = 1, box_size=50
+
+; Чердак в деревне
+; На чердаке тайник, узнал у Лихого. Он много языком ляпал, мы его и пришили.
+;; physics\equipment_cache\equipment_box_01_case
+[esc_secret_village_roof]           ;story_id = 5011
+af_vyvert = 1
+antirad = 5
+vodka = 1
+
+; Удобное место
+; Нашел на чердаке отличный тайник, подожду, пока кто-то туда что-то положит.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[esc_secret_nice_place]             ;story_id = 5012
+medkit = 3
+
+; Тайник Ворпала
+; На чердаке тайник, узнал от Ворпала. Наши разведку местности проводили. Проверим.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[esc_secret_vorpal]                 ;story_id = 5013
+ammo_9x18_pmm = 1, box_size=40
+medkit = 3
+bandage = 5
+
+; Ценности командира
+; Говорят, у командира есть хитрый ящик в кабинете, и там ценного добра навалом.
+;; physics\equipment_cache\equipment_box_02_case
+[esc_secret_commander_goods]        ;story_id = 5014
+medkit_army = 5
+antirad = 5
+bandage = 10
+vodka = 3
+
+; У сельской дороги
+; Недалеко от лагеря новичков сгинул какой-то сталкер, надо бы посмотреть, что он нес. Кто их вообще сюда пропускает?
+;; physics\equipment_cache\equipment_rucksack_02_case
+[esc_secret_road]                   ;story_id = 5015
+wpn_bm16 = 1
+ammo_12x76_zhekan = 1, box_size=15
+
+; Воровской чердак
+; На чердаке у бандитов спрятал хабар, пока их не было. Теперь бы улучить момент и забрать.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[esc_secret_thief]                  ;story_id = 5016
+af_rusty_thorn = 1
+
+; Газовая труба
+; Обнаружил инвентарь в трубе, недалеко от фермы. Вот гауптвахта закончится - обязательно вернусь.
+;; physics\equipment_cache\equipment_pipe_02_case
+[esc_secret_gas_pipe]               ;story_id = 5017
+outfit_novice_m1 = 1
+
+; Спрятанные вещи
+; Недалеко от поста скинул рюкзак, надо поскорее забрать, пока командир не перевел нас на другую локацию.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[esc_secret_truck_goods]            ;story_id = 5018
+medkit_army = 3
+bandage = 5
+
+; Вышка на КПП
+; На вышке временно оставил ящик. Заберу, когда смогу.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[esc_secret_kpp_tower]              ;story_id = 5019
+af_blood = 1
+
+; Бандитский схрон
+; Видел, как бандит прятал свое добро в ангаре в ящике. Как бы это тихо упереть?
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[gar_secret_bandit_hiding]          ;story_id = 5030
+af_blood = 1
+
+; Старый кран
+; Мы с Васей ходили посмотреть чё да как, тут Васю и настигла ментовская пуля. А я тут ни при чем. Пуля - дура. Вещички схоронил на кране в трубе.
+;; physics\equipment_cache\equipment_pipe_02_case
+[gar_secret_old_kran]               ;story_id = 5031
+bandage = 5
+bandit_outfit = 1
+wpn_mp5 = 1
+
+; Вещи Гризли
+; На Свалке в железнодорожном туннеле за дизелем со всем своим барахлом накрылся Гризли. Жаль парня.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[gar_secret_grizly]                 ;story_id = 5032
+killer_outfit = 1
+wpn_walther = 1
+ammo_9x19_pbp = 1, box_size=40
+
+; Труба на Северной куче
+; Хабар прятанул в трубе на свалке.
+;; physics\equipment_cache\equipment_pipe_01_case
+[gar_secret_north_tube]             ;story_id = 5033
+af_medusa = 2
+
+; Заначка в металлоломе
+; Вещи лежат на свалке, в одной трубе. Если не знать, где точно, ни за что не найдешь.
+;; physics\equipment_cache\equipment_pipe_valve_01_case
+[gar_secret_metal_hiding]           ;story_id = 5034
+medkit = 2
+bandage = 1
+antirad = 3
+
+; Чугунка возле цистерн
+; Спрятал барахло в металлической трубе возле двух цистерн. Надо бы забрать, но некогда.
+;; physics\equipment_cache\equipment_pipe_02_case
+[gar_secret_cistern_pipe]           ;story_id = 5035
+medkit = 1
+bandage = 2
+antirad = 3
+energy_drink = 2
+
+; Труба на Восточной куче
+; Среди радиоактивного мусора, где мало кто шастает, спрятаны кое-какие полезные вещи.
+;; physics\equipment_cache\equipment_pipe_02_case
+[gar_secret_east_tube]              ;story_id = 5036
+antirad = 5
+medkit_scientic = 1
+bandage = 3
+wpn_fort = 1
+ammo_9x18_pmm = 1, box_size=30
+
+; Ничейный рюкзак
+; В низине валяется чей-то рюкзак, вокруг аномалии. Как бы до него добраться?
+;; physics\equipment_cache\equipment_rucksack_02_case
+[gar_secret_rucksack_noones]        ;story_id = 5037
+novice_outfit = 1
+bandage = 2
+ammo_12x76_zhekan = 1, box_size=15
+
+; Вещи убитого
+; Замочили стукача на болоте, там мы его и прикопали. А хабарок его под крестом оставили, не до того было.
+;; physics\equipment_cache\equipment_cross_3_case
+[gar_secret_murdered]               ;story_id = 5038
+af_blood = 1
+af_gravi = 1
+
+; Трухлявый пень
+; В пеньке тайник, хорошее место.
+;; physics\equipment_cache\equipment_trees_stump_01_case
+[gar_secret_rotted_stump]           ;story_id = 5039
+af_fireball = 1
+
+; Бревно в лесу
+; В лесу бревно, внутри - дыра. В ней клад, забрать его пора.
+;; physics\equipment_cache\equipment_trees_log_01_case
+[gar_secret_forest_log]             ;story_id = 5040
+af_rusty_kristall = 1
+
+; Склад группы Стрелка
+; Петренко передал, что есть информация про тайник группы Стрелка на Свалке. Тут на равнине в низине должен быть люк, рассказал как его надо хитро открывать. Как успокоится все, надо туда смотаться.
+;; physics\equipment_cache\equipment_hatch_01_case
+[gar_secret_shooters_supply]        ;story_id = 5041
+wpn_ak74 = 1
+ammo_5.45x39_ap = 1, box_size=100
+grenade_rgd5 = 2
+
+; Тайник в машине
+; Запрятал в машину, Длинный говорил, хорошее место.
+;; physics\equipment_cache\equipment_zaz968_case
+[gar_secret_car_hiding]             ;story_id = 5042
+wpn_walther = 1
+ammo_9x19_pbp = 1, box_size=60
+
+; Рюкзак сталкера в автобусе
+; В автобусе положил рюкзак, вроде незаметно.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[gar_secret_bus_rucksack]           ;story_id = 5043
+medkit = 1
+bandage = 1
+antirad = 1
+
+; Сортирные запасы
+; Запас сложил в ящике, в странном домике за углом. До сих пор не пойму, для чего та постройка.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[gar_secret_toilet]                 ;story_id = 5044
+medkit = 2
+ammo_5.45x39_ap = 1, box_size=60
+
+; Сейф на Южной куче
+; На куче мусора полузакопанный сейф, там-то оно все и лежит. Не забыть бы что.
+;; physics\equipment_cache\equipment_seif_01_case
+[gar_secret_south_safe]             ;story_id = 5045
+af_electra_sparkler = 1
+af_vyvert = 1
+
+; Схрон в металлоломе
+; На куче мусора в трубе положил хабар.
+;; physics\equipment_cache\equipment_pipe_02_case
+[gar_secret_metal_hiding2]          ;story_id = 5046
+af_vyvert = 1
+
+; Запас в ящике
+; Начальник по рации передал - отход. Я набрел на ящик, скинул в него лишний вес и отошел налегке.
+;; physics\equipment_cache\equipment_box_01_case
+[gar_secret_box_supply]             ;story_id = 5047
+grenade_rgd5 = 2
+conserva = 5
+bandage = 5
+medkit_army = 2
+
+; Труба у автобуса
+; Хабар сунул в трубу на свалке. Долго он там не пролежит.
+;; physics\equipment_cache\equipment_pipe_02_case
+[gar_secret_bus_tube]               ;story_id = 5048
+af_drops = 1
+
+; Рюкзак в развалинах
+; В развалинах хорошо запрятал рюкзак. Надеюсь, забрать будет легко, если бандиты не помешают.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[gar_secret_rucksack_ruins]         ;story_id = 5049
+af_ameba_slug = 1
+medkit_scientic = 1
+antirad = 3
+
+; Ящик на блокпосте
+; Пока долговцы стрелялись, припрятал хабар в вагончике. Надо как-то зайти, забрать. И сказать спасибо Долгу.
+;; physics\equipment_cache\equipment_box_01_case
+[gar_secret_box_blockpost]          ;story_id = 5050
+antirad = 8
+
+; Рюкзак Дохляка
+; Говорят, Дохляк на Свалке скопытился, надо наведаться, хабар глянуть. А то желающих много набежит.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[gar_secret_deadman]                ;story_id = 5051
+af_gravi = 1
+ammo_12x76_zhekan = 1, box_size=20
+vodka = 1
+
+; Авоська в люке
+; В люке пока спрячу добро, авось не найдут.
+;; physics\equipment_cache\equipment_hatch_01_case
+[gar_secret_avoska]                 ;story_id = 5052
+ammo_5.45x39_ap = 1, box_size=60
+ammo_9x19_pbp = 1, box_size=40
+
+; Под ковшом
+; Возле экскаватора кто-то сгинул в аномалии, рюкзак видно, а достать тяжело.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[gar_secret_escavator]              ;story_id = 5053
+ammo_9x19_pbp = 1, box_size=80
+medkit = 3
+
+; Заначка под бетонными блоками
+; Еле пролез под балками, зато хорошо рюкзак спрятал, никто сюда не полезет.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[gar_secret_concrete_blocks]        ;story_id = 5054
+af_cristall_flower = 1
+af_vyvert = 1
+
+; Тайник Серого
+; Тайник наш пока в туннеле, все добро лежит в трубе. Там хорошо, мало кто про место знает, да и аномалии отобьют охоту лезть.
+;; physics\equipment_cache\equipment_pipe_valve_01_case
+[agr_secret_gray]                   ;story_id = 5065
+af_rusty_kristall = 1
+af_electra_sparkler = 1
+
+; Дырявый пень
+; В пеньке спрятал, возле туннеля. Дырка там удобная.
+;; physics\equipment_cache\equipment_trees_stump_01_case
+[agr_secret_stump]                  ;story_id = 5066
+wpn_ak74 = 1
+ammo_5.45x39_ap = 1, box_size=100
+
+; Заначка под крестом
+; Под крестом, возле куста, закопал хабара чуток.
+;; physics\equipment_cache\equipment_cross_2_case
+[agr_secret_cross]                  ;story_id = 5067
+af_ameba_slime = 1
+
+; Рюкзак под деревом
+; Скинул рюкзак под поваленным деревом.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[agr_secret_tree_rucksack]          ;story_id = 5068
+conserva = 2
+ammo_9x19_pbp = 1, box_size=80
+energy_drink = 2
+
+; Рюкзак трубочиста
+; Рюкзак засунул в трубу, возле фабрики. Никто не найдет.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[agr_secret_pipe_rucksack]          ;story_id = 5069
+af_ameba_slime = 1
+bandage = 2
+
+; Ящик на крыше
+; Ящик снычковал на крыше фабрики, там никто не увидит. Только под дождем заржавеет.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[agr_secret_roof_box]               ;story_id = 5070
+ammo_5.45x39_ap = 1, box_size=45
+wpn_addon_silencer = 1
+
+; Рюкзак пьяницы
+; Стреляли, пришлось бросить рюкзак под вагоном, за колесом. Зато ушел. Потом вернусь, заберу.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[agr_secret_rucksack_blue]          ;story_id = 5071
+vodka = 10
+bread = 1
+af_ameba_slug = 1
+
+; У трех цистерн
+; Под крестом спрятал, за цистернами. Покопай немного, только не увлекайся.
+;; physics\equipment_cache\equipment_cross_3_case
+[agr_secret_cisterne]               ;story_id = 5072
+medkit = 3
+ammo_9x19_pbp = 1, box_size=40
+wpn_walther = 1
+antirad = 2
+wpn_addon_silencer = 1
+
+; Рюкзак в иллюминаторе
+; На фабрике положил рюкзак наверху, так что снизу не увидать. Только вот точно не помню, что в нем.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[agr_secret_rucksack_window]        ;story_id = 5073
+energy_drink = 3
+af_electra_flash = 1
+
+; Радиоактивный ящик
+; Внутри фабрики, в ящике спрятал вещички.
+;; physics\equipment_cache\equipment_box_01_case
+[agr_secret_box_radiation]          ;story_id = 5074
+antirad = 5
+medkit_scientic = 1
+
+; Ящик в пролете
+; Под лестницей в ящике тайник.
+;; physics\equipment_cache\equipment_box_01_case
+[agr_secret_box_stairs]             ;story_id = 5075
+ammo_11.43x23_fmj = 1, box_size=60
+wpn_colt1911 = 1
+
+; Фабричный ящик
+; В ящичке спрятал, все равно никто проверять не будет.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[agr_secret_box_factory]            ;story_id = 5076
+killer_outfit = 1
+
+; Сумка на опоре
+; Скинул сумку за окном, заберу ее потом.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[agr_secret_bag_stand]              ;story_id = 5077
+grenade_rgd5 = 5
+
+; Ящик мусора
+; Мы с Коляном на Агропроме неплохо погуляли, хлама разного нагребли, но кое-что довелось припрятать. Ящик положили в мусорном контейнере.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[agr_secret_box_trash]              ;story_id = 5078
+af_ameba_slug = 1
+af_ameba_slime = 1
+
+; Сейф под деревом
+; Под поваленным деревом нашел сейф, пока буду тут все прятать.
+;; physics\equipment_cache\equipment_seif_02_case
+[agr_secret_safe_tree]              ;story_id = 5079
+medkit = 2
+af_gravi = 1
+
+; Вещи в трубе
+; В трубу кинул вещи, потом заберу. Пришлось, а то бы с собой забрал, конечно. Только бы не намокли.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[agr_secret_rucksack_laketube]      ;story_id = 5080
+bandage = 10
+ammo_9x19_pbp = 1, box_size=80
+
+; Радиоактивная труба
+; Добро в старой трубе, надо будет пацанам сказать. Я туда не полезу.
+;; physics\equipment_cache\equipment_pipe_02_case
+[agr_secret_tube_radiactive]        ;story_id = 5081
+energy_drink = 5
+vodka = 2
+
+; Завал
+; Сбежал с базы, ну их в баню, лезть под пули сталкеров. Спрятал шмотки в трубу, в завале. Пересижу пока не улетят, потом заберу.
+;; physics\equipment_cache\equipment_pipe_02_case
+[agr_secret_pipe_breakdown]         ;story_id = 5082
+medkit_army = 2
+ammo_5.45x39_ap = 1, box_size=70
+
+; Сейф под кустом
+; Под кустом полузакопанный сейф, тут все прячу.
+;; physics\equipment_cache\equipment_seif_01_case
+[agr_secret_safe_bush]              ;story_id = 5083
+af_ameba_slug = 1
+af_electra_sparkler = 1
+
+; Архивный бокс
+; Ящик обнаружили под опорой, кто-то его тащил аж с НИИ. Подождем вертолета, тогда заберем.
+;; physics\equipment_cache\equipment_box_02_case
+[agr_secret_box_archive]            ;story_id = 5084
+af_gravi = 1
+af_mincer_meat = 1
+
+; Под люком
+; В железной байдовине спрятал вещички.
+;; physics\equipment_cache\equipment_hatch_01_case
+[agr_secret_sewers]                 ;story_id = 5085
+ammo_7.62x54_ap = 1, box_size=60
+bandage = 3
+
+; Под кустом у стены
+; Под кустом полузакопанный сейф, там все прячу.
+;; physics\equipment_cache\equipment_seif_02_case
+[agr_secret_safe_wall]              ;story_id = 5086
+af_vyvert = 1
+vodka = 1
+
+; Институтский ящик
+; Удобный ящик, чтоб лишнее барахло сбрасывать.
+;; physics\equipment_cache\equipment_box_01_case
+[agr_secret_box_institute]          ;story_id = 5087
+medkit = 5
+
+; Агросейф
+; В сейфе спрятал, а пришли военные. Не достать теперь добро.
+;; physics\equipment_cache\equipment_seif_02_case
+[agr_secret_agrosafe]               ;story_id = 5088
+af_fireball = 1
+
+; Кузов грузовика
+; В трубу кинул шмотки, потом заберу.
+;; physics\equipment_cache\equipment_pipe_02_case
+[agr_secret_truck]                  ;story_id = 5089
+medkit = 2
+bandage = 2
+
+; Гнилое бревно
+; Забрать вещи из трухлявого бревна.
+;; physics\equipment_cache\equipment_trees_log_01_case
+[agr_secret_rotted_log]             ;story_id = 5090
+af_vyvert = 1
+
+; Ящик завхоза
+; Удобный ящик, чтоб лишнее барахло сбрасывать. Когда-то в нем хранился институтский хозяйственный инвентарь.
+;; physics\equipment_cache\equipment_box_02_case
+[agr_secret_box_zavhoz]             ;story_id = 5091
+grenade_rgd5 = 3
+
+; Инвентарь слесаря
+; Удобный ящик для небольших вещей, я в таком слесарные инструменты дома держал.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[agr_secret_inventory_schlosser]    ;story_id = 5092
+wpn_addon_silencer = 1
+ammo_9x19_pbp = 1, box_size=60
+
+; Бандитский общак
+; Бандиты что-то прячут под трубой, надо наведаться. Из разговора ясно, что там их запасы.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[agru_secret_bandit_obschak]        ;story_id = 5100
+wpn_ak74u = 1
+ammo_5.45x39_ap = 1, box_size=90
+bandage = 2
+
+; Рюкзак в закоулке
+; Спрятал рюкзак за кусками бетона, пойду налегке. Лучше буду голодный, но живой.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[agru_secret_rucksack_corner]       ;story_id = 5101
+conserva = 5
+vodka = 1
+energy_drink = 2
+
+; Ящик кровососа
+; Ящик за ржавой "бочкой" в подземелье, все там лежит. Я туда возвращаться не собираюсь, дудки! Каким чудом я того кровососа задавил, до сих пор не помню.
+;; physics\equipment_cache\equipment_box_01_case
+[agru_secret_box_bloodsucker]       ;story_id = 5102
+af_electra_flash = 1
+
+; Хабар сталкера
+; За стеной лежит хабар. Отвечаю за базар!
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[agru_secret_box_habar]             ;story_id = 5103
+af_blood = 1
+
+; Нора крота
+; Я тут нарыл кое-какие ценности. Хитрое местечко для моего тайника. На желтой бочке, фиг найдешь.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[agru_secret_mole_cave]             ;story_id = 5104
+af_electra_flash = 1
+af_rusty_thorn = 1
+
+; Тайник под крестом
+; Под крестом, возле горы, закопал хабара чуток
+;; physics\equipment_cache\equipment_cross_3_case
+[val_secret_0000]                   ;story_id = 5400
+medkit = 1
+bandage = 2
+af_medusa = 1
+
+; Тайник в бревне
+; Сунул добро в бревно, думаю не найдут
+;; physics\equipment_cache\equipment_trees_log_01_case
+[val_secret_0001]                   ;story_id = 5401
+bandage = 3
+af_medusa = 1
+vodka = 1
+
+; Рюкзак под мостом
+; Под мост засунул рюкзак, пусть полежит пока
+;; physics\equipment_cache\equipment_rucksack_02_case
+[val_secret_0002]                   ;story_id = 5402
+af_medusa = 2
+
+; Машина с тайником
+; Положили ящик в машину возле болота
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0003]                   ;story_id = 5403
+ammo_5.45x39_ap = 1, box_size=90
+ammo_9x19_fmj = 1, box_size=40
+medkit = 2
+bandage = 3
+
+; Тайник в пеньке
+; В пеньке тайник, хорошее место
+;; physics\equipment_cache\equipment_trees_stump_01_case
+[val_secret_0004]                   ;story_id = 5404
+af_medusa = 1
+af_ameba_slime = 1
+
+; Ящик c припасами
+; На ферме нашел отличный ящик, буду пока там хранить припасы
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0005]                   ;story_id = 5405
+bandage = 5
+antirad = 5
+conserva = 15
+energy_drink = 5
+
+; Тайник в трубе
+; В трубу кинул шмотки, потом заберу
+;; physics\equipment_cache\equipment_pipe_02_case
+[val_secret_0006]                   ;story_id = 5406
+antirad = 3
+bandage = 3
+medkit = 1
+
+; Тайник под елкой
+; Спрятал рюкзак под елкой
+;; physics\equipment_cache\equipment_rucksack_02_case
+[val_secret_0007]                   ;story_id = 5407
+antirad = 2
+medkit_army = 3
+energy_drink = 1
+af_drops = 1
+
+; Правительственный ящик
+; Новенький стащил таки ящик у бандитов, положил его в Ниве перевернутой. Говорит по виду вроде правительственный ящик. Надо будет снарядить ребят, забрать его
+;; physics\equipment_cache\equipment_box_02_case
+[val_secret_0008]                   ;story_id = 5408
+af_cristall_flower = 1
+
+; Ящик
+; Кругом одно ворье, уже у своих тырят, но мой ящичек не найдут
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[val_secret_0009]                   ;story_id = 5409
+antirad = 2
+ammo_9x19_pbp = 1, box_size=60
+af_rusty_kristall = 1
+
+; Тайник в люке
+; В люке схоронил вещи, когда-нибудь пригодятся
+;; physics\equipment_cache\equipment_hatch_01_case
+[val_secret_0010]                   ;story_id = 5410
+stalker_outfit = 1
+wpn_bm16 = 1
+ammo_12x76_zhekan = 1, box_size=15
+
+; Рюкзак сталкера
+; Бросил рюкзак под дерево, иначе не ушел бы от бандитов
+;; physics\equipment_cache\equipment_rucksack_02_case
+[val_secret_0011]                   ;story_id = 5411
+ammo_9x18_pmm = 1, box_size=60
+af_blood = 1
+conserva = 5
+
+; Тайник
+; Барахлишко положил в трубу, потом заберу
+;; physics\equipment_cache\equipment_pipe_01_case
+[val_secret_0012]                   ;story_id = 5412
+af_vyvert = 1
+bandage = 5
+
+; Спрятанный сейф
+; Все что спер у Борова, припрятал в сейфе, что под елкой. Теперь переждать надо, пока они на нервах все
+;; physics\equipment_cache\equipment_seif_01_case
+[val_secret_0013]                   ;story_id = 5413
+af_cristall_flower = 1
+wpn_mp5 = 1
+wpn_addon_silencer = 1
+ammo_9x19_pbp = 1, box_size=40
+
+; Склад в вагончике
+; Временный штаб в вагончике, ящик с припасами там же
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0014]                   ;story_id = 5414
+wpn_abakan = 2
+ammo_5.45x39_ap = 1, box_size=100
+wpn_fort = 1
+ammo_9x18_fmj = 1, box_size=120
+bandage = 5
+medkit_army = 2
+
+; Тайное место в трубе
+; Еле залез в трубу, под дорогой, будет теперь где рюкзак прятать
+;; physics\equipment_cache\equipment_rucksack_01_case
+[val_secret_0015]                   ;story_id = 5415
+ammo_9x19_pbp = 1, box_size=100
+
+; Ящик с добром
+; В ящик закинул добро, потом заберем
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0016]                   ;story_id = 5416
+vodka = 5
+bread = 3
+kolbasa = 5
+
+; Тайник за трубой
+; Прячу хабар за трубой. Сложно добираться, зато не стырят
+;; physics\equipment_cache\equipment_rucksack_01_case
+[val_secret_0017]                   ;story_id = 5417
+af_electra_flash = 1
+af_ameba_slime = 1
+
+; Тайник в электро-щитке
+; Сныкал патроны в электро-щитке
+;; physics\equipment_cache\equipment_electric_box_02_case
+[val_secret_0018]                   ;story_id = 5418
+ammo_5.45x39_ap = 1, box_size=80
+ammo_9x18_fmj = 1, box_size=60
+ammo_12x70_buck = 1, box_size=25
+
+; Ящик-тайник
+; Все что нашли оставили в ящике, будем идти назад заберем
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0019]                   ;story_id = 5419
+af_gravi = 2
+af_cristall_flower = 1
+
+; Спрятанный рюкзак
+; Заныкали рюкзак новенького, он так и не нашел
+;; physics\equipment_cache\equipment_rucksack_01_case
+[val_secret_0020]                   ;story_id = 5420
+ammo_9x18_pmm = 1, box_size=50
+af_ameba_slime = 1
+
+; Забытый ящик
+; В фургоне остался ящик, надо забрать
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0021]                   ;story_id = 5421
+wpn_ak74 = 1
+medkit = 1
+bandage = 2
+ammo_5.45x39_ap = 1, box_size=90
+ammo_9x18_pmm = 1, box_size=80
+
+; Сейф на бензоколонке
+; Нашел сейф на бензоколонке, спрятал там добро, вроде редко кто здесь ходит
+;; physics\equipment_cache\equipment_seif_01_case
+[val_secret_0022]                   ;story_id = 5422
+medkit = 1
+bandage = 3
+af_blood = 1
+
+; Ящик
+; Ящик затащили на цистерну
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0023]                   ;story_id = 5423
+grenade_rgd5 = 1
+af_drops = 1
+bandage = 3
+
+; Сейф на бензоколонке
+; Спрятал припасы в сейф на бензоколонке
+;; physics\equipment_cache\equipment_seif_02_case
+[val_secret_0024]                   ;story_id = 5424
+ammo_5.45x39_ap = 1, box_size=30
+ammo_5.45x39_fmj = 1, box_size=60
+grenade_rgd5 = 1
+ammo_9x18_pmm = 1, box_size=40
+
+; Ящик в машине
+; В лагере бандитов, в машине какой-то ящик лежит, надо незаметно пробраться, чую там есть чем разжиться
+;; physics\equipment_cache\equipment_box_02_case
+[val_secret_0025]                   ;story_id = 5425
+ammo_12x76_zhekan = 1, box_size=16
+ammo_9x19_fmj = 1, box_size=20
+
+; Ящик в тайнике
+; Поставил ящик в тайник, место надежное
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0026]                   ;story_id = 5426
+wpn_addon_grenade_launcher = 1
+ammo_vog-25 = 3
+medkit = 3
+
+; Оставленный рюкзак
+; Оставил рюкзак в заброшенном здании, хорошо, никого рядом нет
+;; physics\equipment_cache\equipment_rucksack_01_case
+[val_secret_0027]                   ;story_id = 5427
+energy_drink = 1
+bandage = 3
+af_vyvert = 1
+
+; Тайник Борова
+; Добро будем хранить в сейфе, в незаметном месте. Не сегодня завтра военные придут, всем тут фитиль вставят, ну да рыскать долго они не будут, так что самое ценное останется у меня
+;; physics\equipment_cache\equipment_seif_02_case
+[val_secret_0028]                   ;story_id = 5428
+wpn_sig220 = 1
+ammo_11.43x23_hydro = 1, box_size=30
+
+; Рюкзак в тайном месте
+; Рюкзак заныкал возле здания
+;; physics\equipment_cache\equipment_rucksack_01_case
+[val_secret_0029]                   ;story_id = 5429
+af_mincer_meat = 1
+energy_drink = 1
+bandage = 3
+
+; Незаметный ящик
+; Сунул хабар в незаметный ящик, потом заберу
+;; physics\equipment_cache\equipment_box_01_case
+[val_secret_0030]                   ;story_id = 5430
+af_electra_sparkler = 1
+af_ameba_slime = 1
+
+; Спрятанный рюкзак
+; Рюкзак спрятал под машиной, туда никто не сунется
+;; physics\equipment_cache\equipment_rucksack_01_case
+[val_secret_0031]                   ;story_id = 5431
+medkit = 1
+af_rusty_thorn = 1
+
+; Тайник в машине
+; Хабар спрятал в машине под боком у бандитов, времени не было искать что получше
+;; physics\equipment_cache\equipment_zaz968_case
+[val_secret_0032]                   ;story_id = 5432
+bandage = 3
+medkit = 2
+af_rusty_thorn = 1
+af_vyvert = 1
+
+; Тайник в бревне
+; Сунул добро в бревно, думаю не найдут.
+;; physics\equipment_cache\equipment_trees_log_01_case
+[mil_secret_0000]                   ;story_id = 5200
+medkit = 2
+ammo_5.56x45_ap = 1, box_size=60
+
+; Тайник в печи
+; В печку припрятал барахлишко.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[mil_secret_0001]                   ;story_id = 5201
+ammo_11.43x23_hydro = 1, box_size=20
+ammo_9x39_ap = 1, box_size=60
+medkit = 1
+
+; Тайник в КАМАЗе
+; В кабине КАМАЗа припрятал барахлишко.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[mil_secret_0002]                   ;story_id = 5202
+ammo_5.56x45_ap = 1, box_size=60
+
+; Клад под крестом
+; Под крестом, возле деревни, закопал хабара чуток.
+;; physics\equipment_cache\equipment_cross_2_case
+[mil_secret_0003]                   ;story_id = 5203
+af_mincer_meat = 1
+af_ameba_slug = 1
+
+; Тайник в трубе
+; В трубу кинул шмотки, потом заберу.
+;; physics\equipment_cache\equipment_pipe_02_case
+[mil_secret_0004]                   ;story_id = 5204
+ammo_9x39_ap = 1, box_size=120
+medkit = 1
+
+; Клад в башне
+; Тайник в водонапорной башне, в ящике.
+;; physics\equipment_cache\equipment_box_01_case
+[mil_secret_0005]                   ;story_id = 5205
+medkit = 3
+af_gold_fish = 1
+
+; Печной тайник
+; В печку сунул рюкзак, потом пригодится.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[mil_secret_0006]                   ;story_id = 5206
+medkit = 1
+ammo_11.43x23_hydro = 1, box_size=20
+ammo_9x39_ap = 1, box_size=40
+af_cristall_flower = 1
+
+; Авто-тайник
+; Хабар спрятал в машине, в деревне заброшенной.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[mil_secret_0007]                   ;story_id = 5207
+af_rusty_sea-urchin = 1
+
+; Опасный секрет
+; В развалинах с радиацией оставил рюкзак. Побоятся сунуться.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[mil_secret_0008]                   ;story_id = 5208
+af_ameba_mica = 1
+af_medusa = 1
+
+; Схрон сталкера
+; Закопал хабар под крестом, в укромном месте.
+;; physics\equipment_cache\equipment_cross_1_case
+[mil_secret_0009]                   ;story_id = 5209
+af_gravi = 2
+
+; Рюкзак со снаряжением
+; Припрятал рюкзачок со снарягой в укромном месте.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[mil_secret_0010]                   ;story_id = 5210
+medkit = 2
+ammo_9x39_ap = 1, box_size=60
+
+; Тайник на холме
+; Шмотье припрятал на холме в машине.
+;; physics\equipment_cache\equipment_box_01_case
+[mil_secret_0011]                   ;story_id = 5211
+ammo_11.43x23_hydro = 1, box_size=40
+
+; Ящик из вертолёта
+; Упал вертолет возле заброшенной военной базы, ящик лежит недалеко, прямо под вертолетом. Одна беда, аномалии и радиация кругом.
+;; physics\equipment_cache\equipment_box_02_case
+[mil_secret_0012]                   ;story_id = 5212
+ammo_9x39_ap = 1, box_size=100
+
+; Секрет в могиле
+; На холме под крестом закопал хабар.
+;; physics\equipment_cache\equipment_cross_1_case
+[mil_secret_0013]                   ;story_id = 5213
+af_cristall_flower = 1
+af_gravi = 1
+af_mincer_meat = 1
+
+; Тайный пень
+; В пеньке тайник, хорошее место
+;; physics\equipment_cache\equipment_trees_stump_01_case
+[mil_secret_0014]                   ;story_id = 5214
+grenade_f1 = 3
+ammo_9x39_ap = 1, box_size=75
+
+; Тайник высотника
+; Оставил рюкзак в кабине крана, потом заберу.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[mil_secret_0015]                   ;story_id = 5215
+conserva = 2
+ammo_9x39_sp5 = 1, box_size=60
+
+; Условленный тайник
+; Все сложил в ящик, в вагоне недалеко от базы. Так и договаривались, теперь осталось только ждать.
+;; physics\equipment_cache\equipment_box_01_case
+[mil_secret_0016]                   ;story_id = 5216
+wpn_g36 = 1
+ammo_5.56x45_ap = 1, box_size=60
+
+; Клад в бревне
+; Сунул добро в бревно, думаю не найдут.
+;; physics\equipment_cache\equipment_trees_log_01_case
+[mil_secret_0017]                   ;story_id = 5217
+af_ameba_slime = 3
+af_ameba_slug = 1
+
+; Труба с хабаром
+; Хабар сунул в трубу на берегу озера.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[mil_secret_0018]                   ;story_id = 5218
+af_drops = 1
+ammo_9x39_sp5 = 1, box_size=70
+
+; Тайник сталкера
+; В железной байдовине спрятал вещички.
+;; physics\equipment_cache\equipment_hatch_01_case
+[mil_secret_0019]                   ;story_id = 5219
+bandage = 4
+medkit = 2
+medkit_scientic = 1
+
+; Хабар в бревне
+; Сунул добро в бревно, думаю не найдут.
+;; physics\equipment_cache\equipment_trees_log_01_case
+[mil_secret_0020]                   ;story_id = 5220
+ammo_m209 = 5
+
+; Удобный схрон
+; Удобный ящик, чтоб лишнее барахло сбрасывать.
+;; physics\equipment_cache\equipment_box_01_case
+[mil_secret_0021]                   ;story_id = 5221
+ammo_vog-25 = 3
+grenade_f1 = 1
+grenade_rgd5 = 2
+
+; Рюкзак в туннеле
+; В туннеле припрятал рюкзак с хабаром.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[mil_secret_0022]                   ;story_id = 5222
+ammo_m209 = 6
+
+; Ящик с добром
+; Удобный ящик, чтоб лишнее барахло сбрасывать.
+;; physics\equipment_cache\equipment_box_01_case
+[mil_secret_0023]                   ;story_id = 5223
+wpn_groza = 1
+ammo_9x39_ap = 1, box_size=90
+
+; Тайник в бревне
+; Сунул добро в бревно, думаю не найдут.
+;; physics\equipment_cache\equipment_trees_log_01_case
+[mil_secret_0024]                   ;story_id = 5224
+medkit = 1
+wpn_groza = 1
+ammo_9x39_ap = 1, box_size=90
+
+; Временный тайник
+; В ящик закинул добро, потом заберу.
+;; physics\equipment_cache\equipment_box_01_case
+[mil_secret_0025]                   ;story_id = 5225
+ammo_9x19_pbp = 1, box_size=40
+ammo_12x76_zhekan = 1, box_size=16
+
+; Стальной тайник
+; В люке схоронил вещи, когда-нибудь пригодятся.
+;; physics\equipment_cache\equipment_hatch_01_case
+[mil_secret_0026]                   ;story_id = 5226
+wpn_vintorez = 1
+
+; Ящик с хабаром
+; В ящик закинул добро, потом заберу.
+;; physics\equipment_cache\equipment_box_01_case
+[mil_secret_0027]                   ;story_id = 5227
+af_cristall_flower = 1
+af_gravi = 1
+
+; Тайник в машине
+; Хабар спрятал в машине под боком у Свободы, времени не было искать что получше.
+;; physics\equipment_cache\equipment_zaz968_case
+[mil_secret_0028]                   ;story_id = 5228
+af_cristall = 1
+
+; Тайник под крестом
+; Крест на холме, а под ним тайник.
+;; physics\equipment_cache\equipment_cross_3_case
+[yan_secret_0000]                   ;story_id = 5229
+af_dummy_spring = 1
+
+; Старый сейф
+; Говорят на островке среди болота сейф есть, полузакопанный. Надо наведаться.
+;; physics\equipment_cache\equipment_seif_02_case
+[yan_secret_0001]                   ;story_id = 5230
+af_ameba_mica = 1
+
+; Труба с добром
+; В трубу засунул добро, возле лагеря.
+;; physics\equipment_cache\equipment_pipe_02_case
+[yan_secret_0002]                   ;story_id = 5231
+af_soul = 1
+
+; Рюкзак за гаражами
+; За гаражами припрятал хабарок.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[yan_secret_0003]                   ;story_id = 5232
+af_gold_fish = 1
+energy_drink = 2
+
+; Рюкзак с добычей
+; Припрятал рюкзак в будке, прямо за железной хренью.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[yan_secret_0004]                   ;story_id = 5233
+af_electra_sparkler = 2
+ammo_9x39_pab9 = 1, box_size=40
+
+; Тайник в автобусе
+; В автобусе положил ящичек, вроде незаметно.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[yan_secret_0005]                   ;story_id = 5234
+conserva = 2
+ammo_9x39_pab9 = 1, box_size=60
+
+; Добыча в машине
+; Хабар спрятан в машине, недалеко от территории. Излучение не очень сильное.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[yan_secret_0006]                   ;story_id = 5235
+af_mincer_meat = 1
+ammo_m209 = 3
+
+; Старый рюкзак
+; Говорят, тут хабар чей-то есть, только под излучением не пробраться.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[yan_secret_0007]                   ;story_id = 5236
+ammo_vog-25 = 5
+
+; Тайник группировки
+; Говорят, тут тайник какой-то группировки, как только они под излучением пробрались?
+;; physics\equipment_cache\equipment_rucksack_01_case
+[yan_secret_0008]                   ;story_id = 5237
+energy_drink = 2
+af_rusty_sea-urchin = 1
+
+; Рюкзак испытателя
+; Сгинул очередной сталкер-доброволец, очередной прототип не защитил от излучения. Смог дойти только до середины территории, там и остался. Сахаров хочет замеры более точные сделать, но я не пойду, а то и я там останусь, недалеко от территории.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[yan_secret_0009]                   ;story_id = 5238
+wpn_spas12 = 1
+ammo_12x76_zhekan = 1, box_size=10
+ammo_12x70_buck = 1, box_size=10
+
+; Старый тайник
+; Говорят тут хабар чей-то есть, только под излучением не пробраться.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[yan_secret_0010]                   ;story_id = 5239
+af_fuzz_kolobok = 1
+
+; Тайник учёного
+; Надо валить. Сахаров и Круглов полные психи, требуют чтоб я отправился с каким-то сталкером в центр излучения. Ну их нафиг, как только соберу все запасы в люке, тут же свалю.
+;; physics\equipment_cache\equipment_hatch_01_case
+[yan_secret_0011]                   ;story_id = 5240
+af_dummy_pellicle = 1
+
+; Клад в бревне
+; Сунул добро в бревно, думаю, не найдут.
+;; physics\equipment_cache\equipment_trees_log_01_case
+[yan_secret_0012]                   ;story_id = 5241
+af_dummy_dummy = 1
+
+; Ящик с добром
+; Говорят тут схрон чей-то, только под излучением не пробраться.
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[yan_secret_0013]                   ;story_id = 5242
+af_dummy_battery = 1
+
+; Хабар в электрощитке
+; Слухи ходят что был сталкер, который в эту лабораторию проник и припрятал свой хабар в электрощиток в шахте лифта. А забрать его уже не смог.
+;; physics\equipment_cache\equipment_electric_box_01_case
+[x16_secret_0000]                   ;story_id = 5243
+wpn_vintorez = 1
+
+; Рюкзак разведчика
+; Слухи ходят что был сталкер, который в эту лабораторию проник, так он коньки отбросил в районе клеток с подопытными, со всем своим хабаром.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[x16_secret_0001]                   ;story_id = 5244
+af_electra_moonlight = 1
+
+; Клад Угрюмого
+; Крест по дороге к выжигателю, дальше не пошел, спрятал все под ним.
+;; physics\equipment_cache\equipment_cross_2_case
+[rad_secret_0000]                   ;story_id = 5245
+ammo_vog-25 = 5
+
+; Хабар мёртвого сталкера
+; Тут погиб какой-то сталкер, хабар до сих пор валяется, никто подобрать не может.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[rad_secret_0001]                   ;story_id = 5246
+ammo_vog-25p = 5
+
+; Хабар в сейфе
+; Говорят в лесу полузакопанный сейф есть и там хабара полно.
+;; physics\equipment_cache\equipment_seif_01_case
+[rad_secret_0002]                   ;story_id = 5247
+vodka = 1
+wpn_usp = 1
+ammo_11.43x23_hydro = 1, box_size=1
+
+; Посылка Долгу
+; Говорил им не летать над выжигателем, вот и результат. В середине леса приземлились, вряд ли кто-то выжил. Где-то там и лежит то, что нам передали.
+;; physics\equipment_cache\equipment_box_02_case
+[rad_secret_0003]                   ;story_id = 5248
+wpn_val = 1
+ammo_9x39_ap = 1, box_size=90
+
+; Запас группы отчаянных
+; Говорят там остался запас группы, которая пробивалась к центру Зоны, прямо под излучением Выжигателя. Никто из них не вернулся, а запас так и остался дожидаться того, кто его подберет.
+;; physics\equipment_cache\equipment_box_02_case
+[rad_secret_0004]                   ;story_id = 5249
+antirad = 5
+ammo_m209 = 4
+
+; Хабар лидера группировки
+; Говорят сгинул здесь лидер какой-то бывшей группировки, и хабар у него с собой богатый был.
+;; physics\equipment_cache\equipment_rucksack_02_case
+[rad_secret_0005]                   ;story_id = 5250
+af_fuzz_kolobok = 1
+ammo_m209 = 5
+
+; Вещи мёртвого сталкера
+; Говорят сгинул здесь какой-то сталкер известный, добро его до сих пор никто не подобрал.
+;; physics\equipment_cache\equipment_rucksack_01_case
+[pri_secret_0000]                   ;story_id = 5251
+ammo_5.56x45_ap = 1, box_size=180
+ammo_9x39_sp5 = 1, box_size=100
+
+; Клад в гараже
+; В гараже, говорят, ящик стоит, а в нем хабара мама не горюй.
+;; physics\equipment_cache\equipment_box_01_case
+[pri_secret_0001]                   ;story_id = 5252
+af_fuzz_kolobok = 1
+
+; Старый тайник
+; В детском саду, говорят, ящик стоит, а в нем хабара мама не горюй.
+;; physics\equipment_cache\equipment_box_02_case
+[pri_secret_0002]                   ;story_id = 5253
+af_dummy_dummy = 1
+af_gravi = 1
+
+; Хабар Клыка
+; Клыка похоронил на Припяти, под памятником. Весь его хабар оставил там же, нехорошо забирать у мертвого.
+;; physics\equipment_cache\equipment_cross_3_case
+[pri_secret_0003]                   ;story_id = 5254
+outfit_exo_m1 = 1
+af_dummy_glassbeads = 1
+
+; Запасы лидера Свободы
+; Последнее что было известно о нем, это то, что выжил только он один после выжигателя. Запасы оставил в каком-то бывшем универмаге и двинул дальше. Все пошло не так, как планировалось, а ведь это был лучший лидер Свободы, за всю нашу историю.
+;; physics\equipment_cache\equipment_box_01_case
+[pri_secret_0004]                   ;story_id = 5255
+wpn_g36 = 1
+ammo_5.56x45_ap = 1, box_size=90
+ammo_m209 = 4
+
+; Тайник Копченого
+; В подземной лаборатории, Копченый все сложил в сейфе. Место неплохое, ни у кого ключей от лаборатории нет. Одна напасть, камни вдруг ни с того ни с сего в воздухе летают, говорили кого-то пришибли
+;; physics\equipment_cache\equipment_seif_02_case
+[x18_secret_0000]                   ;story_id = 5433
+af_night_star = 1
+monolit_outfit = 1
+
+; Брошенный рюкзак
+; Рюкзак пришлось бросить
+;; physics\equipment_cache\equipment_rucksack_02_case
+[x18_secret_0001]                   ;story_id = 5434
+bandage = 5
+medkit_army = 2
+wpn_walther = 1
+ammo_9x19_pbp = 1, box_size=40
+
+; Спрятанный рюкзак
+; Спрятал рюкзак возле базы долга. Потом заберу
+;; physics\equipment_cache\equipment_rucksack_01_case
+[bar_secret_0000]                   ;story_id = 5435
+conserva = 3
+bandage = 3
+medkit = 1
+af_rusty_thorn = 1
+
+; Оставленный рюкзак
+; За мной погналась большая стая собак, если бы рюкзак не оставил, то до заставы не добежал бы
+;; physics\equipment_cache\equipment_rucksack_01_case
+[bar_secret_0001]                   ;story_id = 5436
+kolbasa = 10
+vodka = 5
+bandage = 3
+bread = 3
+medkit = 1
+
+; Тайник под крестом
+; Все что осталось закопали под крестом
+;; physics\equipment_cache\equipment_cross_3_case
+[bar_secret_0002]                   ;story_id = 5437
+af_ameba_slug = 1
+conserva = 3
+vodka = 1
+
+; Рюкзак
+; Скинул тут рюкзак, так полегче будет
+;; physics\equipment_cache\equipment_rucksack_02_case
+[bar_secret_0003]                   ;story_id = 5438
+kolbasa = 1
+vodka = 1
+bread = 3
+bandage = 5
+antirad = 2
+
+; Склад в бункере
+; Снаряга заставы Долга, хранится в бункере, но за ящиком никто не следит
+;; physics\equipment_cache\equipment_box_02_case
+[bar_secret_0004]                   ;story_id = 5439
+outfit_dolg_m1 = 1
+medkit_army = 2
+bandage = 4
+grenade_rgd5 = 2
+ammo_5.45x39_ap = 1, box_size=120
+ammo_5.45x39_fmj = 1, box_size=60
+
+; Тайник
+; Видел как долговец что-то сунул в трубу, возле заставы
+;; physics\equipment_cache\equipment_pipe_02_case
+[bar_secret_0005]                   ;story_id = 5440
+vodka = 1
+
+; Тайник под крестом
+; Это все ему принадлежало, пусть пока тут и полежит
+;; physics\equipment_cache\equipment_cross_2_case
+[bar_secret_0006]                   ;story_id = 5441
+wpn_bm16 = 1
+ammo_12x76_zhekan = 1, box_size=18
+vodka = 1
+af_fireball = 1
+af_ameba_slug = 1
+
+; Рюкзак
+; Иду в бар, рюкзак оставил в ангаре
+;; physics\equipment_cache\equipment_rucksack_02_case
+[bar_secret_0007]                   ;story_id = 5442
+kolbasa = 2
+bread = 3
+bandage = 5
+antirad = 2
+af_mincer_meat = 1
+
+; Электрощиток с тайником
+; Говорят на территории Долга, в электрощитке, что-то ценное лежит
+;; physics\equipment_cache\equipment_electric_box_01_case
+[bar_secret_0008]                   ;story_id = 5443
+af_fireball = 1
+ammo_12x76_zhekan = 1, box_size=20
+
+; Тайник на башне
+; Наверху башни возле Долга запихнул ящичек так, что никто не заметит
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[bar_secret_0009]                   ;story_id = 5444
+wpn_addon_scope = 1
+ammo_7.62x54_7h14 = 1, box_size=10
+
+; Тайник
+; Спрятал в трубе под лестницей
+;; physics\equipment_cache\equipment_pipe_02_case
+[bar_secret_0010]                   ;story_id = 5445
+vodka = 2
+
+; Тайник Арни
+; Недалеко от бара схоронил добро, за аномалиями, никто не подберется. Да и как открывать не знают, а все просто, там поддеть дверцу надо, сразу и откроется
+;; physics\equipment_cache\equipment_seif_01_case
+[bar_secret_0011]                   ;story_id = 5446
+wpn_sig550 = 1
+ammo_5.56x45_ap = 1, box_size=90
+ammo_5.56x45_ss190 = 1, box_size=60
+ammo_m209 = 5
+
+; Тайник
+; Недалеко от бара схоронил добро
+;; physics\equipment_cache\equipment_pipe_02_case
+[bar_secret_0012]                   ;story_id = 5447
+af_ameba_slug = 1
+af_rusty_kristall = 1
+af_drops = 1
+
+; Ящик
+; Возле бара в ящике
+;; physics\equipment_cache\equipment_box_02_case
+[bar_secret_0013]                   ;story_id = 5448
+ammo_5.45x39_fmj = 1, box_size=60
+ammo_9x39_pab9 = 1, box_size=60
+ammo_vog-25p = 3
+
+; Ящичек
+; В закоулке, возле бара, припрятал ящичек
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[bar_secret_0014]                   ;story_id = 5449
+ammo_11.43x23_hydro = 1, box_size=20
+
+; Тайник
+; Закопал под крестом, за елками
+;; physics\equipment_cache\equipment_cross_2_case
+[bar_secret_0015]                   ;story_id = 5450
+grenade_f1 = 5
+
+; Тайник
+; Под крестом, недалеко от прохода к Дикой территории
+;; physics\equipment_cache\equipment_cross_3_case
+[bar_secret_0016]                   ;story_id = 5451
+ecolog_outfit = 1
+
+; Ящичек
+; В трубе, возле Арены, припрятал ящичек c антирадом
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[bar_secret_0017]                   ;story_id = 5452
+antirad = 8
+
+; Тайник
+; Под башней спрятал шмотье в трубе
+;; physics\equipment_cache\equipment_pipe_02_case
+[bar_secret_0018]                   ;story_id = 5453
+novice_outfit = 1
+bandage = 2
+
+; Тайник
+; Под крестом тайник
+;; physics\equipment_cache\equipment_cross_2_case
+[bar_secret_0019]                   ;story_id = 5454
+svoboda_light_outfit = 1
+
+; Спрятанный рюкзак
+; Припрятал рюкзак, за железным листом
+;; physics\equipment_cache\equipment_rucksack_01_case
+[ros_secret_0000]                   ;story_id = 5455
+kolbasa = 2
+bread = 3
+bandage = 5
+antirad = 2
+medkit_scientic = 1
+
+; Тайник под крестом
+; Приховал добро под крестом
+;; physics\equipment_cache\equipment_cross_2_case
+[ros_secret_0001]                   ;story_id = 5456
+af_ameba_slug = 1
+af_drops = 1
+
+; Ящик под домиком
+; Спрятал кое-что в ящике, под домиком. Не забыть
+;; physics\equipment_cache\equipment_box_02_case
+[ros_secret_0002]                   ;story_id = 5457
+af_electra_flash = 1
+
+; Рюкзак сталкера
+; Сунул рюкзак под ступеньки, а там эти гады появились. Блин, как бы достать?
+;; physics\equipment_cache\equipment_rucksack_01_case
+[ros_secret_0003]                   ;story_id = 5458
+af_ameba_slug = 1
+af_gravi = 1
+bandage = 2
+
+; Тайник за деревом
+; Тут в углу, за деревом сейф полузакопанный, вот тут мое барахлишко и побудет
+;; physics\equipment_cache\equipment_seif_01_case
+[ros_secret_0004]                   ;story_id = 5459
+killer_outfit = 1
+ammo_5.56x45_ap = 1, box_size=30
+wpn_lr300 = 1
+
+; Тайник в гараже
+; Все что захватили во время рейда, спрятали в гараже в ящике
+;; physics\equipment_cache\equipment_box_02_case
+[ros_secret_0005]                   ;story_id = 5460
+wpn_lr300 = 1
+wpn_addon_grenade_launcher_m203 = 1
+ammo_5.56x45_ap = 1, box_size=90
+ammo_m209 = 5
+
+; Спрятанный ящик
+; За будкой в ящике припрятал вещички
+;; physics\equipment_cache\equipment_box_01_case
+[ros_secret_0006]                   ;story_id = 5461
+antirad = 2
+bandage = 2
+medkit_scientic = 1
+
+; Рюкзак в тайнике
+; Сунул рюкзак в дырку, сверху вроде не заметно
+;; physics\equipment_cache\equipment_rucksack_02_case
+[ros_secret_0007]                   ;story_id = 5462
+bread = 3
+bandage = 5
+antirad = 1
+conserva = 1
+
+; Ящик в укромном месте
+; Ящичек припрятал в укромном месте
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[ros_secret_0008]                   ;story_id = 5463
+ammo_11.43x23_hydro = 1, box_size=20
+
+; Тайник сталкера
+; Под крышей лежит мой рюкзак. Это на черный день
+;; physics\equipment_cache\equipment_rucksack_02_case
+[ros_secret_0009]                   ;story_id = 5464
+af_ameba_mica = 1
+
+; Сейф в доме
+; Говорят в этом домике сейф есть, а в нем что-то припрятано
+;; physics\equipment_cache\equipment_seif_02_case
+[ros_secret_0010]                   ;story_id = 5465
+scientific_outfit = 1
+
+; Тайник в трубе
+; Спрятал в домике, в трубе. Осторожно там все фонит
+;; physics\equipment_cache\equipment_pipe_02_case
+[ros_secret_0011]                   ;story_id = 5466
+af_dummy_dummy = 1
+
+; Спрятанный ящичек
+; О чем договорились, возьмешь в ящичке, туда обычно никто не заглядывает
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[ros_secret_0012]                   ;story_id = 5467
+medkit_scientic = 3
+
+; Тайник под крестом
+; Под крестом спрятал, в закоулке
+;; physics\equipment_cache\equipment_cross_1_case
+[ros_secret_0013]                   ;story_id = 5468
+af_rusty_kristall = 1
+
+; Тайник под бетоном
+; Лишние припасы спрятали на стройке, под бетоном
+;; physics\equipment_cache\equipment_box_01_case
+[ros_secret_0014]                   ;story_id = 5469
+medkit = 1
+bandage = 4
+antirad = 3
+conserva = 3
+
+; Тайник Счастливчика
+; Хабар будем складывать в ящике на стройке, на случай если ноги надо будет уносить
+;; physics\equipment_cache\equipment_box_02_case
+[ros_secret_0015]                   ;story_id = 5470
+wpn_winchester_m1 = 1
+ammo_12x76_zhekan = 1, box_size=10
+af_dummy_glassbeads = 1
+
+; Нычка
+; На стройке спрятал, в закоулке
+;; physics\equipment_cache\equipment_rucksack_01_case
+[ros_secret_0016]                   ;story_id = 5471
+af_electra_flash = 1
+
+; Тайник в трубе
+; Запихал все в какую-то трубу, потом заберем
+;; physics\equipment_cache\equipment_pipe_01_case
+[ros_secret_0017]                   ;story_id = 5472
+af_mincer_meat = 2
+medkit_scientic = 2
+
+; Ящик с медикаментами
+; Недалеко от стройки спрятал медикаменты в ящик
+;; physics\equipment_cache\equipment_box_01_case
+[ros_secret_0018]                   ;story_id = 5473
+medkit_scientic = 1
+medkit_army = 2
+
+; Ящик на кране
+; Затащили ящик в кабину крана
+;; physics\equipment_cache\equipment_box_01_case
+[ros_secret_0019]                   ;story_id = 5474
+outfit_killer_m1 = 1
+wpn_lr300 = 1
+ammo_5.56x45_ap = 1, box_size=120
+
+; Тайник в люке
+; В углу, за жд закрыл свое добро в люке
+;; physics\equipment_cache\equipment_hatch_01_case
+[ros_secret_0020]                   ;story_id = 5475
+af_ameba_slug = 1
+
+; Брошенный рюкзак
+; Полез за артефактом и попал в аномалию, еле иду. Рюкзак скинул, в углу, за жд
+;; physics\equipment_cache\equipment_rucksack_01_case
+[ros_secret_0021]                   ;story_id = 5476
+mutant_psevdodog_tail = 1
+conserva = 2
+bread = 1
+energy_drink = 1
+
+; Ящичек под крышей
+; Наверху, под крышей возле вышки запихнул ящичек, чтоб никто не заметил
+;; physics\equipment_cache\equipment_instrument_case_01_case
+[ros_secret_0022]                   ;story_id = 5477
+ammo_11.43x23_hydro = 1, box_size=20
+medkit_scientic = 2
+
+; Тайник в трубе
+; То, что нашли, спрятали в трубе, недалеко от стройки
+;; physics\equipment_cache\equipment_pipe_02_case
+[ros_secret_0023]                   ;story_id = 5478
+af_cristall = 1
+
+; Тайник
+; Сунул добро в бревно, думаю не найдут
+;; physics\equipment_cache\equipment_trees_log_01_case
+[ros_secret_0024]                   ;story_id = 5479
+antirad = 5
+af_fireball = 1
+af_drops = 1
+
+; Рюкзак
+; Нычканул рюкзак возле крана
+;; physics\equipment_cache\equipment_rucksack_01_case
+[ros_secret_0025]                   ;story_id = 5480
+wpn_addon_scope_susat = 1
+medkit = 5
+

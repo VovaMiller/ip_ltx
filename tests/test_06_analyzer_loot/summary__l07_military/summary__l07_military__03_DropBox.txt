@@ -1,0 +1,19 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = True
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l07_military
+
+[metrics]
+cost = 4635
+cost_trade = 1718
+game_objects_count = 27.0
+
+[summary]
+ammo_5.56x45_ap = 2
+ammo_9x39_sp5   = 5
+
+conserva    = 20

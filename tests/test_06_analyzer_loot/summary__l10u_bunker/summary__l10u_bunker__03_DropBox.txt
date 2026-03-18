@@ -1,0 +1,15 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = True
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l10u_bunker
+
+[metrics]
+cost = 0
+cost_trade = 0
+game_objects_count = 0
+
+[summary]

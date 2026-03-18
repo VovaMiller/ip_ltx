@@ -1,0 +1,18 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l08u_brainlab
+
+[metrics]
+cost = 22000
+cost_trade = 9800
+game_objects_count = 2.0
+
+[summary]
+wpn_groza   = 1, unload
+
+specops_outfit  = 1

@@ -1,0 +1,27 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l03u_agr_underground
+
+[metrics]
+cost = 9740
+cost_trade = 5405
+game_objects_count = 18.0
+
+[summary]
+af_blood            = 1
+af_electra_flash    = 2
+af_rusty_thorn      = 1
+
+wpn_ak74u   = 1
+
+ammo_5.45x39_ap = 1, box_size=90
+
+conserva        = 5
+vodka           = 1
+energy_drink    = 2
+bandage         = 2

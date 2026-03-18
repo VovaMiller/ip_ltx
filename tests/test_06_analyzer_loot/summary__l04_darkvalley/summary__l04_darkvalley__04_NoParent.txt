@@ -1,0 +1,49 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l04_darkvalley
+
+[WARNING]
+; encountered section 'guitar_a' from [ignore_sections]
+; encountered section 'hand_radio' from [ignore_sections]
+
+[metrics]
+cost = 58700
+cost_trade = 27801
+game_objects_count = 96.0
+
+[summary]
+af_dummy_glassbeads = 1
+
+wpn_ak74u   = 3, unload
+wpn_rpg7    = 1
+wpn_mp5     = 2, unload
+wpn_abakan  = 1, unload
+
+ammo_9x19_pbp       = 2
+ammo_5.45x39_fmj    = 6
+ammo_5.56x45_ss190  = 4
+ammo_5.56x45_ap     = 2
+ammo_12x70_buck     = 3
+
+ammo_vog-25 = 1
+
+bandit_outfit   = 1
+killer_outfit   = 1
+stalker_outfit  = 1
+
+bread_a         = 3
+bread           = 1
+kolbasa         = 1
+conserva        = 7
+vodka           = 32
+guitar_a        = 1
+antirad         = 6
+medkit          = 6
+energy_drink    = 5
+bandage         = 4
+hand_radio      = 1

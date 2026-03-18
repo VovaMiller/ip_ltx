@@ -1,0 +1,39 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l01_escape
+
+[metrics]
+cost = 26891
+cost_trade = 17248
+game_objects_count = 88.0
+
+[summary]
+af_medusa       = 1
+af_vyvert       = 1
+af_drops        = 1
+af_blood        = 1
+af_mincer_meat  = 1
+af_rusty_thorn  = 3
+
+wpn_pb      = 2
+wpn_bm16    = 1
+
+ammo_9x18_fmj       = 1, box_size=50
+ammo_9x18_pmm       = 2, box_size=40
+ammo_5.45x39_ap     = 1, box_size=30
+ammo_12x76_zhekan   = 1, box_size=15
+
+bandit_outfit       = 2
+outfit_novice_m1    = 1
+
+conserva    = 5
+vodka       = 4
+antirad     = 10
+medkit      = 13
+medkit_army = 10
+bandage     = 22

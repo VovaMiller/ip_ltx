@@ -1,0 +1,18 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = True
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l04u_labx18
+
+[metrics]
+cost = 1500
+cost_trade = 750
+game_objects_count = 10.0
+
+[summary]
+ammo_5.45x39_fmj    = 5
+
+grenade_rgd5    = 5

@@ -1,0 +1,26 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = True
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l12u_sarcofag
+
+[metrics]
+cost = 54430
+cost_trade = 35040
+game_objects_count = 20.0
+
+[summary]
+ammo_5.56x45_ap = 3
+ammo_9x39_pab9  = 4
+
+grenade_f1  = 3
+
+exo_outfit  = 1
+
+antirad         = 2
+medkit_army     = 1
+medkit_scientic = 2
+bandage         = 4

@@ -5,8 +5,10 @@
 
 import re
 import copy
+from typing import Self
 
 from .ini import meta_ini, system_ini
+from .ip_ltx import Section
 from .trade import get_buy_k
 from .utils import print_warning
 
@@ -295,6 +297,31 @@ class SpawnEntriesPool:
 
     def __init__(self):
         self.pool = {}
+
+    @classmethod
+    def from_items(cls: type[Self], section: Section) -> Self:
+        """Конструктор по полю ``items`` из указанной секции.
+        """
+        entries = cls()
+        if section.line_exist("items"):
+            context = f"items@{section.id}"
+            items = section.get_items(
+                "items",
+                mandatory=False,
+                parsing_mode="vanilla_ext"
+            )
+            for item, cnt in items:
+                _type = meta_ini().get_string(
+                    "inv_class_to_type",
+                    system_ini().get_string(item, "class", "-"),
+                    defval=""
+                )
+                if _type == "T_AMMO":
+                    se = SpawnEntry(item, f"1, box_size={cnt}", context)
+                else:
+                    se = SpawnEntry(item, cnt, context)
+                entries.add(se)
+        return entries
 
     def add(self, se: SpawnEntry):
         s = se.signature()

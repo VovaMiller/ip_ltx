@@ -1,0 +1,44 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l03u_agr_underground
+
+[metrics]
+cost = 56110
+cost_trade = 34862
+game_objects_count = 49.0
+
+[summary]
+af_vyvert               = 2
+af_fireball             = 1
+af_blood                = 1
+af_electra_sparkler     = 1
+af_electra_flash        = 5
+af_electra_moonlight    = 1
+af_rusty_thorn          = 1
+af_rusty_sea-urchin     = 1
+
+wpn_ak74u   = 1
+wpn_ak74u   = 1, unload
+wpn_ak74_m1 = 1, unload
+
+ammo_5.45x39_fmj    = 5
+ammo_5.45x39_ap     = 1, box_size=90
+ammo_12x76_zhekan   = 1
+
+grenade_f1      = 2
+grenade_rgd5    = 4
+
+bandit_outfit   = 1
+stalker_outfit  = 1
+
+conserva            = 5
+vodka               = 1
+medkit              = 3
+energy_drink        = 2
+bandage             = 4
+gunslinger_flash    = 1

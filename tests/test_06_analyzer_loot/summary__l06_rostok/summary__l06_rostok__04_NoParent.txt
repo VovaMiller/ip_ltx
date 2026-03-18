@@ -1,0 +1,28 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l06_rostok
+
+[metrics]
+cost = 50220
+cost_trade = 32415
+game_objects_count = 13.0
+
+[summary]
+af_electra_sparkler     = 2
+af_electra_flash        = 1
+af_electra_moonlight    = 2
+af_ameba_mica           = 1
+af_dummy_pellicle       = 1
+
+hunters_toz = 1, unload
+
+stalker_outfit          = 1
+svoboda_light_outfit    = 1
+
+medkit  = 2
+bandage = 1

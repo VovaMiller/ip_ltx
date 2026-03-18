@@ -736,3 +736,54 @@ def test_section_get_items():
     # invalid format OR non-existent AND not mandatory
     assert section.get_items("items_invalid_1", mandatory=False) == []
     assert section.get_items("items_unknown", mandatory=False) == []
+
+def test_section_get_items_parsing_mode():
+    section = Section(id="test")
+    section.add("items_1", "")
+    section.add("items_2", "medkit_army")
+    section.add("items_3", "wpn_rg-6")
+    section.add("items_4", "ammo_5.45x39_fmj")
+    section.add("items_5", "config\\misc")
+    section.add("items_6", "medkit_army, wpn_rg-6, ammo_5.45x39_fmj, config\\misc")
+    section.add("items_7", "medkit_army,2, wpn_rg-6,1, ammo_5.45x39_fmj,30, config\\misc,-1")
+
+    assert section.get_items("items_1", True, "comma") == []
+    assert section.get_items("items_1", True, "vanilla") == []
+    assert section.get_items("items_1", True, "vanilla_ext") == []
+
+    assert section.get_items("items_2", True, "comma") == [("medkit_army", 1)]
+    assert section.get_items("items_2", True, "vanilla") == [("medkit_army", 1)]
+    assert section.get_items("items_2", True, "vanilla_ext") == [("medkit_army", 1)]
+
+    assert section.get_items("items_3", True, "comma") == [("wpn_rg-6", 1)]
+    assert section.get_items("items_3", True, "vanilla") == [("wpn_rg", 6)]
+    assert section.get_items("items_3", True, "vanilla_ext") == [("wpn_rg-6", 1)]
+
+    assert section.get_items("items_4", True, "comma") == [("ammo_5.45x39_fmj", 1)]
+    assert section.get_items("items_4", True, "vanilla") == [("ammo_5", 1), ("45x39_fmj", 1)]
+    assert section.get_items("items_4", True, "vanilla_ext") == [("ammo_5.45x39_fmj", 1)]
+
+    assert section.get_items("items_5", True, "comma") == [("config\\misc", 1)]
+    assert section.get_items("items_5", True, "vanilla") == [("config\\misc", 1)]
+    assert section.get_items("items_5", True, "vanilla_ext") == [("config\\misc", 1)]
+
+    assert section.get_items("items_6", True, "comma") == [
+        ("medkit_army", 1), ("wpn_rg-6", 1), ("ammo_5.45x39_fmj", 1), ("config\\misc", 1)
+    ]
+    assert section.get_items("items_6", True, "vanilla") == [
+        ("medkit_army", 1), ("wpn_rg", 6), ("ammo_5", 1), ("45x39_fmj", 1), ("config\\misc", 1)
+    ]
+    assert section.get_items("items_6", True, "vanilla_ext") == [
+        ("medkit_army", 1), ("wpn_rg-6", 1), ("ammo_5.45x39_fmj", 1), ("config\\misc", 1)
+    ]
+
+    assert section.get_items("items_7", True, "comma") == [
+        ("medkit_army", 2), ("wpn_rg-6", 1), ("ammo_5.45x39_fmj", 30), ("config\\misc", -1)
+    ]
+    assert section.get_items("items_7", True, "vanilla") == [
+        ("medkit_army", 2), ("wpn_rg", 6), ("1", 1), ("ammo_5", 1), ("45x39_fmj", 30), ("config\\misc", 1)
+    ]
+    assert section.get_items("items_7", True, "vanilla_ext") == [
+        ("medkit_army", 2), ("wpn_rg-6", 1), ("ammo_5.45x39_fmj", 30), ("config\\misc", 1)
+    ]
+    

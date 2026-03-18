@@ -1,0 +1,29 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l11_pripyat
+
+[metrics]
+cost = 91110
+cost_trade = 50280
+game_objects_count = 23.0
+
+[summary]
+af_gravi            = 1
+af_dummy_dummy      = 1
+af_dummy_glassbeads = 1
+af_fuzz_kolobok     = 1
+
+wpn_g36 = 1
+
+ammo_5.56x45_ap = 1, box_size=180
+ammo_5.56x45_ap = 1, box_size=90
+ammo_9x39_sp5   = 1, box_size=100
+
+ammo_m209   = 4
+
+outfit_exo_m1   = 1

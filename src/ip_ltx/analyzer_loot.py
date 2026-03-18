@@ -1,7 +1,8 @@
 """Сводка по разному типу лута в игре"""
 
-import traceback
+import itertools
 import math
+import traceback
 from pathlib import Path
 from collections import OrderedDict
 
@@ -26,15 +27,23 @@ class SpawnEntriesCollector:
     def from_treasure_manager(self, levels: list[str] = []) -> None:
         """Сборка вхождений с тайников из системы treasure_manager.
 
+        Учитывает список ``items`` из конфига тайника и предметы
+        из секций ``[spawn]`` и ``[spawn_tm]`` из ``custom_data``
+        соответствующего тайнику спавн-объекта.
+
         :param levels: Список локаций, по которым осуществляется сборка.
         """
+        ini_meta = meta_ini()
         ini_tm = treasure_manager_ini()
         spawn = get_spawn()
         entries = SpawnEntriesPool()
         for treasure_section in ini_tm.sections():
             obj = spawn.story_object(treasure_section.get_uint("target"))
             if obj._level in levels:
+                # all.spawn: [spawn] & [spawn_tm]
                 entries.merge(obj._loot)
+                # treasure_manager.ltx: items
+                entries.merge(SpawnEntriesPool.from_items(treasure_section))
         self.result.merge(entries)
 
     def from_non_tm_inventories(self, levels: list[str] = []) -> None:
@@ -231,7 +240,12 @@ def tm__extract_loot_each(
             file.write("[{}]  {};story_id = {}\n".format(
                 treasure_id, " "*max(0, 32-len(treasure_id)), obj.story_id
             ))
-            file.write("\n".join([str(e) for e in obj._loot.entries()]))
+            file.write("\n".join([
+                str(e) for e in itertools.chain(
+                    SpawnEntriesPool.from_items(treasure_section).entries(),
+                    obj._loot.entries()
+                )
+            ]))
             file.write("\n\n")
 
 

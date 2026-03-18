@@ -1,0 +1,233 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = True
+show_unlisted_items = True
+levels = l01_escape, l02_garbage, l03_agroprom, l04_darkvalley, l05_bar, l06_rostok, l07_military, l08_yantar, l08u_brainlab, l10_radar, l11_pripyat, l12_stancia
+
+[WARNING]
+; encountered section 'guitar_a' from [ignore_sections]
+; encountered section 'hand_radio' from [ignore_sections]
+; encountered section 'wpn_binoc' from [ignore_sections]
+
+[metrics]
+cost = 1630723
+cost_trade = 924315
+game_objects_count = 1696.0
+
+[summary]
+af_medusa               = 18
+af_cristall_flower      = 14
+af_night_star           = 2
+af_vyvert               = 17
+af_gravi                = 14
+af_gold_fish            = 4
+af_drops                = 8
+af_fireball             = 5
+af_cristall             = 2
+af_blood                = 12
+af_mincer_meat          = 10
+af_soul                 = 1
+af_electra_sparkler     = 10
+af_electra_flash        = 7
+af_electra_moonlight    = 4
+af_ameba_slime          = 10
+af_ameba_slug           = 12
+af_ameba_mica           = 4
+af_dummy_spring         = 5
+af_dummy_dummy          = 6
+af_dummy_battery        = 4
+af_dummy_pellicle       = 2
+af_dummy_glassbeads     = 3
+af_rusty_thorn          = 6
+af_rusty_kristall       = 6
+af_rusty_sea-urchin     = 2
+af_fuzz_kolobok         = 5
+af_blood_tutorial       = 0
+
+wpn_ak74            = 5, unload
+wpn_ak74u           = 5, unload
+wpn_fn2000          = 0, unload
+wpn_rpg7            = 2, unload
+wpn_rg-6            = 2, unload
+wpn_vintorez        = 3, unload
+wpn_lr300           = 7, unload
+wpn_mp5             = 4, unload
+wpn_val             = 1, unload
+wpn_gauss           = 0, unload
+wpn_groza           = 3, unload
+wpn_hpsa            = 0, unload
+wpn_pm              = 3, unload
+wpn_pb              = 3, unload
+wpn_walther         = 4, unload
+wpn_usp             = 1, unload
+wpn_fort            = 2, unload
+wpn_toz34           = 0, unload
+wpn_svd             = 0, unload
+wpn_svu             = 0, unload
+wpn_l85             = 0, unload
+wpn_bm16            = 5, unload
+wpn_spas12          = 1, unload
+wpn_wincheaster1300 = 0, unload
+wpn_colt1911        = 1, unload
+wpn_beretta         = 0, unload
+wpn_desert_eagle    = 0, unload
+wpn_sig220          = 1, unload
+wpn_sig550          = 1, unload
+wpn_abakan          = 5, unload
+wpn_g36             = 2, unload
+wpn_ak74_m1         = 0, unload
+wpn_abakan_m1       = 0, unload
+wpn_fort_m1         = 0, unload
+wpn_ak74u_m1        = 0, unload
+wpn_mp5_m1          = 0, unload
+wpn_groza_m1        = 0, unload
+wpn_spas12_m1       = 0, unload
+wpn_winchester_m1   = 1, unload
+wpn_l85_m1          = 0, unload
+wpn_lr300_m1        = 1, unload
+wpn_svd_m1          = 0, unload
+wpn_sig_m1          = 0, unload
+wpn_eagle_m1        = 1, unload
+wpn_colt_m1         = 0, unload
+wpn_val_m1          = 0, unload
+wpn_mp5_m2          = 0, unload
+wpn_abakan_m2       = 0, unload
+wpn_l85_m2          = 0, unload
+wpn_sig_m2          = 0, unload
+wpn_rg6_m1          = 0, unload
+wpn_walther_m1      = 0, unload
+wpn_pm_arena        = 0, unload
+wpn_mp5_arena       = 0, unload
+wpn_toz34_arena     = 0, unload
+wpn_spas12_arena    = 0, unload
+wpn_ak74_arena      = 0, unload
+wpn_bm16_arena      = 0, unload
+wpn_ak74u_arena     = 0, unload
+wpn_val_arena       = 0, unload
+wpn_groza_arena     = 0, unload
+wpn_fn2000_arena    = 0, unload
+wpn_g36_arena       = 0, unload
+hunters_toz         = 1, unload
+
+ammo_9x18_fmj       = 1, box_size=918
+ammo_9x18_pmm       = 1, box_size=380
+ammo_9x19_fmj       = 1, box_size=648
+ammo_9x19_pbp       = 1, box_size=1960
+ammo_5.45x39_fmj    = 1, box_size=1320
+ammo_5.45x39_ap     = 1, box_size=1035
+ammo_5.56x45_ss190  = 1, box_size=540
+ammo_5.56x45_ap     = 1, box_size=960
+ammo_5.7x28_fmj     = 1, box_size=0
+ammo_5.7x28_ap      = 1, box_size=0
+ammo_7.62x54_7h1    = 1, box_size=0
+ammo_7.62x54_ap     = 1, box_size=60
+ammo_7.62x54_7h14   = 1, box_size=10
+ammo_9x39_pab9      = 1, box_size=480
+ammo_gauss          = 1, box_size=0
+ammo_9x39_ap        = 1, box_size=1325
+ammo_9x39_sp5       = 1, box_size=388
+ammo_11.43x23_fmj   = 1, box_size=122
+ammo_11.43x23_hydro = 1, box_size=271
+ammo_12x70_buck     = 1, box_size=214
+ammo_12x76_dart     = 1, box_size=10
+ammo_12x76_zhekan   = 1, box_size=215
+
+ammo_og-7b      = 3
+ammo_vog-25p    = 14
+ammo_vog-25     = 40
+ammo_m209       = 37
+
+grenade_f1      = 20
+grenade_gd-05   = 0
+grenade_rgd5    = 23
+
+wpn_addon_scope                 = 2
+wpn_addon_scope_susat           = 2
+wpn_addon_silencer              = 6
+wpn_addon_grenade_launcher      = 1
+wpn_addon_grenade_launcher_m203 = 2
+
+novice_outfit           = 2
+bandit_outfit           = 7
+killer_outfit           = 7
+monolit_outfit          = 3
+specops_outfit          = 6
+military_outfit         = 3
+stalker_outfit          = 6
+scientific_outfit       = 1
+exo_outfit              = 0
+svoboda_light_outfit    = 6
+svoboda_heavy_outfit    = 5
+dolg_outfit             = 3
+dolg_scientific_outfit  = 0
+ecolog_outfit           = 2
+protection_outfit       = 0
+soldier_outfit          = 2
+outfit_novice_m1        = 1
+outfit_bandit_m1        = 1
+outfit_dolg_m1          = 1
+outfit_killer_m1        = 1
+outfit_specnaz_m1       = 0
+outfit_stalker_m1       = 0
+outfit_stalker_m2       = 0
+outfit_svoboda_m1       = 1
+outfit_exo_m1           = 1
+
+bread_a                 = 3
+bread                   = 34
+kolbasa                 = 29
+kolbasa_a               = 0
+conserva                = 124
+vodka_a                 = 0
+vodka                   = 94
+guitar_a                = 1
+antirad                 = 100
+medkit                  = 117
+medkit_army             = 25
+medkit_scientic         = 14
+energy_drink            = 51
+bandage                 = 187
+binocular_a             = 0
+detector_simple         = 0
+detector_advances       = 0
+detector_elite          = 0
+mutant_flesh_eye        = 0
+mutant_boar_leg         = 0
+mutant_dog_tail         = 0
+mutant_psevdodog_tail   = 1
+mutant_krovosos_jaw     = 0
+mutant_burer_hand       = 0
+mutant_zombie_hand      = 0
+mutant_snork_leg        = 0
+device_atifact_merger   = 0
+quest_case_01           = 1
+dynamite                = 0
+esc_wounded_flash       = 0
+gunslinger_flash        = 0
+quest_case_02           = 1
+val_key_to_underground  = 0
+bar_tiran_pda           = 0
+bar_lucky_pda           = 0
+bar_ecolog_flash        = 0
+lab_x16_documents       = 0
+good_psy_helmet         = 0
+bad_psy_helmet          = 0
+kruglov_flash           = 0
+crazy_flash             = 0
+mil_svoboda_leader_pda  = 0
+dar_pass_flash          = 0
+dar_pass_document       = 0
+dar_document1           = 0
+dar_document2           = 0
+dar_document3           = 0
+dar_document4           = 0
+dar_document5           = 0
+pri_decoder_documents   = 1
+cit_doctors_key         = 0
+decoder                 = 1
+hand_radio              = 1
+
+wpn_binoc   = 1

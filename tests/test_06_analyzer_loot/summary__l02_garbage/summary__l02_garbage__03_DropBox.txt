@@ -1,0 +1,25 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = True
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l02_garbage
+
+[metrics]
+cost = 10970
+cost_trade = 5772
+game_objects_count = 94.0
+
+[summary]
+ammo_9x19_fmj       = 13
+ammo_9x19_pbp       = 60
+ammo_5.45x39_fmj    = 5
+
+grenade_rgd5    = 2
+
+wpn_addon_silencer  = 1
+
+medkit  = 7
+bandage = 6

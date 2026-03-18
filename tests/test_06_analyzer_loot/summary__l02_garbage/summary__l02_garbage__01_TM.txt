@@ -1,0 +1,54 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l02_garbage
+
+[metrics]
+cost = 53705
+cost_trade = 32580
+game_objects_count = 115.0
+
+[summary]
+af_medusa           = 2
+af_cristall_flower  = 1
+af_vyvert           = 3
+af_gravi            = 2
+af_drops            = 1
+af_fireball         = 1
+af_blood            = 2
+af_electra_sparkler = 1
+af_ameba_slug       = 1
+af_rusty_kristall   = 1
+
+wpn_ak74    = 1
+wpn_mp5     = 1
+wpn_walther = 2
+wpn_fort    = 1
+
+ammo_9x18_pmm       = 1, box_size=30
+ammo_9x19_pbp       = 2, box_size=40
+ammo_9x19_pbp       = 1, box_size=60
+ammo_9x19_pbp       = 1, box_size=80
+ammo_5.45x39_ap     = 1, box_size=100
+ammo_5.45x39_ap     = 2, box_size=60
+ammo_12x76_zhekan   = 1, box_size=15
+ammo_12x76_zhekan   = 1, box_size=20
+
+grenade_rgd5    = 4
+
+novice_outfit   = 1
+bandit_outfit   = 1
+killer_outfit   = 1
+
+conserva        = 5
+vodka           = 1
+antirad         = 23
+medkit          = 9
+medkit_army     = 2
+medkit_scientic = 2
+energy_drink    = 2
+bandage         = 19

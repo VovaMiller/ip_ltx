@@ -1,0 +1,16 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = False
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l12u_sarcofag
+
+[metrics]
+cost = 50000
+cost_trade = 32500
+game_objects_count = 1.0
+
+[summary]
+exo_outfit  = 1

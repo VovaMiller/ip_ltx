@@ -1,0 +1,41 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l11_pripyat
+
+[metrics]
+cost = 245880
+cost_trade = 150440
+game_objects_count = 46.0
+
+[summary]
+af_night_star           = 2
+af_gravi                = 1
+af_electra_moonlight    = 1
+af_dummy_spring         = 1
+af_dummy_dummy          = 1
+af_dummy_glassbeads     = 1
+af_fuzz_kolobok         = 2
+
+wpn_g36 = 1
+
+ammo_5.56x45_ap = 1, box_size=180
+ammo_5.56x45_ap = 1, box_size=90
+ammo_9x39_pab9  = 8
+ammo_9x39_sp5   = 1, box_size=100
+
+ammo_m209   = 4
+
+monolit_outfit          = 1
+specops_outfit          = 2
+military_outfit         = 1
+svoboda_heavy_outfit    = 2
+dolg_outfit             = 2
+outfit_exo_m1           = 1
+
+pri_decoder_documents   = 1
+decoder                 = 1

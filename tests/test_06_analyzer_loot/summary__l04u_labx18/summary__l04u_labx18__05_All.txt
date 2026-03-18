@@ -1,0 +1,43 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l04u_labx18
+
+[metrics]
+cost = 50570
+cost_trade = 26576
+game_objects_count = 64.0
+
+[summary]
+af_night_star   = 1
+af_vyvert       = 1
+af_ameba_slug   = 1
+
+wpn_ak74    = 1, launcher unload
+wpn_rpg7    = 1
+wpn_walther = 1
+
+ammo_9x19_pbp       = 1, box_size=40
+ammo_5.45x39_fmj    = 9
+ammo_5.45x39_ap     = 2
+
+ammo_vog-25 = 2
+
+grenade_rgd5    = 7
+
+monolit_outfit  = 2
+
+bread           = 1
+kolbasa         = 1
+vodka           = 2
+antirad         = 8
+medkit          = 2
+medkit_army     = 2
+medkit_scientic = 3
+energy_drink    = 2
+bandage         = 12
+dar_document4   = 1

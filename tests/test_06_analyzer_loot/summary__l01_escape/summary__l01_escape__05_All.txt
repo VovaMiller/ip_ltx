@@ -1,0 +1,61 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l01_escape
+
+[metrics]
+cost = 78284
+cost_trade = 46360
+game_objects_count = 250.0
+
+[summary]
+af_medusa           = 4
+af_cristall_flower  = 2
+af_vyvert           = 1
+af_drops            = 1
+af_blood            = 3
+af_mincer_meat      = 1
+af_electra_sparkler = 2
+af_electra_flash    = 1
+af_rusty_thorn      = 3
+
+wpn_ak74u   = 1, unload
+wpn_pm      = 1, unload
+wpn_pb      = 3
+wpn_walther = 1, unload
+wpn_bm16    = 1
+wpn_bm16    = 1, unload
+
+ammo_9x18_fmj       = 32
+ammo_9x18_fmj       = 1, box_size=50
+ammo_9x18_pmm       = 2
+ammo_9x18_pmm       = 2, box_size=40
+ammo_9x19_fmj       = 2
+ammo_5.45x39_fmj    = 10
+ammo_5.45x39_ap     = 1, box_size=30
+ammo_12x70_buck     = 7
+ammo_12x76_zhekan   = 2
+ammo_12x76_zhekan   = 1, box_size=15
+
+wpn_addon_silencer  = 1
+
+bandit_outfit       = 3
+killer_outfit       = 1
+soldier_outfit      = 2
+outfit_novice_m1    = 1
+outfit_bandit_m1    = 1
+
+bread           = 6
+kolbasa         = 3
+conserva        = 37
+vodka           = 11
+antirad         = 11
+medkit          = 18
+medkit_army     = 11
+energy_drink    = 15
+bandage         = 37
+quest_case_01   = 1

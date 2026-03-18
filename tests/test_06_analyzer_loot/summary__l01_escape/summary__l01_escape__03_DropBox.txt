@@ -1,0 +1,37 @@
+[options]
+include_treasure_manager = False
+include_non_tm_inventories = False
+include_drop_box_items = True
+include_level_items = False
+compress = False
+show_unlisted_items = False
+levels = l01_escape
+
+[metrics]
+cost = 30518
+cost_trade = 17754
+game_objects_count = 102.0
+
+[summary]
+af_medusa           = 2
+af_cristall_flower  = 1
+af_blood            = 1
+
+wpn_pb  = 1
+
+ammo_9x18_fmj       = 30
+ammo_5.45x39_fmj    = 10
+ammo_12x70_buck     = 4
+ammo_12x76_zhekan   = 2
+
+wpn_addon_silencer  = 1
+
+killer_outfit   = 1
+soldier_outfit  = 2
+
+conserva        = 26
+vodka           = 3
+antirad         = 1
+medkit          = 4
+energy_drink    = 2
+bandage         = 11

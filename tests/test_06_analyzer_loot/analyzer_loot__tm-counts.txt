@@ -1,0 +1,15 @@
+l01_escape              20
+l02_garbage             25
+l03_agroprom            28
+l03u_agr_underground    5
+l04_darkvalley          33
+l04u_labx18             2
+l05_bar                 20
+l06_rostok              26
+l07_military            29
+l08_yantar              14
+l08u_brainlab           2
+l10_radar               6
+l11_pripyat             5
+--------------------------
+                        215

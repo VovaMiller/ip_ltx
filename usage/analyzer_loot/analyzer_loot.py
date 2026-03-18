@@ -10,27 +10,32 @@ def main():
         "l01_escape",
         "l02_garbage",
         "l03_agroprom",
+        "l03u_agr_underground",
         "l04_darkvalley",
+        "l04u_labx18",
         "l05_bar",
         "l06_rostok",
         "l07_military",
         "l08_yantar",
         "l08u_brainlab",
         "l10_radar",
+        "l10u_bunker",
         "l11_pripyat",
         "l12_stancia",
+        "l12_stancia_2",
+        "l12u_control_monolith",
+        "l12u_sarcofag",
     ]
 
-
-    # Summaries
+    # Summaries: default
     run_summary(
         "all",
         LEVELS_ALL
     )
-    run_summary(
-        "all_but_l11_l12",
-        [level for level in LEVELS_ALL if level not in ["l11_pripyat", "l12_stancia"]]
-    )
+    for level in LEVELS_ALL:
+        run_summary(level, [level])
+
+    # Summaries: custom
     run_summary(
         "custom",
         [
@@ -42,18 +47,18 @@ def main():
             "l06_rostok",
             "l07_military",
             "l08_yantar",
-            "l08u_brainlab"
+            "l08u_brainlab",
+            "l10_radar",
+            "l11_pripyat",
+            "l12_stancia",
         ]
     )
-    for level in LEVELS_ALL:
-        run_summary(level, [level])
     
-
     # Other
     run(al.tm__count_by_levels, "tm-counts")
     run(al.tm__extract_loot_each, "tm-each", show_strings=True, show_visual=True)
     # run(al.tm__extract_position, "tm-position")
-    run(al.tm__calculate_prob_w, "tm-prob_w")
+    # run(al.tm__calculate_prob_w, "tm-prob_w")
 
 
 # ----------------------------------------------------------------

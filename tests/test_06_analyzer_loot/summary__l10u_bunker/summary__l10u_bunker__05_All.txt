@@ -1,0 +1,20 @@
+[options]
+include_treasure_manager = True
+include_non_tm_inventories = True
+include_drop_box_items = True
+include_level_items = True
+compress = False
+show_unlisted_items = False
+levels = l10u_bunker
+
+[metrics]
+cost = 3550
+cost_trade = 1925
+game_objects_count = 14.0
+
+[summary]
+ammo_5.56x45_ap = 5
+
+grenade_f1  = 5
+
+medkit  = 4
