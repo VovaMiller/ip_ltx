@@ -1331,7 +1331,7 @@ def test_ini_read_inside_gamedata(tmp_path):
     # Setting up meta ini
     _ss = Section(id="settings")
     _ss.add("gamedata_path_mod", f'"{str(gd_mod_path)}"')
-    _ss.add("gamedata_path_original", f'"{str(gd_alt_path)}"')
+    _ss.add("gamedata_path_alt", f'"{str(gd_alt_path)}"')
     ini_meta = Ini(name="meta")
     ini_meta.add(_ss, by_reference=True)
 
@@ -1388,7 +1388,7 @@ def test_ini_read_inside_gamedata_prefix_1(tmp_path):
     # Setting up meta ini
     _ss = Section(id="settings")
     _ss.add("gamedata_path_mod", f'"{str(gd_mod_path)}"')
-    _ss.add("gamedata_path_original", f'"{str(gd_alt_path)}"')
+    _ss.add("gamedata_path_alt", f'"{str(gd_alt_path)}"')
     ini_meta = Ini(name="meta")
     ini_meta.add(_ss, by_reference=True)
 
@@ -1422,7 +1422,7 @@ def test_ini_read_inside_gamedata_prefix_2(tmp_path):
     # Setting up meta ini
     _ss = Section(id="settings")
     _ss.add("gamedata_path_mod", f'"{str(gd_mod_path)}"')
-    _ss.add("gamedata_path_original", f'"{str(gd_alt_path)}"')
+    _ss.add("gamedata_path_alt", f'"{str(gd_alt_path)}"')
     ini_meta = Ini(name="meta")
     ini_meta.add(_ss, by_reference=True)
 

@@ -166,8 +166,8 @@ class Inspector:
             ini_system = system_ini()
             exists = is_gamedata_file(
                 f"meshes\\{v}.ogf",
-                gd_path_main=ini_system.gdp_m,
-                gd_path_alt=ini_system.gdp_o
+                gd_path_main=ini_system.gdm,
+                gd_path_alt=ini_system.gda
             )
             if not exists:
                 print_warning(f"<visual> Not found: '{v}'")
@@ -179,8 +179,8 @@ class Inspector:
             ini_system = system_ini()
             exists = is_gamedata_dir(
                 f"sounds\\{v}",
-                gd_path_main=ini_system.gdp_m,
-                gd_path_alt=ini_system.gdp_o
+                gd_path_main=ini_system.gdm,
+                gd_path_alt=ini_system.gda
             )
             if not exists:
                 print_warning(f"<snd_config> Not found: '{v}'")
@@ -193,8 +193,8 @@ class Inspector:
                 ini_system = system_ini()
                 exists = is_gamedata_file(
                     f"config\\gameplay\\{v}.xml",
-                    gd_path_main=ini_system.gdp_m,
-                    gd_path_alt=ini_system.gdp_o
+                    gd_path_main=ini_system.gdm,
+                    gd_path_alt=ini_system.gda
                 )
                 if not exists:
                     print_warning(f"#include: not found ({v})")

@@ -74,8 +74,8 @@ def generate() -> None:
     """
     print("-"*80)
     ini_system = system_ini()
-    print("mod:", ini_system.gdp_m)
-    print("SoC:", ini_system.gdp_o or "--")
+    print("mod:", ini_system.gdm)
+    print("SoC:", ini_system.gda or "--")
     print("-"*80)
     run(_generate_sections,  "sections")
     print("-"*80)

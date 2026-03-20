@@ -33,8 +33,8 @@ class TextureDesc(SingletonBase):
                 root = ET.fromstringlist(
                     read_xml(
                         fp_from_config,
-                        ini_system.gdp_m,
-                        ini_system.gdp_o
+                        ini_system.gdm,
+                        ini_system.gda
                     )
                 )
             except Exception:

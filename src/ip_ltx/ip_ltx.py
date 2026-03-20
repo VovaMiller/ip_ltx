@@ -527,26 +527,18 @@ class Ini:
         Эти настройки полезны для последующего чтения файлов из gamedata.
         Пути указываются в секции ``[settings]``:
 
-            * ``gamedata_path_mod`` - путь до папки gamedata мода.
-            * ``gamedata_path_original`` - путь до папки gamedata
-              с ресурсами оригинальной игры;
-              необходимо, если не все используемые
-              игрой файлы есть в gamedata мода.
+            * ``gamedata_path_mod`` - путь до основной папки gamedata;
+              как правило, это просто папка gamedata мода;
+              указывается обязательно.
+            * ``gamedata_path_alt`` - путь до альтернативной папки gamedata;
+              как правило, это разархивированные ``gamedata.db*``;
+              указывать не обязательно, если в основной папке gamedata
+              уже содержатся все ресурсы игры.
 
     :raises Ini.Error: при ошибке инициализации.
     """
     _s: dict[str, Section]
     _name: str
-
-    gdp_m: str | None
-    """Строчка пути до основной папки gamedata.
-    WILL BE DEPRECATED
-    """
-
-    gdp_o: str | None
-    """Строчка пути до альтернативной папки gamedata.
-    WILL BE DEPRECATED
-    """
 
     gdm: Path | None
     """Объект пути до основной папки gamedata."""
@@ -570,8 +562,6 @@ class Ini:
     def __init__(self, name: str = "", ini_meta: Self | None = None):
         self._s = {}
         self._name = name
-        self.gdp_m = None
-        self.gdp_o = None
         self.gdm = None
         self.gda = None
         self.show_ltx_warnings = True
@@ -583,7 +573,6 @@ class Ini:
             gdm_str = ini_meta.get_string_wb("settings", "gamedata_path_mod", "")
             if len(gdm_str) > 0:
                 self.gdm = Path(gdm_str).resolve()
-                self.gdp_m = str(self.gdm)
                 if not self.gdm.is_dir():
                     raise Ini.Error((
                         "Directory provided in 'gamedata_path_mod' doesn't exist: "
@@ -595,17 +584,26 @@ class Ini:
                     " in section [settings]"
                 ))
 
-            # gamedata_path_original
-            gda_str = ini_meta.get_string_wb("settings", "gamedata_path_original", "")
+            # gamedata_path_alt
+            gda_str = ini_meta.get_string_wb("settings", "gamedata_path_alt", "")
             if len(gda_str) > 0:
                 self.gda = Path(gda_str).resolve()
-                self.gdp_o = str(self.gda)
                 if not self.gda.is_dir():
                     raise Ini.Error((
-                        "Directory provided in 'gamedata_path_original' doesn't exist: "
+                        "Directory provided in 'gamedata_path_alt' doesn't exist: "
                         f"{gda_str}"
                     ))
             
+            # Доп. проверка путей
+            if (self.gdm is not None) and (self.gda is not None):
+                if self.gdm == self.gda:
+                    raise Ini.Error("gamedata paths can't be equal")
+                if (
+                    self.gdm.is_relative_to(self.gda)
+                    or self.gda.is_relative_to(self.gdm)
+                ):
+                    raise Ini.Error("gamedata paths can't be relative to each other")
+
             # Указанная ini_meta - критерий того, что мы оперируем файлами из gamedata
             str_opt = os.environ.get("HIDE_GAMEDATA_LTX_WARNINGS", "off")
             if Section.cast_bool(str_opt) is True:
@@ -890,13 +888,13 @@ class Ini:
         """
         fp = None
         if inside_gamedata:
-            if self.gdp_m is None:
+            if self.gdm is None:
                 self._raise("gamedata path is not specified")
-            p = Path(self.gdp_m).joinpath(fp0).resolve()
+            p = self.gdm.joinpath(fp0).resolve()
             if p.is_file():
                 fp = str(p)
-            elif self.gdp_o is not None:
-                p = Path(self.gdp_o).joinpath(fp0).resolve()
+            elif self.gda is not None:
+                p = self.gda.joinpath(fp0).resolve()
                 if p.is_file():
                     fp = str(p)
             if fp is None:

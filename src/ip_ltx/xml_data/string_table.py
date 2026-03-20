@@ -11,7 +11,7 @@ def _read_string_table() -> dict[str, str]:
     """ Считывает xml-файлы с string_table в словарь.
     """
     ini_localization = Ini(name="localization.ltx", ini_meta=meta_ini())
-    if ini_localization.gdp_m is None:
+    if ini_localization.gdm is None:
         raise Exception(
             "Ini object for localization.ltx was not initialized properly"
         )
@@ -27,8 +27,8 @@ def _read_string_table() -> dict[str, str]:
             root = ET.fromstringlist(
                 read_xml(
                     fp_from_config,
-                    ini_localization.gdp_m,
-                    ini_localization.gdp_o
+                    ini_localization.gdm,
+                    ini_localization.gda
                 )
             )
         except Exception:

@@ -187,8 +187,8 @@ def run(f: Runnable, tag: str, **kwargs: Any) -> None:
 
 def is_gamedata_file(
         path: str,
-        gd_path_main: str | None,
-        gd_path_alt: str | None
+        gd_path_main: Path | None,
+        gd_path_alt: Path | None
 ) -> bool:
     """Проверка, существует ли файл в ресурсах игры (gamedata).
 
@@ -199,16 +199,14 @@ def is_gamedata_file(
     :return: Был ли найден указанный файл хотя бы в одной из папок gamedata.
     """
     for gd_path in [gd_path_main, gd_path_alt]:
-        if (gd_path is None) or (len(gd_path) == 0):
-            continue
-        if Path(gd_path).joinpath(Path(path)).is_file():
+        if (gd_path is not None) and gd_path.joinpath(path).is_file():
             return True
     return False
 
 def is_gamedata_dir(
         path: str,
-        gd_path_main: str | None,
-        gd_path_alt: str | None
+        gd_path_main: Path | None,
+        gd_path_alt: Path | None
 ) -> bool:
     """Проверка, существует ли папка в ресурсах игры (gamedata).
 
@@ -219,9 +217,7 @@ def is_gamedata_dir(
     :return: Была ли найдена указанная папка хотя бы в одной из папок gamedata.
     """
     for gd_path in [gd_path_main, gd_path_alt]:
-        if (gd_path is None) or (len(gd_path) == 0):
-            continue
-        if Path(gd_path).joinpath(Path(path)).is_dir():
+        if (gd_path is not None) and gd_path.joinpath(path).is_dir():
             return True
     return False
 
@@ -240,8 +236,8 @@ class XML_PATTERNS:
 
 def read_xml(
         fp_from_config: str,
-        gd_path_main: str | None,
-        gd_path_alt: str | None
+        gd_path_main: Path | None,
+        gd_path_alt: Path | None
 ) -> list[str]:
     """Основная функция для чтения XML файлов из ресурсов игры
     с поддержкой include-директив.
@@ -286,10 +282,9 @@ def read_xml(
 
     # Получаем реальный путь до файла
     for gd_path in [gd_path_main, gd_path_alt]:
-        if (gd_path is None) or (len(gd_path) == 0):
+        if gd_path is None:
             continue
-        path = Path(gd_path).joinpath(Path(f"config\\{fp_from_config}"))
-        if path.is_file():
+        if (path := gd_path.joinpath("config", fp_from_config)).is_file():
             fp = str(path)
             break
     else:
