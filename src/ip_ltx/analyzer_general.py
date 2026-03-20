@@ -7,7 +7,7 @@ from collections.abc import Callable
 
 from .ip_ltx import Section
 from .ini import meta_ini, system_ini
-from .xml_data.string_table import string_table
+from .xml_data.string_table import StringTable
 from .utils import print_warning
 
 # ----------------------------------------------------------------
@@ -206,7 +206,7 @@ def to_float(v: str | None) -> float:
 def translate_string(v: str | None) -> str:
     """Перевод строки по таблице ``string_table``.
     """
-    return string_table().get(v, v) if v is not None else "-"
+    return StringTable().get(v, v) if v is not None else "-"
 
 def scope_type(v: str | None) -> str:
     """Определение типа прицела: коллиматор или оптика.

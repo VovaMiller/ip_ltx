@@ -14,7 +14,7 @@ from typing import TextIO
 from .ip_ltx import Ini, Section
 from .ini import system_ini
 from .xml_data.dialogs import Dialogs
-from .xml_data.string_table import string_table
+from .xml_data.string_table import StringTable
 from .xml_data.texture_desc import TextureDesc
 from .treasure_manager_ext import SpawnEntry
 from .utils import (
@@ -113,7 +113,7 @@ class Inspector:
                 if not ok:
                     print_warning(f"<name> Generator '{v}' is not set up properly")
             else:
-                ST = string_table()
+                ST = StringTable()
                 if v not in ST:
                     print_warning(f"<name> Not found: '{v}'")
     
@@ -129,7 +129,7 @@ class Inspector:
     def bio(v: str | None) -> None:
         if (v is not None) and (v not in Inspector._bio):
             Inspector._bio.add(v)
-            ST = string_table()
+            ST = StringTable()
             if v not in ST:
                 print_warning(f"<bio> Not found: '{v}'")
 
@@ -1053,10 +1053,10 @@ def generate(
         return
     
     try:
-        validate_data([system_ini, string_table])
+        validate_data([system_ini])
     except Exception:
         return
-    preinit_singletons([Dialogs, TextureDesc])
+    preinit_singletons([Dialogs, StringTable, TextureDesc])
     
     if (output_dir is not None) and not Path(output_dir).is_dir():
         print_error(f"Output directory doesn't exist: '{output_dir}'")

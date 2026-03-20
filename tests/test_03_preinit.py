@@ -7,7 +7,7 @@ from ip_ltx.task_manager import get_task_manager
 from ip_ltx.trade import get_buy_k
 from ip_ltx.treasure_manager import treasure_manager_ini
 from ip_ltx.xml_data.dialogs import Dialogs
-from ip_ltx.xml_data.string_table import string_table
+from ip_ltx.xml_data.string_table import StringTable
 from ip_ltx.xml_data.texture_desc import TextureDesc
 
 
@@ -42,7 +42,7 @@ def test_xml_dialogs():
     _ = Dialogs()
 
 def test_xml_string_table():
-    _ = string_table()
+    _ = StringTable()
 
 def test_xml_texture_desc():
     _ = TextureDesc()

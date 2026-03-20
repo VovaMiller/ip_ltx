@@ -10,7 +10,7 @@ from .db import ADDON_FLAGS
 from .ini import meta_ini, system_ini, spawn_ini
 from .treasure_manager import treasure_manager_ini, treasure_by_sid
 from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
-from .xml_data.string_table import string_table
+from .xml_data.string_table import StringTable
 from .spawn import get_spawn
 from .utils import ANSI_COLOR_CODE, print_warning, print_error, validate_data
 
@@ -192,35 +192,26 @@ def tm__extract_loot_each(
     spawn = get_spawn()
 
     # Извлекаем имена и описания
-    st = {}
+    ST = StringTable() if show_strings else {}
+
+    # Сводка по наличию нужных строк
     if show_strings:
-        try:
-            st = string_table()
-        except Exception as e:
-            print_error(f"Unable to retrieve string_table nodes:\n    {str(e)}")
-            st = {}
-        else:
-            # Сводка по наличию нужных строк
-            for treasure_section in ini_tm.sections():
-                treasure_id = treasure_section.id
-                if not treasure_section.line_exist("name"):
-                    print_warning(
-                        f"Treasure '{treasure_id}' doesn't have field 'name'"
-                    )
-                    continue
-                if not treasure_section.line_exist("description"):
-                    print_warning(
-                        f"Treasure '{treasure_id}' doesn't have field 'description'"
-                    )
-                    continue
-                name = treasure_section.get_string("name")
-                desc = treasure_section.get_string("description")
-                if len(st.get(name, "")) == 0:
-                    print_warning(f"Can't translate string '{name}'")
-                    continue
-                if len(st.get(desc, "")) == 0:
-                    print_warning(f"Can't translate string '{desc}'")
-                    continue
+        for treasure_section in ini_tm.sections():
+            name = treasure_section.get_string("name", "")
+            if len(name) == 0:
+                print_warning(
+                    f"Treasure '{treasure_section.id}' doesn't have 'name'"
+                )
+            elif name not in ST:
+                print_warning(f"Can't translate string '{name}'")
+            
+            desc = treasure_section.get_string("description", "")
+            if len(desc) == 0:
+                print_warning(
+                    f"Treasure '{treasure_section.id}' doesn't have 'description'"
+                )
+            elif desc not in ST:
+                print_warning(f"Can't translate string '{desc}'")
 
     # Выписываем содержимое тайников.
     with open(fn, "w", encoding="utf-8") as file:
@@ -229,9 +220,9 @@ def tm__extract_loot_each(
             obj = spawn.story_object(treasure_section.get_uint("target"))
             if show_strings:
                 name_id = treasure_section.get_string("name", "?")
-                name_txt = st.get(name_id, name_id)
+                name_txt = ST.get(name_id, name_id)
                 desc_id = treasure_section.get_string("description", "?")
-                desc_txt = st.get(desc_id, desc_id)
+                desc_txt = ST.get(desc_id, desc_id)
                 file.write("; {}\n".format(name_txt))
                 file.write("; {}\n".format(desc_txt))
             if show_visual:
