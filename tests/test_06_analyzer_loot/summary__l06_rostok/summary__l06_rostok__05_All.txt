@@ -39,8 +39,7 @@ ammo_5.56x45_ap     = 1, box_size=90
 ammo_9x39_ap        = 2
 ammo_11.43x23_hydro = 2, box_size=20
 ammo_12x76_zhekan   = 1, box_size=10
-
-ammo_m209   = 5
+ammo_m209           = 5
 
 wpn_addon_scope_susat           = 1
 wpn_addon_grenade_launcher_m203 = 1

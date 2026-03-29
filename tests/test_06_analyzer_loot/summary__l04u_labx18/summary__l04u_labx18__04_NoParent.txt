@@ -20,8 +20,7 @@ wpn_ak74    = 1, launcher unload
 wpn_rpg7    = 1
 
 ammo_5.45x39_fmj    = 4
-
-ammo_vog-25 = 2
+ammo_vog-25         = 2
 
 monolit_outfit  = 1
 

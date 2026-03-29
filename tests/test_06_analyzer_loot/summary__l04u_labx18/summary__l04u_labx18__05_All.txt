@@ -24,8 +24,7 @@ wpn_walther = 1
 ammo_9x19_pbp       = 1, box_size=40
 ammo_5.45x39_fmj    = 9
 ammo_5.45x39_ap     = 2
-
-ammo_vog-25 = 2
+ammo_vog-25         = 2
 
 grenade_rgd5    = 7
 

@@ -32,9 +32,8 @@ ammo_9x39_pab9      = 1, box_size=60
 ammo_11.43x23_hydro = 1, box_size=20
 ammo_12x76_zhekan   = 1, box_size=18
 ammo_12x76_zhekan   = 1, box_size=20
-
-ammo_vog-25p    = 3
-ammo_m209       = 5
+ammo_vog-25p        = 3
+ammo_m209           = 5
 
 grenade_f1      = 5
 grenade_rgd5    = 2

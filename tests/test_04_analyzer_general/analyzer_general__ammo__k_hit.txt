@@ -21,3 +21,7 @@ ammo_11.43x23_hydro     1.1
 ammo_12x70_buck         0.4
 ammo_12x76_dart        1.15
 ammo_12x76_zhekan       1.0
+ammo_og-7b                1
+ammo_vog-25p              1
+ammo_vog-25               1
+ammo_m209                 1

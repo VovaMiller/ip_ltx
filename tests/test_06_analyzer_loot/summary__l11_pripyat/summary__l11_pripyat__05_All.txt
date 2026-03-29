@@ -27,8 +27,7 @@ ammo_5.56x45_ap = 1, box_size=180
 ammo_5.56x45_ap = 1, box_size=90
 ammo_9x39_pab9  = 8
 ammo_9x39_sp5   = 1, box_size=100
-
-ammo_m209   = 4
+ammo_m209       = 4
 
 monolit_outfit          = 1
 specops_outfit          = 2

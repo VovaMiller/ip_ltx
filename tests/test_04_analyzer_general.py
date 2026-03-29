@@ -67,7 +67,7 @@ def test_all_cost(tmp_path):
 def test_ammo(tmp_path):
     _test(tmp_path,
         ag.extract_fields, "ammo",
-        precond=lambda s: ag.is_ammo(s) or ag.is_projectile(s) or ag.is_grenade(s),
+        precond=lambda s: ag.is_ammo(s) or ag.is_grenade(s),
         fields=[
             "class",
             "inv_name",
@@ -75,7 +75,7 @@ def test_ammo(tmp_path):
             "box_size"
         ],
         fields_pp=[
-            lambda v: meta_ini().get_string("inv_class_to_type", v, "?"),
+            str,
             ag.translate_string,
             str,
             str

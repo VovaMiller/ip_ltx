@@ -23,7 +23,6 @@ wpn_g36 = 1
 ammo_5.56x45_ap = 1, box_size=180
 ammo_5.56x45_ap = 1, box_size=90
 ammo_9x39_sp5   = 1, box_size=100
-
-ammo_m209   = 4
+ammo_m209       = 4
 
 outfit_exo_m1   = 1

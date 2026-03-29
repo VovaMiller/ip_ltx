@@ -90,16 +90,10 @@ def is_wpn2(section: Section) -> bool:
     return is_wpn(section) and not _is_multiscope(section)
 
 def is_ammo(section: Section) -> bool:
-    """Является ли секция патронами.
+    """Является ли секция патронами/снарядом.
     Используется проверка по классу (поле ``class``).
     """
     return _is_inv_type(section, "T_AMMO")
-
-def is_projectile(section: Section) -> bool:
-    """Является ли секция снарядом.
-    Используется проверка по классу (поле ``class``).
-    """
-    return _is_inv_type(section, "T_PROJ")
 
 def is_grenade(section: Section) -> bool:
     """Является ли секция гранатой.

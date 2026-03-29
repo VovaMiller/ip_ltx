@@ -2,7 +2,7 @@ META_FILEPATH = "_settings/meta.ltx"
 HIDE_GAMEDATA_LTX_WARNINGS = True
 
 def main():
-    from ip_ltx.generator_test_db import generate
+    from ip_ltx.generator_export import generate
 
     generate()
 

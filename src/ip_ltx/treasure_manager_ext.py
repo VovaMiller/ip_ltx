@@ -316,7 +316,10 @@ class SpawnEntriesPool:
                     system_ini().get_string(item, "class", "-"),
                     defval=""
                 )
-                if _type == "T_AMMO":
+                if (
+                    _type == "T_AMMO"
+                    and system_ini().get_uint(item, "box_size") != 1
+                ):
                     se = SpawnEntry(item, f"1, box_size={cnt}", context)
                 else:
                     se = SpawnEntry(item, cnt, context)
@@ -447,7 +450,8 @@ class SpawnEntriesPool:
             else:
                 buffer.add(se)
         for se in buffer_ammo.pool.values():
-            se.box_size = se.count
-            se.count = 1
+            if ini_system.get_uint(se.name, "box_size") != 1:
+                se.box_size = se.count
+                se.count = 1
         self.pool = buffer.pool
         self.merge(buffer_ammo)
