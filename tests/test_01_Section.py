@@ -787,3 +787,50 @@ def test_section_get_items_parsing_mode():
         ("medkit_army", 2), ("wpn_rg-6", 1), ("ammo_5.45x39_fmj", 30), ("config\\misc", 1)
     ]
     
+def test_section_get_pair():
+    section = Section(id="test")
+    section.add("pair_str_1", "Hello, world!")
+    section.add("pair_str_2", "One | Two")
+    section.add("pair_float_1", "2.71828, 3.14159")
+    section.add("pair_float_2", "-1.11 | 2.22")
+    section.add("pair_int_1", "-10, 10")
+    section.add("pair_int_2", "-111 | 111")
+    section.add("pair_uint_1", "0, 10")
+    section.add("pair_uint_2", "10 | 0")
+    section.add("pair_bool_1", "False, True")
+    section.add("pair_bool_2", "True | False")
+    section.add("list_without_values", None)
+    section.add("list_len_0", "")
+    section.add("list_len_1", "1")
+    section.add("list_len_3", "1,2,3")
+
+    assert section.get_pair_str("pair_str_1") == ("Hello", "world!")
+    assert section.get_pair_str("pair_str_2", sep="|") == ("One", "Two")
+    assert section.get_pair_float("pair_float_1") == pytest.approx((2.71828, 3.14159), abs=1e-6)
+    assert section.get_pair_float("pair_float_2", sep="|") == pytest.approx((-1.11, 2.22), abs=1e-6)
+    assert section.get_pair_int("pair_int_1") == (-10, 10)
+    assert section.get_pair_int("pair_int_2", sep="|") == (-111, 111)
+    assert section.get_pair_uint("pair_uint_1") == (0, 10)
+    assert section.get_pair_uint("pair_uint_2", sep="|") == (10, 0)
+    assert section.get_pair_bool("pair_bool_1") == (False, True)
+    assert section.get_pair_bool("pair_bool_2", sep="|") == (True, False)
+
+    # Указанного поля нет или оно без значения
+    with pytest.raises(Section.Error):
+        _ = section.get_pair_str("unknown_field")
+    with pytest.raises(Section.Error):
+        _ = section.get_pair_str("list_without_values")
+    
+    # Размер списка не равен двум
+    with pytest.raises(Section.Error):
+        _ = section.get_pair_str("list_len_0")
+    with pytest.raises(Section.Error):
+        _ = section.get_pair_str("list_len_1")
+    with pytest.raises(Section.Error):
+        _ = section.get_pair_str("list_len_3")
+    
+    # Конвертация значения хотя бы одного элемента невозможна
+    with pytest.raises(Section.Error):
+        _ = section.get_pair_float("pair_str_1")
+    with pytest.raises(Section.Error):
+        _ = section.get_pair_uint("pair_int_1")

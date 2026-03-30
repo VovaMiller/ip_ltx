@@ -24,7 +24,7 @@ import os
 import re
 from collections.abc import Callable
 from pathlib import Path
-from typing import Literal, Self, TextIO
+from typing import Literal, NoReturn, Self, TextIO
 
 from .utils import cast_safe, print_warning, read_file
 
@@ -76,7 +76,7 @@ class Section:
             self.id = id
             self.msg = msg
 
-    def _raise(self, msg: str):
+    def _raise(self, msg: str) -> NoReturn:
         raise Section.Error(self._src, self.id, msg)
 
 
@@ -386,7 +386,7 @@ class Section:
                указанного поля нет или оно без значения.
 
         :return: Построенный по значению поля список элементов нужного типа,
-            либо пустоый список, если ``mandatory == False``
+            либо пустой список, если ``mandatory == False``
             и указанного поля нет или оно без значения.
         """
         v = self._fields.get(k, None)
@@ -513,6 +513,84 @@ class Section:
         return []
 
 
+    def get_pair[R](
+            self,
+            type_caster: Callable[[str], R | None],
+            type_label: str,
+            k: str,
+            sep: str
+    ) -> tuple[R, R]:
+        """Получить значение поля как пару элементов нужного типа.
+
+        Базовый метод для ряда других методов (``get_pair_*``).
+
+        :param type_caster: Функция для конвертации элементов в нужный тип,
+            возвращающая ``None`` в случае невозможности конвертации.
+        :param type_label: Текстовое обозначения типа.
+            Используется в сообщении исключения.
+        :param k: Имя поля.
+        :param sep: Разделитель, по которому
+            из строкового значения поля получается список.
+        
+        :raises Section.Error: в одном из трёх случаев:
+        
+            1. Указанного поля нет или оно без значения.
+            2. Размер списка не равен двум.
+            3. Конвертация значения хотя бы одного элемента невозможна.
+
+        :return: Построенная по строковому значению поля пара элементов нужного типа.
+        """
+        def _err(why: str) -> NoReturn:
+            self._raise(f"field '{k}' can't be read as a pair of *{type_label}*: {why}")
+        
+        v = self._fields.get(k, None)
+        if v is None:
+            _err("None value" if (k in self._fields) else "non-existent")
+        
+        v = v.strip()
+        v = v.split(sep) if len(v) > 0 else []
+        if len(v) != 2:
+            _err(f"expected exactly 2 values, got {len(v)}")
+        
+        v = [type_caster(vv.strip()) for vv in v]
+        if v[0] is None:
+            _err("value #1 is invalid")
+        if v[1] is None:
+            _err("value #2 is invalid")
+
+        return (v[0], v[1])
+
+    def get_pair_str(self, k: str, sep: str = ",") -> tuple[str, str]:
+        """Получить значение поля k как пару обычных строк (str).
+        О деталях работы, см. :func:`get_pair`.
+        """
+        return self.get_pair(str, "str", k, sep)
+
+    def get_pair_float(self, k: str, sep: str = ",") -> tuple[float, float]:
+        """Получить значение поля k как пару чисел с плавающей точкой (float).
+        О деталях работы, см. :func:`get_pair`.
+        """
+        return self.get_pair(Section.cast_float, "float", k, sep)
+
+    def get_pair_int(self, k: str, sep: str = ",") -> tuple[int, int]:
+        """Получить значение поля k как пару целых чисел (int).
+        О деталях работы, см. :func:`get_pair`.
+        """
+        return self.get_pair(Section.cast_int, "int", k, sep)
+    
+    def get_pair_uint(self, k: str, sep: str = ",") -> tuple[int, int]:
+        """Получить значение поля k как пару неотрицательных целых чисел.
+        О деталях работы, см. :func:`get_pair`.
+        """
+        return self.get_pair(Section.cast_uint, "uint", k, sep)
+    
+    def get_pair_bool(self, k: str, sep: str = ",") -> tuple[bool, bool]:
+        """Получить значение поля k как пару bool.
+        О деталях работы, см. :func:`get_pair`.
+        """
+        return self.get_pair(Section.cast_bool, "bool", k, sep)
+
+
 # ----------------------------------------------------------------
 
 
@@ -610,7 +688,7 @@ class Ini:
                 self.show_ltx_warnings = False
 
 
-    def _raise(self, msg: str):
+    def _raise(self, msg: str) -> NoReturn:
         raise Ini.Error(
             f"{self._name} | {msg}" if len(self._name) > 0 else msg
         )
