@@ -83,6 +83,30 @@ l03u_agr_underground_hw = 3403
 
 ; ----------------------------------------------------------------
 
+#include "base_SoC.ltx"
+#include "base_OGSR.ltx"
+
+[server_classes]:server_classes@soc
+[clsid_to_classes]:clsid_to_classes@soc
+
+; Определение типов объектов.
+;  Принадлежность к типу определяется принадлежностью хотя бы к одному из перечисленных классов.
+;  Принадлежность к серверному классу (cse_class) определяется прямым совпадением или наследованием от него.
+;  Принадлежность к клиентскому классу (CClass) определяется прямым совпадением без учёта наследования.
+[types]
+is_monster      = se_monster
+is_stalker      = se_stalker
+is_anomaly      = cse_alife_anomalous_zone, cse_alife_torrid_zone
+is_item         = cse_alife_item
+is_item_art     = cse_alife_item_artefact               ; T_ART
+is_item_weapon  = cse_alife_item_weapon                 ; T_WPN
+is_item_ammo    = cse_alife_item_ammo                   ; T_AMMO
+is_item_grenade = cse_alife_item_grenade                ; T_GREN
+is_item_addon   = CScope, CSilencer, CGrenadeLauncher   ; T_ADDON
+is_item_outfit  = cse_alife_item_custom_outfit          ; T_OUTFIT
+
+; ----------------------------------------------------------------
+
 ; Группировка секций инвентарных предметов
 ; Наличие здесь класса в некоторых скриптах используется как критерий инвентарного предмета.
 [inv_class_to_type]

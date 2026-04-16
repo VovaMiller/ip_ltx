@@ -1,0 +1,327 @@
+
+; ----------------------------------------------------------------
+
+;# Базовые настройки ip_ltx для OGSR Engine (v2.1.390)
+
+; ----------------------------------------------------------------
+
+;## Иерархия серверных классов
+[server_classes@ogsr]
+
+// xrServer_Objects_Abstract.h
+cse_visual
+cse_motion
+
+// xrServer_Object_Base.h
+cse_abstract
+
+// xrServer_Objects.h
+cse_shape
+cse_spectator                           = cse_abstract
+cse_temporary                           = cse_abstract
+cse_ph_skeleton
+cse_abstract_visual                     = cse_abstract, cse_visual
+
+// xrServer_Objects_ALife.h
+cse_alife_schedulable
+cse_alife_graph_point                   = cse_abstract
+cse_alife_object                        = cse_abstract
+cse_alife_group_abstract
+cse_alife_dynamic_object                = cse_alife_object
+cse_alife_dynamic_object_visual         = cse_alife_dynamic_object, cse_visual
+cse_alife_ph_skeleton_object            = cse_alife_dynamic_object_visual, cse_ph_skeleton
+cse_alife_space_restrictor              = cse_alife_dynamic_object, cse_shape
+cse_alife_level_changer                 = cse_alife_space_restrictor
+cse_alife_smart_zone                    = cse_alife_space_restrictor, cse_alife_schedulable
+cse_alife_object_physic                 = cse_alife_dynamic_object_visual, cse_ph_skeleton
+cse_alife_object_hanging_lamp           = cse_alife_dynamic_object_visual, cse_ph_skeleton
+cse_alife_object_projector              = cse_alife_dynamic_object_visual
+cse_alife_helicopter                    = cse_alife_dynamic_object_visual, cse_motion, cse_ph_skeleton
+cse_alife_car                           = cse_alife_dynamic_object_visual, cse_ph_skeleton
+cse_alife_object_breakable              = cse_alife_dynamic_object_visual
+cse_alife_object_climable               = cse_shape, cse_alife_dynamic_object
+cse_alife_mounted_weapon                = cse_alife_dynamic_object_visual
+cse_alife_stationary_mgun               = cse_alife_dynamic_object_visual
+cse_alife_team_base_zone                = cse_alife_space_restrictor
+cse_alife_inventory_box_abstract
+cse_alife_inventory_box                 = cse_alife_dynamic_object_visual, cse_alife_inventory_box_abstract
+
+// xrServer_Objects_ALife_Items.h
+cse_alife_inventory_item
+cse_alife_item                          = cse_alife_dynamic_object_visual, cse_alife_inventory_item
+cse_alife_item_torch                    = cse_alife_item
+cse_alife_item_ammo                     = cse_alife_item
+cse_alife_item_weapon                   = cse_alife_item
+cse_alife_item_weapon_magazined         = cse_alife_item_weapon
+cse_alife_item_weapon_magazined_w_gl    = cse_alife_item_weapon_magazined
+cse_alife_item_weapon_shotgun           = cse_alife_item_weapon_magazined
+cse_alife_item_detector                 = cse_alife_item
+cse_alife_item_artefact                 = cse_alife_item
+cse_alife_item_pda                      = cse_alife_item
+cse_alife_item_document                 = cse_alife_item
+cse_alife_item_grenade                  = cse_alife_item
+cse_alife_item_explosive                = cse_alife_item
+cse_alife_item_bolt                     = cse_alife_item
+cse_alife_item_custom_outfit            = cse_alife_item
+cse_alife_inventory_container           = cse_alife_inventory_box_abstract, cse_alife_item
+
+// xrServer_Objects_ALife_Monsters.h
+cse_alife_trader_abstract
+cse_alife_trader                        = cse_alife_dynamic_object_visual, cse_alife_trader_abstract
+cse_alife_custom_zone                   = cse_alife_space_restrictor
+cse_alife_anomalous_zone                = cse_alife_custom_zone
+cse_alife_torrid_zone                   = cse_alife_custom_zone, cse_motion
+cse_alife_zone_visual                   = cse_alife_anomalous_zone, cse_visual
+cse_alife_creature_abstract             = cse_alife_dynamic_object_visual
+cse_alife_monster_abstract              = cse_alife_creature_abstract, cse_alife_schedulable
+cse_alife_creature_actor                = cse_alife_creature_abstract, cse_alife_trader_abstract, cse_ph_skeleton
+cse_alife_creature_crow                 = cse_alife_creature_abstract
+cse_alife_creature_phantom              = cse_alife_creature_abstract
+cse_alife_monster_zombie                = cse_alife_monster_abstract
+cse_alife_monster_base                  = cse_alife_monster_abstract, cse_ph_skeleton
+cse_alife_psydog_phantom                = cse_alife_monster_base
+cse_alife_human_abstract                = cse_alife_trader_abstract, cse_alife_monster_abstract
+cse_alife_human_stalker                 = cse_alife_human_abstract, cse_ph_skeleton
+cse_alife_online_offline_group          = cse_alife_dynamic_object, cse_alife_schedulable
+
+// templates
+cse_alife_group_template<cse_alife_monster_base> = cse_alife_monster_base, cse_alife_group_abstract
+
+// other
+se_artefact                 = cse_alife_item_artefact               ; se_artefact.script
+se_car                      = cse_alife_car                         ; se_car.script
+se_heli                     = cse_alife_helicopter                  ; se_car.script
+se_outfit                   = cse_alife_item_custom_outfit          ; se_item.script
+se_weapon                   = cse_alife_item_weapon                 ; se_item.script
+se_weapon_shotgun           = cse_alife_item_weapon_shotgun         ; se_item.script
+se_weapon_magazined         = cse_alife_item_weapon_magazined       ; se_item.script
+se_weapon_magazined_w_gl    = cse_alife_item_weapon_magazined_w_gl  ; se_item.script
+se_item                     = cse_alife_item                        ; se_item.script
+se_item_torch               = cse_alife_item_torch                  ; se_item.script
+se_physic                   = cse_alife_object_physic               ; se_item.script
+se_monster                  = cse_alife_monster_base                ; se_monster.script
+se_respawn                  = cse_alife_smart_zone                  ; se_respawn.script
+se_stalker                  = cse_alife_human_stalker               ; se_stalker.script
+se_trader                   = cse_alife_trader                      ; se_stalker.script
+cse_switcher                = cse_abstract_visual                   ; se_switcher.script
+se_zone_anom                = cse_alife_anomalous_zone              ; se_zones.script
+se_zone_visual              = cse_alife_zone_visual                 ; se_zones.script
+se_restrictor               = cse_alife_space_restrictor            ; se_zones.script
+se_smart_terrain            = cse_alife_smart_zone                  ; smart_terrain.script
+
+// xrEngine vs LUA
+; cse_alife_anomalous_zone: переименован на cse_anomalous_zone
+; cse_alife_custom_zone:    переименован на cse_custom_zone
+; cse_alife_torrid_zone:    переименован на cse_torrid_zone
+; cse_alife_zone_visual:    переименован на cse_zone_visual
+; cse_abstract_visual:      переименован на CSE_AbstractVisual
+; cse_alife_item_weapon_shotgun: наследование от cse_alife_item_weapon, а не от cse_alife_item_weapon_magazined
+
+; ----------------------------------------------------------------
+
+;## Соответствия: CLSID -> Клиентский класс, Серверный класс
+[clsid_to_classes@ogsr]
+
+G_LEVEL     = CLevel,
+G_PERSIS    = CGamePersistent,
+HUD_MNGR    = CHUDManager,
+SV_SINGL    = game_sv_Single,
+CL_SINGL    = game_cl_Single,
+UI_SINGL    = CUIGameSP,
+
+AI_FLE_G    = , cse_alife_group_template<cse_alife_monster_base>
+AI_GRAPH    = , cse_alife_graph_point
+ON_OFF_G    = , cse_alife_online_offline_group
+
+O_ACTOR     = CActor,                       cse_alife_creature_actor
+SPECT       = CSpectator,                   cse_spectator
+
+AI_FLESH    = CAI_Flesh,                    cse_alife_monster_base
+AI_HIMER    = CChimera,                     cse_alife_monster_base
+AI_DOG_R    = CAI_Dog,                      cse_alife_monster_base
+AI_STL      = CAI_Stalker,                  cse_alife_human_stalker
+AI_BLOOD    = CAI_Bloodsucker,              cse_alife_monster_base
+AI_BOAR     = CAI_Boar,                     cse_alife_monster_base
+AI_DOG_B    = CAI_PseudoDog,                cse_alife_monster_base
+AI_DOG_P    = CPsyDog,                      cse_alife_monster_base
+AI_DOG_F    = CPsyDogPhantom,               cse_alife_psydog_phantom
+AI_BURER    = CBurer,                       cse_alife_monster_base
+AI_GIANT    = CPseudoGigant,                cse_alife_monster_base
+AI_CONTR    = CController,                  cse_alife_monster_base
+AI_POLTR    = CPoltergeist,                 cse_alife_monster_base
+AI_ZOM      = CZombie,                      cse_alife_monster_base
+AI_FRACT    = CFracture,                    cse_alife_monster_base
+AI_SNORK    = CSnork,                       cse_alife_monster_base
+AI_CAT      = CCat,                         cse_alife_monster_base
+AI_TUSH     = CTushkano,                    cse_alife_monster_base
+AI_PHANT    = CPhantom,                     cse_alife_creature_phantom
+AI_TRADE    = CAI_Trader,                   cse_alife_trader
+AI_CROW     = CAI_Crow,                     cse_alife_creature_crow
+
+C_NIVA      = CCar,                         cse_alife_car
+C_HLCPTR    = CHelicopter,                  cse_alife_helicopter
+
+AF_MBALL    = CMercuryBall,                 cse_alife_item_artefact
+AF_BDROP    = CBlackDrops,                  cse_alife_item_artefact
+AF_NEEDL    = CBlackGraviArtefact,          cse_alife_item_artefact
+AF_BAST     = CBastArtefact,                cse_alife_item_artefact
+AF_BGRAV    = CBlackGraviArtefact,          cse_alife_item_artefact
+AF_DUMMY    = CDummyArtefact,               cse_alife_item_artefact
+AF_ZUDA     = CZudaArtefact,                cse_alife_item_artefact
+AF_THORN    = CThornArtefact,               cse_alife_item_artefact
+AF_FBALL    = CFadedBall,                   cse_alife_item_artefact
+AF_EBALL    = CElectricBall,                cse_alife_item_artefact
+AF_RHAIR    = CRustyHairArtefact,           cse_alife_item_artefact
+AF_GALAN    = CGalantineArtefact,           cse_alife_item_artefact
+AF_GRAVI    = CGraviArtefact,               cse_alife_item_artefact
+ARTEFACT    = CGraviArtefact,               cse_alife_item_artefact
+
+W_WMAGAZ    = CWeaponMagazined,             cse_alife_item_weapon_magazined
+W_WMAGGL    = CWeaponMagazinedWGrenade,     cse_alife_item_weapon_magazined_w_gl
+W_FN2000    = CWeaponFN2000,                cse_alife_item_weapon_magazined_w_gl
+W_AK74      = CWeaponAK74,                  cse_alife_item_weapon_magazined_w_gl
+W_LR300     = CWeaponLR300,                 cse_alife_item_weapon_magazined
+W_HPSA      = CWeaponHPSA,                  cse_alife_item_weapon_magazined
+W_PM        = CWeaponPM,                    cse_alife_item_weapon_magazined
+W_FORT      = CWeaponFORT,                  cse_alife_item_weapon_magazined
+W_BINOC     = CWeaponBinoculars,            cse_alife_item_weapon_magazined
+W_SHOTGN    = CWeaponShotgun,               cse_alife_item_weapon_shotgun
+W_SVD       = CWeaponSVD,                   cse_alife_item_weapon_magazined
+W_SVU       = CWeaponSVU,                   cse_alife_item_weapon_magazined
+W_RPG7      = CWeaponRPG7,                  cse_alife_item_weapon_magazined
+W_VAL       = CWeaponVal,                   cse_alife_item_weapon_magazined
+W_VINT      = CWeaponVintorez,              cse_alife_item_weapon_magazined
+W_WALTHR    = CWeaponWalther,               cse_alife_item_weapon_magazined
+W_USP45     = CWeaponUSP45,                 cse_alife_item_weapon_magazined
+W_GROZA     = CWeaponGroza,                 cse_alife_item_weapon_magazined_w_gl
+W_KNIFE     = CWeaponKnife,                 cse_alife_item_weapon
+W_BM16      = CWeaponBM16,                  cse_alife_item_weapon_shotgun
+W_RG6       = CWeaponRG6,                   cse_alife_item_weapon_shotgun
+
+AMMO        = CWeaponAmmo,                  cse_alife_item_ammo
+A_VOG25     = CWeaponAmmo,                  cse_alife_item_ammo
+A_OG7B      = CWeaponAmmo,                  cse_alife_item_ammo
+A_M209      = CWeaponAmmo,                  cse_alife_item_ammo
+
+W_SCOPE     = CScope,                       cse_alife_item
+W_SILENC    = CSilencer,                    cse_alife_item
+W_GLAUNC    = CGrenadeLauncher,             cse_alife_item
+
+II_BOLT     = CBolt,                        cse_alife_item_bolt
+II_MEDKI    = CMedkit,                      cse_alife_item
+II_BANDG    = CMedkit,                      cse_alife_item
+II_ANTIR    = CAntirad,                     cse_alife_item
+II_FOOD     = CFoodItem,                    cse_alife_item
+II_BOTTL    = CBottleItem,                  cse_alife_item
+II_EXPLO    = CExplosiveItem,               cse_alife_item_explosive
+II_DOC      = CInfoDocument,                cse_alife_item_document
+II_ATTCH    = CInventoryItemObject,         cse_alife_item
+
+EQU_SCIE    = CScientificOutfit,            cse_alife_item_custom_outfit
+EQU_STLK    = CStalkerOutfit,               cse_alife_item_custom_outfit
+EQU_MLTR    = CMilitaryOutfit,              cse_alife_item_custom_outfit
+EQU_EXO     = CExoOutfit,                   cse_alife_item_custom_outfit
+
+G_F1        = CF1,                          cse_alife_item_grenade
+G_RGD5      = CRGD5,                        cse_alife_item_grenade
+
+G_RPG7      = CExplosiveRocket,             cse_temporary
+G_FAKE      = CExplosiveRocket,             cse_temporary
+
+Z_ZONE      = CCustomZone,                  cse_alife_custom_zone
+Z_MBALD     = CMosquitoBald,                cse_alife_anomalous_zone
+Z_MINCER    = CMincer,                      cse_alife_anomalous_zone
+Z_ACIDF     = CMosquitoBald,                cse_alife_anomalous_zone
+Z_GALANT    = CMincer,                      cse_alife_anomalous_zone
+Z_RADIO     = CRadioactiveZone,             cse_alife_anomalous_zone
+Z_BFUZZ     = CHairsZone,                   cse_alife_zone_visual
+Z_RUSTYH    = CHairsZone,                   cse_alife_zone_visual
+Z_DEAD      = CMosquitoBald,                cse_alife_anomalous_zone
+LVL_CHNG    = CLevelChanger,                cse_alife_level_changer
+SCRIPTZN    = CScriptZone,                  cse_alife_space_restrictor
+SMRTZONE    = CSmartZone,                   cse_alife_smart_zone
+Z_TEAMBS    = CTeamBaseZone,                cse_alife_team_base_zone
+Z_TORRID    = CTorridZone,                  cse_alife_torrid_zone
+SPACE_RS    = CSpaceRestrictor,             cse_alife_space_restrictor
+Z_AMEBA     = CAmebaZone,                   cse_alife_zone_visual
+Z_NOGRAV    = CNoGravityZone,               cse_alife_anomalous_zone
+
+D_SIMDET    = CSimpleDetectorSHOC,          cse_alife_item_detector
+DET_SIMP    = CSimpleDetector,              cse_alife_item_detector
+DET_ADVA    = CAdvancedDetector,            cse_alife_item_detector
+DET_ELIT    = CEliteDetector,               cse_alife_item_detector
+DET_SCIE    = CScientificDetector,          cse_alife_item_detector
+
+D_TORCH     = CTorch,                       cse_alife_item_torch
+D_PDA       = CPda,                         cse_alife_item_pda
+
+O_SEARCH    = CProjector,                   cse_alife_object_projector
+W_MOUNTD    = CWeaponMounted,               cse_alife_mounted_weapon
+W_STMGUN    = CWeaponStatMgun,              cse_alife_stationary_mgun
+
+O_HLAMP     = CHangingLamp,                 cse_alife_object_hanging_lamp
+O_PHYSIC    = CPhysicObject,                cse_alife_object_physic
+SCRPTOBJ    = CScriptObject,                cse_alife_dynamic_object_visual
+O_BRKBL     = CBreakableObject,             cse_alife_object_breakable
+O_CLMBL     = CClimableObject,              cse_alife_object_climable
+P_SKELET    = CPhysicsSkeletonObject,       cse_alife_ph_skeleton_object
+P_DSTRBL    = CDestroyablePhysicsObject,    cse_alife_object_physic
+
+O_INVBOX    = CInventoryBox,                cse_alife_inventory_box
+O_CONTNR    = CInventoryContainer,          cse_alife_inventory_container
+
+// LUA (class_registrator.script)
+MAIN_MNU    = main_menu,
+SMRTTRRN    = ce_smart_zone,                se_smart_terrain
+RE_SPAWN    = ce_smart_zone,                se_respawn
+O_SWITCH    = ce_switcher,                  cse_switcher 
+AI_STL_S    = CAI_Stalker,                  se_stalker
+AI_TRD_S    = CAI_Trader,                   se_trader
+C_HLCP_S    = CHelicopter,                  se_heli
+SPC_RS_S    = CSpaceRestrictor,             se_restrictor
+O_PHYS_S    = CPhysicObject,                se_physic
+SCRPTART    = CElectricBall,                se_artefact
+SCRPTCAR    = CCar,                         se_car
+SM_BLOOD    = CAI_Bloodsucker,              se_monster
+SM_BOARW    = CAI_Boar,                     se_monster
+SM_DOG_S    = CAI_Dog,                      se_monster
+SM_FLESH    = CAI_Flesh,                    se_monster
+SM_P_DOG    = CAI_PseudoDog,                se_monster
+SM_BURER    = CBurer,                       se_monster
+SM_CAT_S    = CCat,                         se_monster
+SM_CHIMS    = CChimera,                     se_monster
+SM_CONTR    = CController,                  se_monster
+SM_IZLOM    = CFracture,                    se_monster
+SM_POLTR    = CPoltergeist,                 se_monster
+SM_GIANT    = CPseudoGigant,                se_monster
+SM_ZOMBI    = CZombie,                      se_monster
+SM_SNORK    = CSnork,                       se_monster
+SM_TUSHK    = CTushkano,                    se_monster
+SM_DOG_P    = CPsyDog,                      se_monster
+SM_DOG_F    = CPsyDogPhantom,               se_monster
+TORCH_S     = CTorch,                       se_item_torch
+E_STLK      = CStalkerOutfit,               se_outfit
+WP_SCOPE    = CScope,                       se_item
+WP_AK74     = CWeaponAK74,                  se_weapon_magazined_w_gl
+WP_LR300    = CWeaponLR300,                 se_weapon_magazined
+WP_BINOC    = CWeaponBinoculars,            se_weapon_magazined
+WP_BM16     = CWeaponBM16,                  se_weapon_shotgun
+WP_GROZA    = CWeaponGroza,                 se_weapon_magazined_w_gl
+WP_SVD      = CWeaponSVD,                   se_weapon_magazined
+WP_HPSA     = CWeaponHPSA,                  se_weapon_magazined
+WP_KNIFE    = CWeaponKnife,                 se_weapon
+WP_PM       = CWeaponPM,                    se_weapon_magazined
+WP_RG6      = CWeaponRG6,                   se_weapon_shotgun
+WP_RPG7     = CWeaponRPG7,                  se_weapon_magazined
+WP_SHOTG    = CWeaponShotgun,               se_weapon_shotgun
+WP_SVU      = CWeaponSVU,                   se_weapon_magazined
+WP_USP45    = CWeaponUSP45,                 se_weapon_magazined
+WP_VAL      = CWeaponVal,                   se_weapon_magazined
+WP_VINT     = CWeaponVintorez,              se_weapon_magazined
+WP_WALTH    = CWeaponWalther,               se_weapon_magazined
+ZS_BFUZZ    = CHairsZone,                   se_zone_visual
+ZS_MBALD    = CMosquitoBald,                se_zone_anom
+ZS_GALAN    = CMincer,                      se_zone_anom
+ZS_MINCE    = CMincer,                      se_zone_anom
+
+; ----------------------------------------------------------------
