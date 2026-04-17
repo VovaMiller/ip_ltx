@@ -419,3 +419,37 @@ m_zombie_e
 ; zombie_weak_respawn_3
 
 ; ----------------------------------------------------------------
+
+; Настройки генерации таблиц для Universal ACDC
+
+[universal_acdc@ignore]
+EVENT       ; useless
+T_ASS       ; useless
+T_CS        ; useless
+AI_RAT      ; non-existent
+AI_RAT_G    ; non-existent
+AI_SPGRP    ; non-existent
+II_BTTCH    ; non-existent
+NW_ATTCH    ; non-existent
+
+[universal_acdc@conversion]
+cse_temporary               = unknown
+cse_alife_level_changer     = se_level_changer
+cse_alife_psydog_phantom    = cse_alife_psy_dog_phantom
+cse_alife_group_template<cse_alife_monster_base> = cse_alife_flesh_group
+cse_switcher                = unknown
+se_artefact                 = cse_alife_item_artefact
+se_car                      = cse_alife_car
+se_heli                     = cse_alife_helicopter
+se_outfit                   = cse_alife_item_custom_outfit
+se_weapon                   = cse_alife_item_weapon
+se_weapon_shotgun           = cse_alife_item_weapon_shotgun
+se_weapon_magazined         = cse_alife_item_weapon_magazined
+se_weapon_magazined_w_gl    = cse_alife_item_weapon_magazined_w_gl
+se_item                     = cse_alife_item
+se_item_torch               = cse_alife_item_torch
+se_physic                   = cse_alife_object_physic
+se_trader                   = cse_alife_trader
+se_restrictor               = cse_alife_space_restrictor
+
+; ----------------------------------------------------------------
