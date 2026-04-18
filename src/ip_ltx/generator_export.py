@@ -66,6 +66,89 @@ def _ip_test_static_tables(fn: str) -> None:
             else:
                 file.write("\n{} = {{}}\n".format(group.name))
 
+
+def _acdc_tables(fn: str) -> None:
+    """Генерация таблицы ``section_to_class`` для **ACDC**.
+
+    Работа генерации тестировалась на ACDC с последней правкой от 11.10.2007
+    """
+    ini_meta = meta_ini()
+    SECTION_IGNORE = "acdc@ignore"
+    SECTION_CONVERSION = "acdc@conversion"
+
+    # Множество CLSID, которые будут проигнорированы
+    if ini_meta.section_exist(SECTION_IGNORE):
+        ignore_clsid = set(ini_meta.section(SECTION_IGNORE).lines())
+    else:
+        ignore_clsid = set()
+        print_warning(f"Section [{SECTION_IGNORE}] doesn't exist")
+
+    # Словарь перевода имён серверных классов в имена пакетов ACDC.
+    if ini_meta.section_exist(SECTION_CONVERSION):
+        cse_conversion = {
+            cse_server: cse_package
+            for cse_server, cse_package
+            in ini_meta.section(SECTION_CONVERSION).fields()
+            if (cse_package is not None) and (len(cse_package) > 0)
+        }
+    else:
+        cse_conversion = {}
+        print_warning(f"Section [{SECTION_CONVERSION}] doesn't exist")
+
+    # Получение соответствий CLSID с серверным классом.
+    # Считываем конфиг программы.
+    clsid_to_classes = ini_meta.section("clsid_to_classes")
+    clsid_to_cse = {}
+    for clsid in clsid_to_classes.lines():
+        if clsid in ignore_clsid:
+            continue
+        cse = clsid_to_classes.get_pair_str(clsid)[1]
+        if len(cse) > 0:
+            clsid_to_cse[clsid] = cse
+
+    # Получение соответствий имён секций с CLSID.
+    # Считываем конфиги игры.
+    section_to_clsid = {}
+    section_to_clsid_unk = {}
+    for section in system_ini().sections():
+        _class = section.get_string("class", "")
+        if len(_class) == 0:
+            continue
+        if _class in ignore_clsid:
+            continue
+        if _class in clsid_to_cse:
+            section_to_clsid[section.id] = _class
+        else:
+            section_to_clsid_unk[section.id] = _class
+    
+    # Вывод
+    TAB = 4
+    with open(fn, "w", encoding="utf-8") as file:
+        # header
+        if len(section_to_clsid_unk) > 0:
+            offset = ((
+                2 + max([len(sect_id) for sect_id in section_to_clsid_unk.keys()]) + TAB
+            ) // TAB) * TAB
+            file.write("# Unable to derive package for these sections:\n")
+            for section, clsid in section_to_clsid_unk.items():
+                shift = " "*(offset - len(section) - 2)
+                file.write(f"#   '{section}'{shift}=> '__UNKNOWN__', # {clsid}\n")
+            file.write("\n")
+        file.write("# acdc.pl\n")
+
+        # section_to_class
+        offset = ((
+            2 + max([len(sect_id) for sect_id in section_to_clsid.keys()]) + TAB
+        ) // TAB) * TAB
+        file.write("use constant section_to_class => {\n")
+        for section, clsid in section_to_clsid.items():
+            cse_server = clsid_to_cse[clsid]
+            cse_package = cse_conversion.get(cse_server, cse_server)
+            shift = " "*(offset - len(section) - 2)
+            file.write(f"\t'{section}'{shift}=> '{cse_package}', # {clsid}\n")
+        file.write("};\n")
+
+
 def _universal_acdc_tables(fn: str) -> None:
     """Генерация таблиц для **Universal ACDC**
 
@@ -163,6 +246,7 @@ def generate() -> None:
     Генерирует:
 
     * Статические таблицы для **ip_test** (``ip_test_db.script``)
+    * Таблицу ``section_to_class`` для **ACDC**
     * Таблицы ``section_to_clsid`` и ``clsid_to_class`` для **Universal ACDC**
     """
     print("-"*80)
@@ -170,6 +254,7 @@ def generate() -> None:
     print("MOD:", ini_system.gdm)
     print("ALT:", ini_system.gda or "--")
     print("-"*80)
-    run(_ip_test_static_tables,  "ip_test")
-    run(_universal_acdc_tables,  "universal_acdc")
+    run(_ip_test_static_tables, "ip_test")
+    run(_acdc_tables,           "acdc")
+    run(_universal_acdc_tables, "universal_acdc")
     print("-"*80)

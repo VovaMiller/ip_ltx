@@ -420,7 +420,40 @@ m_zombie_e
 
 ; ----------------------------------------------------------------
 
-; Настройки генерации таблиц для Universal ACDC
+; Настройки генерации таблицы для ACDC (11.10.2007)
+
+[acdc@ignore]
+SPECT       ; useless
+AI_FLE_G    ; useless
+AI_DOG_F    ; useless
+O_SWITCH    ; useless
+AI_RAT_G    ; non-existent
+AI_RAT      ; non-existent
+EVENT       ; non-existent
+AI_SPGRP    ; non-existent
+II_BTTCH    ; non-existent
+NW_ATTCH    ; non-existent
+
+[acdc@conversion]
+cse_alife_mounted_weapon    = cse_alife_dynamic_object_visual
+cse_alife_stationary_mgun   = cse_alife_mounted_weapon
+se_artefact                 = cse_alife_item_artefact
+se_car                      = cse_alife_car
+se_heli                     = cse_alife_helicopter
+se_outfit                   = cse_alife_item_custom_outfit
+se_weapon                   = cse_alife_item_weapon
+se_weapon_shotgun           = cse_alife_item_weapon_shotgun
+se_weapon_magazined         = cse_alife_item_weapon_magazined
+se_weapon_magazined_w_gl    = cse_alife_item_weapon_magazined_w_gl
+se_item                     = cse_alife_item
+se_item_torch               = cse_alife_item_torch
+se_physic                   = cse_alife_object_physic
+se_trader                   = cse_alife_trader
+se_restrictor               = cse_alife_space_restrictor
+
+; ----------------------------------------------------------------
+
+; Настройки генерации таблиц для Universal ACDC (v1.38)
 
 [universal_acdc@ignore]
 EVENT       ; useless
