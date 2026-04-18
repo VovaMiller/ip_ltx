@@ -29,6 +29,9 @@
 то в качестве исходных файлов генерации можно использовать всё те же файлы
 ``alife_*.ltx``, полученные при декомпиляции ``all.spawn`` утилитой ACDC
 (такие файлы генерации будут генерировать файлы по содержанию идентичные сами себе).
+
+Допускается использование значений полей с пробельными символами:
+они не будут удалены при считывании ltx-файла.
 """
 
 import itertools
@@ -210,7 +213,7 @@ def build(
                 input_fp = str(input_path.joinpath(fn))
                 output_fp = str(output_path.joinpath(fn))
                 ini = Ini()
-                ini.read(input_fp)
+                ini.read(input_fp, preserve_value_whitespaces=True)
                 with open(output_fp, "w", encoding="utf-8") as file:
                     _ini_write(
                         ini, file, _IDS_MASK, _FIRST, _VNONE, _OVERRIDE, _OVERRIDE_ID

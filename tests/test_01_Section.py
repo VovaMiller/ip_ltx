@@ -59,6 +59,14 @@ def test_section_add_various_values():
     section.add("field", ' "w1 w2" w3 w4 " w5 w6    ', overwrite=True)
     assert section.field("field") == '"w1 w2"w3w4" w5 w6    '
 
+    section.add(
+        "field",
+        ' "w1 w2" w3 w4 " w5 w6    ',
+        overwrite=True,
+        preserve_value_whitespaces=True
+    )
+    assert section.field("field") == '"w1 w2" w3 w4 " w5 w6'
+
 def test_section_add_invalid_fields():
     section = Section(id="test")
 

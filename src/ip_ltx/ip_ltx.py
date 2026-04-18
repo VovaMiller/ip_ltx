@@ -200,7 +200,8 @@ class Section:
             self,
             field: str,
             value: str | None,
-            overwrite: bool = False
+            overwrite: bool = False,
+            preserve_value_whitespaces: bool = False
     ) -> None:
         """Добавить поле с указанным значение.
 
@@ -210,6 +211,9 @@ class Section:
             Перед присвоением полю пробельные символы будут отфильтрованы
             как при чтении ltx-файла. Исключение - поле ``custom_data``.
         :param overwrite: Можно ли перезаписать уже существующее поле.
+        :param preserve_value_whitespaces: Не удалять из значения поля
+            пробельные символы (кроме тех, что с краю).
+            По умолчанию они удаляются, если не находятся между парой кавычек.
         :raises Section.Error: если поле уже существует, а ``overwrite == False``.
         :raises ValueError: если дан неверный формат имени поля или значения.
         """
@@ -234,7 +238,11 @@ class Section:
             else:
                 if (("\n" in value) or ("\r" in value)):
                     raise ValueError("Multi-line value is allowed only for custom_data")
-                self._fields[field] = Section.fmt_value_whitespaces(value)
+                self._fields[field] = (
+                    value.strip()
+                    if preserve_value_whitespaces
+                    else Section.fmt_value_whitespaces(value)
+                )
         else:
             self._fields[field] = None
         self._fields_own.add(field)
@@ -744,7 +752,8 @@ class Ini:
             self,
             raw: str,
             fp_src: str = "",
-            _current_section: Section | None = None
+            _current_section: Section | None = None,
+            preserve_value_whitespaces: bool = False
     ) -> None:
         """Считывание данных о секциях непосредственно со строки (str).
 
@@ -761,6 +770,9 @@ class Ini:
         :param _current_section: Указатель на объект секции,
             на которой остановилось чтение.
             Используется самой функцией; в остальном, можно оставлять None.
+        :param preserve_value_whitespaces: При чтении значения поля сохранить
+            все его пробельные символы (кроме тех, что с краю).
+            По умолчанию они сохраняются только если находятся между парой кавычек.
         :raises Ini.Error: при ошибке считывания.
         """
         def _err(ln: int, msg: str):
@@ -862,8 +874,12 @@ class Ini:
                         ))
                 
                 str_inc = str(p_inc)
-                raw = read_file(str_inc)
-                self.read_raw(raw, fp_src=str_inc, _current_section=_current_section)
+                self.read_raw(
+                    raw=read_file(str_inc),
+                    fp_src=str_inc,
+                    _current_section=_current_section,
+                    preserve_value_whitespaces=preserve_value_whitespaces
+                )
                 continue
 
             # New section
@@ -933,6 +949,8 @@ class Ini:
                     if (lv == "custom_data") and (rv.strip() == "<<END"):
                         custom_data_buffer = ""
                         field, value = lv, ""
+                    elif preserve_value_whitespaces:
+                        field, value = lv, rv.strip()
                     else:
                         field, value = lv, Section.fmt_value_whitespaces(rv)
                         # rvs = rv.strip() if (rv.count('"') % 2) == 0 else rv.lstrip()
@@ -953,7 +971,8 @@ class Ini:
     def read(
             self,
             fp0: str,
-            inside_gamedata: bool = False
+            inside_gamedata: bool = False,
+            preserve_value_whitespaces: bool = False
     ) -> None:
         """Считать данные с файла.
 
@@ -962,6 +981,9 @@ class Ini:
             как указанный относительно папки gamedata.
             В первую очередь ищет файл в gamedata мода;
             если его там нет, то пробует gamedata оригинала.
+        :param preserve_value_whitespaces: При чтении значения поля сохранить
+            все его пробельные символы (кроме тех, что с краю).
+            По умолчанию они сохраняются только если находятся между парой кавычек.
         :raises Ini.Error: при ошибке считывания.
         """
         fp = None
@@ -982,8 +1004,11 @@ class Ini:
                 fp = fp0
             if fp is None:
                 self._raise(f"FILE DOES NOT EXIST (\"{fp}\")")
-        raw = read_file(fp)
-        self.read_raw(raw, fp_src=fp)
+        self.read_raw(
+            raw=read_file(fp),
+            fp_src=fp,
+            preserve_value_whitespaces=preserve_value_whitespaces
+        )
 
 
     def write(

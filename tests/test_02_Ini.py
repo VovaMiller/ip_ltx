@@ -995,6 +995,52 @@ def test_ini_read_various_values():
     assert ini.get_string("test", "f8") == '1" 2 3 "45" 6'
     assert ini.get_string("test", "f9") == '"1\t2\t3"'
 
+def test_ini_read_values_with_whitespaces(tmp_path):
+    """Чтение с сохранением пробельных символов.
+    """
+    f1 = tmp_path / "file_1.ltx"
+    f2 = tmp_path / "file_2.ltx"
+    f1.write_text("\n".join([
+        '[test_1]',
+        'f1 = V1',
+        'f2 =    v2    ',
+        'f3 =\t\t\t\tv3\t\t\t\t',
+        'f4 =  v  4  ',
+        'f5 = \t\tv\t\t5\t\t',
+        'f6 = 1 2 3 4 5',
+        'f7 = "1 2" 3 "4 5"',
+        'f8 =  1  " 2 3 "  4  5  " 6    ',
+        'f9 = "1\t2\t3"',
+        '',
+        '#include "file_2.ltx"',
+    ]))
+    f2.write_text("\n".join([
+        '[test_2]',
+        'f1 =    v1    ',
+        'f2 =  v  2  ',
+        'f3 = \t\tv\t\t3\t\t',
+        'f4 = 1 2 3 4 5',
+        'f5 =  1  " 2 3 "  4  5  " 6    ',
+    ]))
+
+    ini = Ini(name="test_ini")
+    ini.read(str(f1), inside_gamedata=False, preserve_value_whitespaces=True)
+
+    assert ini.get_string("test_1", "f1") == 'V1'
+    assert ini.get_string("test_1", "f2") == 'v2'
+    assert ini.get_string("test_1", "f3") == 'v3'
+    assert ini.get_string("test_1", "f4") == 'v  4'
+    assert ini.get_string("test_1", "f5") == 'v\t\t5'
+    assert ini.get_string("test_1", "f6") == '1 2 3 4 5'
+    assert ini.get_string("test_1", "f7") == '"1 2" 3 "4 5"'
+    assert ini.get_string("test_1", "f8") == '1  " 2 3 "  4  5  " 6'
+    assert ini.get_string("test_1", "f9") == '"1\t2\t3"'
+    assert ini.get_string("test_2", "f1") == 'v1'
+    assert ini.get_string("test_2", "f2") == 'v  2'
+    assert ini.get_string("test_2", "f3") == 'v\t\t3'
+    assert ini.get_string("test_2", "f4") == '1 2 3 4 5'
+    assert ini.get_string("test_2", "f5") == '1  " 2 3 "  4  5  " 6'
+
 def test_ini_read_with_comments():
     """Поддержка комментариев ``;`` и ``//``.
 
