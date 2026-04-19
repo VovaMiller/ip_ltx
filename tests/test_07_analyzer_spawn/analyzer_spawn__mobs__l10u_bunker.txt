@@ -1,0 +1,39 @@
+# l10u_bunker
+
+## Monsters (alive only)
++ bun_bloodsucker_strong      --[0xffffffbf][t0s0g0] (bun_krovosos_nest) bloodsucker_strong
++ bun_bloodsucker_strong_0000 --[0xffffffbf][t0s0g0] (bun_krovosos_nest) bloodsucker_strong
++ bun_bloodsucker_strong_0001 --[0xffffffb3][t0s0g0] (bun_krovosos_nest) bloodsucker_strong
+
+## NPC (alive only)
++ bun_stalker_monolith        --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper1) rad_monolit_bunker
++ bun_stalker_monolith_0000   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper2) rad_monolit_bunker
++ bun_stalker_monolith_0001   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper3) rad_monolit_bunker
++ bun_stalker_monolith_0005   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper4) rad_monolit_bunker
++ bun_stalker_monolith_0006   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper5) rad_monolit_bunker
++ bun_stalker_monolith_0007   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper6) rad_monolit_bunker
++ bun_stalker_monolith_0008   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper7) rad_monolit_bunker
++ bun_stalker_monolith_0009   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper8) rad_monolit_bunker
++ bun_stalker_monolith_0010   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper9) rad_monolit_bunker
++ bun_stalker_monolith_0011   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper10) rad_monolit_bunker
++ bun_stalker_monolith_0012   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper11) rad_monolit_bunker
++ bun_stalker_monolith_0013   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper12) rad_monolit_bunker
++ bun_stalker_monolith_0014   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper13) rad_monolit_bunker
++ bun_stalker_monolith_0015   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper14) rad_monolit_bunker
++ bun_stalker_monolith_0016   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper15) rad_monolit_bunker
++ bun_stalker_monolith_0017   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper16) rad_monolit_bunker
++ bun_stalker_monolith_0018   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper17) rad_monolit_bunker
++ bun_stalker_monolith_0019   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper18) rad_monolit_bunker
++ bun_stalker_monolith_0020   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper19) rad_monolit_bunker
++ bun_stalker_monolith_0021   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper20) rad_monolit_bunker
++ bun_stalker_monolith_0022   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper21) rad_monolit_bunker
++ bun_stalker_monolith_0023   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_camper22) rad_monolit_bunker
++ bun_stalker_monolith_0002   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol1) rad_monolit_master
++ bun_stalker_monolith_0003   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol1) rad_monolit_master
++ bun_stalker_monolith_0004   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol2) rad_monolit_master
++ bun_stalker_monolith_0024   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol2) rad_monolit_master
++ bun_stalker_monolith_0025   --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol3) rad_monolit_master
++ bun_stalker_monolith_0026   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol3) rad_monolit_master
++ bun_stalker_monolith_0027   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol4) rad_monolit_master
++ bun_stalker_monolith_0028   --[0xffffffb3][t0s0g0] {+bar_deactivate_radar_done} (bun_patrol4) rad_monolit_master
+

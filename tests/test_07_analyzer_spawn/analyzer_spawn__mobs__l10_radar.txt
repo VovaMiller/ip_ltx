@@ -1,0 +1,151 @@
+# l10_radar
+
+## Monsters (alive only)
++ rad_m_pseudodog_e_0001          --[0xffffffbf][t0s0g0] pseudodog_strong
++ rad_m_pseudodog_e_0003          --[0xffffffbf][t0s0g0] pseudodog_strong
++ rad_m_pseudodog_e_0005          --[0xffffffbf][t0s0g0] pseudodog_strong
++ rad_bloodsucker_normal          --[0xffffffbf][t0s0g0] (rad_bloodsucker) bloodsucker_normal
++ rad_snork_jumper_0001           --[0xffffffbf][t0s0g0] (rad_snork1) snork_jumper
++ rad_snork_jumper_0003           --[0xffffffbf][t0s0g0] (rad_snork1) snork_jumper
++ rad_snork_jumper_0004           --[0xffffffbf][t0s0g0] (rad_snork1) snork_jumper
++ rad_snork_jumper_0005           --[0xffffffbf][t0s0g0] (rad_snork1) snork_jumper
++ rad_snork_jumper_0008           --[0xffffffbf][t0s0g0] (rad_snork1) snork_jumper
++ rad_snork_jumper_0009           --[0xffffffbf][t0s0g0] (rad_snork1) snork_jumper
++ rad_snork_jumper_0010           --[0xffffffbf][t0s0g0] (rad_snork2) snork_jumper
++ rad_snork_jumper_0015           --[0xffffffbf][t0s0g0] (rad_snork2) snork_jumper
++ rad_snork_jumper_0016           --[0xffffffbf][t0s0g0] (rad_snork2) snork_jumper
++ rad_snork_jumper_0019           --[0xffffffbf][t0s0g0] (rad_snork2) snork_jumper
++ rad_psy_dog                     --[0xfffffff7][t0s0g0] (none) psy_dog_radar
++ rad_m_poltergeist_normal_tele   --[0xffffffbf][t0s0g0] m_poltergeist_normal_tele
++ rad_gigant_normal               --[0xffffffbf][t0s0g0] gigant_strong
+
+## NPC (alive only)
++ rad_entrance_stalker_monolith3      --[0xffffffff][t0s0g0] (rad_entrance) rad_monolit_regular
++ rad_ambush1_walker1                 --[0xfffffff7][t0s0g0] (none) rad_monolit_regular
++ rad_ambush1_walker_0001             --[0xfffffff7][t0s16g14] (none) rad_monolit_sniper
++ rad_after_valley_walker1            --[0xffffffff][t0s0g0] (rad_after_valley) rad_monolit_regular
++ rad_ambush1_walker_0003             --[0xfffffff7][t0s16g14] (none) rad_monolit_regular
++ rad_tramplin_rpg_walker             --[0xfffffff7][t0s16g14] (none) rad_monolit_rpg
++ rad_tramplin_walker3                --[0xffffffff][t0s0g0] (rad_after_tramplin_ambush) rad_monolit_regular
++ rad_tramplin_walker4                --[0xffffffff][t0s0g0] (rad_after_tramplin_ambush) rad_monolit_regular
++ rad_stalker_monolith                --[0xfffffff7][t0s16g14] (none) rad_monolit_sniper
++ rad_ambush3_walker2                 --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_ambush) rad_monolit_regular
++ rad_ambush3_walker                  --[0xffffffff][t0s0g0] (rad_after_tramplin_ambush) rad_monolit_regular
++ rad_ambush3_walker3                 --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_ambush) rad_monolit_regular
++ rad_ambush3_walker4                 --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_ambush) rad_monolit_regular
++ rad_ambush3_walker6                 --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_ambush) rad_monolit_regular
++ rad_ambush3_walker5                 --[0xfffffff7][t0s16g16] {-bar_deactivate_radar_done} (none) rad_monolit_sniper
++ rad_ambush3_walker7                 --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_ambush) rad_monolit_regular
++ rad_ambush3_walker8                 --[0xffffffff][t0s0g0] (rad_after_tramplin_ambush) rad_monolit_regular
++ rad_prip_teleport_patroler1         --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_specnaz
++ rad_prip_teleport_patroler2         --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_specnaz
++ rad_prip_teleport_guard1            --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_regular
++ rad_prip_teleport_guard2            --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_regular
++ rad_prip_teleport_kamper1           --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_specnaz
++ rad_prip_teleport_kamper2           --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_regular
++ rad_prip_teleport_cache_quard1      --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_regular
++ rad_prip_teleport_cache_quard2      --[0xffffffff][t0s16g16] (rad_prip_teleport) rad_monolit_master
++ rad_prip_road_patroler1             --[0xffffffff][t0s16g17] (rad_prip_road) rad_monolit_specnaz
++ rad_prip_road_patroler2             --[0xffffffff][t0s16g17] (rad_prip_road) rad_monolit_regular
++ rad_prip_road_guard1                --[0xffffffff][t0s16g17] (rad_prip_road) rad_monolit_regular
++ rad_prip_road_guard2                --[0xffffffff][t0s16g17] (rad_prip_road) rad_monolit_specnaz
++ rad_prip_road_kamper1               --[0xffffffff][t0s16g17] (rad_prip_road) rad_monolit_regular
++ rad_prip_road_kamper2               --[0xffffffff][t0s16g17] (rad_prip_road) rad_monolit_regular
++ rad_prip_road_kamper3               --[0xffffffff][t0s16g17] (rad_prip_road) rad_monolit_regular
++ rad_curve_road_mid_guard2           --[0xfffffff7][t0s16g16] (none) rad_monolit_regular
++ rad_curve_road_mid_guard1           --[0xfffffff7][t0s16g16] (none) rad_monolit_regular
++ rad_curve_road_high_guard1          --[0xfffffff7][t0s16g16] (none) rad_monolit_regular
++ rad_curve_road_high_guard2          --[0xfffffff7][t0s16g16] (none) rad_monolit_regular
++ rad_antenna_camper1                 --[0xffffffff][t0s0g0] (rad_antenna_camper) rad_monolit_specnaz
++ rad_stalker_monolith_antenna_0004   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0005   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_specnaz
++ rad_stalker_monolith_antenna_0009   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0010   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0011   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0012   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0013   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0014   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_specnaz
++ rad_stalker_monolith_antenna_0015   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0016   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_stalker_monolith_antenna_0017   --[0xffffffff][t0s0g0] (rad_antenna_patrol) rad_monolit_regular
++ rad_antenna_sniper1                 --[0xfffffff3][t0s16g17] (none) rad_monolit_sniper
++ rad_ambush1_kamp                    --[0xffffffff][t0s0g0] (rad_valley) rad_monolit_regular
++ rad_ambush1_kamp_0000               --[0xffffffff][t0s0g0] (rad_valley) rad_monolit_regular
++ rad_ambush1_kamp_0001               --[0xffffffff][t0s0g0] (rad_valley) rad_monolit_regular
++ rad_ambush3_walker_0000             --[0xfffffff7][t0s16g14] (none) rad_monolit_sniper
++ rad_antenna_sniper2                 --[0xfffffff7][t0s0g0] (none) rad_monolit_sniper
++ rad_antenna_sniper3                 --[0xfffffff7][t0s16g17] (none) rad_monolit_sniper
++ rad_antenna_sniper4                 --[0xfffffff7][t0s16g17] (none) rad_monolit_sniper
++ rad_antenna_camper2                 --[0xffffffff][t0s0g0] (rad_antenna_camper) rad_monolit_specnaz
++ rad_antenna_camper3                 --[0xffffffff][t0s0g0] (rad_antenna_camper) rad_monolit_specnaz
++ rad_stalker_dolg_0003               --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Dolg_master
++ rad_stalker_svoboda_0004            --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Svoboda_master
++ rad_stalker_dolg_0001               --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Svoboda_master
++ rad_stalker_svoboda_0002            --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Svoboda_master
++ rad_stalker_svoboda_0005            --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Svoboda_master
++ rad_stalker_svoboda_0006            --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Svoboda_master
++ rad_stalker_dolg                    --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Dolg_master
++ rad_stalker_dolg_0008               --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Dolg_master
++ rad_stalker_dolg_0009               --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Dolg_master
++ rad_stalker_dolg_0010               --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Dolg_master
++ rad_stalker_dolg_0011               --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Dolg_master
++ rad_specnaz_antenna_0007            --[0xfffffff7][t0s16g19] {+bar_deactivate_radar_done} (rad_mil_entrance) rad_soldier_specnaz
++ rad_specnaz_antenna_0008            --[0xfffffff7][t0s16g19] {+bar_deactivate_radar_done} (rad_mil_entrance) rad_soldier_specnaz
++ rad_specnaz_antenna_0009            --[0xfffffff7][t0s16g19] {+bar_deactivate_radar_done} (rad_mil_entrance) rad_soldier_specnaz
++ rad_specnaz_antenna_0010            --[0xfffffff7][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
++ rad_codedoor_sniper                 --[0xfffffff7][t0s16g16] {-bar_deactivate_radar_done} (none) rad_monolit_sniper
++ rad_tramplin_sniper                 --[0xfffffff7][t0s16g14] (none) rad_monolit_sniper
++ rad_curve_road_low_guard            --[0xfffffff7][t0s16g16] (none) rad_monolit_regular
++ rad_entrance_stalker_monolith2      --[0xffffffff][t0s0g0] (rad_entrance) rad_monolit_regular
++ rad_entrance_stalker_monolith4      --[0xffffffff][t0s0g0] (rad_entrance) rad_monolit_regular
++ rad_entrance_stalker_monolith1      --[0xffffffff][t0s0g0] (rad_entrance) rad_monolit_regular
++ rad_stalker_zombied_0010            --[0xfffffff7][t0s0g0] (none) rad_zombied_veteran
++ rad_stalker_zombied_0011            --[0xfffffff7][t0s0g0] (none) rad_zombied
++ rad_antenna_sniper5                 --[0xfffffff7][t0s16g17] (none) rad_monolit_sniper
++ rad_ambush3_walker_0001             --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_btr_ambush) rad_monolit_regular
++ rad_ambush3_walker_0002             --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_btr_ambush) rad_monolit_regular
++ rad_ambush3_walker_0003             --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_btr_ambush) rad_monolit_regular
++ rad_ambush3_walker_0004             --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_btr_ambush) rad_monolit_regular
++ rad_ambush3_walker_0005             --[0xffffffff][t0s0g0] {-bar_deactivate_radar_done} (rad_far_road_btr_ambush) rad_monolit_regular
++ rad_stalker_svoboda_0000            --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_freedom_vs_duty) rad_Svoboda_master
++ rad_after_valley_walker2            --[0xffffffff][t0s0g0] (rad_after_valley) rad_monolit_regular
++ rad_after_valley_walker3            --[0xffffffff][t0s0g0] (rad_after_valley) rad_monolit_regular
++ rad_after_valley_walker4            --[0xffffffff][t0s0g0] (rad_after_valley) rad_monolit_regular
++ rad_stalker_zombied                 --[0xffffffff][t0s0g0] (rad_zombied1) rad_zombied
++ rad_stalker_zombied_0000            --[0xffffffff][t0s0g0] (rad_zombied1) rad_zombied
++ rad_stalker_zombied_0001            --[0xffffffff][t0s0g0] (rad_zombied1) rad_zombied
++ rad_stalker_zombied_0002            --[0xffffffff][t0s0g0] (rad_zombied1) rad_zombied_veteran
++ rad_stalker_zombied_0003            --[0xffffffff][t0s0g0] (rad_zombied2) rad_zombied
++ rad_stalker_zombied_0004            --[0xffffffff][t0s0g0] (rad_zombied2) rad_zombied_veteran
++ rad_stalker_zombied_0005            --[0xffffffff][t0s0g0] (rad_zombied2) rad_zombied_veteran
++ rad_stalker_zombied_0006            --[0xffffffff][t0s0g0] (rad_zombied2) rad_zombied_veteran
++ rad_stalker_zombied_0007            --[0xffffffff][t0s0g0] (rad_zombied2) rad_zombied
++ rad_stalker_zombied_0008            --[0xffffffff][t0s0g0] (rad_zombied2) rad_zombied
++ rad_stalker_zombied_0012            --[0xffffffff][t0s0g0] (rad_zombied2) rad_zombied
++ rad_antenna_specnazer               --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_specnazer_0000          --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_specnazer_0001          --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_specnazer_0002          --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_specnazer_0003          --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_specnazer_0004          --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_specnazer_0005          --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_specnazer_0006          --[0xfffffffb][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_specnaz) rad_soldier_specnaz
++ rad_antenna_monolither              --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad_antenna_monolither_0000         --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad_antenna_monolither_0001         --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad_antenna_monolither_0002         --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad_antenna_monolither_0003         --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad_antenna_monolither_0004         --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad_antenna_monolither_0005         --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad_antenna_monolither_0006         --[0xffffffff][t0s0g0] {+bar_deactivate_radar_done} (rad_antenna_monolith) rad_monolit_regular
++ rad2_stalker_zombied                --[0xffffffbf][t0s0g0] (none) rad_monolit_regular
++ rad2_stalker_zombied_0000           --[0xffffffbf][t0s0g0] (none) rad_monolit_regular
++ rad2_stalker_zombied_0001           --[0xffffffbf][t0s0g0] (none) rad_monolit_regular
++ rad2_military                       --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
++ rad2_stalker                        --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
++ rad2_stalker_0000                   --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
++ rad2_stalker_0001                   --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
++ rad2_stalker_0002                   --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
++ rad2_stalker_0003                   --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
++ rad2_stalker_0004                   --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (none) rad_soldier_specnaz
+

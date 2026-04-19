@@ -1,0 +1,40 @@
+# l12u_control_monolith
+
+## Monsters (alive only)
++ mon_m_poltergeist_normal_flame      --[0xffffffff][t0s0g0] {+sar_mon_poltergeist_1_spawn} (none) m_poltergeist_strong_flame
++ mon_m_poltergeist_normal_flame_0000 --[0xffffffff][t0s0g0] {+sar_mon_poltergeist_2_spawn} (none) m_poltergeist_strong_flame
++ mon_m_poltergeist_normal_flame_0001 --[0xffffffff][t0s0g0] {+sar_mon_poltergeist_3_spawn} (none) m_poltergeist_strong_flame
+
+## NPC (alive only)
++ mon_stalker_walker3_0003    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker3_0002    --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker3_0001    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker2_0006    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker2_0005    --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker2_0004    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker2_0003    --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker2_0002    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker2_0001    --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker_0006     --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker_0004     --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker_0003     --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker_0001     --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker_0002     --[0xfffff7f7][t0s21g0] (none) sar2_monolith_specnaz
++ mon_stalker_walker_0005     --[0xfffff7f7][t0s21g0] (none) sar2_monolith_specnaz2
++ mon_stalker_monolith_post1  --[0xfffff7f7][t0s21g2] sar_monolith_commander
++ mon_stalker_monolith_post2  --[0xfffff7f7][t0s21g2] sar_monolith_commander
++ mon_stalker_camper_0001     --[0xfffff7f3][t0s21g2] sar_monolith_specnaz
++ mon_stalker_camper_0002     --[0xfffff7f3][t0s21g2] sar_monolith_specnaz
++ mon_stalker_camper_0003     --[0xfffff7f3][t0s21g2] sar_monolith_specnaz
++ mon_stalker_walker3_0004    --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_monolith_post3  --[0xfffff7f7][t0s21g2] sar_monolith_commander
++ mon_stalker_walker4_0002    --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker_walker4_0003    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker4_0004    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker4_0005    --[0xfffff7f7][t0s21g0] (none) sar_monolith_specnaz
++ mon_stalker_walker4_0001    --[0xfffff7f7][t0s21g0] (none) sar_monolith_exo
++ mon_stalker                 --[0xfffff6b7][t0s0g17] osoznanie
++ mon_stalker_monolith        --[0xffffffff][t0s0g0] (sar_monolith_guard) sar_monolith_guard
++ mon_stalker_monolith_0000   --[0xffffffff][t0s0g0] (sar_monolith_guard) sar_monolith_guard
++ mon_stalker_monolith_0001   --[0xffffffff][t0s0g0] (sar_monolith_guard) sar_monolith_guard
+

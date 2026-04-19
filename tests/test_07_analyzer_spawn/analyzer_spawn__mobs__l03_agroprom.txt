@@ -1,0 +1,93 @@
+# l03_agroprom
+
+## Monsters (alive only)
++ agr_boar                    --[0xffffffbf][t0s0g0] boar_normal
++ agr_boar_0005               --[0xffffffbf][t0s0g0] boar_normal
++ agr_flesh_normal            --[0xffffffff][t2s12g0] (agr2_flesh_nes1) flesh_normal
++ agr_flesh_normal_0000       --[0xffffffbf][t0s0g0] (agr2_flesh_nes1) flesh_weak
++ agr_m_dog_e_0005            --[0xffffffbf][t0s0g0] dog_normal
++ agr_m_dog_e_0000            --[0xffffffbf][t0s0g0] dog_normal
++ agr_m_dog_e_0003            --[0xffffffbf][t0s0g0] dog_normal
++ agr_m_dog_e_0004            --[0xffffffbf][t0s0g0] dog_normal
++ agr_m_dog_e_0011            --[0xffffffbf][t0s0g0] dog_normal
++ agr_pseudodog_weak          --[0xffffffff][t0s0g0] (agr_pseudodog_nest1) pseudodog_weak
++ agr_pseudodog_weak_0000     --[0xffffffff][t0s0g0] (agr_pseudodog_nest1) pseudodog_weak
++ agr_dog_weak                --[0xffffffb7][t0s0g0] (agr_dog_nest1) dog_weak
++ agr_dog_weak_0000           --[0xffffffb7][t0s0g0] (agr_dog_nest1) dog_weak
++ agr_dog_normal              --[0xffffffbf][t0s0g0] (agr_dog_nest1) dog_normal
++ agr_dog_normal_0000         --[0xffffffbf][t0s0g0] (agr_dog_nest1) dog_normal
++ agr_pseudodog_normal        --[0xffffffff][t2s11g0] (none) pseudodog_normal
++ agr_pseudodog_normal_0001   --[0xffffffff][t2s11g3] (none) pseudodog_normal
++ agr_dog_normal_0001         --[0xffffffff][t11s4g0] (agr_dog_nest1) dog_normal
++ agr_dog_normal_0002         --[0xffffffff][t11s4g0] (agr_dog_nest1) dog_normal
++ agr_dog_normal_0003         --[0xffffffff][t2s11g5] (none) dog_normal
++ agr_bloodsucker_normal      --[0xffffffbf][t0s0g0] {+agroprom_military_case_done} (agr2_bloodsucker_lair2) bloodsucker_normal
++ agr_bloodsucker_normal_0000 --[0xffffffbf][t0s0g0] {+agroprom_military_case_done} (none) bloodsucker_normal
++ agr_boar_0000               --[0xffffffbf][t0s0g0] boar_normal
++ agr_boar_0001               --[0xffffffbf][t0s0g0] boar_normal
+
+## NPC (alive only)
++ agr_nii_commander                   --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_commander
++ agr_nii_soldier1                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier2                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier3                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier4                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier5                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier7                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier8                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier9                    --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier10                   --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_tower3_soldier                  --[0xffffffff][t0s3g7] (none) agr_soldier_sniper
++ agr_tower2_soldier                  --[0xffffffff][t0s3g7] (none) agr_soldier_sniper
++ agr_tower1_soldier                  --[0xffffffff][t0s3g7] (none) agr_soldier_sniper
++ agr_zastava1_soldier1               --[0xfffffff7][t0s3g20] (agr_road_patrol2) agr_soldier_regular
++ agr_zastava1_soldier2               --[0xfffffff7][t0s3g20] (agr_road_patrol2) agr_soldier_regular
++ agr_zastava2_soldier2               --[0xfffffff7][t0s3g20] (agr_road_patrol1) agr_soldier_regular
++ agr_zastava2_soldier3               --[0xfffffff7][t0s3g20] (agr_road_patrol1) agr_soldier_regular
++ agr_zastava2_soldier1               --[0xfffffff7][t0s3g20] (agr_road_patrol1) agr_soldier_regular
++ agr_nii_soldier16                   --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_nii_soldier17                   --[0xffffffb7][t0s0g0] (agr_nii) agr_soldier_regular
++ agr_road_patrol_soldier1            --[0xffffffff][t0s3g20] (agr_road_patrol1) agr_soldier_regular
++ agr_road_patrol_soldier_0000        --[0xffffffff][t0s3g20] (agr_road_patrol1) agr_soldier_regular
++ agr_factory_defence_stalker1        --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_factory_defence_stalker2        --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_factory_defence_stalker3        --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_factory_defence_stalker4        --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_factory_assault_soldier2        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_factory_assault_soldier3        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_factory_assault_soldier4        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_factory_assault_soldier5        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_factory_assault_soldier6        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_factory_assault_soldier7        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_factory_defence_stalker5        --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_factory_defence_stalker6        --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_defector_stalker1               --[0xffffffff][t0s3g22] {-agr_krot_secret_info} (none) agr_stalker_general
++ agr_krot                            --[0xfffffeff][t0s3g1] {-agr_find_gunslinger_cache_found} (none) agr_krot
++ agr_factory_hold_soldier1           --[0xffffffff][t0s2g1] (agr_factory_hold) agr_soldier_regular
++ agr_factory_hold_soldier3           --[0xffffffff][t0s2g1] (agr_factory_hold) agr_soldier_regular
++ agr_factory_hold_soldier2           --[0xffffffff][t0s2g1] (agr_factory_hold) agr_soldier_regular
++ agr_factory_spetsnaz1               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_spetsnaz2               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_spetsnaz3               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_spetsnaz4               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_spetsnaz5               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_spetsnaz6               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_spetsnaz7               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_spetsnaz8               --[0xfffffff7][t0s3g10] {+agr_factory_spawn_spetsnaz-agroprom_military_case_done} (none) agr_soldier_specnaz
++ agr_factory_assault_soldier1        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_factory_assault_soldier8        --[0xfffffff3][t0s3g2] {+agr_factory_assault_start} (agr_factory_assault) agr_soldier_regular
++ agr_ratcatcher                      --[0xfffffff7][t0s3g8] (none) agr_ratcatcher
++ agr_factory_defence_stalker5_0000   --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_factory_defence_stalker5_0001   --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_factory_defence_stalker5_0002   --[0xfffffff3][t0s3g1] {+agr_factory_assault_start} (agr_factory_defence) agr_stalker_general
++ agr_stalker                         --[0xffffffbf][t0s0g0] {+agr_nii_helicopter_atack} (none) agr_soldier_regular
++ agr_stalker_0006                    --[0xffffffbf][t0s0g0] {+agr_nii_helicopter_atack+agr_need_respawn} (none) agr_soldier_regular
++ agr_stalker_0007                    --[0xffffffbf][t0s0g0] {+agr_nii_helicopter_atack+agr_need_respawn} (none) agr_soldier_regular
++ agr_stalker_0008                    --[0xffffffbf][t0s0g0] {+agr_nii_helicopter_atack} (none) agr_soldier_regular
++ agr_stalker_0009                    --[0xffffffbf][t0s0g0] {+agr_nii_helicopter_atack} (none) agr_soldier_regular
++ agr_stalker_0010                    --[0xffffffbf][t0s0g0] {+agr_nii_helicopter_atack+agr_need_respawn} (none) agr_soldier_regular
++ agr_road_patrol_not_gul_1           --[0xffffffff][t0s3g20] {+agroprom_military_case_have-agroprom_military_case_done} (none) agr_soldier_regular
++ agr_road_patrol_not_gul_1_0000      --[0xffffffff][t0s3g20] {+agroprom_military_case_have-agroprom_military_case_done} (none) agr_soldier_regular
++ agr_road_patrol_not_gul_1_0001      --[0xffffffff][t0s3g20] {+agroprom_military_case_have-agroprom_military_case_done} (none) agr_soldier_regular
++ agr_road_patrol_not_gul_1_0002      --[0xffffffff][t0s3g20] {+agroprom_military_case_have-agroprom_military_case_done} (none) agr_soldier_regular
+

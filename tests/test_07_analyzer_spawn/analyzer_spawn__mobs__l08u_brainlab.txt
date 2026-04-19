@@ -1,0 +1,32 @@
+# l08u_brainlab
+
+## Monsters (alive only)
++ x16_home_snork_0013             --[0xffffffbf][t0s0g0] {+x16_zasada_2} (none) snork_weak
++ x16_home_snork_0002             --[0xffffffbf][t0s0g0] (none) snork_weak
++ x16_m_controller_e              --[0xffffffbf][t0s0g0] {+yan_controller_respawn_01} (none) controller_tubeman
++ level_prefix_snork_normal_0001  --[0xffffffff][t0s0g0] {+yan_test_info} (none) snork_normal
++ x16_home_snork_0000             --[0xffffffff][t0s7g7] {+brain_snork_respawn_01} (none) snork_normal
++ level_prefix_snork_normal_0009  --[0xffffffbf][t0s0g0] {+x16_zasada_4} (none) snork_strong
++ level_prefix_snork_normal_0012  --[0xffffffbf][t0s0g0] {+x16_zasada_4} (none) snork_strong
+
+## NPC (alive only)
++ x16_exozombied                      --[0xffffffbf][t0s0g0] (none) yan_zombied_master
++ x16_exozombied_0000                 --[0xffffffff][t8s1g4] (none) yan_zombied_veteran
++ x16_zombied_stalker_0001            --[0xffffffff][t8s1g5] (none) yan_zombied_veteran
++ x16_zombied_0004                    --[0xffffffff][t0s0g0] (none) yan_zombied
++ x16_zombied_0005                    --[0xffffffff][t0s0g0] (none) yan_zombied_veteran
++ x16_zombied_0007                    --[0xffffffff][t0s0g0] (none) yan_zombied
++ level_prefix_stalker_zombied        --[0xffffffbf][t0s0g0] {+yan_test_info} (none) yan_Zombied_ambush
++ level_prefix_stalker_zombied_0001   --[0xffffffbf][t0s0g0] {+yan_test_info} (none) yan_Zombied_ambush
++ level_prefix_stalker_zombied_0003   --[0xffffffbf][t0s0g0] {+yan_test_info} (none) yan_Zombied_ambush
++ x16_zombied_0000                    --[0xffffffff][t0s0g0] {+yan_labx16_switcher_3_off} (none) yan_zombied
++ x16_zombied_0003                    --[0xffffffff][t8s1g7] {+yan_labx16_switcher_3_off} (none) yan_fresh_Zombied
++ x16_zombied_0009                    --[0xffffffff][t8s1g7] {+yan_labx16_switcher_2_off} (none) yan_fresh_Zombied
++ x16_zombied_0018                    --[0xffffffff][t0s0g0] {+yan_labx16_switcher_primary_off} (none) yan_zombied_veteran
++ x16_zombied_0017                    --[0xffffffff][t0s0g0] {+yan_labx16_switcher_primary_off} (none) yan_zombied_veteran
++ x16_zombied_0013                    --[0xffffffff][t0s0g0] {+yan_labx16_switcher_1_off} (none) yan_zombied
++ x16_zombied_0019                    --[0xffffffff][t0s0g0] (none) yan_zombied_veteran
++ x16_zombied_0021                    --[0xffffffff][t0s0g0] (none) yan_zombied_veteran
++ level_prefix_stalker_zombied_0000   --[0xffffffbf][t0s0g0] {+x16_zasada_3} (none) yan_Zombied_ambush
++ level_prefix_stalker_zombied_0002   --[0xffffffbf][t0s0g0] {+x16_zasada_3} (none) yan_Zombied_ambush
+

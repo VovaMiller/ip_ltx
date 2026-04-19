@@ -1,0 +1,86 @@
+# l08_yantar
+
+## Monsters (alive only)
++ yan_home_snork_01       --[0xffffffff][t0s0g0] (none) snork_weak
++ yan_home_snork_0001     --[0xffffffff][t0s0g0] (none) snork_weak
++ yan_home_snork_0000     --[0xffffffff][t0s0g0] (yantar2_snork_small) snork_weak
++ yan_home_snork_0002     --[0xffffffff][t0s0g0] (yantar2_snork_small2) snork_weak
++ yan_home_snork_0003     --[0xffffffff][t0s0g0] (yantar2_snork_small4) snork_weak
++ yan_home_snork_0005     --[0xffffffff][t0s0g0] (none) snork_weak
++ yan_home_snork_0006     --[0xffffffff][t0s0g0] (none) snork_weak
++ yan_home_snork_0009     --[0xffffffff][t0s0g0] (none) snork_weak
++ factory_m_snork_e_0013  --[0xffffffff][t0s0g0] {+yan_tonnel_snork_spawn_1} (none) snork_weak
++ yan_home_snork_0011     --[0xffffffff][t0s0g0] (none) snork_weak
++ yan_home_snork_0017     --[0xffffffff][t0s0g0] (none) snork_weak
++ yan_jump_snork_1_03     --[0xffffffff][t0s0g0] {+yan_zombied_respawn_01} (none) snork_weak
++ yan_jump_snork_7_0007   --[0xffffffff][t0s0g0] {+yan_zombied_respawn_07} (none) snork_weak
++ yan_jump_snork_7_0008   --[0xffffffff][t0s0g0] {+yan_zombied_respawn_07} (none) snork_weak
++ yan_jump_snork_5_0009   --[0xffffffff][t0s0g0] {+yan_zombied_respawn_05} (none) snork_weak
++ yan_jump_snork_5_0011   --[0xffffffff][t0s0g0] {+yan_zombied_respawn_05} (none) snork_weak
++ yan_home_snork_0004     --[0xffffffff][t0s0g0] (yantar2_snork_small) snork_weak
++ yan_home_snork_0019     --[0xffffffff][t0s0g0] (yantar2_snork_small2) snork_weak
++ yan_home_snork_0020     --[0xffffffff][t0s0g0] (yantar2_snork_small4) snork_weak
++ yan_jump_snork_1_0012   --[0xffffffff][t0s0g0] {+yan_zombied_respawn_01} (none) snork_weak
++ yan_jump_snork_0009     --[0xffffffff][t0s0g0] {+yan_zombied_respawn_05} (none) snork_weak
++ yan_jump_snork_2_001    --[0xffffffff][t0s0g0] {+yan_zombied_respawn_02} (none) snork_weak
++ yan_jump_snork_4_0001   --[0xffffffff][t0s0g0] {+yan_zombied_respawn_04} (none) snork_weak
++ yan_jump_snork_6_001    --[0xffffffff][t0s0g0] {+yan_zombied_respawn_06} (none) snork_weak
++ factory_m_snork_e_0000  --[0xffffffff][t0s0g0] {+yan_tonnel_snork_spawn_3} (none) snork_weak
++ factory_m_snork_e_0001  --[0xffffffff][t0s0g0] {+yantar_attack_start} (none) snork_weak
++ factory_m_snork_e_0002  --[0xffffffff][t0s0g0] {+yan_tonnel_snork_spawn_3} (none) snork_weak
++ factory_m_snork_e_0004  --[0xffffffff][t0s0g0] {+yantar_attack_start} (none) snork_weak
++ factory_m_snork_e_0005  --[0xffffffff][t0s0g0] {+yan_tonnel_snork_spawn_2} (none) snork_weak
++ yantar_m_gigant_e_0000  --[0xfffffff7][t8s21g0] {+yan_tonnel_snork_spawn_4} (none) gigant_strong
+
+## NPC (alive only)
++ yantar_stalker_zombied_0000 --[0xffffffff][t8s0g0] (none) yan_zombied
++ yantar_stalker_zombied_0001 --[0xffffffff][t8s0g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0002 --[0xffffffff][t8s0g0] (none) yan_zombied
++ yantar_stalker_zombied_0005 --[0xffffffff][t8s0g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0007 --[0xffffffff][t8s5g0] (none) yan_zombied
++ yantar_stalker_zombied_0008 --[0xffffffff][t8s5g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0043 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0046 --[0xffffffff][t8s3g0] (none) yan_zombied
++ yantar_gulag_zombies_03     --[0xffffffbf][t0s0g0] {-yantar_attack_start} (yantar_zombies) yan_zombied
++ yantar_gulag_zombies_01     --[0xffffffbf][t0s0g0] {-yantar_attack_start} (yantar_zombies) yan_zombied
++ yantar_gulag_zombies_05     --[0xffffffbf][t0s0g0] {-yantar_attack_start} (yantar_zombies) yan_zombied
++ yantar_stalker_zombied_0016 --[0xffffffff][t8s6g0] (none) yan_zombied
++ yantar_stalker_zombied_0021 --[0xffffffff][t8s0g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0022 --[0xffffffff][t8s6g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0032 --[0xffffffff][t8s6g0] (none) yan_zombied
++ yantar_stalker_zombied_0044 --[0xffffffff][t8s5g0] (none) yan_zombied
++ yantar_stalker_zombied_0049 --[0xffffffff][t8s5g0] (none) yan_zombied
++ yantar_ecolog_general       --[0xffffffff][t8s8g1] (none) yan_general_ecolog
++ yan_scientist_help          --[0xffffffff][t8s8g8] (yan_scientist) yan_ecolog_help
++ yantar_stalker_zombied_0003 --[0xffffffff][t8s0g0] {+yan_kruglov_after_actor} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0004 --[0xffffffff][t8s0g0] {+yan_kruglov_after_actor} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0006 --[0xffffffff][t8s0g4] {+yan_kruglov_after_actor} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0009 --[0xffffffff][t8s0g0] {+yan_kruglov_after_actor} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0010 --[0xffffffff][t8s0g0] {+yan_kruglov_after_actor} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0011 --[0xffffffff][t8s0g0] {+yan_kruglov_after_actor} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0012 --[0xffffffff][t8s0g4] {+yan_kruglov_after_actor} (none) yan_zombied
++ yantar_stalker_zombied_0013 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0014 --[0xffffffff][t8s0g0] (none) yan_zombied
++ yantar_gulag_zombies_0000   --[0xffffffff][t8s6g2] {-yantar_attack_start} (yantar_zombies) yan_zombied_veteran
++ yantar_gulag_zombies_0002   --[0xffffffff][t8s6g2] {-yantar_attack_start} (yantar_zombies) yan_zombied_veteran
++ yantar_stalker_zombied_0017 --[0xffffffff][t8s0g4] {+yan_spawn_ghost} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0018 --[0xffffffff][t8s0g4] {+yan_spawn_ghost} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0019 --[0xffffffff][t8s0g4] {+yan_spawn_ghost} (none) yan_zombied_veteran
++ yantar_stalker_zombied_0020 --[0xffffffff][t8s0g4] {+yan_spawn_ghost} (none) yan_zombied_veteran
++ yantar_semenov              --[0xffffffff][t8s8g2] (yan_scientist) yan_Semenov
++ yantar_stalker_zombied_0023 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0024 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0026 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0027 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0029 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0030 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0015 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0025 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0031 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0033 --[0xffffffff][t8s2g0] (none) yan_zombied_veteran
++ yantar_stalker_zombied_0028 --[0xffffffff][t8s0g4] {+yantar_tunnel_finish} (none) yan_zombied_dolg
++ yantar_stalker_zombied_0034 --[0xffffffff][t8s0g4] {+yantar_tunnel_finish} (none) yan_zombied_dolg
++ yantar_stalker_zombied_0035 --[0xffffffff][t8s0g4] {+yantar_tunnel_finish} (none) yan_zombied_dolg
++ yantar_stalker_zombied_0036 --[0xffffffff][t8s0g4] {+yantar_tunnel_finish} (none) yan_zombied_dolg
++ yantar_stalker_zombied_0037 --[0xffffffff][t8s0g4] {+yantar_tunnel_finish} (none) yan_zombied_dolg
+

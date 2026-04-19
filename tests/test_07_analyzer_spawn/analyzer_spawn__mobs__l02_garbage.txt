@@ -1,0 +1,68 @@
+# l02_garbage
+
+## Monsters (alive only)
++ gar_boar_rush_0002  --[0xffffffbf][t0s0g0] (gar_boars_nest) boar_weak
++ gar_boar_rush_0006  --[0xffffffbf][t0s0g0] (gar_boars_nest) boar_weak
++ gar_boar_rush_0007  --[0xffffffbf][t0s0g0] (gar_boars_nest) boar_weak
++ gar_boar_rush_0008  --[0xffffffbf][t0s0g0] (gar_boars_nest) boar_weak
++ gar_boar_rush_0009  --[0xffffffbf][t0s0g0] (gar_boars_nest) boar_weak
++ gar_boar_rush_0010  --[0xffffffbf][t0s0g0] (gar_boars_nest) boar_weak
++ gar_pseudodog_weak  --[0xffffffff][t0s6g5] (none) pseudodog_weak
+
+## NPC (alive only)
++ gar_bandit_stroyka1 --[0xffffffbf][t0s2g5] (gar_bandit_stroyka) gar_bandit_novice
++ gar_dm_novice       --[0xffffffbf][t0s2g6] (gar_dram, gar_hellcar_group) gar_dram_novice
++ gar_dm_bandit_1     --[0xffffffbf][t0s2g20] (gar_dram) gar_bandit_dm
++ gar_dm_bandit_2     --[0xffffffbf][t0s2g20] (gar_dram) gar_bandit_dm
++ gar_dm_bandit_3     --[0xffffffbf][t0s2g20] (gar_dram) gar_bandit_dm
++ gar_bandit_agr_1    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_general
++ gar_bandit_agr_2    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_general
++ gar_bandit_agr_3    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_general
++ gar_bandit_agr_4    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_general
++ gar_bandit_agr_5    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_general
++ gar_bandit_agr_6    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_leader
++ gar_bandit_agr_7    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_novice
++ gar_bandit_agr_8    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_novice
++ gar_bandit_agr_9    --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_novice
++ gar_bandit_agr_10   --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_novice
++ gar_bandit_agr_11   --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_novice
++ gar_dolg_blokpost_1 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost
++ gar_dolg_blokpost_2 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost
++ gar_dolg_blokpost_3 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost
++ gar_dolg_blokpost_4 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost_commander
++ gar_dolg_blokpost_5 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost
++ gar_dolg_blokpost_6 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost
++ gar_dolg_blokpost_7 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost
++ gar_dolg_blokpost_8 --[0xffffffbf][t0s2g7] (gar_dolg_blokpost) gar_dolg_blokpost
++ gar_bandit_seryi_1  --[0xffffffbf][t0s2g4] (gar_seryi_bandits) gar_bandit_general
++ gar_bandit_seryi_2  --[0xffffffbf][t0s2g4] (gar_seryi_bandits) gar_bandit_general
++ gar_bandit_seryi_3  --[0xffffffbf][t0s2g4] (gar_seryi_bandits) gar_bandit_general
++ gar_bandit_seryi_4  --[0xffffffbf][t0s2g4] (gar_seryi_bandits) gar_bandit_general
++ gar_bandit_seryi_5  --[0xffffffbf][t0s2g4] (gar_seryi_bandits) gar_bandit_general
++ gar_bandit_seryi_6  --[0xffffffbf][t0s2g4] (gar_seryi_bandits) gar_bandit_general
++ gar_seryi_drug2     --[0xffffffbf][t0s2g8] (gar_angar, active, combat_ignore, on_hit, on_death, meet) gar_stalker_general
++ gar_seryi           --[0xffffffbf][t0s2g8] (gar_angar) gar_seriy
++ gar_bandit_stroyka2 --[0xffffffbf][t0s2g5] (gar_bandit_stroyka) gar_bandit_novice
++ gar_bandit_stroyka3 --[0xfffff7bf][t0s2g5] (gar_bandit_stroyka) gar_bandit_novice_wounded
++ gar_bandit_stroyka4 --[0xffffffbf][t0s2g5] (gar_bandit_stroyka) gar_bandit_novice
++ gar_bandit_stroyka5 --[0xffffffbf][t0s2g5] (gar_bandit_stroyka) gar_bandit_novice
++ gar_bandit_agr_12   --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_general
++ gar_bandit_agr_13   --[0xffffffff][t0s2g1] (gar_bandit_agr) gar_bandit_general
++ gar_wounded_bandit  --[0xffffffff][t0s2g0] (gar_psevdowounded) gar_wounded_bandit
++ gar_sniper_bandit   --[0xffffffff][t0s2g15] (gar_psevdowounded) gar_sniper
++ gar_seryi_drug3     --[0xffffffbf][t0s2g8] (gar_angar, active, meet) gar_stalker_general
++ gar_hellcar         --[0xffffffbf][t0s2g0] (gar_hellcar_group, gar_smart_graveyard, gar_smart_stalkers_1) gar_hellcar
++ gar_hellcar_group_1 --[0xffffffbf][t0s2g0] (gar_hellcar_group, gar_smart_graveyard, gar_smart_stalkers_1) gar_stalker_general
++ gar_hellcar_group_2 --[0xffffffbf][t0s2g0] (gar_hellcar_group, gar_smart_graveyard, gar_smart_stalkers_1) gar_stalker_general
++ gar_bandit_post_1   --[0xffffffbf][t0s2g3] (gar_bandit_post) gar_bandit_general
++ gar_bandit_post_3   --[0xffffffbf][t0s2g3] (gar_bandit_post) gar_bandit_general
++ gar_bandit_post_4   --[0xffffffbf][t0s2g3] (gar_bandit_post) gar_bandit_general
++ gar_bandit_post_2   --[0xffffffbf][t0s2g3] (gar_bandit_post) gar_bandit_general
++ gar_bandit_post_5   --[0xffffffbf][t0s2g3] (gar_bandit_post) gar_bandit_general
++ gar_bandit_post_6   --[0xffffffbf][t0s2g3] (gar_bandit_post) gar_bandit_general
++ gar_bandit_post_7   --[0xffffffbf][t0s2g3] (gar_bandit_post) gar_bandit_general
++ gar_stalker_0006    --[0xffffffbf][t0s0g0] sim_stalker_novice_neumeha
++ gar_stalker_0007    --[0xffffffbf][t0s0g0] sim_stalker_general_upir
++ gar_stalker_0008    --[0xffffffbf][t0s0g0] (gar_smart_bandit2) sim_bandit_veteran
++ gar_stalker_0009    --[0xffffffbf][t0s0g0] (gar_smart_bandit2) sim_bandit_veteran
+

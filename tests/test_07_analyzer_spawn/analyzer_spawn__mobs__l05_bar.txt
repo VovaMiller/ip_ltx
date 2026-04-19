@@ -1,0 +1,90 @@
+# l05_bar
+
+## Monsters (alive only)
++ bar_m_dog_e_0000        --[0xffffffff][t0s5g1] (bar_zastava_dogs_lair) m_dog_e
++ bar_m_dog_e_0001        --[0xffffffff][t0s5g1] (bar_zastava_dogs_lair) m_dog_e
++ bar_m_dog_e_0003        --[0xffffffff][t0s5g1] (bar_zastava_dogs_lair) m_dog_e
++ bar_m_dog_e_0005        --[0xffffffff][t0s5g1] (bar_zastava_dogs_lair) m_dog_e
++ bar_m_dog_e_0007        --[0xffffffff][t0s5g1] (bar_zastava_dogs_lair) m_dog_e
++ bar_m_pseudodog_e       --[0xffffffff][t0s5g1] (bar_zastava_dogs_lair) m_pseudodog_e
++ bar_m_pseudodog_e_0000  --[0xffffffff][t0s5g1] (bar_zastava_dogs_lair) m_pseudodog_e
++ bar_m_pseudodog_e_0001  --[0xffffffff][t0s5g1] (none) m_pseudodog_e
+
+## NPC (alive only)
++ bar_bar_drunk_dolg              --[0xffffffff][t0s5g27] (none) bar_bar_drunk_dolg
++ bar_bar_visitors_3_3            --[0xffffffff][t0s5g28] {+bar_bar_square_3_state_3} (none) bar_general
++ bar_bar_visitors_3_4            --[0xffffffff][t0s5g28] {+bar_bar_square_3_state_2} (none) bar_brown_novice
++ bar_bar_visitors_3_2            --[0xffffffff][t0s5g28] {+bar_bar_square_3_state_2} (none) bar_dolg
++ bar_bar_lisiy                   --[0xffffffff][t0s5g28] (none) bar_bar_lisiy
++ bar_bar_visitors_2_1            --[0xffffffff][t0s5g27] {+bar_bar_square_2_state_1} (none) bar_bandit
++ bar_bar_visitors_1_2            --[0xffffffff][t0s5g27] {+bar_bar_square_1_state_2} (none) bar_general
++ bar_bar_visitor_hunter          --[0xffffffff][t0s5g27] (none) bar_bar_hunter
++ bar_barman                      --[0xffffffff][t0s0g0] (none) bar_barman
++ bar_bar_guard                   --[0xffffffff][t0s5g20] (none) bar_barman_guard
++ bar_bar_osvedomitel             --[0xffffffff][t0s5g0] (none) bar_bar_osvedomitel
++ bar_bar_guard_2                 --[0xffffffff][t0s5g20] (none) bar_barman_guard2
++ bar_bar_stalker                 --[0xfffffff7][t0s8g8] (none) bar_Stalker_novice
++ bar_visitor_2                   --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_novice
++ bar_visitor_3                   --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_novice
++ bar_visitor_4                   --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_veteran
++ bar_visitor_5                   --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_veteran
++ bar_visitor_7                   --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_veteran
++ bar_visitor_8                   --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_veteran
++ bar_visitor_10                  --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_general
++ bar_visitor_12                  --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_general
++ bar_visitor_13                  --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_novice
++ bar_visitor_15                  --[0xffffffff][t0s0g0] (bar_visitors) bar_Stalker_general
++ bar_house_stalker               --[0xfffffff7][t0s8g8] (none) bar_Stalker_general
++ bar_dolg_veteran_3              --[0xffffffff][t0s5g4] (bar_dolg_veterans) bar_dolg_master
++ bar_dolg_veteran_2              --[0xffffffff][t0s5g4] (bar_dolg_veterans) bar_dolg_veteran
++ bar_dolg_bunker_1               --[0xffffffff][t0s5g4] (bar_dolg_bunker) bar_dolg_master
++ bar_dolg_bunker_4               --[0xffffffff][t0s5g4] (bar_dolg_bunker) bar_dolg_sniper
++ bar_dolg_bunker_3               --[0xffffffff][t0s5g4] (bar_dolg_bunker) bar_dolg_veteran
++ bar_dolg_bunker_2               --[0xffffffff][t0s5g4] (none) bar_dolg_sniper
++ bar_dolg_bunker_5               --[0xffffffff][t0s5g4] (bar_dolg_bunker) bar_dolg_regular
++ bar_zastava_guard_1             --[0xfffffff7][t0s5g8] (bar_zastava) bar_dolg_regular
++ bar_zastava_guard_2             --[0xfffffff7][t0s5g8] (bar_zastava) bar_dolg_regular
++ bar_zastava_guard_3             --[0xfffffff7][t0s5g8] (bar_zastava) bar_zastava_commander_1
++ bar_zastava_commander_1         --[0xfffffff7][t0s5g8] (bar_zastava) bar_dolg_regular
++ bar_zastava_2_square_1_guard_4  --[0xfffffff7][t0s5g9] (bar_zastava_2) bar_dolg_regular
++ bar_zastava_2_square_1_guard_2  --[0xfffffff7][t0s5g9] (bar_zastava_2) bar_dolg_regular
++ bar_zastava_2_square_1_guard_6  --[0xfffffff7][t0s5g9] (bar_zastava_2) bar_dolg_regular
++ bar_dolg_petrenko               --[0xfffffff7][t0s5g4] (none) bar_dolg_petrenko
++ bar_dolg_ivancov                --[0xfffffff7][t0s5g4] (none) bar_dolg_ivancov
++ bar_dolg_leader                 --[0xfffffff7][t0s5g4] (none) bar_dolg_leader
++ bar_dolg_bunker_0001            --[0xffffffff][t0s5g4] (none) bar_dolg_sniper
++ bar_dolg_bunker_0002            --[0xffffffff][t0s5g4] (none) bar_dolg_sniper
++ bar_angar_zoneguard             --[0xffffffff][t0s5g0] (none) bar_dolg_regular
++ bar_dolg_regular_4              --[0xffffffff][t0s5g4] (bar_dolg_general) bar_dolg_regular
++ bar_dolg_regular_5              --[0xffffffff][t0s5g4] (bar_dolg_general) bar_dolg_guard_commander
++ bar_dolg_regular_1              --[0xffffffff][t0s5g4] (bar_dolg_general) bar_dolg_regular
++ bar_stalker_0001                --[0xffffffbf][t0s0g0] sim_dolg_veteran_barin
++ sim_stalker_gusarov             --[0xffffffbf][t0s0g0] (bar_visitors, gar_smart_graveyard) sim_stalker_veteran_gusarov
++ bar_stalker_0004                --[0xffffffbf][t0s0g0] (bar_visitors, yan_st_stalker2) sim_stalker_veteran_vorobey
++ bar_arena_man                   --[0xffffffbf][t0s0g0] (none) bar_arena_manager
++ bar_stalker_0005                --[0xffffffbf][t5s8g3] {+bar_arena_fight_1} (none) bar_arena_stalker_1
++ bar_stalker_0006                --[0xffffffbf][t5s8g3] {+bar_arena_fight_2} (none) bar_arena_stalker_2
++ bar_stalker_0007                --[0xffffffbf][t5s8g3] {+bar_arena_fight_3} (none) bar_arena_stalker_3_2
++ bar_stalker_0008                --[0xffffffbf][t5s8g3] {+bar_arena_fight_3} (none) bar_arena_stalker_3_1
++ bar_stalker_0009                --[0xffffffbf][t5s8g3] {+bar_arena_fight_4} (none) bar_arena_stalker_4_1
++ bar_stalker_0010                --[0xffffffbf][t5s8g3] {+bar_arena_fight_4} (none) bar_arena_stalker_4_2
++ bar_stalker_0011                --[0xffffffbf][t5s8g3] {+bar_arena_fight_4} (none) bar_arena_stalker_4_3
++ bar_stalker_0012                --[0xffffffbf][t5s8g7] {+bar_arena_fight_4} (none) bar_arena_stalker_4_5
++ bar_stalker_0013                --[0xffffffbf][t5s8g7] {+bar_arena_fight_4} (none) bar_arena_stalker_4_4
++ bar_stalker_0014                --[0xffffffbf][t5s8g3] {+bar_arena_fight_5} (none) bar_arena_stalker_5_1
++ bar_stalker_0015                --[0xffffffbf][t5s8g3] {+bar_arena_fight_5} (none) bar_arena_stalker_5_2
++ bar_stalker_0016                --[0xffffffbf][t5s8g3] {+bar_arena_fight_6} (none) bar_arena_stalker_6_1
++ bar_stalker_0017                --[0xffffffbf][t5s8g3] {+bar_arena_fight_6} (none) bar_arena_stalker_6_2
++ bar_stalker_0018                --[0xffffffbf][t5s8g3] {+bar_arena_fight_6} (none) bar_arena_stalker_6_4
++ bar_stalker_0019                --[0xffffffbf][t5s8g3] {+bar_arena_fight_6} (none) bar_arena_stalker_6_5
++ bar_stalker_0020                --[0xffffffbf][t5s8g3] {+bar_arena_fight_6} (none) bar_arena_stalker_6_6
++ bar_stalker_0021                --[0xffffffbf][t5s8g3] {+bar_arena_fight_6} (none) bar_arena_stalker_6_3
++ bar_stalker_0022                --[0xffffffbf][t5s8g3] {+bar_arena_fight_7} (none) bar_arena_stalker_7
++ bar_stalker_0023                --[0xffffffbf][t5s8g3] {+bar_arena_fight_8} (none) bar_arena_stalker_8_2
++ bar_stalker_0024                --[0xffffffbf][t5s8g3] {+bar_arena_fight_8} (none) bar_arena_stalker_8_3
++ bar_stalker_0025                --[0xffffffbf][t5s8g3] {+bar_arena_fight_8} (none) bar_arena_stalker_8_4
++ bar_stalker_0026                --[0xffffffbf][t5s8g3] {+bar_arena_fight_8} (none) bar_arena_stalker_8_1
++ sim_stalker_umnik               --[0xffffffbf][t0s0g0] sim_stalker_veteran_umnik
++ sim_stalker_prapor              --[0xffffffbf][t0s0g0] (bar_visitors, yan_st_stalker3) sim_dolg_veteran_prapor
++ bar_stalker_0000                --[0xffffffff][t0s0g0] (none) sim_stalker_novice
+

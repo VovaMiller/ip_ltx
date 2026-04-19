@@ -1,0 +1,45 @@
+# l12u_sarcofag
+
+## Monsters (alive only)
+
+## NPC (alive only)
++ sar_stalker_monolith_0002       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_specnaz
++ sar_stalker_monolith_0008       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_specnaz
++ sar_stalker_monolith_0011       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_specnaz
++ sar_stalker_monolith_0012       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_specnaz
++ sar_stalker_monolith_0013       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_specnaz
++ sar_stalker_monolith_0014       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_exo
++ sar_stalker_monolith_0015       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_exo
++ sar_stalker_monolith_0016       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_exo
++ sar_stalker_monolith_0017       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_exo
++ sar_stalker_monolith_0018       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_exo
++ sar_stalker_monolith_high       --[0xfffffff3][t0s20g0] (none) sar_monolith_exo
++ sar_stalker_monolith_high_0000  --[0xfffffff3][t0s20g0] (none) sar_monolith_exo
++ sar_stalker_monolith_high_0001  --[0xfffffff3][t0s20g0] (none) sar_monolith_exo
++ sar_stalker_monolith_high_0002  --[0xfffffff3][t0s20g0] (none) sar_monolith_exo
++ sar_stalker_monolith_high_0003  --[0xfffffff3][t0s20g0] (none) sar_monolith_exo
++ sar_stalker_monolith_high_0004  --[0xfffffff3][t0s20g0] (none) sar_monolith_exo
++ sar_stalker_monolith_high_0005  --[0xfffffff3][t0s20g0] (none) sar_monolith_specnaz
++ sar_stalker_monolith_high_0006  --[0xfffffff3][t0s20g0] (none) sar_monolith_specnaz
++ sar_stalker_monolith_high_0007  --[0xfffffff3][t0s20g0] (none) sar_monolith_specnaz
++ sar_stalker_monolith_high_0008  --[0xfffffff3][t0s20g0] (none) sar_monolith_specnaz
++ sar_stalker_monolith_high_0009  --[0xfffffff3][t0s20g0] (none) sar_monolith_specnaz
++ sar_stalker_sklad               --[0xffffffff][t0s20g0] (sar_monolith_sklad) sar_monolith_exo
++ sar_stalker_sklad_0000          --[0xffffffff][t0s20g0] (sar_monolith_sklad) sar_monolith_exo
++ sar_stalker_sklad_0001          --[0xffffffff][t0s20g0] (sar_monolith_sklad) sar_monolith_exo
++ sar_stalker_sklad_0002          --[0xffffffff][t0s20g0] (sar_monolith_sklad) sar_monolith_exo
++ sar_stalker_sklad_0003          --[0xffffffff][t0s20g0] (sar_monolith_sklad) sar_monolith_exo
++ sar_secret_room_monolith_1      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn1} (none) sar_monolith_exo_crystal
++ sar_secret_room_monolith_2      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn2} (none) sar_monolith_exo_crystal
++ sar_secret_room_monolith_3      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn3} (none) sar_monolith_exo_crystal
++ sar_secret_room_monolith_4      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn4} (none) sar_monolith_exo_crystal
++ sar_secret_room_monolith_5      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn5} (none) sar_monolith_exo_crystal
++ sar_secret_room_monolith_6      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn6} (none) sar_monolith_exo_crystal
++ sar_secret_room_monolith_7      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn7} (none) sar_monolith_exo_crystal
++ sar_secret_room_monolith_8      --[0xfffffff7][t0s30g1] {+sar_monolith_spawn8} (none) sar_monolith_exo_crystal
++ sar_stalker_monolith_lest_1     --[0xfffffff3][t0s20g0] (none) sar_monolith_commander
++ sar_stalker_monolith_lest_0000  --[0xfffffff3][t0s20g0] (none) sar_monolith_exo
++ sar_stalker_monolith_lest_0001  --[0xfffffff3][t0s20g0] (none) sar_monolith_specnaz
++ sar_stalker_monolith_0019       --[0xffffffbf][t0s20g0] (none) sar_monolith_commander
++ sar_stalker_monolith_0020       --[0xfffffff7][t0s20g0] (sar_monolith_general) sar_monolith_specnaz
+

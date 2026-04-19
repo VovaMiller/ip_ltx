@@ -1,0 +1,19 @@
+# l04u_labx18
+
+## Monsters (alive only)
++ dar_m_poltergeist_normal_flame_0000 --[0xffffffff][t0s0g0] (dar_control_poltergeist) m_poltergeist_normal_flame
++ dar_gigant_normal                   --[0xffffffff][t0s0g0] (dar_angar) gigant_normal
++ dar_m_poltergeist_normal_tele       --[0xffffffff][t0s0g0] (dar_poltergeist_tele) m_poltergeist_normal_tele
++ dar_m_poltergeist_normal_tele_0000  --[0xffffffff][t0s0g0] (dar_poltergeist_tele_round) m_poltergeist_normal_tele
++ dar_m_poltergeist_normal_flame      --[0xffffffff][t0s0g0] (dar_poltergeist_ring) m_poltergeist_normal_tele
++ dar_m_poltergeist_normal_flame_0001 --[0xffffffff][t0s0g0] (dar_poltergeist_ring) m_poltergeist_normal_tele
++ dar_m_poltergeist_normal_flame_0002 --[0xffffffff][t0s0g0] (dar_poltergeist_ring) m_poltergeist_normal_tele
++ dar_snork_strong                    --[0xffffffbf][t5s5g9] (none) snork_weak
++ dar_snork_strong_0000               --[0xffffffbf][t5s5g4] (none) snork_normal
+
+## NPC (alive only)
++ dar_stalker_0000    --[0xffffffff][t0s0g0] (dar_military_scout) dar_military_scout
++ dar_stalker_0002    --[0xffffffff][t0s0g0] (dar_military_scout) dar_military_scout
++ dar_stalker_0004    --[0xffffffff][t0s0g0] (dar_military_scout) dar_military_scout
++ dar_stalker_0005    --[0xffffffff][t0s0g0] (dar_military_scout) dar_military_scout
+

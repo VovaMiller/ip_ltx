@@ -1,0 +1,109 @@
+# l12_stancia_2
+
+## Monsters (alive only)
++ aes2_snork_outdoor      --[0xffffffff][t0s0g0] (none) snork_outdoor
++ aes2_snork_outdoor_0000 --[0xffffffff][t0s0g0] (none) snork_outdoor
++ aes2_snork_outdoor_0001 --[0xffffffff][t0s0g0] (none) snork_outdoor
++ aes2_snork_strong       --[0xffffffbf][t0s0g0] {+aes2_snork_jumper1} (none) snork_normal
++ aes2_snork_strong_0000  --[0xffffffbf][t0s0g0] {+aes2_snork_jumper1} (none) snork_normal
++ aes2_snork_strong_0004  --[0xffffffbf][t0s0g0] {+aes2_snork_jumper1} (none) snork_normal
++ aes2_snork_strong_0009  --[0xffffffbf][t0s0g0] {+aes2_snork_jumper2} (none) snork_normal
++ aes2_snork_strong_0010  --[0xffffffbf][t0s0g0] {+aes2_snork_jumper2} (none) snork_normal
++ aes2_snork_strong_0011  --[0xffffffbf][t0s0g0] {+aes2_snork_jumper3} (none) snork_normal
++ aes2_snork_strong_0013  --[0xffffffbf][t0s0g0] {+aes2_snork_jumper3} (none) snork_normal
++ aes2_snork_strong_0014  --[0xffffffbf][t0s0g0] {+aes2_snork_jumper3} (none) snork_normal
++ aes2_snork_strong_0018  --[0xffffffff][t0s0g0] {+aes2_snork_ambush1} (none) snork_strong
++ aes2_snork_strong_0019  --[0xffffffbf][t0s0g0] {+aes2_snork_ambush1} snork_normal
++ aes2_snork_strong_0020  --[0xffffffbf][t0s0g0] {+aes2_snork_ambush1} (none) snork_normal
++ aes2_snork_strong_0032  --[0xffffffbf][t0s0g0] {+aes2_snork_ambush3} (none) snork_normal
++ aes2_snork_strong_0033  --[0xffffffbf][t0s0g0] {+aes2_snork_ambush3} (none) snork_normal
+
+## NPC (alive only)
++ aes2_stalker_0002           --[0xfffffffb][t3s3g3] (none) aes_Monolit_rpg
++ aes2_monolit_stalker_0003   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0000   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0001   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_stalker_0003           --[0xfffffffb][t3s3g3] (none) aes_Monolit_sniper_gauss
++ aes2_stalker_0004           --[0xfffffffb][t3s3g3] {+aes2_sniper_ambush1} (none) aes_Monolit_sniper_gauss
++ aes2_stalker_0005           --[0xfffffffb][t3s3g3] {+aes2_sniper_ambush3} (none) aes_Monolit_sniper_gauss
++ aes2_monolit_stalker_0002   --[0xffffffff][t1s1g1] {+aes2_sniper_ambush3} (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0004   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0005   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0006   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0007   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0008   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0009   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0010   --[0xffffffff][t1s1g1] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0011   --[0xffffffff][t1s1g1] {+aes2_sniper_ambush2} (none) aes_Monolit_rpg
++ aes2_monolit_stalker_0012   --[0xffffffff][t1s1g1] {+aes2_sniper_ambush3} (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0013   --[0xfffffffb][t1s1g1] {+aes2_rpg_ambush1} (none) aes_Monolit_rpg
++ aes2_stalker_0008           --[0xfffffffb][t3s3g3] (none) aes_Monolit_sniper_gauss
++ aes2_monolit_stalker_0015   --[0xffffffff][t1s1g1] {+aes2_rpg_ambush3} aes_Monolit_rpg
++ aes2_monolit_stalker_0016   --[0xffffffff][t1s1g1] {+aes2_monolit_ambush1} (none) aes_Monolit_master
++ aes2_monolit_stalker_0018   --[0xfffffffb][t1s1g1] {+aes2_rpg_ambush4} (none) aes_Monolit_rpg
++ aes2_monolit_stalker_0017   --[0xffffffff][t1s1g1] {+aes2_monolit_ambush2} (none) aes_Monolit_master
++ aes2_stalker_0010           --[0xfffffffb][t3s3g3] (none) aes_Monolit_sniper_gauss
++ aes2_stalker_0011           --[0xfffffffb][t3s3g3] (none) aes_Monolit_sniper_gauss
++ aes2_monolit_stalker_0019   --[0xffffffff][t1s1g1] (none) aes_Monolit_master
++ aes2_monolit_stalker_0020   --[0xffffffff][t1s1g1] (none) aes_Monolit_master
++ aes2_monolit_stalker_0022   --[0xffffffff][t1s1g1] {+aes2_monolit_ambush3} (none) aes_Monolit_master
++ aes2_monolit_stalker_0023   --[0xffffffff][t1s1g1] (none) aes_Monolit_master
++ aes2_monolit_stalker_0024   --[0xffffffff][t1s1g1] {+aes2_rpg_ambush4} (none) aes_Monolit_master
++ aes2_monolit_stalker_0025   --[0xffffffff][t1s1g1] {+aes2_rpg_ambush4} (none) aes_Monolit_master
++ aes2_monolit_stalker_0027   --[0xffffffff][t2s2g2] {+aes2_monolit_ambush4} (none) aes_Monolit_master
++ aes2_monolit_stalker_0028   --[0xffffffff][t2s2g2] {+aes2_monolit_ambush4} (none) aes_Monolit_master
++ aes2_monolit_stalker_0030   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush5} (none) aes_Monolit_master
++ aes2_monolit_stalker_0026   --[0xffffffff][t2s2g2] {+aes2_rpg_ambush4} (none) aes_Monolit_rpg
++ aes2_monolit_stalker_0032   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready1} (none) aes_Monolit_master
++ aes2_monolit_stalker_0034   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0035   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0036   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0038   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush7} aes_Monolit_master
++ aes2_monolit_stalker_0039   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush7} (none) aes_Monolit_master
++ aes2_monolit_stalker_0042   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush8} (none) aes_Monolit_master
++ aes2_monolit_stalker_0043   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush8} (none) aes_Monolit_master
++ aes2_monolit_stalker_0046   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush9} (none) aes_Monolit_master
++ aes2_monolit_stalker_0047   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush9} (none) aes_Monolit_master
++ aes2_monolit_stalker_0048   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready2} (none) aes_Monolit_master
++ aes2_monolit_stalker_0050   --[0xffffffff][t2s2g2] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0051   --[0xffffffff][t2s2g2] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0052   --[0xffffffff][t2s2g2] (none) aes_Monolit_specnaz
++ aes2_monolit_stalker_0053   --[0xffffffff][t2s2g2] (none) aes_Monolit_specnaz
++ aes2_stalker_0030           --[0xfffffffb][t0s0g0] {+aes2_monolit_ambush10} (none) aes_Monolit_sniper_gauss
++ aes2_stalker_0032           --[0xfffffffb][t0s0g0] {+aes2_monolit_ambush10} (none) aes_Monolit_rpg
++ aes2_monolit_stalker_0054   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush10} (none) aes_Monolit_master
++ aes2_monolit_stalker_0055   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush10} (none) aes_Monolit_master
++ aes2_monolit_stalker_0056   --[0xfffffffb][t2s2g2] {+aes2_monolit_ambush10} (none) aes_Monolit_master
++ aes2_monolit_stalker_0062   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready5} (none) aes_Monolit_master
++ aes2_monolit_stalker_0063   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready5} (none) aes_Monolit_master
++ aes2_monolit_stalker_0064   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0065   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0066   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0067   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0068   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready6} (none) aes_Monolit_master
++ aes2_monolit_stalker_0069   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready6} (none) aes_Monolit_master
++ aes2_stalker_0035           --[0xfffffffb][t0s0g0] {+aes2_sniper_ready1} (none) aes_Monolit_sniper_gauss
++ aes2_stalker_0036           --[0xfffffffb][t0s0g0] {+aes2_sniper_ready2} (none) aes_Monolit_rpg
++ aes2_monolit_stalker_0070   --[0xfffffffb][t2s2g2] {+aes2_monolit_roof29_1} (none) aes_Monolit_master
++ aes2_monolit_stalker_0071   --[0xfffffffb][t2s2g2] {+aes2_monolit_roof29_1} (none) aes_Monolit_master
++ aes2_monolit_stalker_0073   --[0xfffffffb][t2s2g2] {+aes2_monolit_roof29_1} (none) aes_Monolit_master
++ aes2_monolit_stalker_0074   --[0xfffffffb][t2s2g2] {+aes2_monolit_roof29_2} (none) aes_Monolit_master
++ aes2_monolit_stalker_0075   --[0xfffffffb][t2s2g2] {+aes2_monolit_roof29_2} (none) aes_Monolit_master
++ aes2_monolit_stalker_0078   --[0xfffffffb][t2s2g2] {+aes2_monolit_roof29_3} (none) aes_Monolit_master
++ aes2_stalker_0037           --[0xfffffffb][t3s3g3] {+aes2_monolit_ambush_rpg1} (none) aes_Monolit_rpg
++ aes2_stalker_0038           --[0xfffffffb][t3s3g3] {+aes2_monolit_ambush_rpg1} (none) aes_Monolit_rpg
++ aes2_stalker_0039           --[0xfffffffb][t3s3g3] {+aes2_monolit_ambush4} (none) aes_Monolit_sniper_gauss
++ aes2_stalker_0040           --[0xfffffffb][t3s3g3] {+aes2_monolit_teleport1} (none) aes_Monolit_sniper_gauss
++ aes2_stalker_0041           --[0xfffffffb][t3s3g3] {+aes2_monolit_teleport1} (none) aes_Monolit_sniper_gauss
++ aes2_monolit_stalker_0049   --[0xffffffff][t1s1g1] {+aes2_monolit_ambush1} (none) aes_Monolit_master
++ aes2_monolit_stalker_0029   --[0xffffffff][t2s2g2] {+aes2_monolit_first_ambush} (none) aes_Monolit_master
++ aes2_monolit_stalker_0044   --[0xffffffff][t2s2g2] {+aes2_monolit_first_ambush} (none) aes_Monolit_master
++ aes2_monolit_stalker_0045   --[0xffffffff][t2s2g2] {+aes2_monolit_first_ambush_2} (none) aes_Monolit_master
++ aes2_stalker                --[0xffffffbf][t0s0g0] (none) aes_Monolit_master
++ aes2_monolit_stalker_0014   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready_final} (none) aes_Monolit_master
++ aes2_monolit_stalker_0021   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready_final} (none) aes_Monolit_master
++ aes2_monolit_stalker_0031   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready_final} (none) aes_Monolit_master
++ aes2_monolit_stalker_0033   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready_final} (none) aes_Monolit_master
++ aes2_monolit_stalker_0037   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready_final} (none) aes_Monolit_master
++ aes2_monolit_stalker_0040   --[0xffffffff][t2s2g2] {+aes2_monolit_teleport_ready_final} (none) aes_Monolit_master
+

@@ -1,0 +1,124 @@
+# l01_escape
+
+## Monsters (alive only)
++ esc_suicidal_flesh      --[0xfffffff3][t12s1g1] m_flesh_e
++ esc_bd__m_dog_e_0008    --[0xffffffbf][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) dog_weak
++ esc_bd_m_dog_e_0009     --[0xffffffbf][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) dog_weak
++ esc_bd__m_dog_e_0010    --[0xffffffbf][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) dog_weak
++ esc_bd__m_dog_e_0011    --[0xffffffbf][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) dog_weak
++ esc_bd__m_dog_e_0012    --[0xffffffbf][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) dog_weak
++ esc_bd__m_dog_e_0013    --[0xffffffbf][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) dog_weak
++ esc_bd__m_boar_e_0006   --[0xffffffff][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) boar_weak
++ esc_bd__m_boar_e_0008   --[0xffffffff][t0s0g0] {+esc_boar_dogs_restrictor} (esc_boars_dogs) boar_weak
++ esc_flesh_normal        --[0xffffffbf][t0s0g0] (esc_flesh_1) flesh_weak
++ esc_dog_swarm_0001      --[0xffffffbf][t0s1g14] (esc_dogs_swarm) dog_weak
++ esc_dog_swarm_0002      --[0xffffffbf][t0s1g14] (esc_dogs_swarm) dog_weak
++ esc_dog_swarm_0004      --[0xffffffbf][t0s1g14] (esc_dogs_swarm) dog_weak
++ esc_dog_swarm_0007      --[0xffffffbf][t0s1g14] (esc_dogs_swarm) dog_weak
++ esc_flesh_normal_0000   --[0xffffffbf][t0s0g0] (esc_flesh_1) flesh_weak
++ esc_flesh_normal_0004   --[0xffffffbf][t0s0g0] (esc_flesh_2) flesh_weak
++ esc_flesh_normal_0008   --[0xffffffbf][t0s0g0] (esc_flesh_2) flesh_weak
++ esc_dog_weak            --[0xffffffbf][t0s0g0] (esc_dogs_to_fox) dog_weak
++ esc_dog_weak_0000       --[0xffffffbf][t0s0g0] (esc_dogs_to_fox) dog_weak
++ esc_dog_weak_0001       --[0xffffffbf][t0s0g0] (esc_dogs_to_fox) dog_weak
++ esc_dog_weak_0003       --[0xffffffbf][t0s0g0] (esc_dogs_to_fox) dog_weak
++ esc_dog_weak_0004       --[0xffffffbf][t0s0g0] (esc_dogs_to_fox) dog_weak
++ esc_boar_weak_0001      --[0xffffffff][t0s1g25] (esc_bridge_boar) boar_weak
++ esc_boar_weak_0002      --[0xffffffbf][t0s1g25] (esc_bridge_boar) boar_weak
++ esc_boar_weak_0006      --[0xffffffbf][t0s0g0] boar_normal
++ esc_dog_weak_0009       --[0xffffffbf][t0s1g22] (esc_small_home3) dog_weak
++ esc_dog_weak_0010       --[0xffffffbf][t0s1g22] (esc_small_home3) dog_weak
++ esc_dog_weak_0011       --[0xffffffbf][t0s1g22] (esc_small_home3) dog_weak
++ esc_dog_weak_0014       --[0xffffffbf][t0s1g22] (esc_small_home5) dog_weak
++ esc_dog_weak_0015       --[0xffffffbf][t0s1g22] (esc_small_home5) dog_weak
++ esc_flesh_weak_0000     --[0xffffffbf][t0s1g22] (esc_small_home6) flesh_weak
++ esc_boar_weak_0004      --[0xffffffbf][t0s1g22] (esc_small_home1) boar_weak
++ esc_dog_strong          --[0xffffffff][t0s11g11] (esc2_dogs_lair) dog_strong
++ esc_pseudodog_weak      --[0xffffffff][t0s11g12] (none) pseudodog_weak
++ esc_flesh_normal_0001   --[0xffffffbf][t0s0g0] flesh_weak
++ esc_dog_normal          --[0xffffffff][t0s11g10] (none) dog_normal
++ esc_dog_normal_0000     --[0xffffffff][t0s11g10] (none) dog_normal
++ esc_dog_weak_0012       --[0xffffffbf][t0s1g22] (esc_small_home4) dog_weak
++ esc_dog_weak_0013       --[0xffffffbf][t0s1g22] (esc_small_home4) dog_weak
++ esc_pseudodog_strong    --[0xffffffbf][t0s0g0] {+esc_dog_spawn} (none) pseudodog_weak
++ esc_dog_weak_0005       --[0xffffffbf][t0s0g0] (esc2_dogs_lair) dog_weak
++ esc_dog_weak_0008       --[0xffffffbf][t0s0g0] (esc2_dogs_lair) dog_weak
++ esc_dog_weak_0016       --[0xffffffbf][t0s0g0] (esc2_dogs_lair) dog_weak
++ esc_dog_normal_0001     --[0xffffffbf][t0s0g0] (esc2_dogs_lair) dog_normal
++ esc_dog_weak_0017       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0018       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0019       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0020       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0021       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0022       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0023       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0024       --[0xffffffbf][t0s0g0] (esc2_dogs_exit) dog_weak
++ esc_dog_weak_0025       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost) dog_weak
++ esc_dog_weak_0026       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost) dog_weak
++ esc_dog_weak_0027       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost) dog_weak
++ esc_dog_weak_0028       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost2) dog_weak
++ esc_dog_weak_0029       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost2) dog_weak
++ esc_dog_weak_0030       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost3) dog_weak
++ esc_dog_weak_0031       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost3) dog_weak
++ esc_dog_weak_0032       --[0xffffffbf][t0s0g0] (esc2_dogs_zamost3) dog_weak
++ esc_boar_weak_0000      --[0xffffffbf][t0s1g22] (esc_small_home1) boar_weak
++ esc_flesh_weak_0001     --[0xffffffbf][t0s1g22] (esc_small_home6) flesh_weak
++ esc_boar_weak           --[0xffffffbf][t0s0g0] (esc_small_home2) boar_weak
++ esc_boar_weak_0003      --[0xffffffbf][t0s0g0] (esc_small_home2) boar_weak
+
+## NPC (alive only)
++ esc_lager1                  --[0xffffffbf][t0s1g5] (esc_lager) esc_stalker_novice
++ esc_lager2                  --[0xffffffbf][t0s1g5] (esc_lager) esc_stalker_novice
++ esc_lager3                  --[0xffffffbf][t0s1g5] (esc_lager) esc_stalker_novice
++ esc_lager4                  --[0xffffffbf][t0s1g5] (esc_lager) esc_stalker_novice
++ esc_lager5                  --[0xffffffbf][t0s1g5] (esc_lager) esc_stalker_novice
++ esc_lager6                  --[0xffffffbf][t0s1g5] (esc_lager) esc_stalker_novice
++ esc_lager7                  --[0xffffffbf][t0s1g5] (esc_lager) esc_stalker_novice
++ esc_wolf                    --[0xffffffbf][t0s1g5] (esc_lager, mil_lager) esc_wolf
++ esc_vagon_wounded           --[0xffffffbf][t0s1g0] (esc_corps, esc_lager) esc_tutorial_wounded
++ esc_novice_attacker1        --[0xffffffbf][t0s1g0] (esc_assault) esc_ranger
++ esc_novice_attacker2        --[0xffffffbf][t0s1g0] (esc_assault) esc_stalker_novice
++ esc_novice_attacker3        --[0xffffffbf][t0s1g0] (esc_assault) esc_stalker_novice
++ esc_factory_bandit1         --[0xffffffbf][t0s1g3] (esc_fabrika_bandit) esc_bandit_novice
++ esc_factory_prisoner_guard  --[0xffffffbf][t0s1g3] (esc_fabrika_bandit) esc_bandit_novice
++ esc_factory_bandit3         --[0xffffffbf][t0s1g3] (esc_fabrika_bandit) esc_bandit_novice
++ esc_factory_bandit6         --[0xffffffbf][t0s1g3] (esc_fabrika_bandit) esc_bandit_novice
++ esc_factory_bandit5         --[0xffffffbf][t0s1g3] (esc_fabrika_bandit) esc_bandit_novice
++ esc_factory_bandit4         --[0xffffffbf][t0s1g3] (esc_fabrika_bandit) esc_bandit_novice
++ esc_factory_bandit_7        --[0xffffffbf][t0s1g3] (esc_fabrika_bandit) esc_bandit_novice
++ esc_gar_bandit1             --[0xffffffbf][t0s1g21] (esc_ambush) gar_bandit_general
++ esc_gar_bandit2             --[0xffffffbf][t0s1g21] (esc_ambush) gar_bandit_general
++ esc_fox                     --[0xfffffff3][t0s1g0] {+escape_stalker_help} (esc_stalker_camp) esc_fox
++ esc_bridge_soldier1         --[0xffffffbf][t0s1g2] (esc_bridge) esc_soldier_regular
++ esc_bridge_soldier2         --[0xffffffbf][t0s1g2] (esc_bridge) esc_soldier_regular
++ esc_bridge_soldier3         --[0xffffffbf][t0s1g2] (esc_bridge) esc_soldier_regular
++ esc_bridge_soldier4         --[0xffffffbf][t0s1g2] (esc_bridge) esc_soldier_regular
++ esc_bridge_soldier5         --[0xffffffbf][t0s1g2] (esc_bridge) esc_soldier_commander
++ esc_specnaz1                --[0xffffffbb][t0s1g6] (esc_specnaz) esc_soldier_specnaz
++ esc_specnaz2                --[0xffffffbb][t0s1g6] (esc_specnaz) esc_soldier_specnaz
++ esc_specnaz3                --[0xffffffbb][t0s1g6] (esc_specnaz) esc_soldier_specnaz
++ esc_specnaz4                --[0xffffffbb][t0s1g6] (esc_specnaz) esc_soldier_specnaz
++ esc_specnaz5                --[0xffffffbb][t0s1g6] (esc_specnaz) esc_soldier_specnaz
++ esc_specnaz6                --[0xffffffbb][t0s1g6] (esc_specnaz) esc_soldier_specnaz
++ esc_blokpost_soldier1       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier2       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier3       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier4       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier5       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier6       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier7       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier8       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_soldier9       --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blokpost
++ esc_blokpost_commander      --[0xffffffbb][t0s1g1] (esc_blokpost) esc_soldier_blockpost_commander
++ esc_stalker_fanat           --[0xffffffbf][t0s1g5] {+esc_fanat_spawn} (esc_lager) esc_fanat
++ esc_killer1                 --[0xffffffbf][t0s1g4] {+escape_lager_spawn_killers} (esc_killers) esc_killer_specnaz
++ esc_killer2                 --[0xffffffbf][t0s1g4] {+escape_lager_spawn_killers} (esc_killers) esc_killer_master
++ esc_killer3                 --[0xffffffbf][t0s1g4] {+escape_lager_spawn_killers} (esc_killers) esc_killer_specnaz
++ esc_killer4                 --[0xffffffbf][t0s1g4] {+escape_lager_spawn_killers} (esc_killers) esc_killer_specnaz
++ esc_killer6                 --[0xffffffbf][t0s1g4] {+escape_lager_spawn_killers} (esc_killers) esc_killer_specnaz
++ esc_killer7                 --[0xffffffbf][t0s1g4] {+escape_lager_spawn_killers} (esc_killers) esc_killer_specnaz
++ esc_killer8                 --[0xffffffbf][t0s1g4] {+escape_lager_spawn_killers} (esc_killers) esc_killer_specnaz
++ esc_provodnik               --[0xffffffbf][t0s1g0] (esc_stalker_camp) esc_provodnik
++ esc_shustryi                --[0xffffffbf][t0s0g0] (esc_lager) esc_shustryi
++ esc_bridge_soldier1_0000    --[0xffffffbf][t0s1g2] (esc_bridge) esc_soldier_regular
+

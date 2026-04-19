@@ -1,0 +1,97 @@
+# l04_darkvalley
+
+## Monsters (alive only)
++ val_pseudodog_normal        --[0xffffffff][t0s21g21] (none) pseudodog_normal
++ val_flesh_normal            --[0xffffffff][t0s3g3] (none) flesh_normal
++ val_pseudodog_normal_0000   --[0xffffffff][t0s21g22] (none) pseudodog_normal
++ val_dog_weak                --[0xffffffff][t4s1g1] dog_weak
++ val_dog_weak_0000           --[0xffffffff][t4s1g1] (none) dog_strong
++ val_dog_strong              --[0xffffffff][t0s0g0] (none) dog_strong
++ val_sos_bs                  --[0xffffffff][t0s6g1] {+val_sos_actor_near_wounded} (val_sos) bloodsucker_normal
+
+## NPC (alive only)
++ val_kocherga                    --[0xffffffbf][t0s0g0] {+val_actor_has_borov_key} sim_bandit_master_kocherga
++ sim_stalker_fraer               --[0xffffffbf][t0s0g0] sim_bandit_master_fraer
++ val_exit1_ambush_soldier2       --[0xffffffff][t2s6g1] {+val_raid_start} (val_exit1_ambush) val_soldier_specnaz
++ val_exit1_ambush_soldier1       --[0xffffffff][t2s6g1] {+val_raid_start} (val_exit1_ambush) val_soldier_specnaz
++ val_exit1_ambush_soldier4       --[0xffffffff][t2s6g1] {+val_raid_start} (val_exit1_ambush) val_soldier_specnaz
++ val_exit1_ambush_soldier3       --[0xffffffff][t2s6g1] {+val_raid_start} (val_exit1_ambush) val_soldier_specnaz
++ val_stalker                     --[0xffffffbf][t2s6g1] {+val_raid_start} (none) val_soldier_specnaz
++ val_stalker_0000                --[0xffffffbf][t2s6g1] {+val_raid_start} (none) val_soldier_specnaz
++ val_sacrifice_tunnel_bandit     --[0xfffffffb][t4s6g2] (val_sacrifice, val_lager_bandits) val_bandit_general
++ val_sacrifice_victim            --[0xffffffff][t5s6g2] (val_sacrifice, gar_dolg_blokpost) val_dolg_regular
++ val_sacrifice_guard1            --[0xffffffff][t0s6g2] (val_sacrifice, val_lager_bandits) val_bandit_general
++ val_sacrifice_guard2            --[0xffffffff][t0s6g2] (val_sacrifice, val_lager_bandits) val_bandit_general
++ val_sos_wounded                 --[0xffffffff][t0s6g1] (val_sos, val_rob) val_stalker_novice
++ val_watchtower1_bandit_sniper   --[0xfffffffd][t4s6g2] (val_watchtower1) val_watchtower_bandit_sniper
++ val_watchtower2_bandit_guard    --[0xfffffffd][t4s6g2] (val_watchtower2) val_watchtower_bandit_guard
++ val_watchtower3_bandit_guard    --[0xfffffffd][t4s6g2] (val_watchtower3) val_watchtower_bandit_guard
++ val_watchtower4_bandit_guard    --[0xfffffffd][t4s6g2] (val_watchtower4) val_watchtower_bandit_guard
++ val_watchtower5_bandit_guard    --[0xfffffffd][t4s6g2] (val_watchtower5) val_watchtower_bandit_guard
++ val_bs_killer1                  --[0xfffffffd][t4s6g1] {+val_bs_start} (none) val_bandit_general
++ val_bs_killer2                  --[0xfffffffd][t4s6g1] {+val_bs_start} (none) val_bandit_general
++ val_raid_g01_soldier_0000       --[0xffffffbf][t0s6g15] (val_soldiers_raid_off, val_raid1_soldiers) val_soldier_specnaz
++ val_raid_g01_soldier_0001       --[0xffffffbf][t0s6g15] (val_soldiers_raid_off, val_raid1_soldiers) val_soldier_specnaz
++ val_raid_g02_soldier_0004       --[0xffffffbf][t0s6g1] (val_soldiers_raid_off, val_raid2_soldiers) val_soldier_specnaz
++ val_raid_g02_soldier_0005       --[0xffffffbf][t0s6g1] (val_soldiers_raid_off, val_raid2_soldiers) val_soldier_specnaz
++ val_raid_g02_soldier_0006       --[0xffffffbf][t0s6g1] (val_soldiers_raid_off, val_raid2_soldiers) val_soldier_regular
++ val_raid_g01_soldier_0002       --[0xffffffbf][t0s6g15] (val_soldiers_raid_off, val_raid1_soldiers) val_soldier_specnaz
++ val_raid_g03_soldier_0008       --[0xffffffbf][t0s6g1] (val_soldiers_raid_off, val_raid2_soldiers) val_soldier_specnaz
++ val_raid_g03_soldier_0009       --[0xffffffbf][t0s6g1] (val_soldiers_raid_off, val_raid2_soldiers) val_soldier_specnaz
++ val_raid_g05_soldier_0010       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g06_soldier_0012       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g07_soldier_0014       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g08_soldier_0016       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g09_soldier_0018       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g09_soldier_0019       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g05_soldier_0011       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g06_soldier_0013       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_regular
++ val_raid_g07_soldier_0015       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g08_soldier_0017       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_specnaz
++ val_raid_g09_soldier_0020       --[0xffffffbf][t0s6g2] (val_soldiers_raid_off) val_soldier_regular
++ val_raid_g04_soldier_0002       --[0xffffffbf][t0s6g15] (val_soldiers_raid_off, val_raid3_soldiers) val_soldier_specnaz
++ val_raid_g04_soldier_0001       --[0xffffffbf][t0s6g15] (val_soldiers_raid_off, val_raid3_soldiers) val_soldier_specnaz
++ val_raid_g10_soldier_0001       --[0xffffffbf][t0s6g15] (val_soldiers_raid_off, val_raid3_soldiers) val_soldier_specnaz
++ val_escort_captive              --[0xfffffffb][t0s6g2] (val_escort, gar_dolg_blokpost) val_escort_captive
++ val_escort_guard2               --[0xfffffffb][t0s6g8] (val_escort, val_x18_exit_base) val_bandit_general
++ val_escort_guard1               --[0xfffffffb][t0s6g8] (val_escort, val_x18_exit_base) val_bandit_general
++ val_escort_nap1                 --[0xfffffffb][t0s6g2] (val_escort, gar_dolg_blokpost) val_escort_nap1
++ val_escort_bandit_halfdead      --[0xffffffbf][t4s6g3] (val_escort, val_lager_bandits) val_escort_halfdead
++ val_lager_bandit19              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit15              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit20              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandits_borov         --[0xfffffffb][t4s6g2] (val_lager_bandits) val_bandit_borov
++ val_lager_bandits_bodyguard3    --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_bodyguard
++ val_lager_bandits_bodyguard2    --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_bodyguard
++ val_lager_bandits_bodyguard1    --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_bodyguard
++ val_lager_bandit04              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit03              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit05              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit06              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit07              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit08              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit09              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit10              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit11              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit12              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit13              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit14              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit16              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit17              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit18              --[0xffffffbd][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit01              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_lager_bandit02              --[0xffffffbf][t4s6g2] (val_lager_bandits) val_bandit_general
++ val_prisoner_captive            --[0xffffffff][t0s6g1] (val_prisoner, gar_dolg_blokpost) val_dolg_prisoner
++ val_rob_leader                  --[0xffffffff][t0s6g1] (val_rob) val_stalker_general
++ val_rob_helper1                 --[0xffffffff][t0s6g1] (val_rob) val_stalker_general
++ val_rob_helper2                 --[0xffffffff][t0s6g1] (val_rob) val_stalker_general
++ val_rob_guard2                  --[0xffffffff][t0s6g1] (val_rob) val_stalker_general
++ val_rob_guard1                  --[0xffffffff][t0s6g1] (val_rob) val_stalker_general
++ val_x18_exit_base_bandit_0000   --[0xffffffbf][t0s6g16] (val_x18_exit_base) val_bandit_general
++ val_x18_exit_base_bandit_0001   --[0xffffffbf][t0s6g16] (val_x18_exit_base) val_bandit_general
++ val_x18_exit_base_bandit_0002   --[0xffffffbf][t0s6g16] (val_x18_exit_base) val_bandit_general
++ val_x18_exit_base_bandit_0003   --[0xffffffbf][t0s6g16] (val_x18_exit_base) val_bandit_general
++ val_x18_exit_base_bandit_0004   --[0xffffffbf][t0s6g16] (val_x18_exit_base) val_bandit_general
++ val_x18_exit_base_bandit_0005   --[0xffffffbf][t0s6g16] (val_x18_exit_base) val_bandit_general
++ val_x18_exit_base_bandit_0006   --[0xffffffbf][t0s6g16] (val_x18_exit_base) val_bandit_general
+

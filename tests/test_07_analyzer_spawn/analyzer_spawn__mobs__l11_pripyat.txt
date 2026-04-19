@@ -1,0 +1,132 @@
+# l11_pripyat
+
+## Monsters (alive only)
++ pri_stadium_lair_gigant_0000    --[0xffffffff][t0s18g1] {+pri_stadium_scene_start} (pri_stadium_lair) gigant_strong
++ pri_stadium_lair_gigant_0001    --[0xfffffffd][t0s18g1] {+pri_stadium_scene_start} (pri_stadium_lair) gigant_strong
++ pri_stadium_lair_tushkano_0000  --[0xffffffff][t0s18g3] (pri_stadium_lair) tushkano_normal
++ pri_stadium_lair_tushkano_0001  --[0xffffffff][t0s18g3] (pri_stadium_lair) tushkano_normal
++ pri_stadium_lair_tushkano_0002  --[0xffffffff][t0s18g3] (pri_stadium_lair) tushkano_normal
++ pri_stadium_lair_tushkano_0003  --[0xffffffff][t0s18g3] (pri_stadium_lair) tushkano_normal
++ pri_stadium_lair_tushkano_0004  --[0xffffffff][t0s18g3] (pri_stadium_lair) tushkano_normal
++ pri_stadium_lair_tushkano_0005  --[0xffffffff][t0s18g3] (pri_stadium_lair) tushkano_normal
++ pri_stadium_lair_tushkano_0006  --[0xffffffff][t0s18g3] (pri_stadium_lair) tushkano_normal
++ pri_stadium_lair_snork_0001     --[0xffffffff][t0s18g4] {+pri_stadium_scene_start} (pri_stadium_lair) snork_strong
++ pri_stadium_lair_snork_0002     --[0xffffffff][t0s18g4] {+pri_stadium_scene_start} (pri_stadium_lair) snork_strong
++ pri_depot_psydog_0000           --[0xfffffffd][t0s18g2] (pri_depot) psy_dog
++ pri_depot_controller1           --[0xfffffffd][t0s18g1] (pri_depot) m_controller_normal
++ pri_depot_controller2           --[0xfffffffd][t0s18g1] (pri_depot) m_controller_normal_fat
++ pri_depot_controller3           --[0xfffffffd][t0s18g1] (pri_depot) m_controller_old_fat
++ pri_depot_pseudodog_strong_0002 --[0xfffffffd][t0s18g4] (pri_depot) pseudodog_strong
++ pri_depot_pseudodog_strong_0000 --[0xfffffffd][t0s18g4] (pri_depot) pseudodog_strong
++ pri_depot_pseudodog_strong_0001 --[0xfffffffd][t0s18g4] (pri_depot) pseudodog_strong
++ pri_depot_pseudodog_normal_0003 --[0xfffffffd][t0s18g3] (pri_depot) pseudodog_normal
++ pri_depot_pseudodog_normal_0000 --[0xfffffffd][t0s18g3] (pri_depot) pseudodog_normal
++ pri_depot_pseudodog_normal_0001 --[0xfffffffd][t0s18g3] (pri_depot) pseudodog_normal
++ pri_depot_pseudodog_normal_0002 --[0xfffffffd][t0s18g3] (pri_depot) pseudodog_normal
++ pri_depot_pseudodog_normal_0004 --[0xfffffffd][t0s18g3] (pri_depot) pseudodog_normal
++ pri_boar_strong                 --[0xffffffff][t0s0g0] {+pri_stadium_scene_start} (none) boar_strong
++ pri_boar_strong_0000            --[0xffffffff][t0s0g0] {+pri_stadium_scene_start} (none) boar_strong
++ pri_boar_strong_0001            --[0xffffffff][t0s0g0] {+pri_stadium_scene_start} (none) boar_strong
++ pri_boar_strong_0002            --[0xffffffff][t0s0g0] {+pri_stadium_scene_start} (none) boar_strong
++ pri_boar_strong_0003            --[0xffffffff][t0s0g0] {+pri_stadium_scene_start} (none) boar_strong
++ pri_boar_strong_0004            --[0xffffffff][t0s0g0] {+pri_stadium_scene_start} (none) boar_strong
++ pri_boar_strong_0005            --[0xffffffff][t0s0g0] {+pri_stadium_scene_start} (none) boar_strong
++ pri_snork_strong                --[0xffffffff][t0s0g0] {+pri_snork_respawn_n_1} (none) snork_strong
++ pri_snork_strong_0000           --[0xffffffff][t0s0g0] {+pri_snork_respawn_n_1} (none) snork_strong
++ pri_snork_strong_0001           --[0xffffffff][t0s0g0] {+pri_snork_respawn_n_1} (none) snork_strong
+
+## NPC (alive only)
++ pri_stadium_help_stalker1       --[0xffffffff][t0s18g7] {+pri_stadium_scene_start} (pri_stadium_help) rad_stalker_veteran
++ pri_stadium_help_stalker2       --[0xffffffff][t0s18g7] {+pri_stadium_scene_start} (pri_stadium_help) rad_stalker_veteran
++ pri_corner_monolith2            --[0xffffffff][t7s18g10] (pri_corner, pri_monolith) pri_monolith_specnaz
++ pri_corner_monolith3            --[0xffffffff][t7s18g10] (pri_corner, pri_monolith) pri_monolith_specnaz
++ pri_corner_monolith1            --[0xffffffff][t7s18g10] (pri_corner, pri_monolith) pri_monolith_specnaz
++ pri_sideway_left_kamp_monolith1 --[0xfffffffd][t7s18g5] (none) pri_monolith_regular
++ pri_sideway_left_kamp_monolith2 --[0xfffffffd][t7s18g5] (none) pri_monolith_regular
++ pri_sideway_left_kamp_monolith3 --[0xfffffffd][t7s18g5] (none) pri_monolith_regular
++ pri_sideway_left_kamp_monolith4 --[0xfffffffd][t7s18g5] (none) pri_monolith_regular
++ pri_followers_stalker3          --[0xffffffbf][t0s18g1] (pri_followers) pri_followers
++ pri_followers_stalker2          --[0xffffffbf][t0s18g1] (pri_followers) pri_followers
++ pri_followers_stalker1          --[0xffffffbf][t0s18g1] (pri_followers) pri_followers
++ pri_followers_leader            --[0xffffffbf][t0s18g1] (pri_followers) pri_followers
++ pri_followers_bomber            --[0xffffffbf][t0s18g1] (pri_followers) pri_followers
++ pri_stadium_sniper1             --[0xffffffff][t0s18g17] (pri_stadium) pri_monolith_exo
++ pri_stadium_sniper2             --[0xffffffff][t0s18g17] (pri_stadium) pri_monolith_exo
++ pri_stadium_sniper3             --[0xffffffff][t0s18g17] (pri_stadium) pri_monolith_exo
++ pri_monolith_28                 --[0xffffffff][t0s18g15] (pri_monolith) pri_monolith_regular
++ pri_monolith_29                 --[0xffffffff][t0s18g15] (pri_monolith) pri_monolith_regular
++ pri_monolith_30                 --[0xffffffff][t0s18g15] (pri_monolith) pri_monolith_regular
++ pri_monolith_31                 --[0xffffffff][t0s18g15] (pri_monolith) pri_monolith_regular
++ pri_monolith_32                 --[0xffffffff][t0s18g15] (pri_monolith) pri_monolith_regular
++ pri_monolith_33                 --[0xffffffff][t0s18g15] (pri_monolith) pri_monolith_regular
++ pri_monolith_leader             --[0xffffffff][t0s18g1] (pri_monolith) pri_monolith_leader
++ pri_monolith_roof3              --[0xffffffff][t0s18g10] (none) pri_monolith_exo
++ pri_monolith_roof1              --[0xffffffff][t7s18g10] (none) pri_monolith_specnaz
++ pri_monolith_01                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_02                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_03_sniper          --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_04                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_08                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_07                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_06                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_05                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_09                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_10                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_11                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_12                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_13                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_14                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_15                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_16                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_17                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_18                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_19                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_20                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_21                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_22                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_exo
++ pri_monolith_23                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_exo
++ pri_monolith_24                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_exo
++ pri_monolith_25                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_exo
++ pri_monolith_26                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_exo
++ pri_monolith_27                 --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_exo
++ pri_monolith_balcony_sniper1    --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_balcony_sniper2    --[0xffffffff][t7s18g10] (pri_monolith) pri_monolith_specnaz
++ pri_monolith_roof2              --[0xffffffff][t7s18g10] (none) pri_monolith_specnaz
++ pri_wave1_monolith1_rsniper1    --[0xffffffff][t0s18g1] (pri_wave1) pri_monolith_ambush_specnaz
++ pri_wave1_monolith2_free1       --[0xffffffff][t0s18g1] (pri_wave1) pri_monolith_ambush
++ pri_wave1_monolith3_free2       --[0xffffffff][t0s18g1] (pri_wave1) pri_monolith_ambush
++ pri_wave2_monolith1_rsniper1    --[0xffffffff][t7s18g2] (pri_wave2) pri_monolith_ambush_exo
++ pri_wave2_monolith2_wsniper1    --[0xffffffff][t7s18g2] (pri_wave2) pri_monolith_ambush
++ pri_wave2_monolith4_wsniper2    --[0xffffffff][t7s18g2] (pri_wave2) pri_monolith_ambush
++ pri_wave2_monolith3_rsniper2    --[0xffffffff][t7s18g2] (pri_wave2) pri_monolith_ambush_specnaz
++ pri_wave4_monolith5_free2       --[0xfffffffd][t0s11g4] (pri_wave4) pri_monolith_ambush_specnaz
++ pri_wave4_monolith5_free3       --[0xfffffffd][t0s11g4] (pri_wave4) pri_monolith_ambush_specnaz
++ pri_wave4_monolith1_rsniper1    --[0xffffffff][t0s18g1] (pri_wave4) pri_monolith_ambush_exo
++ pri_wave4_monolith2_wsniper1    --[0xffffffff][t0s18g2] (pri_wave4) pri_monolith_ambush_specnaz
++ pri_wave4_monolith3_rsniper2    --[0xffffffff][t0s18g1] (pri_wave4) pri_monolith_ambush_exo
++ pri_wave4_monolith4_wsniper2    --[0xffffffff][t0s18g2] (pri_wave4) pri_monolith_ambush
++ pri_wave4_monolith5_free1       --[0xffffffff][t0s11g3] (pri_wave4) pri_monolith_ambush_specnaz
++ pri_wave5_monolith3_free3       --[0xffffffff][t0s18g5] (pri_wave5) pri_monolith_ambush_exo
++ pri_wave5_monolith4_free4       --[0xffffffff][t0s18g5] (pri_wave5) pri_monolith_ambush
++ pri_wave5_monolith1_free1       --[0xffffffff][t0s18g5] (pri_wave5) pri_monolith_ambush_exo
++ pri_wave5_monolith2_free2       --[0xffffffff][t0s18g5] (pri_wave5) pri_monolith_ambush_specnaz
++ pri_wave6_monolith1_rsniper1    --[0xffffffff][t0s18g6] (pri_wave6) pri_monolith_ambush_exo
++ pri_wave6_monolith2_wsniper1    --[0xffffffff][t0s18g6] (pri_wave6) pri_monolith_ambush_specnaz
++ pri_wave7_monolith1             --[0xffffffbf][t7s18g7] (pri_wave7) pri_monolith_specnaz
++ pri_wave7_monolith2             --[0xffffffbf][t7s18g7] (pri_wave7) pri_monolith_specnaz
++ pri_wave7_monolith3             --[0xffffffbf][t7s18g7] (pri_wave7) pri_monolith_specnaz
++ pri_wave7_monolith4             --[0xffffffbf][t7s18g7] (pri_wave7) pri_monolith_specnaz
++ pri_wave7_monolith5             --[0xffffffbf][t7s18g7] (pri_wave7) pri_monolith_specnaz
++ pri_monolith_camper_n_1         --[0xffffffff][t0s18g10] (none) pri_monolith_exo
++ pri_stalker                     --[0xffffffbf][t0s0g0] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_stalker_n_2                 --[0xffffffff][t0s18g10] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_stalker_n_2_0000            --[0xffffffff][t0s0g0] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_monolith_roof3_0000         --[0xffffffff][t0s18g10] {+pri_stadium_scene_start} (none) pri_monolith_exo
++ pri_monolith_roof3_0001         --[0xffffffff][t0s18g10] {+pri_stadium_scene_start} (none) pri_monolith_exo
++ pri_stalker_n_2_0001            --[0xfffffffb][t0s18g10] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_stalker_n_2_0002            --[0xffffffff][t0s18g10] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_stalker_n_2_0003            --[0xffffffff][t0s18g10] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_stalker_n_2_0004            --[0xffffffff][t0s18g10] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_stalker_n_2_0005            --[0xffffffff][t0s18g10] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
++ pri_stalker_n_2_0006            --[0xffffffff][t0s18g10] {+pri_monolith_respawn_1} (none) pri_monolith_specnaz
+

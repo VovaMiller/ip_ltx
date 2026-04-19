@@ -1,0 +1,86 @@
+# l12_stancia
+
+## Monsters (alive only)
+
+## NPC (alive only)
++ aes_monolit_stalker_0000        --[0xfffffffb][t0s0g0] (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0001        --[0xfffffffb][t0s0g0] (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0004        --[0xfffffffb][t0s0g0] (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0006        --[0xfffffffb][t0s0g0] (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0007        --[0xfffffffb][t0s0g0] {+aes_desant_go} (none) aes_Monolit_sniper
++ aes_monolit_stalker_0008        --[0xfffffffb][t0s0g0] {+aes_desant_go} (none) aes_Monolit_sniper
++ aes_monolit_heli_hunter         --[0xfffffffb][t0s0g0] {+aes_desant_wave3} (none) aes_Monolit_rpg
++ aes_soldier_desant_wave_0000    --[0xfffffffb][t5s5g5] {+aes_desant_wave3} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0001    --[0xfffffffb][t5s5g5] {+aes_desant_wave3} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0002    --[0xfffffffb][t5s5g5] {+aes_desant_wave3} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0006    --[0xfffffffb][t5s5g5] {+aes_desant_wave3} (none) aes_Soldier_military
++ aes_stalker_0002                --[0xfffffffb][t0s0g0] {+aes_gonduras_sound} (none) aes_Monolit_rpg
++ aes_stalker_0004                --[0xffffffff][t0s0g0] (none) aes_Monolit_sniper
++ aes_stalker_0005                --[0xffffffff][t0s0g0] {+aes_desant_wave3} (none) aes_Soldier_sniper
++ aes_stalker_0006                --[0xffffffff][t0s0g0] {+aes_desant_wave3} (none) aes_Soldier_sniper
++ aes_soldier_desant_wave_0023    --[0xfffffffb][t4s4g4] {+aes_desant_wave4} (none) aes_Soldier_military
++ aes_soldier_desant_wave_0024    --[0xfffffffb][t4s4g4] {+aes_desant_wave4} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0025    --[0xfffffffb][t4s4g4] {+aes_desant_wave4} (none) aes_Soldier_specnaz
++ aes_stalker_0007                --[0xffffffff][t0s0g0] (none) aes_Monolit_sniper
++ aes_stalker_0008                --[0xffffffff][t0s0g0] (none) aes_Monolit_sniper
++ aes_stalker_0009                --[0xfffffffb][t0s0g0] (none) aes_Monolit_rpg
++ aes_stalker_0011                --[0xfffffffb][t10s10g10] (none) aes_Monolit_rpg
++ aes_soldier_desant_wave_0029    --[0xfffffffb][t1s1g1] {+aes_desant_wave5} (none) aes_Soldier_military
++ aes_soldier_desant_wave_0031    --[0xfffffffb][t1s1g1] {+aes_desant_wave5} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0032    --[0xfffffffb][t1s1g1] {+aes_desant_wave5} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0033    --[0xfffffffb][t1s1g1] {+aes_desant_wave5} (none) aes_Soldier_specnaz
++ aes_monolit_stalker_0010        --[0xfffffffb][t10s10g10] {+aes_actor_btr} (none) aes_Monolit_sniper_gauss
++ aes_monolit_stalker_0012        --[0xfffffffb][t9s9g9] {+aes_actor_btr} (none) aes_Monolit_rpg
++ aes_monolit_stalker_0016        --[0xfffffffb][t0s0g0] {+aes_monolit_blockpost2} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0017        --[0xfffffffb][t0s0g0] {+aes_monolit_blockpost2} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0018        --[0xfffffffb][t0s0g0] {+aes_zabor} (none) aes_Monolit_master
++ aes_monolit_stalker_0021        --[0xffffffff][t0s0g0] (none) aes_Monolit_master
++ aes_monolit_stalker_0023        --[0xfffffffb][t10s10g10] {+aes_monolit_blockpost2} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0024        --[0xfffffffb][t10s10g10] {+aes_actor_bridge} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0025        --[0xfffffffb][t10s10g10] {+aes_actor_bridge} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0026        --[0xfffffffb][t0s0g0] {+aes_actor_bridge} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0027        --[0xfffffffb][t0s0g0] {+aes_actor_bridge} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0029        --[0xfffffffb][t10s10g10] {+aes_actor_road} (none) aes_Monolit_sniper_gauss
++ aes_monolit_stalker_0033        --[0xfffffffb][t0s0g0] {+aes_actor_road} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0034        --[0xfffffffb][t10s10g10] {+aes_actor_road} (none) aes_Monolit_rpg
++ aes_soldier_desant_wave_0042    --[0xfffffffb][t1s1g1] {+aes_desant_wave6} (none) aes_Soldier_military
++ aes_soldier_desant_wave_0044    --[0xfffffffb][t1s1g1] {+aes_desant_wave6} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0045    --[0xfffffffb][t1s1g1] {+aes_desant_wave6} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0046    --[0xfffffffb][t1s1g1] {+aes_desant_wave6} (none) aes_Soldier_specnaz
++ aes_monolit_stalker_0036        --[0xfffffffb][t0s10g0] {+aes_actor_road2} (none) aes_Monolit_master
++ aes_monolit_stalker_0037        --[0xfffffffb][t0s10g0] {+aes_actor_road2} (none) aes_Monolit_master
++ aes_monolit_stalker_0038        --[0xfffffffb][t0s10g0] {+aes_actor_road2} (none) aes_Monolit_master
++ aes_monolit_stalker_0039        --[0xfffffffb][t0s10g0] {+aes_actor_road2} (none) aes_Monolit_master
++ aes_monolit_stalker_0040        --[0xfffffffb][t0s10g0] {+aes_actor_road2} (none) aes_Monolit_master
++ aes_monolit_stalker_0041        --[0xfffffffb][t0s10g0] {+aes_actor_road2} (none) aes_Monolit_rpg
++ aes_soldier_desant_wave_0050    --[0xfffffffb][t1s1g1] {+aes_desant_snipers} (none) aes_Soldier_sniper
++ aes_soldier_desant_wave_0051    --[0xfffffffb][t1s1g1] {+aes_desant_snipers} (none) aes_Soldier_sniper
++ aes_soldier_desant_wave_0052    --[0xfffffffb][t1s1g1] {+aes_desant_snipers} (none) aes_Soldier_sniper
++ aes_monolit_stalker_0042        --[0xfffffffb][t0s10g0] {+aes_actor_road2} (none) aes_Monolit_master
++ aes_soldier_desant_wave_0053    --[0xfffffffb][t5s5g5] {+aes_desant_wave7} (none) aes_Soldier_military
++ aes_stalker_0013                --[0xfffffffb][t0s0g0] {+aes_desant_wave7} (none) aes_Monolit_sniper_gauss
++ aes_soldier_desant_wave_0054    --[0xfffffffb][t5s5g5] {+aes_desant_wave7} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0055    --[0xfffffffb][t5s5g5] {+aes_desant_wave7} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0056    --[0xfffffffb][t5s5g5] {+aes_desant_wave7} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0057    --[0xfffffffb][t5s5g5] {+aes_desant_wave7} (none) aes_Soldier_specnaz
++ aes_soldier_commander           --[0xfffffffb][t0s0g0] (none) aes_Soldier_commander
++ aes_monolit_stalker_0046        --[0xfffffffb][t0s0g0] {+aes_actor_ambush2} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0047        --[0xfffffffb][t0s0g0] {+aes_actor_ambush2} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0048        --[0xfffffffb][t0s0g0] {+aes_actor_ambush3} (none) aes_Monolit_specnaz
++ aes_stalker_0014                --[0xfffffffb][t0s10g0] {+aes_desant_snipers} (none) aes_Monolit_sniper_gauss
++ aes_monolit_stalker_0051        --[0xfffffffb][t10s10g10] {+aes_actor_btr} (none) aes_Monolit_sniper_gauss
++ aes_soldier_desant_wave_0003    --[0xfffffffb][t5s5g5] {+aes_desant_wave3} (none) aes_Soldier_specnaz
++ aes_stalker_0012                --[0xfffffffb][t0s10g0] {+aes_desant_snipers} (none) aes_Monolit_rpg
++ aes_monolit_stalker_0032        --[0xfffffffb][t0s0g0] {+aes_actor_road} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0045        --[0xfffffffb][t0s0g0] {+aes_actor_ambush} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0030        --[0xfffffffb][t0s0g0] {+aes_actor_road} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0049        --[0xfffffffb][t0s0g0] {+aes_actor_ambush3} (none) aes_Monolit_specnaz
++ aes_monolit_stalker_0050        --[0xfffffffb][t0s0g0] {+aes_actor_ambush5} (none) aes_Monolit_specnaz
++ aes_soldier_desant_wave_0007    --[0xfffffffb][t3s3g3] {+aes_desant_wave2} (none) aes_Soldier_military
++ aes_soldier_desant_wave_0008    --[0xfffffffb][t3s3g3] {+aes_desant_wave2} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0014    --[0xfffffffb][t3s3g3] {+aes_desant_wave2} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0015    --[0xfffffffb][t2s2g2] {+aes_desant_wave1} (none) aes_Soldier_military
++ aes_soldier_desant_wave_0016    --[0xfffffffb][t2s2g2] {+aes_desant_wave1} (none) aes_Soldier_specnaz
++ aes_soldier_desant_wave_0010    --[0xfffffffb][t3s3g3] {+aes_desant_wave2} (none) aes_Soldier_specnaz
++ aes_monolit_stalker_0014        --[0xfffffffb][t9s9g9] {+aes_actor_btr} (none) aes_Monolit_rpg
+

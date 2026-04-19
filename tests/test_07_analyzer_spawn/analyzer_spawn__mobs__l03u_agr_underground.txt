@@ -1,0 +1,27 @@
+# l03u_agr_underground
+
+## Monsters (alive only)
++ kat_m_bloodsucker_e         --[0xfffffff7][t0s6g2] {+agr_u_bloodsucker_start} (none) m_bloodsucker_e
++ kat2_m_controller_old_0000  --[0xffffffff][t3s5g1] {+agr_u_controller_start} (none) controller_tubeman
+
+## NPC (alive only)
++ kat_bandit          --[0xffffffff][t0s4g2] (agr_u_bandits) agr_bandit_general
++ kat_bandit_0000     --[0xffffffff][t0s4g2] (agr_u_bandits) agr_bandit_general
++ kat_bandit_0001     --[0xffffffff][t0s4g2] (agr_u_bandits) agr_bandit_general
++ kat_bandit_0002     --[0xffffffff][t0s4g2] (agr_u_bandits) agr_bandit_general
++ kat_bandit_0003     --[0xffffffff][t0s4g2] (agr_u_bandits) agr_bandit_general
++ kat_bandit_0004     --[0xffffffff][t0s4g2] (agr_u_bandits) agr_bandit_general
++ kat_bandit_0005     --[0xffffffff][t0s4g2] (agr_u_bandits) agr_bandit_general
++ kat_soldier_0006    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_soldier_0007    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_soldier_0008    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_soldier_0009    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_soldier_0010    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_soldier_0011    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_soldier_0012    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_soldier_0013    --[0xffffffff][t0s4g1] (agr_u_soldiers) agr_soldier_regular
++ kat_stalker         --[0xffffffff][t0s0g0] {+agr_doc_wakeup} (none) cit_doctor
++ kat_soldier_0000    --[0xffffffff][t0s4g1] {-agroprom_military_case_done} (none) agr_soldier_regular
++ kat_soldier_0001    --[0xffffffff][t0s4g1] {-agroprom_military_case_done} (none) agr_soldier_regular
++ kat_soldier_0002    --[0xffffffff][t0s4g1] {-agroprom_military_case_done} (none) agr_soldier_regular
+

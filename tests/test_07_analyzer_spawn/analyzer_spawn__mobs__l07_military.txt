@@ -1,0 +1,77 @@
+# l07_military
+
+## Monsters (alive only)
++ mil_bloodsucker_normal          --[0xffffffff][t0s0g0] (mil_hunters_bloodsucker) bloodsucker_normal
++ mil_boar_strong                 --[0xffffffff][t0s0g0] boar_strong
++ mil_boar_strong_0000            --[0xffffffff][t0s0g0] boar_strong
++ mil_pseudodog_normal            --[0xffffffff][t0s0g0] pseudodog_normal
++ mil_pseudodog_strong            --[0xffffffbf][t0s0g0] pseudodog_strong
++ mil_boar_normal                 --[0xffffffff][t0s0g0] boar_normal
++ mil_boar_strong_0002            --[0xffffffbf][t0s0g0] boar_strong
++ mil_boar_strong_0003            --[0xffffffbf][t0s0g0] boar_strong
++ mil_pseudodog_strong_0000       --[0xffffffbf][t0s0g0] pseudodog_strong
++ mil_pseudodog_strong_0001       --[0xffffffbf][t0s0g0] pseudodog_strong
++ mil_m_bloodsucker_e             --[0xffffffff][t9s2g1] {+mil_village_bloodsucker2} (none) m_bloodsucker_e
++ mil_m_bloodsucker_e_0000        --[0xffffffff][t9s2g2] {+mil_village_bloodsucker3} (none) m_bloodsucker_e
++ mil_m_bloodsucker_e_0001        --[0xffffffff][t9s2g3] {+mil_village_bloodsucker1},{+mil_village_bloodsucker2},{+mil_village_bloodsucker3} (none) m_bloodsucker_e
++ mil_m_bloodsucker_normal_0000   --[0xffffffff][t9s2g4] {+mil_village_bloodsucker1} (none) bloodsucker_normal
+
+## NPC (alive only)
++ mil_stalker0012                 --[0xfffffffb][t0s0g0] (none) mil_Svoboda_zombi_stalker
++ mil_dolg_stalker0002            --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_silence
++ mil_dolg_stalker0006            --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_silence
++ mil_dolg_stalker0004            --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_silence
++ mil_dolg_stalker0003            --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_silence
++ mil_dolg_stalker0000            --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_cherep
++ mil_dolg_stalker0007            --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_silence
++ mil_freedom_stalker0010         --[0xffffffbf][t0s7g0] (mil_freedom) mil_Svoboda_sniper
++ mil_freedom_member0018          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_master_Max
++ mil_freedom_member0002          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_engineer
++ mil_freedom_member0005          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_zoneguard
++ mil_freedom_member0019          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_bodyguard
++ mil_freedom_member0012          --[0xffffffff][t11s7g0] (mil_freedom) mil_Svoboda_leader
++ mil_freedom_stalker0026         --[0xffffffbf][t0s7g0] (mil_freedom) mil_Svoboda_cook
++ mil_freedom_member0021          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_trader
++ mil_freedom_member0009          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_bodyguard
++ mil_stalker0023                 --[0xffffffff][t0s0g0] (mil_village) mil_Svoboda_master_Ugrumiy
++ mil_stalker0024                 --[0xffffffff][t0s0g0] (mil_village) mil_Svoboda_specnaz
++ mil_stalker0025                 --[0xffffffff][t0s0g0] (mil_village) mil_Svoboda_regular
++ mil_freedom_member0010          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_specnaz
++ mil_patrol_stalker0013          --[0xfffffffb][t13s13g13] (none) mil_Svoboda_regular
++ mil_patrol_stalker0014          --[0xfffffffb][t13s13g13] (none) mil_Svoboda_specnaz
++ mil_patrol_stalker_0000         --[0xfffffffb][t13s13g13] (none) mil_Svoboda_regular
++ mil_ara_guard2                  --[0xfffffffb][t0s0g0] {+mil_courier_call} (none) mil_Killer_specnaz
++ mil_ara                         --[0xfffffffb][t0s0g0] {+mil_courier_call} (none) mil_Killer_informator
++ mil_ara_guard1                  --[0xfffffffb][t0s0g0] {+mil_courier_call} (none) mil_Killer_specnaz
++ mil_ara_guard3                  --[0xfffffffb][t0s0g0] {+mil_courier_call} (none) mil_Killer_specnaz
++ mil_freedom_member0001          --[0xfffff7ff][t11s9g0] {+mil_leader_quest2_start} (none) mil_Svoboda_stukach
++ mil_dolg_stalker0001            --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_silence
++ mil_freedom_member0024          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_sniper
++ mil_freedom_member0026          --[0xffffffbf][t11s7g0] (mil_freedom) mil_Svoboda_sniper
++ mil_blockpost_freedomstalker001 --[0xffffffbf][t11s7g4] (mil_fblockpost) mil_Svoboda_blockpost_leader
++ mil_freedom_member0025          --[0xffffffff][t11s7g0] (mil_freedom) mil_Svoboda_sniper
++ mil_stalker_monolith_w1         --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave1} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0000_w1    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave1} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0006_w1    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave1} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0007_w1    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave1} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0008_w1    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave1} (mil_monolit) mil_Monolit_master
++ mil_stalker_monolith_0012_w1    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave1} (mil_monolit) mil_Monolit_regular
++ mil_freedom_stalker0004         --[0xfffffffb][t1s7g0] (mil_freedom) mil_Svoboda_sniper
++ mil_stalker_monolith_0003_w2    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave2} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0004_w2    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave2} (mil_monolit) mil_Monolit_master
++ mil_stalker_monolith_0009_w2    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave2} (mil_monolit) mil_Monolit_master
++ mil_stalker_monolith_0010_w2    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave2} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0015_w2    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave2} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0016_w3    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave3} (mil_monolit) mil_Monolit_regular
++ mil_stalker_monolith_0017_w3    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave3} (mil_monolit) mil_Monolit_master
++ mil_stalker_monolith_0018_w3    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave3} (mil_monolit) mil_Monolit_master
++ mil_stalker_monolith_0019_w3    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave3} (mil_monolit) mil_Monolit_master
++ mil_stalker_monolith_0020_w3    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave3} (mil_monolit) mil_Monolit_master
++ mil_stalker_monolith_0021_w3    --[0xffffffff][t0s0g0] {+mil_fblockpost_rush_wave3} (mil_monolit) mil_Monolit_master
++ mil_dolg_stalker0006_0000       --[0xfffffffb][t2s5g5] (mil_dolg) mil_Dolg_specnaz_silence
++ mil_stalker_0003                --[0xffffffbf][t0s0g0] sim_Svoboda_specnaz_leshii
++ sim_stalker_prut                --[0xffffffbf][t0s0g0] sim_svoboda_specnaz_prut
++ sim_stalker_master_diador       --[0xffffffbf][t0s0g0] sim_stalker_master_diador
++ sim_stalker_master_chuchelo     --[0xffffffbf][t0s0g0] (ros_smart_stalker3, mil_lager) sim_stalker_master_chuchelo
++ sim_stalker_master_master       --[0xffffffbf][t0s0g0] sim_stalker_master_master
+

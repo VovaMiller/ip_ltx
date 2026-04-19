@@ -1,0 +1,61 @@
+# l06_rostok
+
+## Monsters (alive only)
++ rostok_pseudodog_weak                   --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) pseudodog_weak
++ rostok_dog_strong_0000                  --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) dog_strong
++ rostok_dog_strong_0001                  --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) dog_strong
++ rostok_dog_normal                       --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) dog_normal
++ rostok_dog_normal_0000                  --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) dog_normal
++ rostok_dog_normal_0001                  --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) dog_normal
++ rostok_dog_normal_0002                  --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) dog_normal
++ rostok_dog_strong_0002                  --[0xffffffbf][t0s0g0] {+yan_find_scientist_done} (none) dog_strong
++ rostok_bloodsucker_strong               --[0xffffffbf][t0s0g0] {+bar_rescue_research_done},{+bar_rescue_research_fail} (ros_smart_bloodsucker1) bloodsucker_strong
++ rostok_m_poltergeist_tele_outdoor       --[0xffffffff][t0s0g0] {+yan_find_scientist_start},{+yan_find_scientist_semenov_start} (ros_smart_poltergeist1) m_poltergeist_tele_outdoor
++ rostok_m_poltergeist_tele_outdoor_0000  --[0xffffffbf][t0s0g0] {+bar_deactivate_radar_done} (ros_smart_poltergeist2) m_poltergeist_tele_outdoor
+
+## NPC (alive only)
++ bar_freedom_attacker_1          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_4          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_6          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_2          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_3          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_5          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_Killer_regular
++ bar_ecolog_professor            --[0xfffffff7][t0s5g3] {+bar_heli_scene_stay_online} (bar_ecolog_crush) bar_ecolog_professor
++ bar_ecolog_crush_1              --[0xfffffff7][t0s5g3] {+bar_heli_scene_stay_online} (bar_ecolog_crush) bar_ecolog_guard
++ bar_ecolog_crush_3              --[0xfffffff7][t0s5g3] {+bar_heli_scene_stay_online} (bar_ecolog_crush) bar_ecolog_guard
++ bar_ecolog_crush_2              --[0xfffffff7][t0s5g3] {+bar_heli_scene_stay_online} (bar_ecolog_crush) bar_ecolog_guard
++ bar_ecolog_crush_4              --[0xfffffff7][t0s5g3] {+bar_heli_scene_stay_online} (bar_ecolog_crush) bar_ecolog_guard
++ bar_freedom_attacker_commander  --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_svoboda_attack_commander
++ bar_spy_killer_2                --[0xfffffffb][t0s5g7] {+bar_kill_svoboda_ambush_start} (none) bar_Killer_specnaz
++ bar_spy_killers_2               --[0xfffffff3][t0s5g7] {+bar_kill_svoboda_ambush_start} (none) bar_Killer_sniper
++ bar_spy_killers_1               --[0xfffffff7][t0s5g7] {+yan_find_scientist_done} (none) bar_Killer_sniper
++ bar_freedom_attacker_7          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_8          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_attack) bar_killer_rpg
++ bar_ambush_killer_01            --[0xfffffff7][t0s5g7] {+bar_heli_scene_stay_online} (none) bar_Killer_sniper_on_enter
++ bar_ambush_killer_03            --[0xfffffff7][t6s6g1] {-bar_kill_svoboda_ambush_start} (none) bar_Killer_regular
++ bar_ambush_killer_05            --[0xfffffff7][t0s6g8] {+bar_heli_scene_stay_online+rostok_spawn_naemniki} (none) bar_Killer_regular
++ bar_ambush_killer_07            --[0xfffffff7][t0s6g8] {+bar_heli_scene_stay_online+rostok_spawn_naemniki} (none) bar_Killer_regular
++ rostok_stalker_0001             --[0xffffffbf][t6s6g1] {+bar_heli_scene_stay_online} (none) bar_Killer_sniper_on_enter
++ rostok_stalker_0002             --[0xffffffbf][t6s6g1] {+bar_heli_scene_stay_online} (none) bar_Killer_sniper_on_enter
++ rostok_stalker_0003             --[0xffffffbf][t6s6g1] {+bar_heli_scene_stay_online} (none) bar_Killer_sniper_on_enter
++ rostok_stalker_0004             --[0xffffffbf][t6s6g1] {+bar_heli_scene_stay_online} (none) bar_Killer_sniper_on_enter
++ bar_ambush_killer_09            --[0xfffffff7][t0s6g8] {+bar_heli_scene_stay_online+rostok_spawn_naemniki} (none) bar_Killer_regular
++ bar_freedom_attacker_10         --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online+bar_kruglov_follow_actor} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_11         --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online+bar_kruglov_follow_actor} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_12         --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online+bar_kruglov_follow_actor} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_9          --[0xffffffff][t0s5g7] {+bar_heli_scene_stay_online+bar_kruglov_follow_actor} (bar_freedom_attack) bar_Killer_regular
++ bar_freedom_attacker_0000       --[0xfffffff7][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_chasers_attack) bar_Killer_regular
++ bar_freedom_attacker_0001       --[0xfffffff7][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_chasers_attack) bar_Killer_regular
++ bar_freedom_attacker_0002       --[0xfffffff7][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_chasers_attack) bar_Killer_regular
++ bar_freedom_attacker_0003       --[0xfffffff7][t0s5g7] {+bar_heli_scene_stay_online} (bar_freedom_chasers_attack) bar_Killer_regular
++ rostok_stalker_zombied          --[0xffffffff][t0s0g0] {+ros_zombied_spawn_01} (none) yan_zombied
++ rostok_stalker_zombied_0000     --[0xffffffff][t0s0g0] {+ros_zombied_spawn_01} (none) yan_zombied
++ rostok_stalker_zombied_0001     --[0xffffffff][t0s0g0] {+ros_zombied_spawn_01} (none) yan_zombied
++ rostok_stalker_zombied_0003     --[0xffffffff][t0s0g0] {+ros_zombied_spawn_01} (none) yan_zombied
++ rostok_stalker_zombied_0004     --[0xffffffff][t0s0g0] {+ros_zombied_spawn_01} (none) yan_zombied
++ rostok_stalker_zombied_0005     --[0xffffffff][t0s0g0] (none) yan_zombied
++ rostok_stalker_zombied_0006     --[0xffffffff][t0s0g0] (none) yan_zombied
++ bar_ambush_killer_02            --[0xfffffff7][t0s5g7] {+bar_heli_scene_stay_online} (none) bar_Killer_regular
++ bar_ambush_killer_04            --[0xfffffff7][t0s5g7] {+bar_heli_scene_stay_online} (none) bar_Killer_regular
++ rostok_stalker_0000             --[0xffffffbf][t0s0g0] {+rostok_spawn_dogs_food-bar_deactivate_radar_start} (none) sim_killer_general
+

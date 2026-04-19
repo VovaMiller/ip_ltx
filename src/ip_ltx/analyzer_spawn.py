@@ -150,6 +150,9 @@ def extract_mobs(fn: str, level: str) -> None:
             ("NPC (alive only)", "T_STALKER")
         ]:
             file.write("## {}\n".format(_caption))
+            if len(info[_type]) == 0:
+                file.write("\n")
+                continue
             tab = 4 * (1 + max([len(mob["name"]) for mob in info[_type]]) // 4)
             for mob in info[_type]:
                 str_spawner = (
