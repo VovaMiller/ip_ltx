@@ -93,7 +93,7 @@ l03u_agr_underground_hw = 3403
 ;  Принадлежность к типу определяется принадлежностью хотя бы к одному из перечисленных классов.
 ;  Принадлежность к серверному классу (cse_class) определяется прямым совпадением или наследованием от него.
 ;  Принадлежность к клиентскому классу (CClass) определяется прямым совпадением без учёта наследования.
-[types]
+[object_types]
 is_monster      = se_monster
 is_stalker      = se_stalker
 is_anomaly      = cse_alife_anomalous_zone, cse_alife_torrid_zone
@@ -173,30 +173,14 @@ SM_FLESH    = T_MONSTER
 SM_P_DOG    = T_MONSTER
 SM_BURER    = T_MONSTER
 SM_CAT_S    = T_MONSTER
-IP_CAT_S    = T_MONSTER
 SM_CHIMS    = T_MONSTER
-IP_CHM_A    = T_MONSTER
-IP_CHM_P    = T_MONSTER
-SM_WOLK     = T_MONSTER
-IP_CHM_S    = T_MONSTER
-IP_WLK_S    = T_MONSTER
-IP_IZL_S    = T_MONSTER
-IP_CTR_S    = T_MONSTER
-IP_GRG_S    = T_MONSTER
-IP_ZOM_P    = T_MONSTER
-IP_ZOM_Y    = T_MONSTER
-IP_PLT_S    = T_MONSTER
-IP_DOG_B    = T_MONSTER
-IP_DOG_T    = T_MONSTER
 SM_CONTR    = T_MONSTER
 SM_IZLOM    = T_MONSTER
 SM_POLTR    = T_MONSTER
 SM_GIANT    = T_MONSTER
-IP_GIG_P    = T_MONSTER
 SM_ZOMBI    = T_MONSTER
 SM_SNORK    = T_MONSTER
 SM_TUSHK    = T_MONSTER
-SM_RAT      = T_MONSTER
 SM_DOG_P    = T_MONSTER
 SM_DOG_F    = T_MONSTER
 
@@ -220,9 +204,9 @@ ZS_MBALD    = true  ; se_zones.se_zone_anom     ; CMosquitoBald     ; zone_mbald
 ZS_GALAN    = true  ; se_zones.se_zone_anom     ; CMincer           ; zone_galant_s
 ZS_MINCE    = true  ; se_zones.se_zone_anom     ; CMincer           ; zone_mincer_s
 
-; Классы, распознающиеся как аномалии в _g.IsAnomaly
+; Классы реальных аномалий
+; Используется только в analyzer_spawn
 [is_anomaly_class2]
-Z_AMEBA     = true
 ZS_BFUZZ    = true
 ZS_MBALD    = true
 ZS_GALAN    = true

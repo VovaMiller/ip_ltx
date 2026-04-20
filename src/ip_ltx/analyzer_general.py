@@ -151,7 +151,7 @@ def is_stalker(section: Section) -> bool:
 def is_anomaly(section: Section) -> bool:
     """Является ли секция аномалией.
     Используется проверка по классу (поле ``class``).
-    В основе широкий критерий, под который попадает в т.ч. радиоактивная зона.
+    В основе широкий критерий, под который попадают в т.ч. костры и радиация.
     """
     _class = section.get_string("class", "-")
     return meta_ini().get_bool("is_anomaly_class", _class, False)
@@ -159,8 +159,8 @@ def is_anomaly(section: Section) -> bool:
 def is_anomaly2(section: Section) -> bool:
     """Является ли секция аномалией.
     Используется проверка по классу (поле ``class``).
-    По сравнению с :func:`is_anomaly` в основе более узкий критерий, который
-    по идее эквивалентен проверке ``_g.IsAnomaly``.
+    По сравнению с :func:`is_anomaly` в основе более узкий критерий,
+    отсекающий зоны, по сути не являющиеся аномалиями, типа костров и радиации.
     """
     _class = section.get_string("class", "-")
     return meta_ini().get_bool("is_anomaly_class2", _class, False)
