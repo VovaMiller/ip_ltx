@@ -212,46 +212,6 @@ bip01_spine1    6       7
 bip01_neck      6       7
 bip01_head      3       4 (1)
 
-; burer_arena
-default         16      160
-bip01_pelvis    4       40
-bip01_spine     3       27
-bip01_spine1    3       27
-bip01_neck      3       27
-bip01_head      1       8
-
-; m_burer_normal
-default         16      160
-bip01_pelvis    4       40
-bip01_spine     3       27
-bip01_spine1    3       27
-bip01_neck      3       27
-bip01_head      1       8
-
-; m_burer_normal_black
-default         16      160
-bip01_pelvis    4       40
-bip01_spine     3       27
-bip01_spine1    3       27
-bip01_neck      3       27
-bip01_head      1       8
-
-; burer_indoor
-default         16      160
-bip01_pelvis    4       40
-bip01_spine     3       27
-bip01_spine1    3       27
-bip01_neck      3       27
-bip01_head      1       8
-
-; burer_outdoor
-default         16      160
-bip01_pelvis    4       40
-bip01_spine     3       27
-bip01_spine1    3       27
-bip01_neck      3       27
-bip01_head      1       8
-
 ; m_gigant_e
 default         40      40
 bone01          40      40
@@ -379,38 +339,6 @@ bip01_spine     2       7
 bip01_spine1    2       7
 bip01_neck      2       7
 bip01_head      1       4
-
-; zombie_weak
-default         2       10
-bip01_pelvis    2       10
-bip01_spine     2       10
-bip01_spine1    2       10
-bip01_neck      2       10
-bip01_head      1       5
-
-; zombie_normal
-default         4       20
-bip01_pelvis    4       20
-bip01_spine     4       20
-bip01_spine1    4       20
-bip01_neck      4       20
-bip01_head      2       10
-
-; zombie_strong
-default         8       40
-bip01_pelvis    8       40
-bip01_spine     8       40
-bip01_spine1    8       40
-bip01_neck      8       40
-bip01_head      4       20
-
-; zombie_immortal
-default         8       40
-bip01_pelvis    8       40
-bip01_spine     8       40
-bip01_spine1    8       40
-bip01_neck      8       40
-bip01_head      4       20
 
 ; m_snork_e
 default         1       23

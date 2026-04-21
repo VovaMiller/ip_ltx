@@ -25,11 +25,6 @@ pseudodog_arena                       monsters\pseudodog\pseudodog_grey
 psy_dog                               monsters\pseudodog\pseudodog_grey
 psy_dog_phantom                       monsters\pseudodog\pseudodog_grey
 psy_dog_radar                         monsters\pseudodog\pseudodog_grey
-burer_arena                                      monsters\burer\burer_1
-m_burer_normal                                     monsters\burer\burer
-m_burer_normal_black                             monsters\burer\burer_1
-burer_indoor                                       monsters\burer\burer
-burer_outdoor                                      monsters\burer\burer
 m_gigant_e                           monsters\psevdogigant\psevdogigant
 m_gigant_normal                      monsters\psevdogigant\psevdogigant
 gigant_normal                        monsters\psevdogigant\psevdogigant
@@ -46,10 +41,6 @@ m_poltergeist_normal_tele              monsters\poltergeist\poltergeist
 m_poltergeist_tele_outdoor             monsters\poltergeist\poltergeist
 m_poltergeist_normal_flame             monsters\poltergeist\poltergeist
 m_poltergeist_strong_flame             monsters\poltergeist\poltergeist
-zombie_weak                                      monsters\zombi\zombi_2
-zombie_normal                                    monsters\zombi\zombi_1
-zombie_strong                                 monsters\zombi\zombi_trup
-zombie_immortal                               monsters\zombi\zombi_trup
 m_snork_e                                          monsters\snork\snork
 snork_weak                                         monsters\snork\snork
 snork_normal                                       monsters\snork\snork

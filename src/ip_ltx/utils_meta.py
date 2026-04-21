@@ -240,9 +240,20 @@ class CLSIDs(SingletonBase):
 
     def __contains__(self, clsid: str) -> bool:
         return clsid in self._clsids
+    
+    def __getitem__(self, clsid: str) -> CLSID:
+        if clsid not in self._clsids:
+            raise KeyError(f"clsid {clsid} doesn't exist")
+        return self._clsids[clsid]
+    
+    def __iter__(self):
+        return iter(self._clsids)
 
     def __len__(self):
         return len(self._clsids)
+    
+    def data(self):
+        return self._clsids.values()
 
     def get_client_class(self, clsid: str) -> str | None:
         """Получить имя клиентского класса для данного CLSID.

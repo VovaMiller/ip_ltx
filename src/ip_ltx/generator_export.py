@@ -1,51 +1,46 @@
 """Генератор данных для сторонних утилит."""
 
-from collections import OrderedDict
+from dataclasses import dataclass
 
 from .ini import meta_ini, system_ini
 from .utils import print_warning, run
+from .utils_meta import CLSIDs, ObjectType
 
 # ----------------------------------------------------------------
 
 def _ip_test_static_tables(fn: str) -> None:
+    @dataclass
     class SectionGroup:
-        def __init__(self, name):
-            self.name = name
-            self.sections = []
+        name: str
+        sections: list[str]
 
     ini_meta = meta_ini()
     ini_system = system_ini()
-    group_by_type = OrderedDict([
-        ("T_ART",       SectionGroup("SECTIONS_INV_ART")),
-        ("T_WPN",       SectionGroup("SECTIONS_INV_WPN")),
-        ("T_AMMO",      SectionGroup("SECTIONS_INV_AMMO")),
-        ("T_GREN",      SectionGroup("SECTIONS_INV_GREN")),
-        ("T_ADDON",     SectionGroup("SECTIONS_INV_ADDON")),
-        ("T_OUTFIT",    SectionGroup("SECTIONS_INV_OUTFIT")),
-        ("T_OTHER",     SectionGroup("SECTIONS_INV_OTHER")),
-        ("T_STALKER",   SectionGroup("SECTIONS_STALKER")),
-    ])
+    CLSIDS = CLSIDs()
+    group_by_type = {
+        ObjectType.ITEM_ART:        SectionGroup("SECTIONS_INV_ART", []),
+        ObjectType.ITEM_WEAPON:     SectionGroup("SECTIONS_INV_WPN", []),
+        ObjectType.ITEM_AMMO:       SectionGroup("SECTIONS_INV_AMMO", []),
+        ObjectType.ITEM_GRENADE:    SectionGroup("SECTIONS_INV_GREN", []),
+        ObjectType.ITEM_ADDON:      SectionGroup("SECTIONS_INV_ADDON", []),
+        ObjectType.ITEM_OUTFIT:     SectionGroup("SECTIONS_INV_OUTFIT", []),
+        ObjectType.ITEM_OTHER:      SectionGroup("SECTIONS_INV_OTHER", []),
+        ObjectType.STALKER:         SectionGroup("SECTIONS_STALKER", []),
+        ObjectType.MONSTER:         SectionGroup("SECTIONS_MONSTER", []),
+    }
 
-    # filling in groups (inventory items)
+    # filling in groups
     for sect in ini_system.sections():
         if ini_meta.line_exist("ignore_sections", sect.id):
             continue
         if len(ini_system.get_string(sect.id, "scope_respawn", "")) > 0:
             # skipping auxiliary multi-scope sections
             continue
-        _class = sect.get_string("class", "?")
-        _type = ini_meta.get_string("inv_class_to_type", _class, "?")
-        if _type in group_by_type:
-            group_by_type[_type].sections.append(sect.id)
-
-    # filling in groups (mobs)
-    for sect in ini_system.sections():
-        if ini_meta.line_exist("ignore_sections", sect.id):
-            continue
-        _class = sect.get_string("class", "?")
-        _type = ini_meta.get_string("mob_class_to_type", _class, "?")
-        if _type in group_by_type:
-            group_by_type[_type].sections.append(sect.id)
+        _class = sect.get_string("class", "")
+        if (len(_class) > 0) and (_class in CLSIDS):
+            _type = CLSIDS.get_object_type(_class)
+            if _type in group_by_type:
+                group_by_type[_type].sections.append(sect.id)
 
     # writing
     with open(fn, "w", encoding="utf-8") as file:
@@ -73,6 +68,7 @@ def _acdc_tables(fn: str) -> None:
     Работа генерации тестировалась на ACDC с последней правкой от 11.10.2007
     """
     ini_meta = meta_ini()
+    CLSIDS = CLSIDs()
     SECTION_IGNORE = "acdc@ignore"
     SECTION_CONVERSION = "acdc@conversion"
 
@@ -97,14 +93,12 @@ def _acdc_tables(fn: str) -> None:
 
     # Получение соответствий CLSID с серверным классом.
     # Считываем конфиг программы.
-    clsid_to_classes = ini_meta.section("clsid_to_classes")
-    clsid_to_cse = {}
-    for clsid in clsid_to_classes.lines():
-        if clsid in ignore_clsid:
-            continue
-        cse = clsid_to_classes.get_pair_str(clsid)[1]
-        if len(cse) > 0:
-            clsid_to_cse[clsid] = cse
+    clsid_to_cse: dict[str, str]
+    clsid_to_cse = {
+        clsid.clsid: clsid.server_class
+        for clsid in CLSIDS.data()
+        if (clsid.clsid not in ignore_clsid) and (clsid.server_class is not None)
+    }
 
     # Получение соответствий имён секций с CLSID.
     # Считываем конфиги игры.
@@ -158,6 +152,7 @@ def _universal_acdc_tables(fn: str) -> None:
     Работа генерации тестировалась на Universal ACDC v1.38
     """
     ini_meta = meta_ini()
+    CLSIDS = CLSIDs()
     SECTION_IGNORE = "universal_acdc@ignore"
     SECTION_CONVERSION = "universal_acdc@conversion"
 
@@ -182,14 +177,12 @@ def _universal_acdc_tables(fn: str) -> None:
 
     # Получение соответствий CLSID с серверным классом.
     # Считываем конфиг программы.
-    clsid_to_classes = ini_meta.section("clsid_to_classes")
-    clsid_to_cse = {}
-    for clsid in clsid_to_classes.lines():
-        if clsid in ignore_clsid:
-            continue
-        cse = clsid_to_classes.get_pair_str(clsid)[1]
-        if len(cse) > 0:
-            clsid_to_cse[clsid] = cse
+    clsid_to_cse: dict[str, str]
+    clsid_to_cse = {
+        clsid.clsid: clsid.server_class
+        for clsid in CLSIDS.data()
+        if (clsid.clsid not in ignore_clsid) and (clsid.server_class is not None)
+    }
 
     # Получение соответствий имён секций с CLSID.
     # Считываем конфиги игры.

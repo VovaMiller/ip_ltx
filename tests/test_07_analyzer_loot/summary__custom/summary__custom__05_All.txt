@@ -8,6 +8,7 @@ show_unlisted_items = True
 levels = l01_escape, l02_garbage, l03_agroprom, l04_darkvalley, l05_bar, l06_rostok, l07_military, l08_yantar, l08u_brainlab, l10_radar, l11_pripyat, l12_stancia
 
 [WARNING]
+; encountered section 'bread_a' from [ignore_sections]
 ; encountered section 'guitar_a' from [ignore_sections]
 ; encountered section 'hand_radio' from [ignore_sections]
 ; encountered section 'wpn_binoc' from [ignore_sections]
@@ -178,9 +179,7 @@ outfit_exo_m1           = 1
 bread_a                 = 3
 bread                   = 34
 kolbasa                 = 29
-kolbasa_a               = 0
 conserva                = 124
-vodka_a                 = 0
 vodka                   = 94
 guitar_a                = 1
 antirad                 = 100
@@ -189,7 +188,6 @@ medkit_army             = 25
 medkit_scientic         = 14
 energy_drink            = 51
 bandage                 = 187
-binocular_a             = 0
 detector_simple         = 0
 detector_advances       = 0
 detector_elite          = 0

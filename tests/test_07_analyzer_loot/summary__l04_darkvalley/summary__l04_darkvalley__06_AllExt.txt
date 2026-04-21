@@ -8,6 +8,7 @@ show_unlisted_items = True
 levels = l04_darkvalley
 
 [WARNING]
+; encountered section 'bread_a' from [ignore_sections]
 ; encountered section 'guitar_a' from [ignore_sections]
 ; encountered section 'hand_radio' from [ignore_sections]
 
@@ -195,9 +196,7 @@ outfit_exo_m1           = 0
 bread_a                 = 3
 bread                   = 4
 kolbasa                 = 6
-kolbasa_a               = 0
 conserva                = 27
-vodka_a                 = 0
 vodka                   = 38
 guitar_a                = 1
 antirad                 = 18
@@ -206,7 +205,6 @@ medkit_army             = 5
 medkit_scientic         = 0
 energy_drink            = 13
 bandage                 = 51
-binocular_a             = 0
 detector_simple         = 0
 detector_advances       = 0
 detector_elite          = 0

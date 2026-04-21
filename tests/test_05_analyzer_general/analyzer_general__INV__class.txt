@@ -4,7 +4,6 @@ wpn_ak74u                         WP_LR300
 wpn_fn2000                        WP_GROZA
 wpn_rpg7                           WP_RPG7
 wpn_rpg7_missile                    G_RPG7
-bolt                               II_BOLT
 grenade_f1                            G_F1
 grenade_gd-05                         G_F1
 grenade_rgd5                        G_RGD5
@@ -76,12 +75,9 @@ wpn_addon_scope_susat             WP_SCOPE
 wpn_addon_silencer                W_SILENC
 wpn_addon_grenade_launcher        W_GLAUNC
 wpn_addon_grenade_launcher_m203   W_GLAUNC
-bread_a                           II_ATTCH
 bread                              II_FOOD
 kolbasa                            II_FOOD
-kolbasa_a                         II_ATTCH
 conserva                           II_FOOD
-vodka_a                           II_ATTCH
 vodka                             II_BOTTL
 antirad                           II_ANTIR
 medkit                            II_MEDKI
@@ -89,8 +85,6 @@ medkit_army                       II_MEDKI
 medkit_scientic                   II_MEDKI
 energy_drink                      II_BOTTL
 bandage                           II_BANDG
-binocular_a                       II_ATTCH
-device_pda                           D_PDA
 detector_simple                   D_SIMDET
 detector_advances                 D_SIMDET
 detector_elite                    D_SIMDET
@@ -171,8 +165,6 @@ dolg_outfit                         E_STLK
 dolg_scientific_outfit              E_STLK
 ecolog_outfit                       E_STLK
 protection_outfit                   E_STLK
-military_stalker_outfit           EQU_MLTR
-military_commander_outfit         EQU_MLTR
 soldier_outfit                      E_STLK
 helicopter_missile                  G_RPG7
 outfit_novice_m1                    E_STLK
@@ -220,6 +212,5 @@ hunters_toz                        WP_BM16
 mp_wpn_fake_missile                 G_FAKE
 mp_wpn_fake_missile2                G_FAKE
 mp_wpn_fake_missile1                G_FAKE
-document                            II_DOC
 new_attachable_item               II_BTTCH
 custom_script_object              NW_ATTCH

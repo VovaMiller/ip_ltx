@@ -8,6 +8,7 @@ show_unlisted_items = False
 levels = l04_darkvalley
 
 [WARNING]
+; encountered section 'bread_a' from [ignore_sections]
 ; encountered section 'guitar_a' from [ignore_sections]
 ; encountered section 'hand_radio' from [ignore_sections]
 
