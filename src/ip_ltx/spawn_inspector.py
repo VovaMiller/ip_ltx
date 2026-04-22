@@ -11,6 +11,7 @@ from .ini import meta_ini, system_ini, spawn_ini, game_ini
 from .spawn import get_spawn
 from .treasure_manager import treasure_manager_ini, treasure_by_sid
 from .utils import ANSI_COLOR_CODE, cast_safe, validate_data
+from .utils_meta import ObjectType
 
 _OK = True
 
@@ -423,7 +424,7 @@ def _check_weapons_on_level() -> None:
     )
     for obj in get_spawn().objects():
         # Объект должен быть оружием
-        if ini_meta.get_string("inv_class_to_type", obj._class, "") != "T_WPN":
+        if obj._type != ObjectType.ITEM_WEAPON:
             continue
         # Объект не должен быть квестовым
         if death_ini.get_string("keep_items", obj.section_name, "false") == "true":

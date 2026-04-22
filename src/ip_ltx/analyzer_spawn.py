@@ -3,6 +3,7 @@
 from .ini import meta_ini, spawn_ini
 from .spawn import get_spawn
 from .utils import print_warning, validate_data
+from .utils_meta import ObjectType
 
 # ----------------------------------------------------------------
 
@@ -31,7 +32,7 @@ def check_anomalies(
         # Поиск аномалий с установленным story_id
         file.write("Anomalies with story_id:\n")
         for obj in spawn.objects():
-            if ini_meta.get_bool("is_anomaly_class", obj._class, False):
+            if obj._type == ObjectType.ANOMALY:
                 if (obj.story_id is not None) and (obj.story_id != -1):
                     file.write("- {}\n".format(obj.name))
 
@@ -52,7 +53,7 @@ def check_anomalies(
         for obj in spawn.objects():
             if obj._level != level:
                 continue
-            if not ini_meta.get_bool("is_anomaly_class2", obj._class, False):
+            if not ini_meta.line_exist("is_anomaly2", obj._class):
                 continue
             if ini_spawn.get_int(obj._id, "restrictor_type", -1) == 2:
                 continue
@@ -67,27 +68,19 @@ def extract_mobs(fn: str, level: str) -> None:
     :param fn: Путь/имя файла для вывода.
     :param level: Локация, по которой выводится информация.
     """
-    ini_meta = meta_ini()
     ini_spawn = spawn_ini()
     spawn = get_spawn()
-    
-    # Проверка типов
-    for _class, _type in ini_meta.section("mob_class_to_type").fields():
-        if (_type != "T_STALKER") and (_type != "T_MONSTER"):
-            ini_meta._raise(
-                f"section [mob_class_to_type] has unexpected mob type '{_type}'"
-            )
 
     # Сборка инфы
-    info = {}
-    info["T_STALKER"] = []
-    info["T_MONSTER"] = []
+    info = {
+        ObjectType.MONSTER: [],
+        ObjectType.STALKER: [],
+    }
     for obj in spawn.objects():
         if obj._level != level:
             continue
-        _type = ini_meta.get_string("mob_class_to_type", obj._class, "")
         section = ini_spawn.section(obj._id)
-        if len(_type) == 0:
+        if obj._type not in info:
             # Not a mob (maybe)
             check = [
                 section.line_exist("g_team"),
@@ -130,7 +123,7 @@ def extract_mobs(fn: str, level: str) -> None:
         if obj.custom_data.section_exist("smart_terrains"):
             gulag = ", ".join(list(obj.custom_data.section("smart_terrains").lines()))
         
-        info[_type].append({
+        info[obj._type].append({
             "name":         obj.name,
             "object_flags": section.get_string("object_flags", "0x????????"),
             "g_team":       g_team,
@@ -146,8 +139,8 @@ def extract_mobs(fn: str, level: str) -> None:
         file.write("# {}\n".format(level))
         file.write("\n")
         for _caption, _type in [
-            ("Monsters (alive only)", "T_MONSTER"),
-            ("NPC (alive only)", "T_STALKER")
+            ("Monsters (alive only)", ObjectType.MONSTER),
+            ("NPC (alive only)", ObjectType.STALKER)
         ]:
             file.write("## {}\n".format(_caption))
             if len(info[_type]) == 0:

@@ -11,6 +11,7 @@ from .ini import meta_ini, system_ini
 from .ip_ltx import Section
 from .trade import get_buy_k
 from .utils import print_warning
+from .utils_meta import CLSIDs, ObjectType
 
 
 # ----------------------------------------------------------------
@@ -20,6 +21,7 @@ class SpawnEntry:
     """ Класс строки из секции спавна [spawn]
         Также поддерживает [spawn_tm] из iP v3.0
     """
+    _type: ObjectType
 
     def __init__(self, name, params, context=""):
         """ Инициализация строки "name = params"
@@ -50,20 +52,19 @@ class SpawnEntry:
         self.silencer = False
         self.launcher = False
         self.unload = False
-        self._type = None
 
-        # pulling data from system.ltx
-        ini_meta = meta_ini()
+        # pulling section data
         ini_system = system_ini()
-        _section = ini_system._s.get(name, None)
-        if _section is None:
-            raise Exception("section '{}' doesn't exist".format(name))
-        _class = _section._fields.get("class", None)
-        if _class is None:
-            raise Exception("section '{}' has no 'class' field".format(name))
-        self._type = ini_meta._s["inv_class_to_type"]._fields.get(_class, None)
-        if self._type is None:
-            raise Exception("section '{}' has unexpected class ('{}')".format(name, _class))
+        CLSIDS = CLSIDs()
+        _section = ini_system.section(name)
+        _class = _section.get_string("class", "")
+        if len(_class) == 0:
+            raise Exception(f"section '{name}' has no 'class' field")
+        if _class not in CLSIDS:
+            raise Exception(f"section '{name}' has unknown class ({_class})")
+        if not CLSIDS.is_item(_class):
+            raise Exception(f"section '{name}' has non-item class ({_class})")
+        self._type = CLSIDS.get_object_type(_class)
 
         # parsing params
         params = str(params) if params is not None else ""
@@ -124,12 +125,12 @@ class SpawnEntry:
                 self.unload     = (params.find("unload") >= 0)
 
         # appropriateness of ammo-specific options
-        if (self.box_size is not None) and (self._type != "T_AMMO"):
+        if (self.box_size is not None) and (self._type != ObjectType.ITEM_AMMO):
             _warn(f"Ignoring option 'box_size': [{name}] is not an ammo")
             self.box_size = None
 
         # appropriateness of weapon-specific options
-        if (self._type != "T_WPN"):
+        if (self._type != ObjectType.ITEM_WEAPON):
             if self.scope:
                 _warn(f"Ignoring option 'scope': [{name}] is not a weapon")
                 self.scope = False
@@ -258,11 +259,11 @@ class SpawnEntry:
         cond = (cond*0.9 + 0.1)**0.75  # condition_factor как в движке
         buy_k = 1.0 if not trade else get_buy_k(self.name)
         base_cost = ini_system.get_uint(self.name, "cost")
-        if self._type == "T_AMMO":
+        if self._type == ObjectType.ITEM_AMMO:
             base_box_size = ini_system.get_uint(self.name, "box_size")
             box_size = self.box_size if (self.box_size is not None) else base_box_size
             return base_cost * ((count * box_size) / base_box_size) * prob * cond * buy_k
-        elif self._type == "T_WPN":
+        elif self._type == ObjectType.ITEM_WEAPON:
             cost_sum = base_cost * count * prob * cond * buy_k
             addons = []
             if self.scope:
@@ -294,6 +295,7 @@ class SpawnEntriesPool:
     """ Хранилище экземпляров класса SpawnEntry.
         Агрегирует по count вхождения с одинаковыми параметрами.
     """
+    pool: dict[str, SpawnEntry]
 
     def __init__(self):
         self.pool = {}
@@ -302,6 +304,8 @@ class SpawnEntriesPool:
     def from_items(cls: type[Self], section: Section) -> Self:
         """Конструктор по полю ``items`` из указанной секции.
         """
+        CLSIDS = CLSIDs()
+        ini_system = system_ini()
         entries = cls()
         if section.line_exist("items"):
             context = f"items@{section.id}"
@@ -311,14 +315,9 @@ class SpawnEntriesPool:
                 parsing_mode="vanilla_ext"
             )
             for item, cnt in items:
-                _type = meta_ini().get_string(
-                    "inv_class_to_type",
-                    system_ini().get_string(item, "class", "-"),
-                    defval=""
-                )
                 if (
-                    _type == "T_AMMO"
-                    and system_ini().get_uint(item, "box_size") != 1
+                    CLSIDS.is_ammo(ini_system.get_string(item, "class"))
+                    and ini_system.get_uint(item, "box_size") != 1
                 ):
                     se = SpawnEntry(item, f"1, box_size={cnt}", context)
                 else:
@@ -407,7 +406,7 @@ class SpawnEntriesPool:
                 * кол-во любых патронов обозначается через box_size
                 * при этом count всегда считается единицей
         """
-        ini_meta = meta_ini()
+        CLSIDS = CLSIDs()
         ini_system = system_ini()
         buffer = SpawnEntriesPool()
         buffer_ammo = SpawnEntriesPool()  # count as box_size for aggregation
@@ -431,16 +430,15 @@ class SpawnEntriesPool:
                 addon_name = ini_system.get_string(se.name, "grenade_launcher_name")
                 buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
                 se.launcher = False
-            if not se.unload and (se._type == "T_WPN"):
+            if not se.unload and (se._type == ObjectType.ITEM_WEAPON):
                 ammo_class = ini_system.get_strings(se.name, "ammo_class")[0]
-                _ammo_type = ini_meta.get_string("inv_class_to_type", ini_system.get_string(ammo_class, "class"))
                 ammo_mag_size = ini_system.get_uint(se.name, "ammo_mag_size")
-                if _ammo_type == "T_AMMO":
+                if CLSIDS.is_ammo(ini_system.get_string(ammo_class, "class")):
                     buffer_ammo.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count), se.context))
                 else:
                     buffer.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count), se.context))
                 se.unload = True
-            if se._type == "T_AMMO":
+            if se._type == ObjectType.ITEM_AMMO:
                 box_size = se.box_size
                 if box_size is None:
                     box_size = ini_system.get_uint(se.name, "box_size")

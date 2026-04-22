@@ -107,110 +107,15 @@ is_item_outfit  = cse_alife_item_custom_outfit          ; T_OUTFIT
 
 ; ----------------------------------------------------------------
 
-; Группировка секций инвентарных предметов
-; Наличие здесь класса в некоторых скриптах используется как критерий инвентарного предмета.
-[inv_class_to_type]
-
-ARTEFACT    = T_ART
-SCRPTART    = T_ART
-
-WP_AK74     = T_WPN
-WP_BM16     = T_WPN
-WP_GROZA    = T_WPN
-WP_HPSA     = T_WPN
-WP_LR300    = T_WPN
-WP_PM       = T_WPN
-WP_RG6      = T_WPN
-WP_RPG7     = T_WPN
-WP_SHOTG    = T_WPN
-WP_SVD      = T_WPN
-WP_SVU      = T_WPN
-WP_USP45    = T_WPN
-WP_VAL      = T_WPN
-WP_VINT     = T_WPN
-WP_WALTH    = T_WPN
-
-AMMO        = T_AMMO
-A_M209      = T_AMMO
-A_OG7B      = T_AMMO
-A_VOG25     = T_AMMO
-
-G_F1        = T_GREN
-G_RGD5      = T_GREN
-
-W_GLAUNC    = T_ADDON
-WP_SCOPE    = T_ADDON
-W_SILENC    = T_ADDON
-
-E_STLK      = T_OUTFIT
-
-D_SIMDET    = T_OTHER
-II_ANTIR    = T_OTHER
-II_ATTCH    = T_OTHER
-II_BANDG    = T_OTHER
-II_BOTTL    = T_OTHER
-II_FOOD     = T_OTHER
-II_MEDKI    = T_OTHER
-
-TORCH_S     = T_HIDDEN
-WP_BINOC    = T_HIDDEN
-WP_KNIFE    = T_HIDDEN
-
-; ----------------------------------------------------------------
-
-; Группировка секций мобов (NPC и монстры)
-; Наличие здесь класса в некоторых скриптах используется как критерий моба.
-[mob_class_to_type]
-
-; AI_TRD_S - Сидорович (m_trader)
-
-AI_STL_S    = T_STALKER
-
-SM_BLOOD    = T_MONSTER
-SM_BOARW    = T_MONSTER
-SM_DOG_S    = T_MONSTER
-SM_FLESH    = T_MONSTER
-SM_P_DOG    = T_MONSTER
-SM_BURER    = T_MONSTER
-SM_CAT_S    = T_MONSTER
-SM_CHIMS    = T_MONSTER
-SM_CONTR    = T_MONSTER
-SM_IZLOM    = T_MONSTER
-SM_POLTR    = T_MONSTER
-SM_GIANT    = T_MONSTER
-SM_ZOMBI    = T_MONSTER
-SM_SNORK    = T_MONSTER
-SM_TUSHK    = T_MONSTER
-SM_DOG_P    = T_MONSTER
-SM_DOG_F    = T_MONSTER
-
-; ----------------------------------------------------------------
-
-; Классы аномальных зон
-[is_anomaly_class]
-Z_MBALD     = true  ; CSE_ALifeAnomalousZone    ; CMosquitoBald     ; zone_mosquito_bald
-Z_MINCER    = true  ; CSE_ALifeAnomalousZone    ; CMincer           ; zone_mincer
-Z_ACIDF     = true  ; CSE_ALifeAnomalousZone    ; CMosquitoBald     ; zone_acid_fog
-Z_GALANT    = true  ; CSE_ALifeAnomalousZone    ; CMincer           ; zone_galantine
-Z_RADIO     = true  ; CSE_ALifeAnomalousZone    ; CRadioactiveZone  ; zone_radioactive
-Z_BFUZZ     = true  ; CSE_ALifeZoneVisual       ; CHairsZone        ; zone_bfuzz
-Z_RUSTYH    = true  ; CSE_ALifeZoneVisual       ; CHairsZone        ; zone_rusty_hair
-Z_AMEBA     = true  ; CSE_ALifeZoneVisual       ; CAmebaZone        ; ameba_zone
-Z_NOGRAV    = true  ; CSE_ALifeAnomalousZone    ; CNoGravityZone    ; nogravity_zone
-Z_DEAD      = true  ; CSE_ALifeAnomalousZone    ; CMosquitoBald     ; zone_dead
-Z_TORRID    = true  ; CSE_ALifeTorridZone       ; CTorridZone       ; torrid_zone
-ZS_BFUZZ    = true  ; se_zones.se_zone_visual   ; CHairsZone        ; zone_bfuzz_s
-ZS_MBALD    = true  ; se_zones.se_zone_anom     ; CMosquitoBald     ; zone_mbald_s
-ZS_GALAN    = true  ; se_zones.se_zone_anom     ; CMincer           ; zone_galant_s
-ZS_MINCE    = true  ; se_zones.se_zone_anom     ; CMincer           ; zone_mincer_s
-
-; Классы реальных аномалий
+; Список CLSID реальных аномалий
+; В отличие от 'is_anomaly' из [object_types]
+;   не должен включать костры, радиацию и т.п.
 ; Используется только в analyzer_spawn
-[is_anomaly_class2]
-ZS_BFUZZ    = true
-ZS_MBALD    = true
-ZS_GALAN    = true
-ZS_MINCE    = true
+[is_anomaly2]
+ZS_BFUZZ
+ZS_MBALD
+ZS_GALAN
+ZS_MINCE
 
 ; ----------------------------------------------------------------
 

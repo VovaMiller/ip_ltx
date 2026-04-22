@@ -80,6 +80,21 @@ def test_server_classes_issubclass():
 
 # ----------------------------------------------------------------
 
+def test_object_type_is_item():
+    assert ObjectType.MONSTER.is_item() == False
+    assert ObjectType.STALKER.is_item() == False
+    assert ObjectType.ANOMALY.is_item() == False
+    assert ObjectType.ITEM_ART.is_item() == True
+    assert ObjectType.ITEM_WEAPON.is_item() == True
+    assert ObjectType.ITEM_AMMO.is_item() == True
+    assert ObjectType.ITEM_GRENADE.is_item() == True
+    assert ObjectType.ITEM_ADDON.is_item() == True
+    assert ObjectType.ITEM_OUTFIT.is_item() == True
+    assert ObjectType.ITEM_OTHER.is_item() == True
+    assert ObjectType.OTHER.is_item() == False
+
+# ----------------------------------------------------------------
+
 def test_object_type_detector_exact():
     OTD = ObjectTypeDetector()
     assert OTD.get_object_type(None, "se_monster") == ObjectType.MONSTER
@@ -459,5 +474,140 @@ def test_clsids_get_object_type_others_without_type():
     assert CLSIDS.get_object_type("SPC_RS_S") == ObjectType.OTHER
     assert CLSIDS.get_object_type("O_PHYS_S") == ObjectType.OTHER
     assert CLSIDS.get_object_type("SCRPTCAR") == ObjectType.OTHER
+
+def test_clsids_get_object_type_errors():
+    CLSIDS = CLSIDs()
+    with pytest.raises(ValueError):
+        _ = CLSIDS.get_object_type("")
+    with pytest.raises(ValueError):
+        _ = CLSIDS.get_object_type("MAIN")
+    with pytest.raises(ValueError):
+        _ = CLSIDS.get_object_type("MNU")
+    with pytest.raises(ValueError):
+        _ = CLSIDS.get_object_type("d_pda")
+    with pytest.raises(ValueError):
+        _ = CLSIDS.get_object_type("O_O")
+
+def test_clsids_is_monster():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_monster("SM_BOARW") == True
+    assert CLSIDS.is_monster("SM_CAT_S") == True
+    assert CLSIDS.is_monster("SM_POLTR") == True
+    assert CLSIDS.is_monster("SM_SNORK") == True
+    assert CLSIDS.is_monster("Z_RADIO") == False
+    assert CLSIDS.is_monster("SCRPTART") == False
+    assert CLSIDS.is_monster("WP_LR300") == False
+    assert CLSIDS.is_monster("A_M209") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_monster("ERROR")
+
+def test_clsids_is_stalker():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_stalker("AI_STL_S") == True
+    assert CLSIDS.is_stalker("SM_ZOMBI") == False
+    assert CLSIDS.is_stalker("G_F1") == False
+    assert CLSIDS.is_stalker("W_GLAUNC") == False
+    assert CLSIDS.is_stalker("E_STLK") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_stalker("ERROR")
+
+def test_clsids_is_anomaly():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_anomaly("Z_GALANT") == True
+    assert CLSIDS.is_anomaly("Z_RUSTYH") == True
+    assert CLSIDS.is_anomaly("Z_TORRID") == True
+    assert CLSIDS.is_anomaly("ZS_MINCE") == True
+    assert CLSIDS.is_anomaly("D_SIMDET") == False
+    assert CLSIDS.is_anomaly("SM_BLOOD") == False
+    assert CLSIDS.is_anomaly("ARTEFACT") == False
+    assert CLSIDS.is_anomaly("G_RGD5") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_anomaly("ERROR")
+
+def test_clsids_is_artefact():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_artefact("ARTEFACT") == True
+    assert CLSIDS.is_artefact("SCRPTART") == True
+    assert CLSIDS.is_artefact("A_VOG25") == False
+    assert CLSIDS.is_artefact("G_F1") == False
+    assert CLSIDS.is_artefact("II_ATTCH") == False
+    assert CLSIDS.is_artefact("SM_BLOOD") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_artefact("ERROR")
+
+def test_clsids_is_weapon():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_weapon("WP_AK74") == True
+    assert CLSIDS.is_weapon("WP_BM16") == True
+    assert CLSIDS.is_weapon("WP_PM") == True
+    assert CLSIDS.is_weapon("WP_SVD") == True
+    assert CLSIDS.is_weapon("AMMO") == False
+    assert CLSIDS.is_weapon("A_OG7B") == False
+    assert CLSIDS.is_weapon("G_F1") == False
+    assert CLSIDS.is_weapon("W_SILENC") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_weapon("ERROR")
+
+def test_clsids_is_ammo():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_ammo("AMMO") == True
+    assert CLSIDS.is_ammo("A_M209") == True
+    assert CLSIDS.is_ammo("A_OG7B") == True
+    assert CLSIDS.is_ammo("A_VOG25") == True
+    assert CLSIDS.is_ammo("G_RGD5") == False
+    assert CLSIDS.is_ammo("W_GLAUNC") == False
+    assert CLSIDS.is_ammo("II_ATTCH") == False
+    assert CLSIDS.is_ammo("Z_NOGRAV") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_ammo("ERROR")
+
+def test_clsids_is_grenade():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_grenade("G_F1") == True
+    assert CLSIDS.is_grenade("G_RGD5") == True
+    assert CLSIDS.is_grenade("A_M209") == False
+    assert CLSIDS.is_grenade("A_OG7B") == False
+    assert CLSIDS.is_grenade("A_VOG25") == False
+    assert CLSIDS.is_grenade("AMMO") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_grenade("ERROR")
+
+def test_clsids_is_weapon_addon():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_weapon_addon("W_GLAUNC") == True
+    assert CLSIDS.is_weapon_addon("WP_SCOPE") == True
+    assert CLSIDS.is_weapon_addon("W_SILENC") == True
+    assert CLSIDS.is_weapon_addon("II_ATTCH") == False
+    assert CLSIDS.is_weapon_addon("II_BOTTL") == False
+    assert CLSIDS.is_weapon_addon("SCRPTART") == False
+    assert CLSIDS.is_weapon_addon("SM_CAT_S") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_weapon_addon("ERROR")
+
+def test_clsids_is_outfit():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_outfit("E_STLK") == True
+    assert CLSIDS.is_outfit("SM_FLESH") == False
+    assert CLSIDS.is_outfit("AI_STL_S") == False
+    assert CLSIDS.is_outfit("ZS_BFUZZ") == False
+    assert CLSIDS.is_outfit("W_SILENC") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_outfit("ERROR")
+
+def test_clsids_is_item():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_item("ARTEFACT") == True
+    assert CLSIDS.is_item("WP_HPSA") == True
+    assert CLSIDS.is_item("A_VOG25") == True
+    assert CLSIDS.is_item("G_RGD5") == True
+    assert CLSIDS.is_item("WP_SCOPE") == True
+    assert CLSIDS.is_item("E_STLK") == True
+    assert CLSIDS.is_item("II_FOOD") == True
+    assert CLSIDS.is_item("SM_CHIMS") == False
+    assert CLSIDS.is_item("SM_TUSHK") == False
+    assert CLSIDS.is_item("AI_STL_S") == False
+    assert CLSIDS.is_item("Z_RADIO") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_item("ERROR")
 
 # ----------------------------------------------------------------

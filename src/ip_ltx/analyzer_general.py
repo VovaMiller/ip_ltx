@@ -9,6 +9,7 @@ from .ip_ltx import Section
 from .ini import meta_ini, system_ini
 from .xml_data.string_table import StringTable
 from .utils import print_warning
+from .utils_meta import CLSIDs, ObjectType
 
 # ----------------------------------------------------------------
 
@@ -40,8 +41,9 @@ def is_inv_item(section: Section) -> bool:
     """Является ли секция инвентарным предметом.
     Используется проверка по классу (поле ``class``).
     """
-    _class = section.get_string("class", "-")
-    return (len(meta_ini().get_string("inv_class_to_type", _class, "")) > 0)
+    CLSIDS = CLSIDs()
+    _class = section.get_string("class", "")
+    return (len(_class) > 0) and (_class in CLSIDS) and CLSIDS.is_item(_class)
 
 def is_inv_item2(section: Section) -> bool:
     """Является ли секция инвентарным предметом.
@@ -60,27 +62,32 @@ def is_mutant_part(section: Section) -> bool:
         and (re.match(r"^mutant_\w+$", section.id) is not None)
     )
 
-def _is_inv_type(section: Section, _type: str) -> bool:
-    _class = section.get_string("class", "-")
-    return (meta_ini().get_string("inv_class_to_type", _class, "") == _type)
+def _is_section_type(section: Section, _type: ObjectType) -> bool:
+    CLSIDS = CLSIDs()
+    _class = section.get_string("class", "")
+    return (
+        (len(_class) > 0)
+        and (_class in CLSIDS)
+        and (CLSIDS.get_object_type(_class) == _type)
+    )
 
 def is_art(section: Section) -> bool:
     """Является ли секция артефактом.
     Используется проверка по классу (поле ``class``).
     """
-    return _is_inv_type(section, "T_ART")
+    return _is_section_type(section, ObjectType.ITEM_ART)
 
 def is_outfit(section: Section) -> bool:
     """Является ли секция броником.
     Используется проверка по классу (поле ``class``).
     """
-    return _is_inv_type(section, "T_OUTFIT")
+    return _is_section_type(section, ObjectType.ITEM_OUTFIT)
 
 def is_wpn(section: Section) -> bool:
     """Является ли секция оружием.
     Используется проверка по классу (поле ``class``).
     """
-    return _is_inv_type(section, "T_WPN")
+    return _is_section_type(section, ObjectType.ITEM_WEAPON)
 
 def is_wpn2(section: Section) -> bool:
     """Является ли секция оружием.
@@ -93,19 +100,19 @@ def is_ammo(section: Section) -> bool:
     """Является ли секция патронами/снарядом.
     Используется проверка по классу (поле ``class``).
     """
-    return _is_inv_type(section, "T_AMMO")
+    return _is_section_type(section, ObjectType.ITEM_AMMO)
 
 def is_grenade(section: Section) -> bool:
     """Является ли секция гранатой.
     Используется проверка по классу (поле ``class``).
     """
-    return _is_inv_type(section, "T_GREN")
+    return _is_section_type(section, ObjectType.ITEM_GRENADE)
 
 def is_addon(section: Section) -> bool:
     """Является ли секция аддоном для оружия.
     Используется проверка по классу (поле ``class``).
     """
-    return _is_inv_type(section, "T_ADDON")
+    return _is_section_type(section, ObjectType.ITEM_ADDON)
 
 def is_addon_scope(section: Section) -> bool:
     """Является ли секция прицелом для оружия.
@@ -138,23 +145,20 @@ def is_monster(section: Section) -> bool:
     """Является ли секция мутантом.
     Используется проверка по классу (поле ``class``).
     """
-    _class = section.get_string("class", "-")
-    return (meta_ini().get_string("mob_class_to_type", _class, "") == "T_MONSTER")
+    return _is_section_type(section, ObjectType.MONSTER)
 
 def is_stalker(section: Section) -> bool:
     """Является ли секция сталкером/NPC.
     Используется проверка по классу (поле ``class``).
     """
-    _class = section.get_string("class", "-")
-    return (meta_ini().get_string("mob_class_to_type", _class, "") == "T_STALKER")
+    return _is_section_type(section, ObjectType.STALKER)
 
 def is_anomaly(section: Section) -> bool:
     """Является ли секция аномалией.
     Используется проверка по классу (поле ``class``).
     В основе широкий критерий, под который попадают в т.ч. костры и радиация.
     """
-    _class = section.get_string("class", "-")
-    return meta_ini().get_bool("is_anomaly_class", _class, False)
+    return _is_section_type(section, ObjectType.ANOMALY)
 
 def is_anomaly2(section: Section) -> bool:
     """Является ли секция аномалией.
@@ -163,7 +167,7 @@ def is_anomaly2(section: Section) -> bool:
     отсекающий зоны, по сути не являющиеся аномалиями, типа костров и радиации.
     """
     _class = section.get_string("class", "-")
-    return meta_ini().get_bool("is_anomaly_class2", _class, False)
+    return meta_ini().line_exist("is_anomaly2", _class)
 
 # ----------------------------------------------------------------
 

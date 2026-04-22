@@ -65,6 +65,7 @@ wpn_fort            = 0, unload
 wpn_toz34           = 0, unload
 wpn_svd             = 0, unload
 wpn_svu             = 0, unload
+wpn_binoc           = 1, unload
 wpn_l85             = 0, unload
 wpn_bm16            = 0, unload
 wpn_spas12          = 0, unload
@@ -220,5 +221,3 @@ dar_document5           = 0
 pri_decoder_documents   = 0
 cit_doctors_key         = 0
 decoder                 = 0
-
-wpn_binoc   = 1

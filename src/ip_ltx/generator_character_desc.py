@@ -27,6 +27,7 @@ from .utils import (
     print_warning,
     validate_data,
 )
+from .utils_meta import ObjectType
 
 # ----------------------------------------------------------------
 
@@ -551,7 +552,7 @@ class CharacterFactory:
         # Checking <w0>, <w1>, <w2>
         # Проверка, что указано действительно оружие.
         for se in itertools.chain(self.w0, self.w1, self.w2):
-            if (se is not None) and (se._type != "T_WPN"):
+            if (se is not None) and (se._type != ObjectType.ITEM_WEAPON):
                 self._warn(f"Not a weapon: '{se.name}'")
         
         # Checking <w1>, <w2>

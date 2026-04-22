@@ -13,6 +13,7 @@ from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
 from .xml_data.string_table import StringTable
 from .spawn import get_spawn
 from .utils import ANSI_COLOR_CODE, print_warning, print_error, validate_data
+from .utils_meta import CLSIDs, ObjectType
 
 # ----------------------------------------------------------------
 
@@ -99,23 +100,29 @@ class SpawnEntriesCollector:
         оружия невозможно описать синтаксисом вхождения,
         боеприпасы выносятся как отдельное вхождение,
         а оружие при этом считается разряженным.
+
+        Предметы с `can_take = false` в конфиге секции игнорируются.
         
         :param levels: Список локаций, по которым осуществляется сборка.
         """
-        ini_meta = meta_ini()
         ini_system = system_ini()
         ini_spawn = spawn_ini()
         spawn = get_spawn()
         entries = SpawnEntriesPool()
         for obj in spawn.objects():
             if obj._level not in levels:
+                # Пропускаем ненужные локации.
+                continue
+            if not obj._type.is_item():
+                # Пропускаем, если не инвентарный предмет.
+                continue
+            if not ini_system.get_bool(obj.section_name, "can_take", True):
+                # Пропускаем предмет, если его нельзя подобрать
                 continue
             
+            # alias
             sname = obj.section_name
-            _type = ini_meta.get_string("inv_class_to_type", obj._class, "")
-            if len(_type) == 0:
-                continue
-            
+
             # Параметры, по которым нужно собрать инфу
             cond = None
             box_size = None
@@ -131,12 +138,12 @@ class SpawnEntriesCollector:
                 cond = cond / 255
             else:
                 cond = ini_spawn.get_float(obj._id, "condition")
-            if _type == "T_AMMO":
+            if obj._type == ObjectType.ITEM_AMMO:
                 ammo_left = ini_spawn.get_uint(obj._id, "upd:ammo_left")
                 cfg_box_size = ini_system.get_uint(sname, "box_size")
                 if ammo_left < cfg_box_size:
                     box_size = ammo_left
-            if _type == "T_WPN":
+            if obj._type == ObjectType.ITEM_WEAPON:
                 ammo_elapsed = ini_spawn.get_uint(obj._id, "upd:ammo_elapsed")
                 if (ammo_elapsed == 0):
                     unload = True
@@ -320,7 +327,7 @@ def summary(
 
     Сводка осуществляется в формате т.н. вхождений (синтаксис секции ``[spawn]``).
     Вхождения с одинаковыми параметрами агрегируются по кол-ву (складываются count).
-    Вывод группируется по типу предметов (см. ``[inv_class_to_type]`` в мета-файле).
+    Вывод группируется по типу предметов (см. ``[object_types]`` в мета-файле).
     В пределах каждого типа сохраняется порядок секций,
     как они встречаются в ``system.ltx``.
     Также выводится метрика по всему собранному содержимому.
@@ -358,21 +365,14 @@ def summary(
     """
     ini_meta = meta_ini()
     ini_system = system_ini()
-    _types = {}
+    CLSIDS = CLSIDs()
     _sections = {}
     msgs_w, msgs_e = [], []
     metrics = []
 
     # meta verification
-    if not ini_meta.section_exist("inv_class_to_type"):
-        raise Exception("meta-file doesn't have mandatory section [inv_class_to_type]")
     if not ini_meta.section_exist("ignore_sections"):
         raise Exception("meta-file doesn't have mandatory section [ignore_sections]")
-
-    # Запоминаем порядковые номера типов предметов для финальной сортировки
-    for _class, _type in ini_meta._s["inv_class_to_type"]._fields.items():
-        if _type not in _types:
-            _types[_type] = len(_types)
     
     # Запоминаем порядковые номера секций предметов для финальной сортировки
     _sections = {id: i for i, id in enumerate(ini_system._s.keys())}
@@ -406,9 +406,14 @@ def summary(
         _section_exists = {se.name: True for se in entries.pool.values()}
         for id, sect in ini_system._s.items():
             _class = sect.get_string("class", "")
-            _type = ini_meta.get_string("inv_class_to_type", _class, "")
-            if len(_type) == 0:
-                # Пропускаем неинвентарные предметы.
+            if (len(_class) == 0):
+                # Пропускаем секции без поля class.
+                continue
+            if (_class not in CLSIDS):
+                # Пропускаем секции с невалидным значением поля class.
+                continue
+            if not CLSIDS.is_item(_class):
+                # Если не инвентарный предмет, то пропускаем.
                 continue
             if _section_exists.get(id, False):
                 # Пропускаем уже зафиксированные секции.
@@ -416,8 +421,14 @@ def summary(
             if ini_meta.line_exist("ignore_sections", id):
                 # Пропускаем игнорируемые секции.
                 continue
-            if (_type == "T_WPN") and (len(sect.get_string("scope_respawn", "")) > 0):
+            if (
+                CLSIDS.is_weapon(_class)
+                and (len(sect.get_string("scope_respawn", "")) > 0)
+            ):
                 # Пропускаем вспомогательные секции оружия для многоприцельности.
+                continue
+            if not sect.get_bool("can_take", True):
+                # Пропускаем предметы, которые нельзя подобрать.
                 continue
             try:
                 entries.add(SpawnEntry(id, "0"))
@@ -432,7 +443,7 @@ def summary(
     entries = sorted(
         list(entries.pool.values()),
         key=lambda se: (
-            _types[se._type],   # (1) по порядковому номеру типа инвентарного предмета
+            se._type.value,     # (1) по порядковому номеру типа инвентарного предмета
             _sections[se.name], # (2) по порядковому номеру секции
             se.signature()      # (3) по возрастанию сигнатур
         )
@@ -442,6 +453,8 @@ def summary(
     for se in entries:
         if ini_meta.line_exist("ignore_sections", se.name):
             msgs_w.append(f"encountered section '{se.name}' from [ignore_sections]")
+        if not ini_system.get_bool(se.name, "can_take", True):
+            msgs_w.append(f"encountered section '{se.name}' with 'can_take = false'")
 
     # Предподсчёт отступов по каждому типу предметов
     offset_by_type = {}

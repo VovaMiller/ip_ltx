@@ -17,6 +17,7 @@ game_objects_count = 13.0
 
 [summary]
 wpn_rpg7    = 1, unload
+wpn_binoc   = 1, unload
 wpn_abakan  = 1, scope unload
 
 ammo_og-7b  = 2
@@ -25,5 +26,3 @@ grenade_f1  = 4
 
 specops_outfit  = 2
 military_outfit = 2
-
-wpn_binoc   = 1

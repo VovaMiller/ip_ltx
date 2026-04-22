@@ -1,6 +1,7 @@
 import networkx as nx
 from dataclasses import dataclass
 from enum import Enum, auto
+from typing import Container
 
 from .ini import meta_ini
 from .utils import print_error, print_warning, SingletonBase
@@ -85,6 +86,18 @@ class ObjectType(Enum):
     ITEM_OUTFIT     = auto()
     ITEM_OTHER      = auto()
     OTHER           = auto()
+
+    def is_item(self) -> bool:
+        ITEM_TYPES = {
+            ObjectType.ITEM_ART,
+            ObjectType.ITEM_WEAPON,
+            ObjectType.ITEM_AMMO,
+            ObjectType.ITEM_GRENADE,
+            ObjectType.ITEM_ADDON,
+            ObjectType.ITEM_OUTFIT,
+            ObjectType.ITEM_OTHER,
+        }
+        return self in ITEM_TYPES
 
 class ObjectTypeDetector(SingletonBase):
     """Класс для определения типа объекта по его клиентскому и серверному классам.
@@ -281,5 +294,56 @@ class CLSIDs(SingletonBase):
         if clsid not in self._clsids:
             raise ValueError(f"clsid {clsid} doesn't exist")
         return self._clsids[clsid].object_type
+
+    def _is_object_type(
+            self,
+            clsid: str,
+            types: ObjectType | Container[ObjectType]
+    ) -> bool:
+        if clsid not in self._clsids:
+            raise ValueError(f"clsid {clsid} doesn't exist")
+        ot = self._clsids[clsid].object_type
+        if isinstance(types, ObjectType):
+            return (ot == types)
+        else:
+            return (ot in types)
+        
+    def is_monster(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.MONSTER)
+        
+    def is_stalker(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.STALKER)
+        
+    def is_anomaly(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.ANOMALY)
+        
+    def is_artefact(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.ITEM_ART)
+        
+    def is_weapon(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.ITEM_WEAPON)
+        
+    def is_ammo(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.ITEM_AMMO)
+        
+    def is_grenade(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.ITEM_GRENADE)
+        
+    def is_weapon_addon(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.ITEM_ADDON)
+        
+    def is_outfit(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, ObjectType.ITEM_OUTFIT)
+
+    def is_item(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, {
+            ObjectType.ITEM_ART,
+            ObjectType.ITEM_WEAPON,
+            ObjectType.ITEM_AMMO,
+            ObjectType.ITEM_GRENADE,
+            ObjectType.ITEM_ADDON,
+            ObjectType.ITEM_OUTFIT,
+            ObjectType.ITEM_OTHER,
+        })
 
 # ----------------------------------------------------------------

@@ -6,6 +6,7 @@ from .ini import system_ini, spawn_ini
 from .level import get_lvl_by_gvid
 from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
 from .utils import print_error
+from .utils_meta import CLSIDs, ObjectType
 
 # ----------------------------------------------------------------
 
@@ -51,6 +52,9 @@ class SpawnObject:
 
         self._class: str = ""
         """Поле class из секции объекта"""
+
+        self._type: ObjectType = ObjectType.OTHER
+        """Тип объекта"""
 
         self._level: str = ""
         """Имя локации объекта"""
@@ -165,6 +169,14 @@ class SpawnObject:
                     self._errors.append(
                         "unable to get class of this object"
                     )
+
+        self._type = ObjectType.OTHER
+        if len(self._class) > 0:
+            CLSIDS = CLSIDs()
+            if self._class in CLSIDS:
+                self._type = CLSIDS.get_object_type(self._class)
+            else:
+                self._errors.append("unable to get type of this object (unknown clsid)")
 
         self._level = "";
         if self.game_vertex_id >= 0:
