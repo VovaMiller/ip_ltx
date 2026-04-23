@@ -2,7 +2,7 @@ import os.path
 from collections import OrderedDict
 
 from .ip_ltx import Section, Ini
-from .ini import system_ini, spawn_ini
+from .ini import meta_ini, system_ini, spawn_ini
 from .level import get_lvl_by_gvid
 from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
 from .utils import print_error
@@ -22,6 +22,9 @@ class SpawnObject:
 
         self._id: str = ""
         """ID секции, по которой произведена инициализация"""
+
+        self.spawn_id: int = -1
+        """Порядковый номер объекта в общем списке all.spawn (Universal ACDC)"""
 
         self.section_name: str = ""
         """cse_abstract: section_name"""
@@ -72,6 +75,7 @@ class SpawnObject:
         self._errors.clear()
         self._src = section._src
         self._id = section.id
+        self.spawn_id = section.get_uint("spawn_id", -1)
 
         self.section_name = section.get_string("section_name", "")
         if len(self.section_name) == 0:
@@ -215,6 +219,32 @@ class SpawnObject:
             raise Exception("object {} is invalid".format(
                 f"'{self.name}'" if (len(self.name) > 0) else f"[{self._id}]"
             ))
+
+    def get_condition(self) -> float:
+        """Получить состояние объекта.
+
+        В первую очередь пытается считать поле ``upd:condition``.
+        Если его нет, то пытается считать поле ``condition``.
+        Если и его нет, то возращает значение по умолчанию - 0.
+
+        На то, как будет считано поле ``upd:condition``, влияет флаг
+        ``universal_acdc`` из секции ``[features]`` конфигурационного файла:
+
+        * ``universal_acdc = False``: считывается как ``int`` от 0 до 255.
+        * ``universal_acdc = True``: считывается как ``float`` от 0 до 1.
+
+        :return: число с плавающей точкой (``float``) от 0 до 1.
+        """
+        ini_spawn = spawn_ini()
+        if ini_spawn.line_exist(self._id, "upd:condition"):
+            if meta_ini().get_bool("features", "universal_acdc", False):
+                return ini_spawn.get_float(self._id, "upd:condition")
+            else:
+                return ini_spawn.get_uint(self._id, "upd:condition") / 255
+        elif ini_spawn.line_exist(self._id, "condition"):
+            return ini_spawn.get_float(self._id, "condition")
+        else:
+            return 0.0
 
 # ----------------------------------------------------------------
 

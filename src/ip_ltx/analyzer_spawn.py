@@ -1,5 +1,7 @@
 """Извлечение разной информации по объектам, определённым в all.spawn"""
 
+from dataclasses import dataclass
+
 from .ini import meta_ini, spawn_ini
 from .spawn import get_spawn
 from .utils import print_warning, validate_data
@@ -10,7 +12,8 @@ from .utils_meta import ObjectType
 def check_anomalies(
         fn: str,
         levels: list[str],
-        level_for_details: str
+        level_for_details: str,
+        sort_by_spawn_id: bool = True
 ) -> None:
     """Вывод разной информации по аномалиям.
 
@@ -24,10 +27,37 @@ def check_anomalies(
         некоторой информации (см. список выше).
     :param level_for_details: Локация, по которой выводится
         некоторая информации (см. список выше).
+    :param sort_by_spawn_id: Список выводимых аномалий будет отсортирован
+        по возрастанию значения ``spawn_id``. Эта опция работает, только если
+        в секции ``[features]`` установлен флаг ``universal_acdc``.
     """
     ini_meta = meta_ini()
     ini_spawn = spawn_ini()
     spawn = get_spawn()
+
+    @dataclass(slots=True, frozen=True)
+    class AnomalyInfo:
+        name: str
+        position: str
+        spawn_id: int
+
+    # Сборка инфы для level_for_details
+    anomalies: list[AnomalyInfo] = []
+    for obj in spawn.objects():
+        if obj._level != level_for_details:
+            continue
+        if not ini_meta.line_exist("is_anomaly2", obj._class):
+            continue
+        if ini_spawn.get_int(obj._id, "restrictor_type", -1) == 2:
+            continue
+        anomalies.append(AnomalyInfo(
+            name=obj.name,
+            position=",".join(["{:.2f}".format(p) for p in obj.position]),
+            spawn_id=obj.spawn_id
+        ))
+    if sort_by_spawn_id and ini_meta.get_bool("features", "universal_acdc", False):
+        anomalies.sort(key=lambda x: x.spawn_id)
+
     with open(fn, "w", encoding="utf-8") as file:
         # Поиск аномалий с установленным story_id
         file.write("Anomalies with story_id:\n")
@@ -47,31 +77,41 @@ def check_anomalies(
             file.write("- {}: {}\n".format(lvl, cnt_by_lvls.get(lvl, 0)))
         
         # Список позиций аномалий на локации не с типом 2
-        level = level_for_details
         file.write("\n")
-        file.write("Anomalies invisible by mobs ({}):\n".format(level))
-        for obj in spawn.objects():
-            if obj._level != level:
-                continue
-            if not ini_meta.line_exist("is_anomaly2", obj._class):
-                continue
-            if ini_spawn.get_int(obj._id, "restrictor_type", -1) == 2:
-                continue
-            file.write("- {}: position={}\n".format(
-                obj.name,
-                ",".join(["{:.2f}".format(p) for p in obj.position])
-            ))
+        file.write(f"Anomalies invisible by mobs ({level_for_details}):\n")
+        for anomaly in anomalies:
+            file.write(f"- {anomaly.name}: position={anomaly.position}\n")
 
-def extract_mobs(fn: str, level: str) -> None:
+def extract_mobs(
+        fn: str,
+        level: str,
+        sort_by_spawn_id: bool = True
+) -> None:
     """Вывод некоторой информации по всем мобам (мутанты и NPC) на указанной локации.
     
     :param fn: Путь/имя файла для вывода.
     :param level: Локация, по которой выводится информация.
+    :param sort_by_spawn_id: Список выводимых мобов будет отсортирован
+        по возрастанию значения ``spawn_id``. Эта опция работает, только если
+        в секции ``[features]`` установлен флаг ``universal_acdc``.
     """
     ini_spawn = spawn_ini()
     spawn = get_spawn()
 
+    @dataclass(slots=True, frozen=True)
+    class MobInfo:
+        spawn_id: int
+        name: str
+        object_flags: str
+        g_team: int
+        g_squad: int
+        g_group: int
+        profile: str
+        spawner: str
+        gulag: str
+
     # Сборка инфы
+    info: dict[ObjectType, list[MobInfo]]
     info = {
         ObjectType.MONSTER: [],
         ObjectType.STALKER: [],
@@ -99,7 +139,7 @@ def extract_mobs(fn: str, level: str) -> None:
         health = None
         g_team, g_squad, g_group = None, None, None
         try:
-            health = section.get_float("health")
+            health = section.get_float("health", 1.0)
             g_team = section.get_uint("g_team")
             g_squad = section.get_uint("g_squad")
             g_group = section.get_uint("g_group")
@@ -123,47 +163,51 @@ def extract_mobs(fn: str, level: str) -> None:
         if obj.custom_data.section_exist("smart_terrains"):
             gulag = ", ".join(list(obj.custom_data.section("smart_terrains").lines()))
         
-        info[obj._type].append({
-            "name":         obj.name,
-            "object_flags": section.get_string("object_flags", "0x????????"),
-            "g_team":       g_team,
-            "g_squad":      g_squad,
-            "g_group":      g_group,
-            "profile":      section.get_string("character_profile", obj.section_name),
-            "spawner":      spawner,
-            "gulag":        gulag,
-        })
+        info[obj._type].append(MobInfo(
+            spawn_id=obj.spawn_id,
+            name=obj.name,
+            object_flags=section.get_string("object_flags", "0x????????"),
+            g_team=g_team,
+            g_squad=g_squad,
+            g_group=g_group,
+            profile=section.get_string("character_profile", obj.section_name),
+            spawner=spawner,
+            gulag=gulag
+        ))
+    if sort_by_spawn_id and meta_ini().get_bool("features", "universal_acdc", False):
+        for ot in info.keys():
+            info[ot].sort(key=lambda x: x.spawn_id)
     
     # writing down
     with open(fn, "w", encoding="utf-8") as file:
-        file.write("# {}\n".format(level))
+        file.write(f"# {level}\n")
         file.write("\n")
         for _caption, _type in [
             ("Monsters (alive only)", ObjectType.MONSTER),
             ("NPC (alive only)", ObjectType.STALKER)
         ]:
-            file.write("## {}\n".format(_caption))
+            file.write(f"## {_caption}\n")
             if len(info[_type]) == 0:
                 file.write("\n")
                 continue
-            tab = 4 * (1 + max([len(mob["name"]) for mob in info[_type]]) // 4)
+            tab = 4 * (1 + max([len(mob.name) for mob in info[_type]]) // 4)
             for mob in info[_type]:
                 str_spawner = (
-                    " {}".format(mob["spawner"])
-                    if (len(mob["spawner"]) > 0)
+                    f" {mob.spawner}"
+                    if (len(mob.spawner) > 0)
                     else ""
                 )
                 str_gulag = (
-                    " ({})".format(mob["gulag"])
-                    if (len(mob["gulag"]) > 0)
+                    f" ({mob.gulag})"
+                    if (len(mob.gulag) > 0)
                     else ""
                 )
                 file.write("+ {}--[{}][t{}s{}g{}]{}{} {}\n".format(
-                    mob["name"].ljust(tab),
-                    mob["object_flags"],
-                    mob["g_team"], mob["g_squad"], mob["g_group"],
+                    mob.name.ljust(tab),
+                    mob.object_flags,
+                    mob.g_team, mob.g_squad, mob.g_group,
                     str_spawner, str_gulag,
-                    mob["profile"]
+                    mob.profile
                 ))
             file.write("\n")
 

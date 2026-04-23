@@ -61,9 +61,11 @@ def _check_upd_fields_consistency() -> None:
     ``health == upd:health``, ``position == upd:position``,
     ``g_team == upd:g_team``, ...
 
-    Также предусмотрен особый случай ``condition`` и ``upd:condition``,
-    где значения должны не совпадать, а скорее корректно соотноситься.
+    Если в секции ``[features]`` не установлен флаг ``universal_acdc``,
+    то значение поля ``upd:condition`` перед сравнением с ``condition``
+    делится на 255 (для совместимости со старой версией ACDC).
     """
+    upd_condition_f32 = meta_ini().get_bool("features", "universal_acdc", False)
     for section in spawn_ini().sections():
         lines = []
         for k, v in section.fields():
@@ -73,15 +75,14 @@ def _check_upd_fields_consistency() -> None:
             if section.line_exist(updk):
                 updv = section.field(updk)
                 unequal = False
-                if k == "condition":
+                if (k == "condition") and not upd_condition_f32:
                     vf = cast_safe(v, float, defval=None)
                     updvf = cast_safe(updv, float, defval=None)
-                    if (vf is None) or (updvf is None):
-                        # TODO: по факту могут быть и равны, но здесь скорее
-                        #       проблема неожиданных типов данных
-                        unequal = True
-                    else:
-                        unequal = (abs(vf - (updvf / 255)) > 0.01)
+                    unequal = (
+                        (vf is None)
+                        or (updvf is None)
+                        or (abs(vf - (updvf / 255)) > 0.01)
+                    )
                 else:
                     unequal = (v != updv)
                 if unequal:
@@ -416,7 +417,6 @@ def _check_weapons_on_level() -> None:
         return
     cleaner_cond__weapons = 0.899
     ini_meta = meta_ini()
-    ini_spawn = spawn_ini()
     death_ini = Ini(name="death_generic.ltx", ini_meta=ini_meta)
     death_ini.read(
         "config\\misc\\death_generic.ltx",
@@ -427,13 +427,13 @@ def _check_weapons_on_level() -> None:
         if obj._type != ObjectType.ITEM_WEAPON:
             continue
         # Объект не должен быть квестовым
-        if death_ini.get_string("keep_items", obj.section_name, "false") == "true":
+        if death_ini.get_bool("keep_items", obj.section_name, False):
             continue
         # Объект не должен иметь story_id
         if (obj.story_id is not None) and (-1 < obj.story_id < 65535):
             continue
         # Объект должен быть достаточно сломан
-        if ini_spawn.get_float(obj._id, "condition", None) > cleaner_cond__weapons:
+        if obj.get_condition() > cleaner_cond__weapons:
             continue
         # Объект попадает под условия ip_cleaner
         _print1("object '{}':".format(obj.name))

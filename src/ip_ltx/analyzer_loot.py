@@ -67,7 +67,7 @@ class SpawnEntriesCollector:
                 if treasure_by_sid(obj.story_id) is None:
                     entries.merge(obj._loot)
             elif obj._class == "AI_STL_S":
-                if ini_spawn.get_float(obj._id, "health") < 0.01:
+                if ini_spawn.get_float(obj._id, "health", 1.0) < 0.01:
                     if obj.custom_data.section_exist("dont_touch_old_loot"):
                         entries.merge(obj._loot)
         self.result.merge(entries)
@@ -133,23 +133,19 @@ class SpawnEntriesCollector:
             extra_ammo = None  # боеприпасы оружия как доп. вхождение
             
             # Сборка инфы спавна
-            if ini_spawn.line_exist(obj._id, "upd:condition"):
-                cond = ini_spawn.get_uint(obj._id, "upd:condition")
-                cond = cond / 255
-            else:
-                cond = ini_spawn.get_float(obj._id, "condition")
+            cond = obj.get_condition()
             if obj._type == ObjectType.ITEM_AMMO:
                 ammo_left = ini_spawn.get_uint(obj._id, "upd:ammo_left")
                 cfg_box_size = ini_system.get_uint(sname, "box_size")
                 if ammo_left < cfg_box_size:
                     box_size = ammo_left
             if obj._type == ObjectType.ITEM_WEAPON:
-                ammo_elapsed = ini_spawn.get_uint(obj._id, "upd:ammo_elapsed")
+                ammo_elapsed = ini_spawn.get_uint(obj._id, "upd:ammo_elapsed", 0)
                 if (ammo_elapsed == 0):
                     unload = True
                 else:
                     ammo_class = ini_system.get_strings(sname, "ammo_class")
-                    ammo_type = ini_spawn.get_uint(obj._id, "upd:ammo_type")
+                    ammo_type = ini_spawn.get_uint(obj._id, "upd:ammo_type", 0)
                     if ammo_type >= len(ammo_class):
                         ammo_type = 0
                     ammo_mag_size = ini_system.get_uint(sname, "ammo_mag_size")
@@ -159,7 +155,7 @@ class SpawnEntriesCollector:
                             min(ammo_elapsed, ammo_mag_size)
                         )
                         unload = True
-                addon_flags = ini_spawn.get_uint(obj._id, "upd:addon_flags")
+                addon_flags = ini_spawn.get_uint(obj._id, "upd:addon_flags", 0)
                 scope       = ((addon_flags & ADDON_FLAGS.scope) != 0)
                 launcher    = ((addon_flags & ADDON_FLAGS.launcher) != 0)
                 silencer    = ((addon_flags & ADDON_FLAGS.silencer) != 0)
