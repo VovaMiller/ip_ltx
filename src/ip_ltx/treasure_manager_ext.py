@@ -7,7 +7,7 @@ import re
 import copy
 from typing import Self
 
-from .ini import meta_ini, system_ini
+from .ini import system_ini
 from .ip_ltx import Section
 from .trade import get_buy_k
 from .utils import print_warning

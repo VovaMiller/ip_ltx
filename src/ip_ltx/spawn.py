@@ -3,10 +3,9 @@ from collections import OrderedDict
 
 from .ip_ltx import Section, Ini
 from .ini import meta_ini, system_ini, spawn_ini
-from .level import get_lvl_by_gvid
 from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
 from .utils import print_error
-from .utils_meta import CLSIDs, ObjectType
+from .utils_meta import Levels, CLSIDs, ObjectType
 
 # ----------------------------------------------------------------
 
@@ -56,7 +55,7 @@ class SpawnObject:
         self._class: str = ""
         """Поле class из секции объекта"""
 
-        self._type: ObjectType = ObjectType.OTHER
+        self._type: ObjectType = ObjectType.UNDEFINED
         """Тип объекта"""
 
         self._level: str = ""
@@ -174,18 +173,24 @@ class SpawnObject:
                         "unable to get class of this object"
                     )
 
-        self._type = ObjectType.OTHER
+        self._type = ObjectType.UNDEFINED
         if len(self._class) > 0:
             CLSIDS = CLSIDs()
             if self._class in CLSIDS:
                 self._type = CLSIDS.get_object_type(self._class)
+                if self._type == ObjectType.UNDEFINED:
+                    self._errors.append(
+                        "unable to get type of this object (dummy clsid)"
+                    )
             else:
-                self._errors.append("unable to get type of this object (unknown clsid)")
+                self._errors.append(
+                    "unable to get type of this object (unknown clsid)"
+                )
 
         self._level = "";
         if self.game_vertex_id >= 0:
             try:
-                tmp = get_lvl_by_gvid(self.game_vertex_id)
+                tmp = Levels().get_lvl_by_gvid(self.game_vertex_id)
             except Exception as e:
                 self._errors.append(str(e))
             else:

@@ -119,30 +119,17 @@ def extract_mobs(
     for obj in spawn.objects():
         if obj._level != level:
             continue
-        section = ini_spawn.section(obj._id)
         if obj._type not in info:
-            # Not a mob (maybe)
-            check = [
-                section.line_exist("g_team"),
-                section.line_exist("g_squad"),
-                section.line_exist("g_group"),
-                section.line_exist("dynamic_out_restrictions"),
-                section.line_exist("dynamic_in_restrictions"),
-            ]
-            if any(check) and (obj._class != "O_ACTOR") and (obj._class != "AI_CROW"):
-                print_warning((
-                    "Object '{}' with class '{}' seems like a creature, "
-                    "but was not recognized as such"
-                ).format(obj.name, obj._class))
             continue
+        ss = ini_spawn.section(obj._id)
         
         health = None
         g_team, g_squad, g_group = None, None, None
         try:
-            health = section.get_float("health", 1.0)
-            g_team = section.get_uint("g_team")
-            g_squad = section.get_uint("g_squad")
-            g_group = section.get_uint("g_group")
+            health = ss.get_float("health", 1.0)
+            g_team = ss.get_uint("g_team")
+            g_squad = ss.get_uint("g_squad")
+            g_group = ss.get_uint("g_group")
         except Exception as e:
             print_warning(f"Unable to process creature '{obj.name}' ({str(e)})")
             continue
@@ -166,11 +153,11 @@ def extract_mobs(
         info[obj._type].append(MobInfo(
             spawn_id=obj.spawn_id,
             name=obj.name,
-            object_flags=section.get_string("object_flags", "0x????????"),
+            object_flags=ss.get_string("object_flags", "0x????????"),
             g_team=g_team,
             g_squad=g_squad,
             g_group=g_group,
-            profile=section.get_string("character_profile", obj.section_name),
+            profile=ss.get_string("character_profile", obj.section_name),
             spawner=spawner,
             gulag=gulag
         ))

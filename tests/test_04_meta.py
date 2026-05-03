@@ -1,6 +1,27 @@
 import pytest
+import re
 
-from ip_ltx.utils_meta import ServerClasses, ObjectType, ObjectTypeDetector, CLSIDs
+from ip_ltx.ini import spawn_ini
+from ip_ltx.utils_meta import (
+    Levels, ServerClasses, ObjectType, ObjectTypeDetector, CLSIDs
+)
+
+# ----------------------------------------------------------------
+
+def test_levels():
+    LEVELS = Levels()
+    for s in spawn_ini().sections():
+        level_calculated = LEVELS.get_lvl_by_gvid(s.get_uint("game_vertex_id"))
+        if (m := re.fullmatch(r"alife_(.*)\.ltx", s._src)):
+            level_expected = m.group(1).lower()
+        else:
+            level_expected = "__ERROR__"
+        assert level_calculated == level_expected
+
+def test_levels_invalid_gvid():
+    LEVELS = Levels()
+    with pytest.raises(ValueError):
+        _ = LEVELS.get_lvl_by_gvid(-1)
 
 # ----------------------------------------------------------------
 
@@ -80,6 +101,20 @@ def test_server_classes_issubclass():
 
 # ----------------------------------------------------------------
 
+def test_object_type_is_mob():
+    assert ObjectType.MONSTER.is_mob() == True
+    assert ObjectType.STALKER.is_mob() == True
+    assert ObjectType.ANOMALY.is_mob() == False
+    assert ObjectType.ITEM_ART.is_mob() == False
+    assert ObjectType.ITEM_WEAPON.is_mob() == False
+    assert ObjectType.ITEM_AMMO.is_mob() == False
+    assert ObjectType.ITEM_GRENADE.is_mob() == False
+    assert ObjectType.ITEM_ADDON.is_mob() == False
+    assert ObjectType.ITEM_OUTFIT.is_mob() == False
+    assert ObjectType.ITEM_OTHER.is_mob() == False
+    assert ObjectType.OTHER.is_mob() == False
+    assert ObjectType.UNDEFINED.is_mob() == False
+
 def test_object_type_is_item():
     assert ObjectType.MONSTER.is_item() == False
     assert ObjectType.STALKER.is_item() == False
@@ -92,6 +127,7 @@ def test_object_type_is_item():
     assert ObjectType.ITEM_OUTFIT.is_item() == True
     assert ObjectType.ITEM_OTHER.is_item() == True
     assert ObjectType.OTHER.is_item() == False
+    assert ObjectType.UNDEFINED.is_item() == False
 
 # ----------------------------------------------------------------
 
@@ -145,7 +181,6 @@ def test_object_type_detector_inheritance():
 
 def test_object_type_detector_others():
     OTD = ObjectTypeDetector()
-    assert OTD.get_object_type(None, None) == ObjectType.OTHER
     assert OTD.get_object_type("AbsoluteNonsense", None) == ObjectType.OTHER
     assert OTD.get_object_type("G_LEVEL", None) == ObjectType.OTHER
     assert OTD.get_object_type("O_ACTOR", "cse_alife_creature_actor") == ObjectType.OTHER
@@ -165,11 +200,15 @@ def test_object_type_detector_others():
     assert OTD.get_object_type(None, "se_restrictor") == ObjectType.OTHER
     assert OTD.get_object_type(None, "se_smart_terrain") == ObjectType.OTHER
 
+def test_object_type_detector_undefined():
+    OTD = ObjectTypeDetector()
+    assert OTD.get_object_type(None, None) == ObjectType.UNDEFINED
+
 # ----------------------------------------------------------------
 
 def test_clsids_size():
     CLSIDS = CLSIDs()
-    assert len(CLSIDS) == 186
+    assert len(CLSIDS) == 192
 
 def test_clsids_existence():
     CLSIDS = CLSIDs()
@@ -475,6 +514,15 @@ def test_clsids_get_object_type_others_without_type():
     assert CLSIDS.get_object_type("O_PHYS_S") == ObjectType.OTHER
     assert CLSIDS.get_object_type("SCRPTCAR") == ObjectType.OTHER
 
+def test_clsids_get_object_type_undefined():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.get_object_type("AI_RAT_G") == ObjectType.UNDEFINED
+    assert CLSIDS.get_object_type("AI_RAT") == ObjectType.UNDEFINED
+    assert CLSIDS.get_object_type("EVENT") == ObjectType.UNDEFINED
+    assert CLSIDS.get_object_type("AI_SPGRP") == ObjectType.UNDEFINED
+    assert CLSIDS.get_object_type("II_BTTCH") == ObjectType.UNDEFINED
+    assert CLSIDS.get_object_type("NW_ATTCH") == ObjectType.UNDEFINED
+
 def test_clsids_get_object_type_errors():
     CLSIDS = CLSIDs()
     with pytest.raises(ValueError):
@@ -593,6 +641,22 @@ def test_clsids_is_outfit():
     assert CLSIDS.is_outfit("W_SILENC") == False
     with pytest.raises(ValueError):
         _ = CLSIDS.is_outfit("ERROR")
+
+def test_clsids_is_mob():
+    CLSIDS = CLSIDs()
+    assert CLSIDS.is_mob("ARTEFACT") == False
+    assert CLSIDS.is_mob("WP_HPSA") == False
+    assert CLSIDS.is_mob("A_VOG25") == False
+    assert CLSIDS.is_mob("G_RGD5") == False
+    assert CLSIDS.is_mob("WP_SCOPE") == False
+    assert CLSIDS.is_mob("E_STLK") == False
+    assert CLSIDS.is_mob("II_FOOD") == False
+    assert CLSIDS.is_mob("SM_CHIMS") == True
+    assert CLSIDS.is_mob("AI_TRADE") == False
+    assert CLSIDS.is_mob("AI_STL_S") == True
+    assert CLSIDS.is_mob("Z_RADIO") == False
+    with pytest.raises(ValueError):
+        _ = CLSIDS.is_mob("ERROR")
 
 def test_clsids_is_item():
     CLSIDS = CLSIDs()

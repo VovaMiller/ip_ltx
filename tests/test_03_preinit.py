@@ -1,12 +1,11 @@
 import pytest
 
 from ip_ltx.ini import game_ini, meta_ini, spawn_ini, system_ini
-from ip_ltx.level import get_lvl_by_gvid
 from ip_ltx.spawn import get_spawn
 from ip_ltx.task_manager import get_task_manager
 from ip_ltx.trade import get_buy_k
 from ip_ltx.treasure_manager import treasure_manager_ini
-from ip_ltx.utils_meta import ServerClasses, ObjectTypeDetector, CLSIDs
+from ip_ltx.utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs
 from ip_ltx.xml_data.dialogs import Dialogs
 from ip_ltx.xml_data.string_table import StringTable
 from ip_ltx.xml_data.texture_desc import TextureDesc
@@ -24,6 +23,9 @@ def test_system_ini():
 def test_spawn_ini():
     _ = spawn_ini()
 
+def test_meta_levels():
+    _ = Levels()
+
 def test_meta_server_classes():
     _ = ServerClasses()
 
@@ -32,9 +34,6 @@ def test_meta_object_type_detector():
 
 def test_meta_clsids():
     _ = CLSIDs()
-
-def test_level():
-    _ = get_lvl_by_gvid(1)
 
 def test_spawn():
     _ = get_spawn()

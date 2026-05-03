@@ -212,5 +212,3 @@ hunters_toz                        WP_BM16
 mp_wpn_fake_missile                 G_FAKE
 mp_wpn_fake_missile2                G_FAKE
 mp_wpn_fake_missile1                G_FAKE
-new_attachable_item               II_BTTCH
-custom_script_object              NW_ATTCH

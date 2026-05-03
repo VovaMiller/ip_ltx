@@ -212,5 +212,3 @@ hunters_toz                                         weapons\bm_16\wpn_bm-16.ogf
 mp_wpn_fake_missile                                weapons\ammo\ammo_vog-25.ogf
 mp_wpn_fake_missile2                                 weapons\ammo\ammo_m209.ogf
 mp_wpn_fake_missile1                              weapons\ammo\ammo_vog-25p.ogf
-new_attachable_item                                                           -
-custom_script_object                                equipments\item_fmradio.ogf

@@ -8,6 +8,46 @@ from .utils import print_error, print_warning, SingletonBase
 
 # ----------------------------------------------------------------
 
+class Levels(SingletonBase):
+    """Класс, хранящий информацию об игровых локациях и ``game_vertex_id``.
+    
+    Определяется секцией ``[level_gvids]`` в meta-файле.
+    """
+
+    _level_gvids: dict[str, int]
+
+    def __init__(self):
+        s = meta_ini().section("level_gvids")
+        self._level_gvids = {}
+        for loc in s.lines():
+            self._level_gvids[loc.lower()] = s.get_uint(loc)
+        self._level_gvids = dict(
+            sorted(self._level_gvids.items(), key=lambda x: -x[1])
+        )
+
+    def __contains__(self, lvl: str) -> bool:
+        return (lvl.lower() in self._level_gvids)
+
+    def __len__(self) -> int:
+        return len(self._level_gvids)
+    
+    def as_list(self) -> list[str]:
+        return list(self._level_gvids.keys())
+
+    def get_lvl_by_gvid(self, gvid: int) -> str:
+        """Получить имя уровня по ``game_vertex_id``
+
+        :param gvid: ``game_vertex_id``
+        :raises ValueError: если дан невалидный ``game_vertex_id``
+        :return: Идентификатор уровня
+        """
+        for lvl, gvid_threshold in self._level_gvids.items():
+            if gvid >= gvid_threshold:
+                return lvl
+        raise ValueError(f"Invalid game_vertex_id ({gvid})")
+
+# ----------------------------------------------------------------
+
 class ServerClasses(SingletonBase):
     """Структура данных, хранящая информацию о серверных классах и их иерархии.
 
@@ -86,6 +126,14 @@ class ObjectType(Enum):
     ITEM_OUTFIT     = auto()
     ITEM_OTHER      = auto()
     OTHER           = auto()
+    UNDEFINED       = auto()
+
+    def is_mob(self) -> bool:
+        MOB_TYPES = {
+            ObjectType.MONSTER,
+            ObjectType.STALKER,
+        }
+        return self in MOB_TYPES
 
     def is_item(self) -> bool:
         ITEM_TYPES = {
@@ -172,6 +220,8 @@ class ObjectTypeDetector(SingletonBase):
 
         Проверок на корректность указанных в аргументах классов не производится.
         """
+        if (client_class is None) and (server_class is None):
+            return ObjectType.UNDEFINED
         SC = ServerClasses()
         for object_type, rules in self._rules.items():
             if client_class is not None:
@@ -313,7 +363,7 @@ class CLSIDs(SingletonBase):
         
     def is_stalker(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.STALKER)
-        
+
     def is_anomaly(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ANOMALY)
         
@@ -334,6 +384,12 @@ class CLSIDs(SingletonBase):
         
     def is_outfit(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ITEM_OUTFIT)
+
+    def is_mob(self, clsid: str) -> bool:
+        return self._is_object_type(clsid, {
+            ObjectType.MONSTER,
+            ObjectType.STALKER,
+        })
 
     def is_item(self, clsid: str) -> bool:
         return self._is_object_type(clsid, {
