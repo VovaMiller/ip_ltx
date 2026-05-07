@@ -7,6 +7,7 @@ from ip_ltx.trade import get_buy_k
 from ip_ltx.treasure_manager import treasure_manager_ini
 from ip_ltx.utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs
 from ip_ltx.xml_data.dialogs import Dialogs
+from ip_ltx.xml_data.info_portions import InfoPortions
 from ip_ltx.xml_data.string_table import StringTable
 from ip_ltx.xml_data.texture_desc import TextureDesc
 
@@ -49,6 +50,9 @@ def test_treasure_manager():
 
 def test_xml_dialogs():
     _ = Dialogs()
+
+def test_xml_info_portions():
+    _ = InfoPortions()
 
 def test_xml_string_table():
     _ = StringTable()

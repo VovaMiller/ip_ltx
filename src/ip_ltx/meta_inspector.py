@@ -1,10 +1,7 @@
 """Помощник для настройки основного конфигурационного файла программы."""
 
-import io
 import re
-import traceback
 from collections.abc import Callable
-from contextlib import redirect_stderr
 from dataclasses import dataclass
 from enum import auto, Enum
 
@@ -14,84 +11,12 @@ from .spawn import get_spawn
 from .spawn_entries_collector import SpawnEntriesCollector
 from .trade import get_buy_k
 from .treasure_manager import treasure_manager_ini
-from .utils import ANSI_COLOR_CODE
+from .utils_inspector import InspectorStep, run_inspection
 from .utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs, ObjectType
 from .xml_data.string_table import StringTable
 
 
-class InspectorError(Exception):
-    """Вызывается при критической ошибке в конфигурации."""
-    pass
-
-class InspectorStep:
-    LINE_WIDTH = 64
-
-    log_info: list[str]
-    log_warning: list[str]
-    log_error: list[str]
-    intro_width: int
-
-    def __init__(self, msg: str):
-        self.log_info = []
-        self.log_warning = []
-        self.log_error = []
-        self.intro_width = len(msg) + 3
-        print(msg, "...", sep="", end="")
-
-    def __enter__(self):
-        return self
-    
-    def info(self, msg: str):
-        """Вывести серое сообщение с доп. информацией."""
-        self.log_info.append(msg)
-
-    def warn(self, msg: str):
-        """Вывести жёлтое сообщение-предупреждение."""
-        self.log_warning.append(msg)
-    
-    def error(self, msg: str):
-        """Вывести красное сообщение об ошибке.
-
-        При наличии хотя бы одного такого сообщения на выходе
-        из контексного менеджера будет вызвано исключение.
-
-        В отличие прямого вызова исключения, позволяет вывести несколько ошибок сразу.
-        """
-        self.log_error.append(msg)
-    
-    def __exit__(self, exc_type, exc, tb):
-        res_clr = (
-            ANSI_COLOR_CODE.RED if (exc_type is not None) or (len(self.log_error) > 0)
-            else ANSI_COLOR_CODE.YELLOW if (len(self.log_warning) > 0)
-            else ANSI_COLOR_CODE.GREEN
-        )
-        res_txt = "OK" if (exc_type is None) and (len(self.log_error) == 0) else "FAIL"
-        dots = max(0, self.LINE_WIDTH - self.intro_width - len(res_txt))
-        print(f"{"."*dots}{res_clr}{res_txt}{ANSI_COLOR_CODE.DEF}")
-        if (
-            (len(self.log_info) > 0)
-            or (len(self.log_warning) > 0)
-            or (len(self.log_error) > 0)
-            or (exc_type is not None)
-        ):
-            print("")
-            for msg in self.log_info:
-                print(f"{ANSI_COLOR_CODE.BLACK}* {msg}{ANSI_COLOR_CODE.DEF}")
-                # print(f"* {ANSI_COLOR_CODE.WHITE}{msg}{ANSI_COLOR_CODE.DEF}")
-            for msg in self.log_warning:
-                print(f"{ANSI_COLOR_CODE.YELLOW}~ {msg}{ANSI_COLOR_CODE.DEF}")
-            for msg in self.log_error:
-                print(f"{ANSI_COLOR_CODE.RED}! {msg}{ANSI_COLOR_CODE.DEF}")
-            if exc_type is not None:
-                print(f"{ANSI_COLOR_CODE.RED}! {exc}{ANSI_COLOR_CODE.DEF}")
-            print("")
-        if exc_type is not None:
-            raise InspectorError() from exc
-        if len(self.log_error) > 0:
-            raise InspectorError()
-
-
-def _inspector_pipeline() -> None:
+def _inspection_pipeline() -> None:
     """Полная проверка настройки основного конфигурационного файла (``meta.ltx``).
 
     :raises InspectorError: при критической ошибке в конфигурации.
@@ -109,7 +34,7 @@ def _inspector_pipeline() -> None:
     with InspectorStep("Проверка базовых секций") as step:
         # [features]
         s = ini_meta.section("features")
-        lines = ["iPv20", "iPv30", "universal_acdc"]
+        lines = ["iPv20", "iPv30", "universal_acdc", "inspector_pedantic"]
         for line in lines:
             if s.line_exist(line):
                 _ = s.get_bool(line)
@@ -653,7 +578,7 @@ def _inspector_pipeline() -> None:
 
 
 def inspect(show_stderr: bool = False, show_traceback: bool = False) -> None:
-    """Основная функция для запуская полной проверки
+    """Основная функция для запуска полной проверки
     настройки конфигурационного файла (``meta.ltx``).
 
     :param show_stderr: Вывести ли сообщения из ``stderr``,
@@ -661,27 +586,8 @@ def inspect(show_stderr: bool = False, show_traceback: bool = False) -> None:
     :param show_traceback: Выводить ли traceback исключения,
         которое может возникнуть в процессе проверки.
     """
-    def _print_line():
-        print("—" * InspectorStep.LINE_WIDTH)
-    tb = ""
-
-    # pipeline
-    _print_line()
-    stderr_buffer = io.StringIO()
-    with redirect_stderr(stderr_buffer):
-        try:
-            _inspector_pipeline()
-        except InspectorError:
-            tb = traceback.format_exc().strip()
-    stderr_str = stderr_buffer.getvalue().strip()
-    _print_line()
-
-    # stderr
-    if show_stderr and (len(stderr_str) > 0):
-        print(stderr_str)
-        _print_line()
-    
-    # traceback
-    if show_traceback and (len(tb) > 0):
-        print(tb)
-        _print_line()
+    run_inspection(
+        _inspection_pipeline,
+        show_stderr=show_stderr,
+        show_traceback=show_traceback
+    )

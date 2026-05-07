@@ -190,6 +190,12 @@ class Section:
         """
         return (k in self._fields) and (self._fields[k] is not None)
 
+    def line_exist_own(self, k: str) -> bool:
+        """Проверка на то, что поле с укзанным именем существует
+        и определено прямо в этой секции (а не унаследовано от другой).
+        """
+        return (k in self._fields_own)
+
 
     def clear(self) -> None:
         """Удаление всех полей из секции."""
