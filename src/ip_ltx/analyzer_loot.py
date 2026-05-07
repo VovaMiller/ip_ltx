@@ -415,6 +415,15 @@ def run_summary(group_name: str, levels: list[str]) -> None:
             flush=True
         )
 
+def validate_spawn_data():
+    """Проверка наличия данных о спавне.
+
+    :raises Exception: если данных о спавне нет.
+    """
+    if len(spawn_ini().sections()) == 0:
+        print_error("Отсутствуют данные о спавне: см. секцию [spawn] в meta.ltx")
+        raise Exception("Spawn data is not provided")
+
 # ----------------------------------------------------------------
 
 validate_data([

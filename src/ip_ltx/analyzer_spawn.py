@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from .ini import meta_ini, spawn_ini
 from .spawn import get_spawn
-from .utils import print_warning, validate_data
+from .utils import print_error, print_warning, validate_data
 from .utils_meta import ObjectType
 
 # ----------------------------------------------------------------
@@ -197,6 +197,17 @@ def extract_mobs(
                     mob.profile
                 ))
             file.write("\n")
+
+# ----------------------------------------------------------------
+
+def validate_spawn_data():
+    """Проверка наличия данных о спавне.
+
+    :raises Exception: если данных о спавне нет.
+    """
+    if len(spawn_ini().sections()) == 0:
+        print_error("Отсутствуют данные о спавне: см. секцию [spawn] в meta.ltx")
+        raise Exception("Spawn data is not provided")
 
 # ----------------------------------------------------------------
 

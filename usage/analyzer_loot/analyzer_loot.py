@@ -6,6 +6,8 @@ def main():
     from ip_ltx.analyzer_loot import run_summary
     from ip_ltx.utils import run
 
+    al.validate_spawn_data()
+
     LEVELS_ALL = [
         "l01_escape",
         "l02_garbage",

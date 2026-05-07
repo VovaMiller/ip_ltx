@@ -5,6 +5,8 @@ def main():
     import ip_ltx.analyzer_spawn as asp
     from ip_ltx.utils import run
 
+    asp.validate_spawn_data()
+
     LEVELS_ALL = [
         "l01_escape",
         "l02_garbage",
