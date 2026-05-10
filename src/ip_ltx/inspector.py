@@ -1,17 +1,18 @@
 """Валидатор игровых ресурсов."""
 
-import pygtrie
 import re
 from inspect import getdoc
 from pathlib import Path
 
+import pygtrie
+
 from .db import OBJECT_FLAGS
 from .ini import game_ini, meta_ini, spawn_ini, system_ini
 from .ip_ltx import Ini, Section
+from .misc.task_manager import TaskManager
+from .misc.trade import TradeBuy
+from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
-from .task_manager import get_task_manager
-from .trade import get_buy_k
-from .treasure_manager import treasure_manager_ini, treasure_by_sid
 from .utils import cast_safe
 from .utils_inspector import InspectorStep, run_inspection
 from .utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs, ObjectType
@@ -60,10 +61,129 @@ class InspectionsGeneral:
     """Набор проверок, которые автоматически
     запускаются из :func:`_inspection_st2_general`.
     """
+
+    @staticmethod
+    def test_task_manager_unlisted(step: InspectorStep):
+        """Поиск незарегистрированных заданий task_manager.
+        """
+        task_manager = TaskManager()
+        for s in task_manager.ini.sections():
+            task_type = s.get_string("type", "")
+            if (len(task_type) > 0) and (s.id not in task_manager):
+                if task_type == "storyline":
+                    step.error(f"Storyline task '{s.id}' is unlisted")
+                else:
+                    step.error(f"Task '{s.id}' is unlisted")
     
     @staticmethod
+    def test_treasure_manager_unlisted(step: InspectorStep):
+        """Поиск незарегистрированных тайников treasure_manager.
+        """
+        treasure_manager = TreasureManager()
+        for s in treasure_manager.ini.sections():
+            if s.line_exist("target") and (s.id not in treasure_manager):
+                step.error(f"Treasure '{s.id}' is unlisted")
+
+    @staticmethod
+    @_require_feature("iPv30")
+    def test_treasure_manager_sections(step: InspectorStep):
+        """Проверка секций treasure_manager.ltx.
+        """
+        for s in TreasureManager().ini.sections():
+            if s.id not in ["list", "lvl_condlist", "lvl_adjacent"]:
+                try:
+                    _ = s.get_uint("target")
+                except Section.Error:
+                    step.error(f"Unrecognized section: [{s.id}]")
+
+    @staticmethod
+    def test_translations(step: InspectorStep):
+        """Проверка наличия переводов некоторых строк.
+        """
+        ST = StringTable()
+
+        # task_manager
+        msgs = []
+        for task in TaskManager().generic_tasks():
+            if len(task.text) == 0:
+                msgs.append(f"[{task._id}] Пустое поле 'text'")
+            elif task.text not in ST:
+                msgs.append(f"[{task._id}] Для строки '{task.text}' нет перевода")
+        if len(msgs) > 0:
+            step.info("task_manager", header=True)
+            for msg in msgs:
+                step.error(msg)
+        
+        # treasure_manager
+        msgs = []
+        for treasure in TreasureManager():
+            if len(treasure.name) == 0:
+                msgs.append(
+                    f"[{treasure._id}] Пустое поле 'name'"
+                )
+            elif treasure.name not in ST:
+                msgs.append(
+                    f"[{treasure._id}] Для строки '{treasure.name}' нет перевода"
+                )
+            if len(treasure.description) == 0:
+                msgs.append(
+                    f"[{treasure._id}] Пустое поле 'description'"
+                )
+            elif treasure.description not in ST:
+                msgs.append(
+                    f"[{treasure._id}] Для строки '{treasure.description}' нет перевода"
+                )
+        if len(msgs) > 0:
+            step.info("treasure_manager", header=True)
+            for msg in msgs:
+                step.error(msg)
+        
+        # inventory items
+        ini_meta = meta_ini()
+        CLSIDS = CLSIDs()
+        FIELDS = ["inv_name", "inv_name_short", "inv_name_desc", "description"]
+        NO_ST_PATTERN = re.compile('[ "а-яА-Я]')
+        found_no_st: dict[str, list[str]] = {}
+        found_no_tr: dict[str, list[str]] = {}
+        for s in system_ini().sections():
+            if ini_meta.line_exist("ignore_sections", s.id):
+                continue
+            _class = s.get_string("class", "")
+            if (len(_class) > 0) and (_class in CLSIDS) and CLSIDS.is_item(_class):
+                for field in FIELDS:
+                    value = s.get_string(field, "")
+                    if (len(value) > 0):
+                        if re.search(NO_ST_PATTERN, value):
+                            found_no_st.setdefault(s.id, []).append(field)
+                        elif (value not in ST):
+                            found_no_tr.setdefault(s.id, []).append(value)
+        if len(found_no_st) > 0:
+            step.info(
+                "В указанных полях секций инвентарных предметов",
+                "текст записан напрямую, без использования переводов string_table",
+                header=True
+            )
+            for section_name, fields in found_no_st.items():
+                step.error("[{}] {}".format(
+                    section_name,
+                    ", ".join(fields)
+                ))
+        if len(found_no_tr) > 0:
+            step.info(
+                "Указанные строки используются в секциях инвентарных предметов,",
+                "но для них нет перевода в string_table",
+                header=True
+            )
+            for section_name, strings in found_no_tr.items():
+                step.error("[{}] {}".format(
+                    section_name,
+                    ", ".join([f'"{s}"' for s in dict.fromkeys(strings)])
+                ))
+
+    @staticmethod
     def test_generate_name(step: InspectorStep):
-        """Проверка наличия имён GENERATE_NAME"""
+        """Проверка наличия имён GENERATE_NAME.
+        """
         ST = StringTable()
         sections = [
             s
@@ -101,7 +221,8 @@ class InspectionsGeneral:
     @staticmethod
     @_require_feature("iPv30")
     def test_ph_capture_visuals(step: InspectorStep):
-        """Поиск инвентарных предметов в [ph_capture_visuals]"""
+        """Поиск инвентарных предметов в [ph_capture_visuals].
+        """
         ini_meta = meta_ini()
         ini_system = system_ini()
         CLSIDS = CLSIDs()
@@ -132,7 +253,8 @@ class InspectionsGeneral:
     @staticmethod
     @_require_feature("iPv30")
     def test_section_name_patterns(step: InspectorStep):
-        """Проверка имён секций инвентарных предметов"""
+        """Проверка имён секций инвентарных предметов.
+        """
         PATTERNS_BY_TYPE = {
             ObjectType.ITEM_ART:        r"^af_",
             ObjectType.ITEM_AMMO:       r"^ammo_",
@@ -165,7 +287,8 @@ class InspectionsGeneral:
     @staticmethod
     @_require_feature("iPv30")
     def test_inv_name_desc(step: InspectorStep):
-        """Проверка сокращённых имён боеприпасов и аддонов"""
+        """Проверка сокращённых имён боеприпасов и аддонов.
+        """
         ini_meta = meta_ini()
         ini_system = system_ini()
         CLSIDS = CLSIDs()
@@ -219,6 +342,11 @@ class InspectionsSpawn:
                     "Обнаружены дубликаты name\n"
                     "  при поиске по всем локациям."
                 ))
+                step.info((
+                    "Дубликаты name могут приводить к нестабильным безлоговым\n"
+                    "  вылетам при загрузке сохранения, в том числе\n"
+                    "  при переходе на другую локацию."
+                ))
                 for key, ids in d.items():
                     _, name = key
                     step.error("name = {}{}{}".format(
@@ -231,17 +359,17 @@ class InspectionsSpawn:
                     "Обнаружены дубликаты name\n"
                     "  при поиске по каждой отдельной локации."
                 ))
+                step.info((
+                    "Дубликаты name могут приводить к нестабильным безлоговым\n"
+                    "  вылетам при загрузке сохранения, в том числе\n"
+                    "  при переходе на другую локацию."
+                ))
                 for key, ids in d.items():
                     level, name = key
                     step.error("{} | name = {}{}".format(
                         level, name,
                         "".join([f"\n  [{id}]" for id in ids])
                     ))
-            step.info((
-                "Дубликаты name могут приводить к нестабильным безлоговым\n"
-                "  вылетам при загрузке сохранения, в том числе\n"
-                "  при переходе на другую локацию."
-            ))
 
     @staticmethod
     def test_level_correspondence(step: InspectorStep):
@@ -370,35 +498,32 @@ class InspectionsSpawn:
         """
         iPv20 = meta_ini().get_bool("features", "iPv20", False)
         iPv30 = meta_ini().get_bool("features", "iPv30", False)
+        TM = TreasureManager()
         found_treasures = {}
         for obj in get_spawn().objects():
-            treasure_section = (
-                treasure_by_sid(obj.story_id)
-                if (obj.story_id != -1)
-                else None
-            )
-            if treasure_section is not None:
+            treasure = TM[obj.story_id] if (obj.story_id in TM) else None
+            if treasure is not None:
                 # registered in treasure_manager
-                found_treasures[treasure_section.id] = True
+                found_treasures[treasure._id] = True
                 has_spawn = obj.custom_data.section_exist("spawn")
                 has_spawn_tm = obj.custom_data.section_exist("spawn_tm")
                 if not has_spawn and not has_spawn_tm:
                     if iPv20:
                         step.error(
-                            f"treasure '{treasure_section.id}':",
+                            f"treasure '{treasure._id}':",
                             "custom_data has neither [spawn] nor [spawn_tm]"
                         )
                 else:
                     if has_spawn:
                         if iPv30:
                             step.error(
-                                f"treasure '{treasure_section.id}':",
+                                f"treasure '{treasure._id}':",
                                 "custom_data has [spawn]; use [spawn_tm] instead"
                             )
                     if len(obj._loot) == 0:
                         if iPv20:
                             step.error(
-                                f"treasure '{treasure_section.id}':",
+                                f"treasure '{treasure._id}':",
                                 "has no items"
                             )
                     else:
@@ -411,7 +536,7 @@ class InspectionsSpawn:
                                 break
                         else:
                             step.error(
-                                f"treasure '{treasure_section.id}':",
+                                f"treasure '{treasure._id}':",
                                 "can possibly have no items in it"
                             )
 
@@ -419,7 +544,7 @@ class InspectionsSpawn:
                 if iPv30:
                     if obj.section_name != "inventory_box":
                         step.error(
-                            f"treasure '{treasure_section.id}':",
+                            f"treasure '{treasure._id}':",
                             f"section_name = {obj.section_name}",
                             "use \"inventory_box\" instead"
                         )
@@ -432,10 +557,10 @@ class InspectionsSpawn:
                             "not registered in treasure_manager, but has [spawn_tm]",
                             "use [spawn] instead"
                         )
-        for treasure_id in treasure_manager_ini().ids():
-            if treasure_id not in found_treasures:
+        for treasure in TM:
+            if treasure._id not in found_treasures:
                 step.error(
-                    f"treasure '{treasure_id}':",
+                    f"treasure '{treasure._id}':",
                     "has no associated spawn object"
                 )
 
@@ -451,19 +576,18 @@ class InspectionsSpawn:
 
         Заодно проверяется наличие ``[logic]`` у тайников.
         """
+        TM = TreasureManager()
         for obj in get_spawn().objects():
-            if (
-                (obj.story_id != -1)
-                and (treasure_section := treasure_by_sid(obj.story_id))
-            ):
+            if (obj.story_id != -1) and (obj.story_id in TM):
                 # Проверка правильности подсказки ("Обыскать тайник")
+                treasure = TM[obj.story_id]
                 if obj.custom_data.section_exist("logic"):
                     if obj.custom_data.line_exist("logic", "cfg"):
                         cfg_obj = obj.custom_data.get_string("logic", "cfg")
                         cfg_std = "scripts\\treasure_inventory_box.ltx"
                         if cfg_obj != cfg_std:
                             step.error(
-                                f"treasure '{treasure_section.id}':",
+                                f"treasure '{treasure._id}':",
                                 "for treasures use another cfg reference",
                                 f"(\"{cfg_std}\")"
                             )
@@ -473,14 +597,14 @@ class InspectionsSpawn:
                                 break
                         else:
                             step.error(
-                                f"treasure '{treasure_section.id}':",
+                                f"treasure '{treasure._id}':",
                                 "it doesn't seem to have a correct tip;",
                                 "[logic] is expected to have this line:",
                                 "tips = st_search_treasure"
                             )
                 else:
                     step.error(
-                        f"treasure '{treasure_section.id}':",
+                        f"treasure '{treasure._id}':",
                         "custom_data has no [logic];",
                         "it should be provided at least for this:",
                         "tips = st_search_treasure"
@@ -794,13 +918,13 @@ def _inspection_st1_init() -> None:
         TD = TextureDesc()
 
     with InspectorStep("Инициализация данных task_manager") as step:
-        task_manager = get_task_manager()
+        task_manager = TaskManager()
 
     with InspectorStep("Инициализация данных о торговле") as step:
-        _ = get_buy_k("bread")
+        trade = TradeBuy()
 
     with InspectorStep("Инициализация данных treasure_manager") as step:
-        ini_treasure_manager = treasure_manager_ini()
+        treasure_manager = TreasureManager()
 
     with InspectorStep("Инициализация данных all.spawn") as step:
         ini_spawn = spawn_ini()

@@ -1,10 +1,10 @@
 import pytest
 
 from ip_ltx.ini import game_ini, meta_ini, spawn_ini, system_ini
+from ip_ltx.misc.task_manager import TaskManager
+from ip_ltx.misc.trade import TradeBuy
+from ip_ltx.misc.treasure_manager import TreasureManager
 from ip_ltx.spawn import get_spawn
-from ip_ltx.task_manager import get_task_manager
-from ip_ltx.trade import get_buy_k
-from ip_ltx.treasure_manager import treasure_manager_ini
 from ip_ltx.utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs
 from ip_ltx.xml_data.dialogs import Dialogs
 from ip_ltx.xml_data.info_portions import InfoPortions
@@ -40,13 +40,13 @@ def test_spawn():
     _ = get_spawn()
 
 def test_task_manager():
-    _ = get_task_manager()
+    _ = TaskManager()
 
 def test_trade():
-    _ = get_buy_k("bread")
+    _ = TradeBuy()
 
 def test_treasure_manager():
-    _ = treasure_manager_ini()
+    _ = TreasureManager()
 
 def test_xml_dialogs():
     _ = Dialogs()

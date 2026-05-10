@@ -7,12 +7,18 @@ from pathlib import Path
 from collections import OrderedDict
 
 from .ini import meta_ini, system_ini, spawn_ini
-from .treasure_manager import treasure_manager_ini
+from .misc.treasure_manager import TreasureManager
 from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
 from .xml_data.string_table import StringTable
 from .spawn import get_spawn
 from .spawn_entries_collector import SpawnEntriesCollector
-from .utils import ANSI_COLOR_CODE, print_warning, print_error, validate_data
+from .utils import (
+    ANSI_COLOR_CODE,
+    preinit_singletons,
+    print_warning,
+    print_error,
+    validate_data,
+)
 from .utils_meta import CLSIDs
 
 # ----------------------------------------------------------------
@@ -28,53 +34,31 @@ def tm__extract_loot_each(
     :param show_strings: Также показать имя и описание тайника.
     :param show_visual: Также показать используемый тайником визуал.
     """
-    ini_tm = treasure_manager_ini()
+    TM = TreasureManager()
     ini_spawn = spawn_ini()
     spawn = get_spawn()
 
     # Извлекаем имена и описания
     ST = StringTable() if show_strings else {}
 
-    # Сводка по наличию нужных строк
-    if show_strings:
-        for treasure_section in ini_tm.sections():
-            name = treasure_section.get_string("name", "")
-            if len(name) == 0:
-                print_warning(
-                    f"Treasure '{treasure_section.id}' doesn't have 'name'"
-                )
-            elif name not in ST:
-                print_warning(f"Can't translate string '{name}'")
-            
-            desc = treasure_section.get_string("description", "")
-            if len(desc) == 0:
-                print_warning(
-                    f"Treasure '{treasure_section.id}' doesn't have 'description'"
-                )
-            elif desc not in ST:
-                print_warning(f"Can't translate string '{desc}'")
-
     # Выписываем содержимое тайников.
     with open(fn, "w", encoding="utf-8") as file:
-        for treasure_section in ini_tm.sections():
-            treasure_id = treasure_section.id
-            obj = spawn.story_object(treasure_section.get_uint("target"))
+        for treasure in TM:
+            obj = spawn.story_object(treasure.target)
             if show_strings:
-                name_id = treasure_section.get_string("name", "?")
-                name_txt = ST.get(name_id, name_id)
-                desc_id = treasure_section.get_string("description", "?")
-                desc_txt = ST.get(desc_id, desc_id)
-                file.write("; {}\n".format(name_txt))
-                file.write("; {}\n".format(desc_txt))
+                name_txt = ST.get(treasure.name, treasure.name) or "?"
+                desc_txt = ST.get(treasure.description, treasure.description) or "?"
+                file.write(f"; {name_txt}\n")
+                file.write(f"; {desc_txt}\n")
             if show_visual:
                 visual_name = ini_spawn.get_string(obj._id, "visual_name", "")
-                file.write(";; {}\n".format(visual_name))
+                file.write(f";; {visual_name}\n")
             file.write("[{}]  {};story_id = {}\n".format(
-                treasure_id, " "*max(0, 32-len(treasure_id)), obj.story_id
+                treasure._id, " "*max(0, 32-len(treasure._id)), obj.story_id
             ))
             file.write("\n".join([
                 str(e) for e in itertools.chain(
-                    SpawnEntriesPool.from_items(treasure_section).entries(),
+                    SpawnEntriesPool.from_items(TM.ini.section(treasure._id)).entries(),
                     obj._loot.entries()
                 )
             ]))
@@ -86,13 +70,13 @@ def tm__extract_position(fn: str) -> None:
 
     :param fn: Путь/имя файла для вывода.
     """
-    ini_tm = treasure_manager_ini()
+    TM = TreasureManager()
     spawn = get_spawn()
     with open(fn, "w", encoding="utf-8") as file:
-        for treasure_section in ini_tm.sections():
-            obj = spawn.story_object(treasure_section.get_uint("target"))
+        for treasure in TM:
+            obj = spawn.story_object(treasure.target)
             str_pos = ",".join([str(p) for p in obj.position])
-            file.write(f"{{\"{treasure_section.id}\", {{{str_pos}}}}},\n")
+            file.write(f"{{\"{treasure._id}\", {{{str_pos}}}}},\n")
 
 
 def tm__count_by_levels(fn: str) -> None:
@@ -100,13 +84,13 @@ def tm__count_by_levels(fn: str) -> None:
     
     :param fn: Путь/имя файла для вывода.
     """
-    ini_tm = treasure_manager_ini()
+    TM = TreasureManager()
     spawn = get_spawn()
 
     # counting
     cnt_by_lvl = {}
-    for treasure_section in ini_tm.sections():
-        obj = spawn.story_object(treasure_section.get_uint("target"))
+    for treasure in TM:
+        obj = spawn.story_object(treasure.target)
         if obj._level not in cnt_by_lvl:
             cnt_by_lvl[obj._level] = 0
         cnt_by_lvl[obj._level] += 1
@@ -126,14 +110,14 @@ def tm__calculate_prob_w(fn: str) -> None:
 
     :param fn: Путь/имя файла для вывода.
     """
-    ini_tm = treasure_manager_ini()
+    TM = TreasureManager()
     spawn = get_spawn()
     d = OrderedDict()
-    for ts in ini_tm.sections():
-        obj = spawn.story_object(ts.get_uint("target"))
+    for treasure in TM:
+        obj = spawn.story_object(treasure.target)
         cost = round(obj._loot.cost(trade=False))
         prob_w = 0 if (cost == 0) else math.ceil(1000000 / cost)
-        d[ts.id] = prob_w
+        d[treasure._id] = prob_w
     offset_0 = ((max([len(k) for k in d.keys()]) // 4) + 1) * 4
     offset_1 = ((max([len(str(v)) for v in d.values()]) // 4) + 1) * 4
     with open(fn, "w", encoding="utf-8") as file:
@@ -430,6 +414,9 @@ validate_data([
     meta_ini,
     system_ini,
     spawn_ini,
-    treasure_manager_ini,
     get_spawn,
+])
+
+preinit_singletons([
+    TreasureManager,
 ])

@@ -7,10 +7,10 @@ from enum import auto, Enum
 
 from .ini import game_ini, meta_ini, spawn_ini, system_ini
 from .ip_ltx import Ini, Section
+from .misc.trade import TradeBuy
+from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
 from .spawn_entries_collector import SpawnEntriesCollector
-from .trade import get_buy_k
-from .treasure_manager import treasure_manager_ini
 from .utils_inspector import InspectorStep, run_inspection
 from .utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs, ObjectType
 from .xml_data.string_table import StringTable
@@ -93,10 +93,10 @@ def _inspection_pipeline() -> None:
         LEVELS = Levels()
 
     with InspectorStep("Инициализация данных о коэффициентах торговли") as step:
-        _ = get_buy_k("bread")
+        trade = TradeBuy()
 
     with InspectorStep("Инициализация данных о тайниках") as step:
-        ini_treasure_manager = treasure_manager_ini()
+        treasure_manager = TreasureManager()
 
     with InspectorStep("Инициализация данных о спавне (all.spawn)") as step:
         ini_spawn = spawn_ini()

@@ -1,7 +1,8 @@
 import inspect
 import math
-import pytest
 from pathlib import Path
+
+import pytest
 
 from ip_ltx import Ini, Section
 from ip_ltx.utils import cast_safe

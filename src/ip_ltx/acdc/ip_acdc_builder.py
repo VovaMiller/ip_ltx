@@ -40,8 +40,9 @@ import shutil
 import subprocess
 import traceback
 from pathlib import Path
-from pathvalidate import is_valid_filename
 from typing import TextIO
+
+from pathvalidate import is_valid_filename
 
 from ..ip_ltx import Ini, Section
 from ..utils import ANSI_COLOR_CODE, print_error, print_warning

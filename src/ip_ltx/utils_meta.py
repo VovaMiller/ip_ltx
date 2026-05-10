@@ -1,7 +1,8 @@
-import networkx as nx
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Container
+
+import networkx as nx
 
 from .ini import meta_ini
 from .utils import print_error, print_warning, SingletonBase

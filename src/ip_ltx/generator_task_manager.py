@@ -1,6 +1,9 @@
-"""Генерация конфигов, необходимых для заданий из task_manager"""
+"""Генерация конфигов, необходимых для заданий из ``task_manager``.
 
-from .task_manager import TaskIterator
+__Генерация настроена только под второстепенные задания из мода *Истинный путь v3.0*__
+"""
+
+from .misc.task_manager import TaskManager
 from .utils import run
 
 # ----------------------------------------------------------------
@@ -17,13 +20,14 @@ def generate_tasks(
         или None для генерации по всем заданиям.
     :param tab: Отступ, используемый при выводе в файл.
     """
+
     with open(fn, "w", encoding="utf-8") as file:
-        for task_id, task_sect in TaskIterator(task_ids=task_ids, include_storyline=False):
-            file.write(f"{tab*1}<game_task id=\"{task_id}\" prio=\"199\">\n")
-            file.write(f"{tab*2}<title>{task_id}</title>\n")
+        for task in TaskManager().generic_tasks(task_ids):
+            file.write(f"{tab*1}<game_task id=\"{task._id}\" prio=\"199\">\n")
+            file.write(f"{tab*2}<title>{task._id}</title>\n")
             file.write(f"{tab*2}<objective>\n")
-            file.write(f"{tab*3}<text>{task_id}</text>\n")
-            file.write(f"{tab*3}<icon>ui_iconsTotal_{task_id}</icon>\n")
+            file.write(f"{tab*3}<text>{task._id}</text>\n")
+            file.write(f"{tab*3}<icon>ui_iconsTotal_{task._id}</icon>\n")
             file.write(f"{tab*3}<function_complete>task_manager.task_complete</function_complete>\n")
             file.write(f"{tab*3}<function_fail>task_manager.task_fail</function_fail>\n")
             file.write(f"{tab*2}</objective>\n")
@@ -72,20 +76,17 @@ def generate_icons(
         file.write(f"{tab*1}<texture id=\"ui_icons_task_find_wpn\"        x=\"0\" y=\"141\" width=\"83\" height=\"47\"/>\n")
         file.write(f"{tab*1}<texture id=\"ui_icons_task_eliminate_lager\" x=\"0\" y=\"188\" width=\"83\" height=\"47\"/>\n")
         file.write("\n")
-        for task_id, task_sect in TaskIterator(task_ids=task_ids, include_storyline=False):
-            task_type = task_sect._fields.get("type", None)
-            parent = task_sect._fields.get("parent", None)
-
+        for task in TaskManager().generic_tasks(task_ids):
             # calculating icon position
-            pos1 = OFFSET_BY_TYPE.get(task_type, None)
+            pos1 = OFFSET_BY_TYPE.get(task._type, None)
             if (pos1 is None):
-                raise Exception(f"Unexpected task type ({task_type}) in \"{task_id}\"")
-            pos2 = OFFSET_BY_VENDOR.get(parent, None)
+                raise Exception(f"Unexpected task type ({task._type}) in '{task._id}'")
+            pos2 = OFFSET_BY_VENDOR.get(task.parent, None)
             if (pos2 is None):
-                raise Exception(f"Unexpected parent ({parent}) in \"{task_id}\"")
+                raise Exception(f"Unexpected parent ({task.parent}) in '{task._id}'")
             pos = (pos1[0] + pos2[0], pos1[1] + pos2[1])
 
-            file.write(f"{tab*1}<texture id=\"ui_iconsTotal_{task_id}\" x=\"{pos[0]}\" y=\"{pos[1]}\" width=\"83\" height=\"47\"/>\n")
+            file.write(f"{tab*1}<texture id=\"ui_iconsTotal_{task._id}\" x=\"{pos[0]}\" y=\"{pos[1]}\" width=\"83\" height=\"47\"/>\n")
         file.write("\n")
         file.write("</ui_texture>\n")
 
@@ -102,18 +103,9 @@ def generate_articles(
     :param tab: Отступ, используемый при выводе в файл.
     """
     with open(fn, "w", encoding="utf-8") as file:
-        for task_id, task_sect in TaskIterator(task_ids=task_ids, include_storyline=False):
-            task_article = task_sect._fields.get("article", None)
-            task_text = task_sect._fields.get("text", None)
-            task_type = task_sect._fields.get("type", None)
-            if task_article is None:
-                raise Exception(f"No article found in task \"{task_id}\"")
-            if task_text is None:
-                raise Exception(f"No text found in task \"{task_id}\"")
-            if task_type is None:
-                raise Exception(f"No type found in task \"{task_id}\"")
-            file.write(f"<article id=\"{task_article}\" name=\"{task_type}\" article_type=\"task\">\n")
-            file.write(f"{tab*1}<text>{task_text}</text>\n")
+        for task in TaskManager().generic_tasks(task_ids):
+            file.write(f"<article id=\"{task.article}\" name=\"{task._type}\" article_type=\"task\">\n")
+            file.write(f"{tab*1}<text>{task.text}</text>\n")
             file.write("</article>\n")
         file.write("\n")
 
@@ -132,19 +124,13 @@ def generate_strings(
     with open(fn, "w", encoding="utf-8") as file:
         file.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n")
         file.write("<string_table>\n")
-        for task_id, task_sect in TaskIterator(task_ids=task_ids, include_storyline=False):
-            task_text = task_sect._fields.get("text", None)
-            task_target = task_sect._fields.get("target", None)
-            task_count = task_sect._fields.get("count", "")
-            if task_text is None:
-                raise Exception(f"No text found in task \"{task_id}\"")
-            if task_target is None:
-                raise Exception(f"No target found in task \"{task_id}\"")
-            file.write(f"{tab*1}<string id=\"{task_id}\">  <!-- {task_target} - {task_count} -->\n")
+        for task in TaskManager().generic_tasks(task_ids):
+            task_count: str = str(task.count) if (task.count is not None) else ""
+            file.write(f"{tab*1}<string id=\"{task._id}\">  <!-- {task.target} - {task_count} -->\n")
             file.write(f"{tab*2}<text>TODO</text>\n")
             file.write(f"{tab*1}</string>\n")
-            file.write(f"{tab*1}<string id=\"{task_text}\">\n")
-            file.write(f"{tab*2}<text>TODO. {task_target} {task_count} ____</text>\n")
+            file.write(f"{tab*1}<string id=\"{task.text}\">\n")
+            file.write(f"{tab*2}<text>TODO. {task.target} {task_count} ____</text>\n")
             file.write(f"{tab*1}</string>\n")
         file.write("</string_table>\n")
 

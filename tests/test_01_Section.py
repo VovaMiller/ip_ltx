@@ -1,4 +1,5 @@
 import io
+
 import pytest
 
 from ip_ltx import Section

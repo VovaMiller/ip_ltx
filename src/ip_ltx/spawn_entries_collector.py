@@ -1,7 +1,7 @@
 from .db import ADDON_FLAGS
-from .ini import meta_ini, system_ini, spawn_ini
+from .ini import system_ini, spawn_ini
+from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
-from .treasure_manager import treasure_manager_ini, treasure_by_sid
 from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
 from .utils_meta import ObjectType
 
@@ -23,17 +23,16 @@ class SpawnEntriesCollector:
 
         :param levels: Список локаций, по которым осуществляется сборка.
         """
-        ini_meta = meta_ini()
-        ini_tm = treasure_manager_ini()
+        TM = TreasureManager()
         spawn = get_spawn()
         entries = SpawnEntriesPool()
-        for treasure_section in ini_tm.sections():
-            obj = spawn.story_object(treasure_section.get_uint("target"))
+        for treasure in TM:
+            obj = spawn.story_object(treasure.target)
             if obj._level in levels:
                 # all.spawn: [spawn] & [spawn_tm]
                 entries.merge(obj._loot)
                 # treasure_manager.ltx: items
-                entries.merge(SpawnEntriesPool.from_items(treasure_section))
+                entries.merge(SpawnEntriesPool.from_items(TM.ini.section(treasure._id)))
         self.result.merge(entries)
 
     def from_non_tm_inventories(self, levels: list[str] = []) -> None:
@@ -46,6 +45,7 @@ class SpawnEntriesCollector:
         
         :param levels: Список локаций, по которым осуществляется сборка.
         """
+        TM = TreasureManager()
         spawn = get_spawn()
         ini_spawn = spawn_ini()
         entries = SpawnEntriesPool()
@@ -53,7 +53,7 @@ class SpawnEntriesCollector:
             if obj._level not in levels:
                 continue
             if obj._class == "O_INVBOX":
-                if treasure_by_sid(obj.story_id) is None:
+                if obj.story_id not in TM:
                     entries.merge(obj._loot)
             elif obj._class == "AI_STL_S":
                 if ini_spawn.get_float(obj._id, "health", 1.0) < 0.01:

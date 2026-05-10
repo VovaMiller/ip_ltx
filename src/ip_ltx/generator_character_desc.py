@@ -8,8 +8,9 @@ import random
 from collections import Counter
 from collections.abc import Callable
 from pathlib import Path, PureWindowsPath
-from pathvalidate import is_valid_filepath
 from typing import TextIO
+
+from pathvalidate import is_valid_filepath
 
 from .ip_ltx import Ini, Section
 from .ini import system_ini

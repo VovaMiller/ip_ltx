@@ -1,5 +1,6 @@
-import pytest
 import re
+
+import pytest
 
 from ip_ltx.ini import spawn_ini
 from ip_ltx.utils_meta import (

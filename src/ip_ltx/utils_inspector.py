@@ -4,6 +4,8 @@ import io
 import traceback
 from collections.abc import Callable
 from contextlib import redirect_stderr
+from dataclasses import dataclass
+from enum import Enum
 
 from .utils import ANSI_COLOR_CODE
 
@@ -27,15 +29,22 @@ class InspectorStep:
     
     LINE_WIDTH = 64
 
-    log_info: list[str]
-    log_warning: list[str]
-    log_error: list[str]
+    class MessageLevel(Enum):
+        INFO = 0
+        WARNING = 1
+        ERROR = 2
+    
+    @dataclass(frozen=True, slots=True)
+    class Message:
+        level: "InspectorStep.MessageLevel"
+        text: str
+        header: bool
+
+    log: list[Message]
     intro_width: int
 
     def __init__(self, msg: str, raise_on_error: bool = True):
-        self.log_info = []
-        self.log_warning = []
-        self.log_error = []
+        self.log = []
         self.intro_width = len(msg) + 3
         print(msg, "...", sep="", end="")
         self.raise_on_error = raise_on_error
@@ -43,15 +52,29 @@ class InspectorStep:
     def __enter__(self):
         return self
     
-    def info(self, *msgs: str):
-        """Вывести серое сообщение с доп. информацией."""
-        self.log_info.append("\n  ".join(msgs))
+    def info(self, *msgs: str, header: bool = False):
+        """Вывести серое сообщение с доп. информацией.
+        
+        Если ``header == True``, то сообщение отделится от предыдущих.
+        """
+        self.log.append(self.Message(
+            level=self.MessageLevel.INFO,
+            text="\n  ".join(msgs),
+            header=header
+        ))
 
-    def warn(self, *msgs: str):
-        """Вывести жёлтое сообщение-предупреждение."""
-        self.log_warning.append("\n  ".join(msgs))
+    def warn(self, *msgs: str, header: bool = False):
+        """Вывести жёлтое сообщение-предупреждение.
+        
+        Если ``header == True``, то сообщение отделится от предыдущих.
+        """
+        self.log.append(self.Message(
+            level=self.MessageLevel.WARNING,
+            text="\n  ".join(msgs),
+            header=header
+        ))
     
-    def error(self, *msgs: str):
+    def error(self, *msgs: str, header: bool = False):
         """Вывести красное сообщение об ошибке.
 
         При наличии хотя бы одного такого сообщения на выходе
@@ -59,38 +82,51 @@ class InspectorStep:
         если ``raise_on_error == True``.
 
         В отличие прямого вызова исключения, позволяет вывести несколько ошибок сразу.
+        
+        Если ``header == True``, то сообщение отделится от предыдущих.
         """
-        self.log_error.append("\n  ".join(msgs))
+        self.log.append(self.Message(
+            level=self.MessageLevel.ERROR,
+            text="\n  ".join(msgs),
+            header=header
+        ))
     
     def __exit__(self, exc_type, exc, tb):
+        cnt_warning = len(
+            [msg for msg in self.log if msg.level == self.MessageLevel.WARNING]
+        )
+        cnt_error = len(
+            [msg for msg in self.log if msg.level == self.MessageLevel.ERROR]
+        )
         res_clr = (
-            ANSI_COLOR_CODE.RED if (exc_type is not None) or (len(self.log_error) > 0)
-            else ANSI_COLOR_CODE.YELLOW if (len(self.log_warning) > 0)
+            ANSI_COLOR_CODE.RED if (exc_type is not None) or (cnt_error > 0)
+            else ANSI_COLOR_CODE.YELLOW if (cnt_warning > 0)
             else ANSI_COLOR_CODE.GREEN
         )
-        res_txt = "OK" if (exc_type is None) and (len(self.log_error) == 0) else "FAIL"
+        res_txt = "OK" if (exc_type is None) and (cnt_error == 0) else "FAIL"
         dots = max(0, self.LINE_WIDTH - self.intro_width - len(res_txt))
         print(f"{"."*dots}{res_clr}{res_txt}{ANSI_COLOR_CODE.DEF}")
-        if (
-            (len(self.log_info) > 0)
-            or (len(self.log_warning) > 0)
-            or (len(self.log_error) > 0)
-            or (exc_type is not None)
-        ):
+        if (len(self.log) > 0) or (exc_type is not None):
             print("")
-            for msg in self.log_info:
-                print(f"{ANSI_COLOR_CODE.BLACK}* {msg}{ANSI_COLOR_CODE.DEF}")
-                # print(f"* {ANSI_COLOR_CODE.WHITE}{msg}{ANSI_COLOR_CODE.DEF}")
-            for msg in self.log_warning:
-                print(f"{ANSI_COLOR_CODE.YELLOW}~ {msg}{ANSI_COLOR_CODE.DEF}")
-            for msg in self.log_error:
-                print(f"{ANSI_COLOR_CODE.RED}! {msg}{ANSI_COLOR_CODE.DEF}")
+            for i, msg in enumerate(self.log):
+                match msg.level:
+                    case self.MessageLevel.INFO:
+                        prefix = f"{ANSI_COLOR_CODE.BLACK}* "
+                    case self.MessageLevel.WARNING:
+                        prefix = f"{ANSI_COLOR_CODE.YELLOW}~ "
+                    case self.MessageLevel.ERROR:
+                        prefix = f"{ANSI_COLOR_CODE.RED}! "
+                    case _:
+                        prefix = f"* {ANSI_COLOR_CODE.WHITE}"
+                if (i > 0) and msg.header:
+                    print("")
+                print(f"{prefix}{msg.text}{ANSI_COLOR_CODE.DEF}")
             if exc_type is not None:
                 print(f"{ANSI_COLOR_CODE.RED}! {exc}{ANSI_COLOR_CODE.DEF}")
             print("")
         if exc_type is not None:
             raise InspectorError() from exc
-        if self.raise_on_error and (len(self.log_error) > 0):
+        if self.raise_on_error and (cnt_error > 0):
             raise InspectorError()
 
 

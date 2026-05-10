@@ -1,4 +1,3 @@
-import os.path
 from collections import OrderedDict
 
 from .ip_ltx import Section, Ini

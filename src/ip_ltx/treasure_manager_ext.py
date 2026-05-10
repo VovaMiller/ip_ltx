@@ -1,6 +1,4 @@
-"""
-    * class SpawnEntry
-    * class SpawnEntriesPool
+"""Доп. инструменты для работы с лутом: :class:`SpawnEntry`, :class:`SpawnEntriesPool`.
 """
 
 import re
@@ -9,7 +7,7 @@ from typing import Self
 
 from .ini import system_ini
 from .ip_ltx import Section
-from .trade import get_buy_k
+from .misc.trade import TradeBuy
 from .utils import print_warning
 from .utils_meta import CLSIDs, ObjectType
 
@@ -18,26 +16,25 @@ from .utils_meta import CLSIDs, ObjectType
 
 
 class SpawnEntry:
-    """ Класс строки из секции спавна [spawn]
-        Также поддерживает [spawn_tm] из iP v3.0
+    """Класс, представляющий одну строчку секции спавна ``[spawn]``.
+
+    Например, ``wpn_ak74 = 1, cond=0.8 silencer``
+
+    Также поддерживается формат секции ``[spawn_tm]`` из *iP v3.0*
     """
     _type: ObjectType
 
-    def __init__(self, name, params, context=""):
-        """ Инициализация строки "name = params"
-            Поддерживает нецелые count и box_size.
+    def __init__(self, name: str, params: str | int | None, context: str = ""):
+        """Инициализация строки ``name = params``
 
-            @arg name <str>
-                * Имя секции.
-                * Оно же - key из строки секции спавна.
-            @arg params <str>
-                * Параметры спавна.
-                * Оно же - value из строки секции спавна.
-            @arg context <str>
-                * Контекст данного вхождения.
-                * Например, ``custom_data@mil_inventory_box_0033``.
-                * Например, ``all.spawn@mil_wpn_ak74u``.
-                * Используется только в сообщениях об ошибках (warning, error).
+        Поддерживает нецелые ``count`` и ``box_size``.
+
+        :param name: Имя секции. Оно же - key из строки секции спавна.
+        :param params: Параметры спавна. Оно же - value из строки секции спавна.
+        :param context: Контекст данного вхождения.
+            Например, ``custom_data@mil_inventory_box_0033``,
+            ``all.spawn@mil_wpn_ak74u``.
+            Используется только в сообщениях об ошибках (warning, error).
         """
         def _warn(msg: str) -> None:
             print_warning(f"{context} | {msg}")
@@ -145,17 +142,20 @@ class SpawnEntry:
                 self.unload = False
         else:
             # Status check: scope
-            if self.scope and (str(_section._fields.get("scope_status", "0")) != "2"):
+            scope_status = _section.get_string("scope_status", "0")
+            if self.scope and (scope_status != "2"):
                 _warn(f"Ignoring option 'scope': not attachable for [{name}]")
                 self.scope = False
 
             # Status check: silencer
-            if self.silencer and (str(_section._fields.get("silencer_status", "0")) != "2"):
+            silencer_status = _section.get_string("silencer_status", "0")
+            if self.silencer and (silencer_status != "2"):
                 _warn(f"Ignoring option 'silencer': not attachable for [{name}]")
                 self.silencer = False
 
             # Status check: launcher
-            if self.launcher and (str(_section._fields.get("grenade_launcher_status", "0")) != "2"):
+            launcher_status = _section.get_string("grenade_launcher_status", "0")
+            if self.launcher and (launcher_status != "2"):
                 _warn(f"Ignoring option 'launcher': not attachable for [{name}]")
                 self.launcher = False
 
@@ -188,7 +188,7 @@ class SpawnEntry:
     def __str__(self):
         return "{} = {}".format(self.name, self.get_params_str())
 
-    def get_params_str(self):
+    def get_params_str(self) -> str:
         str_count = str(self.count)
         if type(self.count) == float:
             str_count = "{:.2f}".format(self.count)
@@ -216,12 +216,9 @@ class SpawnEntry:
             params = str_count
         return params
 
-    def signature(self):
-        """
-            Возвращает "сигнатуру" - строку,
-            по которой можно определить одинаковость
-            двух экземпляров этого класса с точностью
-            до различных count.
+    def signature(self) -> str:
+        """Возвращает "сигнатуру" - строку, по которой можно определить одинаковость
+        двух экземпляров этого класса с точностью до различных count.
         """
         parts = []
         parts.append(self.name)
@@ -241,28 +238,26 @@ class SpawnEntry:
             parts.append("unload")
         return "|".join(parts)
 
-    def cost(self, trade=False):
-        """ Подсчёт стоимости вхождения
-              с учётом кол-ва и всех параметров.
-            Учитываются также неразряженные боеприпасы
-              и прикреплённые к оружию аддоны.
-            Результат - всегда float.
+    def cost(self, trade: bool = False) -> float:
+        """Подсчёт стоимости вхождения с учётом кол-ва и всех параметров.
 
-            @arg trade: bool
-                * False: подсчёт исходной стоимости.
-                * True: подсчёт стоимости продажи торговцам.
+        Учитываются также неразряженные боеприпасы и прикреплённые к оружию аддоны.
+
+        :param trade: Если ``True``, то подсчитывается стоимость продажи торговцам.
         """
+        TRADE = TradeBuy()
         ini_system = system_ini()
         count = float(self.count)
         prob = 1.0 if (self.prob is None) else (self.prob / 100.0)
         cond = 1.0 if (self.cond is None) else (self.cond / 100.0)
         cond = (cond*0.9 + 0.1)**0.75  # condition_factor как в движке
-        buy_k = 1.0 if not trade else get_buy_k(self.name)
+        buy_k = 1.0 if not trade else TRADE.get_buy_k(self.name)
         base_cost = ini_system.get_uint(self.name, "cost")
         if self._type == ObjectType.ITEM_AMMO:
             base_box_size = ini_system.get_uint(self.name, "box_size")
             box_size = self.box_size if (self.box_size is not None) else base_box_size
-            return base_cost * ((count * box_size) / base_box_size) * prob * cond * buy_k
+            box_count = (count * box_size) / base_box_size
+            return base_cost * box_count * prob * cond * buy_k
         elif self._type == ObjectType.ITEM_WEAPON:
             cost_sum = base_cost * count * prob * cond * buy_k
             addons = []
@@ -274,14 +269,14 @@ class SpawnEntry:
                 addons.append(ini_system.get_string(self.name, "grenade_launcher_name"))
             for addon_name in addons:
                 addon_cost = ini_system.get_uint(addon_name, "cost")
-                addon_buy_k = 1.0 if not trade else get_buy_k(addon_name)
+                addon_buy_k = 1.0 if not trade else TRADE.get_buy_k(addon_name)
                 cost_sum += addon_cost * count * prob * addon_buy_k
             if not self.unload:
                 ammo_class = ini_system.get_strings(self.name, "ammo_class")[0]
                 ammo_mag_size = ini_system.get_uint(self.name, "ammo_mag_size")
                 ammo_base_cost = ini_system.get_uint(ammo_class, "cost")
                 ammo_base_box_size = ini_system.get_uint(ammo_class, "box_size")
-                ammo_buy_k = 1.0 if not trade else get_buy_k(ammo_class)
+                ammo_buy_k = 1.0 if not trade else TRADE.get_buy_k(ammo_class)
                 box_count = (count * ammo_mag_size) / ammo_base_box_size
                 cost_sum += ammo_base_cost * box_count * prob * ammo_buy_k
             return cost_sum
@@ -292,8 +287,9 @@ class SpawnEntry:
 
 
 class SpawnEntriesPool:
-    """ Хранилище экземпляров класса SpawnEntry.
-        Агрегирует по count вхождения с одинаковыми параметрами.
+    """Хранилище экземпляров класса :class:`SpawnEntry`.
+
+    Агрегирует по count вхождения с одинаковыми параметрами.
     """
     pool: dict[str, SpawnEntry]
 
@@ -345,36 +341,33 @@ class SpawnEntriesPool:
     def __len__(self):
         return len(self.pool)
 
-    def cost(self, trade=False):
-        """ Подсчёт стоимости всех вхождений
-              с учётом их количеств и всех параметров.
-            Учитываются также неразряженные боеприпасы
-              и прикреплённые к оружию аддоны.
-            Рекомендуется подсчитывать до compress.
-            Результат - всегда float.
+    def cost(self, trade: bool = False) -> float:
+        """Подсчёт стоимости всех вхождений с учётом их количеств и всех параметров.
 
-            @arg trade: bool
-                * False: подсчёт исходной стоимости.
-                * True: подсчёт стоимости продажи торговцам.
+        Учитываются также неразряженные боеприпасы и прикреплённые к оружию аддоны.
+
+        Рекомендуется подсчитывать до compress.
+
+        :param trade: Если ``True``, то подсчитывается стоимость продажи торговцам.
         """
         return sum([se.cost(trade=trade) for se in self.pool.values()])
     
-    def game_objects_count(self, ignore_prob=True):
-        """ Подсчёт кол-ва игровых объектов (game_object)
-              в сумме по всем вхождениям.
-            Рекомендуется подсчитывать до compress.
-            Возвращает:
-              int, если ignore_prob=True;
-              float, если ignore_prob=False.
-            
-            @arg ignore_prob: bool
-                * True: параметр prob будет проигнорирован.
-                * False: кол-во будет домножаться на параметр prob.
+    def game_objects_count(self, ignore_prob: bool = True) -> int | float:
+        """Подсчёт кол-ва игровых объектов (game_object) в сумме по всем вхождениям.
+
+        Рекомендуется подсчитывать до compress.
+
+        :param ignore_prob: Если ``True``, то параметр *prob* будет проигнорирован,
+            и возвращаемый тип будет ``int``.
+            Если ``False``, то кол-во будет домоножаться на параметр *prob*,
+            и возвращаемый тип будет ``float``.
         """
         ini_system = system_ini()
         cnt = 0
         for se in self.pool.values():
-            prob_factor = 1 if ignore_prob else (1.0 if (se.prob is None) else (se.prob / 100.0))
+            prob_factor = (
+                1 if ignore_prob else (1.0 if (se.prob is None) else (se.prob / 100.0))
+            )
             if se.box_size is not None:
                 base_box_size = ini_system.get_uint(se.name, "box_size")
                 total_ammo = se.count * se.box_size
@@ -385,26 +378,26 @@ class SpawnEntriesPool:
                 cnt += se.count * prob_factor
         return cnt
 
-    def compress(self):
-        """ Пост-обработка параметров спавна для более компактного вывода.
+    def compress(self) -> None:
+        """Пост-обработка параметров спавна для более компактного вывода.
 
-            * cond
-                * флаг удаляется (его значение игнорируется)
-            * prob
-                * флаг удаляется, а его значение преобразуется в нецелый count
-            * scope, silencer, launcher
-                * флаги удаляются
-                * аддон открепляется от оружия, становясь отдельным предметом
-                * аддон наследует count и prob оружия
-            * scope
-                * вспомогательная секция многоприцельности оружия становится базовой
-            * unload
-                * флаг проставляется каждому оружию
-                * при проставлении разряженные боеприпасы выносятся как отдельный предмет
-                * разряженные боеприпасы наследуют count и prob оружия
-            * box_size
-                * кол-во любых патронов обозначается через box_size
-                * при этом count всегда считается единицей
+        * *cond*
+            * флаг удаляется (его значение игнорируется)
+        * *prob*
+            * флаг удаляется, а его значение преобразуется в нецелый count
+        * *scope*, *silencer*, *launcher*
+            * флаги удаляются
+            * аддон открепляется от оружия, становясь отдельным предметом
+            * аддон наследует count и *prob* оружия
+        * *scope*
+            * вспомогательная секция многоприцельности оружия становится базовой
+        * *unload*
+            * флаг проставляется каждому оружию
+            * при проставлении разряженные боеприпасы выносятся как отдельный предмет
+            * разряженные боеприпасы наследуют count и *prob* оружия
+        * *box_size*
+            * кол-во любых патронов обозначается через *box_size*
+            * при этом count всегда считается единицей
         """
         CLSIDS = CLSIDs()
         ini_system = system_ini()
@@ -434,9 +427,13 @@ class SpawnEntriesPool:
                 ammo_class = ini_system.get_strings(se.name, "ammo_class")[0]
                 ammo_mag_size = ini_system.get_uint(se.name, "ammo_mag_size")
                 if CLSIDS.is_ammo(ini_system.get_string(ammo_class, "class")):
-                    buffer_ammo.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count), se.context))
+                    buffer_ammo.add(SpawnEntry(
+                        ammo_class, str(ammo_mag_size * se.count), se.context
+                    ))
                 else:
-                    buffer.add(SpawnEntry(ammo_class, str(ammo_mag_size * se.count), se.context))
+                    buffer.add(SpawnEntry(
+                        ammo_class, str(ammo_mag_size * se.count), se.context
+                    ))
                 se.unload = True
             if se._type == ObjectType.ITEM_AMMO:
                 box_size = se.box_size
