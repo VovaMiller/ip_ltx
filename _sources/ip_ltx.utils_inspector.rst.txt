@@ -1,0 +1,7 @@
+ip\_ltx.utils\_inspector module
+===============================
+
+.. automodule:: ip_ltx.utils_inspector
+   :members:
+   :show-inheritance:
+   :undoc-members:

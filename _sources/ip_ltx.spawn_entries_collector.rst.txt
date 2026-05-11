@@ -1,0 +1,7 @@
+ip\_ltx.spawn\_entries\_collector module
+========================================
+
+.. automodule:: ip_ltx.spawn_entries_collector
+   :members:
+   :show-inheritance:
+   :undoc-members:

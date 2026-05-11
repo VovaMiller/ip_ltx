@@ -1,0 +1,7 @@
+ip\_ltx.acdc.ip\_acdc\_extractor module
+=======================================
+
+.. automodule:: ip_ltx.acdc.ip_acdc_extractor
+   :members:
+   :show-inheritance:
+   :undoc-members:

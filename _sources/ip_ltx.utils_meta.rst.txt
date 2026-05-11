@@ -1,0 +1,7 @@
+ip\_ltx.utils\_meta module
+==========================
+
+.. automodule:: ip_ltx.utils_meta
+   :members:
+   :show-inheritance:
+   :undoc-members:

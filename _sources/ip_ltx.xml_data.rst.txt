@@ -1,45 +1,18 @@
 ip\_ltx.xml\_data package
 =========================
 
-Submodules
-----------
-
-ip\_ltx.xml\_data.dialogs module
---------------------------------
-
-.. automodule:: ip_ltx.xml_data.dialogs
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.xml\_data.info\_portions module
----------------------------------------
-
-.. automodule:: ip_ltx.xml_data.info_portions
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.xml\_data.string\_table module
---------------------------------------
-
-.. automodule:: ip_ltx.xml_data.string_table
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.xml\_data.texture\_desc module
---------------------------------------
-
-.. automodule:: ip_ltx.xml_data.texture_desc
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-Module contents
----------------
-
 .. automodule:: ip_ltx.xml_data
    :members:
    :show-inheritance:
    :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   ip_ltx.xml_data.dialogs
+   ip_ltx.xml_data.info_portions
+   ip_ltx.xml_data.string_table
+   ip_ltx.xml_data.texture_desc

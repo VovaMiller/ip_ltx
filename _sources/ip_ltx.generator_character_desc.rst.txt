@@ -1,0 +1,7 @@
+ip\_ltx.generator\_character\_desc module
+=========================================
+
+.. automodule:: ip_ltx.generator_character_desc
+   :members:
+   :show-inheritance:
+   :undoc-members:

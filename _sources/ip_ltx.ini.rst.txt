@@ -1,0 +1,7 @@
+ip\_ltx.ini module
+==================
+
+.. automodule:: ip_ltx.ini
+   :members:
+   :show-inheritance:
+   :undoc-members:

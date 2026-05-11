@@ -1,0 +1,7 @@
+ip\_ltx.analyzer\_compare module
+================================
+
+.. automodule:: ip_ltx.analyzer_compare
+   :members:
+   :show-inheritance:
+   :undoc-members:

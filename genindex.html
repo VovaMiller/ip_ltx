@@ -1,1535 +1,1764 @@
-<!DOCTYPE html>
+<!doctype html>
+<html class="no-js" lang="ru" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Алфавитный указатель" href="#"><link rel="search" title="Поиск" href="search.html">
 
-<html lang="ru" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Алфавитный указатель &#8212; документация ip-ltx (3.7.1) </title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=372fde1a"></script>
-    <script src="_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-    <script src="_static/translations.js?v=cd1d70c9"></script>
-    <link rel="index" title="Алфавитный указатель" href="#" />
-    <link rel="search" title="Поиск" href="search.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 --><title>Алфавитный указатель - ip-ltx (3.7.1) — Документация</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
   
-
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
   
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
   
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
 
-  </head><body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">ip-ltx (3.7.1) — Документация</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
+  <span class="sidebar-brand-text">ip-ltx (3.7.1) — Документация</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">ip_ltx</a><input aria-label="Toggle navigation of ip_ltx" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ip_ltx.html">ip_ltx package</a><input aria-label="Toggle navigation of ip_ltx package" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ip_ltx.acdc.html">ip_ltx.acdc package</a><input aria-label="Toggle navigation of ip_ltx.acdc package" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.acdc.ip_acdc_builder.html">ip_ltx.acdc.ip_acdc_builder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.acdc.ip_acdc_extractor.html">ip_ltx.acdc.ip_acdc_extractor module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ip_ltx.misc.html">ip_ltx.misc package</a><input aria-label="Toggle navigation of ip_ltx.misc package" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.task_manager.html">ip_ltx.misc.task_manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.trade.html">ip_ltx.misc.trade module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.treasure_manager.html">ip_ltx.misc.treasure_manager module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ip_ltx.xml_data.html">ip_ltx.xml_data package</a><input aria-label="Toggle navigation of ip_ltx.xml_data package" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.dialogs.html">ip_ltx.xml_data.dialogs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.info_portions.html">ip_ltx.xml_data.info_portions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.string_table.html">ip_ltx.xml_data.string_table module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.texture_desc.html">ip_ltx.xml_data.texture_desc module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_compare.html">ip_ltx.analyzer_compare module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_general.html">ip_ltx.analyzer_general module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_loot.html">ip_ltx.analyzer_loot module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_spawn.html">ip_ltx.analyzer_spawn module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html">ip_ltx.db module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.generator_character_desc.html">ip_ltx.generator_character_desc module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.generator_export.html">ip_ltx.generator_export module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.generator_task_manager.html">ip_ltx.generator_task_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.generator_treasure_manager.html">ip_ltx.generator_treasure_manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.ini.html">ip_ltx.ini module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.inspector.html">ip_ltx.inspector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.ip_ltx.html">ip_ltx.ip_ltx module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.meta_inspector.html">ip_ltx.meta_inspector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.spawn.html">ip_ltx.spawn module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.spawn_entries_collector.html">ip_ltx.spawn_entries_collector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.treasure_manager_ext.html">ip_ltx.treasure_manager_ext module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html">ip_ltx.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_inspector.html">ip_ltx.utils_inspector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html">ip_ltx.utils_meta module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
-
-          <div class="body" role="main">
-            
-
-<h1 id="index">Алфавитный указатель</h1>
-
-<div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
- | <a href="#B"><strong>B</strong></a>
- | <a href="#C"><strong>C</strong></a>
- | <a href="#D"><strong>D</strong></a>
- | <a href="#E"><strong>E</strong></a>
- | <a href="#F"><strong>F</strong></a>
- | <a href="#G"><strong>G</strong></a>
- | <a href="#H"><strong>H</strong></a>
- | <a href="#I"><strong>I</strong></a>
- | <a href="#L"><strong>L</strong></a>
- | <a href="#M"><strong>M</strong></a>
- | <a href="#N"><strong>N</strong></a>
- | <a href="#O"><strong>O</strong></a>
- | <a href="#P"><strong>P</strong></a>
- | <a href="#R"><strong>R</strong></a>
- | <a href="#S"><strong>S</strong></a>
- | <a href="#T"><strong>T</strong></a>
- | <a href="#U"><strong>U</strong></a>
- | <a href="#V"><strong>V</strong></a>
- | <a href="#W"><strong>W</strong></a>
- | <a href="#X"><strong>X</strong></a>
- | <a href="#Y"><strong>Y</strong></a>
- 
 </div>
-<h2 id="A">A</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.a0">a0 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.a1">a1 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.a2">a2 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-      <li><a href="ip_ltx.acdc.html#ip_ltx.acdc.ip_acdc_builder.acdc_compile">acdc_compile() (в модуле ip_ltx.acdc.ip_acdc_builder)</a>
-</li>
-      <li><a href="ip_ltx.acdc.html#ip_ltx.acdc.ip_acdc_extractor.acdc_decompile">acdc_decompile() (в модуле ip_ltx.acdc.ip_acdc_extractor)</a>
-</li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortion.action">action (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.actor_dialog">actor_dialog (атрибут ip_ltx.generator_character_desc.Character)</a>
+</div>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.actor_dialog">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<section class="genindex-section">
+  <h1 id="index">Алфавитный указатель</h1>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#X"><strong>X</strong></a> | <a href="#Y"><strong>Y</strong></a></div>
+</section>
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.a0">a0 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.add">add() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.a1">a1 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.a2">a2 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+</li>
+        <li><a href="ip_ltx.acdc.ip_acdc_builder.html#ip_ltx.acdc.ip_acdc_builder.acdc_compile">acdc_compile() (в модуле ip_ltx.acdc.ip_acdc_builder)</a>
+</li>
+        <li><a href="ip_ltx.acdc.ip_acdc_extractor.html#ip_ltx.acdc.ip_acdc_extractor.acdc_decompile">acdc_decompile() (в модуле ip_ltx.acdc.ip_acdc_extractor)</a>
+</li>
+        <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortion.action">action (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.actor_dialog">actor_dialog (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.add">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.actor_dialog">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-        <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.add">(метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS">ADDON_FLAGS (класс в ip_ltx.db)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ANOMALY">ANOMALY (атрибут ip_ltx.utils_meta.ObjectType)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE">ANSI_COLOR_CODE (класс в ip_ltx.utils)</a>
-</li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskGeneric.article">article (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.add">add() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortion.article">(атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.add">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortion.article_disable">article_disable (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
+          <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.add">(метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.Levels.as_list">as_list() (метод ip_ltx.utils_meta.Levels)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS">ADDON_FLAGS (класс в ip_ltx.db)</a>
 </li>
-  </ul></td>
-</tr></table>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ANOMALY">ANOMALY (атрибут ip_ltx.utils_meta.ObjectType)</a>
+</li>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE">ANSI_COLOR_CODE (класс в ip_ltx.utils)</a>
+</li>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskGeneric.article">article (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
 
-<h2 id="B">B</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.bio">bio (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <ul>
+          <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortion.article">(атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
+</li>
+        </ul></li>
+        <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortion.article_disable">article_disable (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
+</li>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.Levels.as_list">as_list() (метод ip_ltx.utils_meta.Levels)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.bio">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.bio">bio() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.BLACK">BLACK (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.BLUE">BLUE (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
-</li>
-      <li><a href="ip_ltx.acdc.html#ip_ltx.acdc.ip_acdc_builder.build">build() (в модуле ip_ltx.acdc.ip_acdc_builder)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.builder">builder (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-  </ul></td>
-</tr></table>
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.bio">bio (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-<h2 id="C">C</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_bool">cast_bool() (статический метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.bio">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_float">cast_float() (статический метод ip_ltx.ip_ltx.Section)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.bio">bio() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_int">cast_int() (статический метод ip_ltx.ip_ltx.Section)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.BLACK">BLACK (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.cast_safe">cast_safe() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.BLUE">BLUE (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_string_wb">cast_string_wb() (статический метод ip_ltx.ip_ltx.Section)</a>
+        <li><a href="ip_ltx.acdc.ip_acdc_builder.html#ip_ltx.acdc.ip_acdc_builder.build">build() (в модуле ip_ltx.acdc.ip_acdc_builder)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_uint">cast_uint() (статический метод ip_ltx.ip_ltx.Section)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.builder">builder (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character">Character (класс в ip_ltx.generator_character_desc)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults">CharacterDefaults (класс в ip_ltx.generator_character_desc)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory">CharacterFactory (класс в ip_ltx.generator_character_desc)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.CharGenClsError">CharacterFactory.CharGenClsError</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.CharGenIdError">CharacterFactory.CharGenIdError</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.IncompleteError">CharacterFactory.IncompleteError</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.ItemsError">CharacterFactory.ItemsError</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_spawn.check_anomalies">check_anomalies() (в модуле ip_ltx.analyzer_spawn)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.chr_cnt_by_cls">chr_cnt_by_cls (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.chr_ids">chr_ids (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.clear">clear() (метод ip_ltx.ip_ltx.Ini)</a>
+    </ul></td>
+  </tr></table>
+</section>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.clear">(метод ip_ltx.ip_ltx.Section)</a>
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.cast_bool">cast_bool() (статический метод ip_ltx.ip_ltx.Section)</a>
 </li>
-        <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.clear">(метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.cast_float">cast_float() (статический метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.CLSID.client_class">client_class (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.cast_int">cast_int() (статический метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_classes">client_classes (атрибут ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.cast_safe">cast_safe() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.cls">cls (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.cast_string_wb">cast_string_wb() (статический метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.cast_uint">cast_uint() (статический метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character">Character (класс в ip_ltx.generator_character_desc)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterDefaults">CharacterDefaults (класс в ip_ltx.generator_character_desc)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory">CharacterFactory (класс в ip_ltx.generator_character_desc)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.CharGenClsError">CharacterFactory.CharGenClsError</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.CharGenIdError">CharacterFactory.CharGenIdError</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.IncompleteError">CharacterFactory.IncompleteError</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.ItemsError">CharacterFactory.ItemsError</a>
+</li>
+        <li><a href="ip_ltx.analyzer_spawn.html#ip_ltx.analyzer_spawn.check_anomalies">check_anomalies() (в модуле ip_ltx.analyzer_spawn)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.chr_cnt_by_cls">chr_cnt_by_cls (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.chr_ids">chr_ids (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.clear">clear() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.cls">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.clear">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.CLSID.clsid">clsid (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
+          <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.clear">(метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs">CLSIDs (класс в ip_ltx.utils_meta)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.CLSID.client_class">client_class (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.CLSID">CLSIDs.CLSID (класс в ip_ltx.utils_meta)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_classes">client_classes (атрибут ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.COMMENT">COMMENT (атрибут ip_ltx.utils.XML_PATTERNS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.community">community (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.cls">cls (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.community">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.cls">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.community">community() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
+        </ul></li>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.CLSID.clsid">clsid (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_compare.compare">compare() (в модуле ip_ltx.analyzer_compare)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs">CLSIDs (класс в ip_ltx.utils_meta)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.compress">compress() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.CLSID">CLSIDs.CLSID (класс в ip_ltx.utils_meta)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.cost">cost() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.COMMENT">COMMENT (атрибут ip_ltx.utils.XML_PATTERNS)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.community">community (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry.cost">(метод ip_ltx.treasure_manager_ext.SpawnEntry)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.community">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskGeneric.count">count (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.community">community() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.crouch_type">crouch_type (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.analyzer_compare.html#ip_ltx.analyzer_compare.compare">compare() (в модуле ip_ltx.analyzer_compare)</a>
+</li>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.compress">compress() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+</li>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.cost">cost() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.crouch_type">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntry.cost">(метод ip_ltx.treasure_manager_ext.SpawnEntry)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.custom_data">custom_data (атрибут ip_ltx.spawn.SpawnObject)</a>
+        </ul></li>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskGeneric.count">count (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.CYAN">CYAN (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
-</li>
-  </ul></td>
-</tr></table>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.crouch_type">crouch_type (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-<h2 id="D">D</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.data">data() (метод ip_ltx.utils_meta.CLSIDs)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.crouch_type">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.DEF">DEF (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
+        </ul></li>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.custom_data">custom_data (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.treasure_manager.Treasure.description">description (атрибут ip_ltx.misc.treasure_manager.Treasure)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.CYAN">CYAN (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.dialogs.Dialog">Dialog (класс в ip_ltx.xml_data.dialogs)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.dialog">dialog() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
-</li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.dialogs.Dialogs">Dialogs (класс в ip_ltx.xml_data.dialogs)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.direction">direction (атрибут ip_ltx.spawn.SpawnObject)</a>
-</li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortion.disable">disable (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
-</li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="E">E</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.entries">entries() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.data">data() (метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel.ERROR">ERROR (атрибут ip_ltx.utils_inspector.InspectorStep.MessageLevel)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.DEF">DEF (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.error">error() (метод ip_ltx.utils_inspector.InspectorStep)</a>
+        <li><a href="ip_ltx.misc.treasure_manager.html#ip_ltx.misc.treasure_manager.Treasure.description">description (атрибут ip_ltx.misc.treasure_manager.Treasure)</a>
 </li>
-      <li><a href="ip_ltx.acdc.html#ip_ltx.acdc.ip_acdc_extractor.extract">extract() (в модуле ip_ltx.acdc.ip_acdc_extractor)</a>
+        <li><a href="ip_ltx.xml_data.dialogs.html#ip_ltx.xml_data.dialogs.Dialog">Dialog (класс в ip_ltx.xml_data.dialogs)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.extract__addon_to_wpn">extract__addon_to_wpn() (в модуле ip_ltx.analyzer_general)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.dialog">dialog() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.extract__ammo_to_wpn">extract__ammo_to_wpn() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.xml_data.dialogs.html#ip_ltx.xml_data.dialogs.Dialogs">Dialogs (класс в ip_ltx.xml_data.dialogs)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.extract_fields">extract_fields() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.direction">direction (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_spawn.extract_mobs">extract_mobs() (в модуле ip_ltx.analyzer_spawn)</a>
+        <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortion.disable">disable (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.extract_monsters_health">extract_monsters_health() (в модуле ip_ltx.analyzer_general)</a>
-</li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="F">F</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.field">field() (метод ip_ltx.ip_ltx.Section)</a>
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.entries">entries() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.fields">fields() (метод ip_ltx.ip_ltx.Section)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel.ERROR">ERROR (атрибут ip_ltx.utils_inspector.InspectorStep.MessageLevel)</a>
 </li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.Texture.file_name">file_name (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.error">error() (метод ip_ltx.utils_inspector.InspectorStep)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flCanSave">flCanSave (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+        <li><a href="ip_ltx.acdc.ip_acdc_extractor.html#ip_ltx.acdc.ip_acdc_extractor.extract">extract() (в модуле ip_ltx.acdc.ip_acdc_extractor)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flCheckForSeparator">flCheckForSeparator (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.extract__addon_to_wpn">extract__addon_to_wpn() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flCorpseRemoval">flCorpseRemoval (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.extract__ammo_to_wpn">extract__ammo_to_wpn() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flInteractive">flInteractive (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.extract_fields">extract_fields() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flOfflineNoMove">flOfflineNoMove (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+        <li><a href="ip_ltx.analyzer_spawn.html#ip_ltx.analyzer_spawn.extract_mobs">extract_mobs() (в модуле ip_ltx.analyzer_spawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOffline">flSwitchOffline (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.extract_monsters_health">extract_monsters_health() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOnline">flSwitchOnline (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUsedAI_Locations">flUsedAI_Locations (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUsefulForAI">flUsefulForAI (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUseGroupBehaviour">flUseGroupBehaviour (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUseSmartTerrains">flUseSmartTerrains (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUseSwitches">flUseSwitches (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForAI">flVisibleForAI (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForMap">flVisibleForMap (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.fmt_value_whitespaces">fmt_value_whitespaces() (статический метод ip_ltx.ip_ltx.Section)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.form_characters">form_characters() (в модуле ip_ltx.generator_character_desc)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_drop_box_items">from_drop_box_items() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.from_items">from_items() (метод класса ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_level_items">from_level_items() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_non_tm_inventories">from_non_tm_inventories() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_treasure_manager">from_treasure_manager() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
-</li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.ini.game_ini">game_ini() (в модуле ip_ltx.ini)</a>
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.field">field() (метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.game_objects_count">game_objects_count() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.fields">fields() (метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.game_vertex_id">game_vertex_id (атрибут ip_ltx.spawn.SpawnObject)</a>
+        <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.Texture.file_name">file_name (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.gda">gda (атрибут ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flCanSave">flCanSave (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.gdm">gdm (атрибут ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flCheckForSeparator">flCheckForSeparator (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.gen_cnt_by_cls">gen_cnt_by_cls (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flCorpseRemoval">flCorpseRemoval (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.generate">generate() (в модуле ip_ltx.generator_character_desc)</a>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flInteractive">flInteractive (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flOfflineNoMove">flOfflineNoMove (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOffline">flSwitchOffline (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOnline">flSwitchOnline (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUsedAI_Locations">flUsedAI_Locations (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUsefulForAI">flUsefulForAI (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUseGroupBehaviour">flUseGroupBehaviour (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUseSmartTerrains">flUseSmartTerrains (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUseSwitches">flUseSwitches (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForAI">flVisibleForAI (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForMap">flVisibleForMap (атрибут ip_ltx.db.OBJECT_FLAGS)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.fmt_value_whitespaces">fmt_value_whitespaces() (статический метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.form_characters">form_characters() (в модуле ip_ltx.generator_character_desc)</a>
+</li>
+        <li><a href="ip_ltx.spawn_entries_collector.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_drop_box_items">from_drop_box_items() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
+</li>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.from_items">from_items() (метод класса ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+</li>
+        <li><a href="ip_ltx.spawn_entries_collector.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_level_items">from_level_items() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
+</li>
+        <li><a href="ip_ltx.spawn_entries_collector.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_non_tm_inventories">from_non_tm_inventories() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
+</li>
+        <li><a href="ip_ltx.spawn_entries_collector.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_treasure_manager">from_treasure_manager() (метод ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_export.generate">(в модуле ip_ltx.generator_export)</a>
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.ini.html#ip_ltx.ini.game_ini">game_ini() (в модуле ip_ltx.ini)</a>
 </li>
-        <li><a href="ip_ltx.html#ip_ltx.generator_task_manager.generate">(в модуле ip_ltx.generator_task_manager)</a>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.game_objects_count">game_objects_count() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
 </li>
-        <li><a href="ip_ltx.html#ip_ltx.generator_treasure_manager.generate">(в модуле ip_ltx.generator_treasure_manager)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.game_vertex_id">game_vertex_id (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_task_manager.generate_articles">generate_articles() (в модуле ip_ltx.generator_task_manager)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.gda">gda (атрибут ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_task_manager.generate_icons">generate_icons() (в модуле ip_ltx.generator_task_manager)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.gdm">gdm (атрибут ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_treasure_manager.generate_main">generate_main() (в модуле ip_ltx.generator_treasure_manager)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.gen_cnt_by_cls">gen_cnt_by_cls (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_task_manager.generate_strings">generate_strings() (в модуле ip_ltx.generator_task_manager)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.generate">generate() (в модуле ip_ltx.generator_character_desc)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_treasure_manager.generate_strings">(в модуле ip_ltx.generator_treasure_manager)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_export.html#ip_ltx.generator_export.generate">(в модуле ip_ltx.generator_export)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_task_manager.generate_tasks">generate_tasks() (в модуле ip_ltx.generator_task_manager)</a>
+          <li><a href="ip_ltx.generator_task_manager.html#ip_ltx.generator_task_manager.generate">(в модуле ip_ltx.generator_task_manager)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskManager.generic_task">generic_task() (метод ip_ltx.misc.task_manager.TaskManager)</a>
+          <li><a href="ip_ltx.generator_treasure_manager.html#ip_ltx.generator_treasure_manager.generate">(в модуле ip_ltx.generator_treasure_manager)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskManager.generic_tasks">generic_tasks() (метод ip_ltx.misc.task_manager.TaskManager)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_task_manager.html#ip_ltx.generator_task_manager.generate_articles">generate_articles() (в модуле ip_ltx.generator_task_manager)</a>
 </li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.string_table.StringTable.get">get() (метод ip_ltx.xml_data.string_table.StringTable)</a>
+        <li><a href="ip_ltx.generator_task_manager.html#ip_ltx.generator_task_manager.generate_icons">generate_icons() (в модуле ip_ltx.generator_task_manager)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_bool">get_bool() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.generator_treasure_manager.html#ip_ltx.generator_treasure_manager.generate_main">generate_main() (в модуле ip_ltx.generator_treasure_manager)</a>
+</li>
+        <li><a href="ip_ltx.generator_task_manager.html#ip_ltx.generator_task_manager.generate_strings">generate_strings() (в модуле ip_ltx.generator_task_manager)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_bool">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_treasure_manager.html#ip_ltx.generator_treasure_manager.generate_strings">(в модуле ip_ltx.generator_treasure_manager)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_bools">get_bools() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_task_manager.html#ip_ltx.generator_task_manager.generate_tasks">generate_tasks() (в модуле ip_ltx.generator_task_manager)</a>
+</li>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskManager.generic_task">generic_task() (метод ip_ltx.misc.task_manager.TaskManager)</a>
+</li>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskManager.generic_tasks">generic_tasks() (метод ip_ltx.misc.task_manager.TaskManager)</a>
+</li>
+        <li><a href="ip_ltx.xml_data.string_table.html#ip_ltx.xml_data.string_table.StringTable.get">get() (метод ip_ltx.xml_data.string_table.StringTable)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_bool">get_bool() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_bools">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_bool">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.trade.TradeBuyImpl.get_buy_k">get_buy_k() (метод ip_ltx.misc.trade.TradeBuyImpl)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.get_client_class">get_client_class() (метод ip_ltx.utils_meta.CLSIDs)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.get_condition">get_condition() (метод ip_ltx.spawn.SpawnObject)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_crouch_type">get_crouch_type() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_elem">get_elem() (метод ip_ltx.ip_ltx.Section)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_elems">get_elems() (метод ip_ltx.ip_ltx.Section)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_float">get_float() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_bools">get_bools() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_float">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_bools">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_floats">get_floats() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.misc.trade.html#ip_ltx.misc.trade.TradeBuyImpl.get_buy_k">get_buy_k() (метод ip_ltx.misc.trade.TradeBuyImpl)</a>
+</li>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.get_client_class">get_client_class() (метод ip_ltx.utils_meta.CLSIDs)</a>
+</li>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.get_condition">get_condition() (метод ip_ltx.spawn.SpawnObject)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterDefaults.get_crouch_type">get_crouch_type() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_elem">get_elem() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_elems">get_elems() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_float">get_float() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_floats">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_float">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_icon">get_icon() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.get_id">get_id() (статический метод ip_ltx.generator_character_desc.Character)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_include">get_include() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_include_supplies">get_include_supplies() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_int">get_int() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_floats">get_floats() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_int">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_floats">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_ints">get_ints() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterDefaults.get_icon">get_icon() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.get_id">get_id() (статический метод ip_ltx.generator_character_desc.Character)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterDefaults.get_include">get_include() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterDefaults.get_include_supplies">get_include_supplies() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_int">get_int() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_ints">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_int">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_items">get_items() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_ints">get_ints() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_items">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_ints">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.Levels.get_lvl_by_gvid">get_lvl_by_gvid() (метод ip_ltx.utils_meta.Levels)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_name">get_name() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.get_object_type">get_object_type() (метод ip_ltx.utils_meta.CLSIDs)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_items">get_items() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector.get_object_type">(метод ip_ltx.utils_meta.ObjectTypeDetector)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_items">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair">get_pair() (метод ip_ltx.ip_ltx.Section)</a>
+        </ul></li>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.Levels.get_lvl_by_gvid">get_lvl_by_gvid() (метод ip_ltx.utils_meta.Levels)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_bool">get_pair_bool() (метод ip_ltx.ip_ltx.Section)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterDefaults.get_name">get_name() (статический метод ip_ltx.generator_character_desc.CharacterDefaults)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_float">get_pair_float() (метод ip_ltx.ip_ltx.Section)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_int">get_pair_int() (метод ip_ltx.ip_ltx.Section)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_str">get_pair_str() (метод ip_ltx.ip_ltx.Section)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_uint">get_pair_uint() (метод ip_ltx.ip_ltx.Section)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry.get_params_str">get_params_str() (метод ip_ltx.treasure_manager_ext.SpawnEntry)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_section_index">get_section_index() (метод ip_ltx.ip_ltx.Ini)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.get_server_class">get_server_class() (метод ip_ltx.utils_meta.CLSIDs)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.get_spawn">get_spawn() (в модуле ip_ltx.spawn)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_string">get_string() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.get_object_type">get_object_type() (метод ip_ltx.utils_meta.CLSIDs)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_string">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.get_object_type">(метод ip_ltx.utils_meta.ObjectTypeDetector)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_string_wb">get_string_wb() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair">get_pair() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_bool">get_pair_bool() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_float">get_pair_float() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_int">get_pair_int() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_str">get_pair_str() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_uint">get_pair_uint() (метод ip_ltx.ip_ltx.Section)</a>
+</li>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntry.get_params_str">get_params_str() (метод ip_ltx.treasure_manager_ext.SpawnEntry)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_section_index">get_section_index() (метод ip_ltx.ip_ltx.Ini)</a>
+</li>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.get_server_class">get_server_class() (метод ip_ltx.utils_meta.CLSIDs)</a>
+</li>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.get_spawn">get_spawn() (в модуле ip_ltx.spawn)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_string">get_string() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_string_wb">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_string">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_strings">get_strings() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_string_wb">get_string_wb() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_strings">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_string_wb">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_uint">get_uint() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_strings">get_strings() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_uint">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_strings">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_uints">get_uints() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_uint">get_uint() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_uints">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_uint">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.GREEN">GREEN (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
-</li>
-  </ul></td>
-</tr></table>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.get_uints">get_uints() (метод ip_ltx.ip_ltx.Ini)</a>
 
-<h2 id="H">H</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.has_class">has_class() (в модуле ip_ltx.analyzer_general)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.get_uints">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.has_cost">has_cost() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.GREEN">GREEN (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.has_cost2">has_cost2() (в модуле ip_ltx.analyzer_general)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.has_spawn_path">has_spawn_path() (в модуле ip_ltx.analyzer_general)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.Message.header">header (атрибут ip_ltx.utils_inspector.InspectorStep.Message)</a>
-</li>
-      <li><a href="ip_ltx.acdc.html#ip_ltx.acdc.ip_acdc_extractor.Printer.header">header() (статический метод ip_ltx.acdc.ip_acdc_extractor.Printer)</a>
-</li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.Texture.height">height (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
-</li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="I">I</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.icon">icon (атрибут ip_ltx.generator_character_desc.Character)</a>
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.has_class">has_class() (в модуле ip_ltx.analyzer_general)</a>
+</li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.has_cost">has_cost() (в модуле ip_ltx.analyzer_general)</a>
+</li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.has_cost2">has_cost2() (в модуле ip_ltx.analyzer_general)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.has_spawn_path">has_spawn_path() (в модуле ip_ltx.analyzer_general)</a>
+</li>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.Message.header">header (атрибут ip_ltx.utils_inspector.InspectorStep.Message)</a>
+</li>
+        <li><a href="ip_ltx.acdc.ip_acdc_extractor.html#ip_ltx.acdc.ip_acdc_extractor.Printer.header">header() (статический метод ip_ltx.acdc.ip_acdc_extractor.Printer)</a>
+</li>
+        <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.Texture.height">height (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.icon">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
-</li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.icon">icon() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.id">id (атрибут ip_ltx.ip_ltx.Section)</a>
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.icon">icon (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.dialogs.Dialog.id">(атрибут ip_ltx.xml_data.dialogs.Dialog)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.icon">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-        <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortion.id">(атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.icon">icon() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-        <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.Texture.id">(атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
-</li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.ids">ids() (метод ip_ltx.ip_ltx.Ini)</a>
-</li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.include">include (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.id">id (атрибут ip_ltx.ip_ltx.Section)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.include">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.xml_data.dialogs.html#ip_ltx.xml_data.dialogs.Dialog.id">(атрибут ip_ltx.xml_data.dialogs.Dialog)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.include">include() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
+          <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortion.id">(атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.include_supplies">include_supplies (атрибут ip_ltx.generator_character_desc.Character)</a>
+          <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.Texture.id">(атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
+</li>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.ids">ids() (метод ip_ltx.ip_ltx.Ini)</a>
+</li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.include">include (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.include_supplies">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.include">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel.INFO">INFO (атрибут ip_ltx.utils_inspector.InspectorStep.MessageLevel)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.include">include() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.info">info() (метод ip_ltx.utils_inspector.InspectorStep)</a>
-</li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortion">InfoPortion (класс в ip_ltx.xml_data.info_portions)</a>
-</li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortions">InfoPortions (класс в ip_ltx.xml_data.info_portions)</a>
-</li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskManager.ini">ini (атрибут ip_ltx.misc.task_manager.TaskManager)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.include_supplies">include_supplies (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.misc.html#ip_ltx.misc.treasure_manager.TreasureManager.ini">(атрибут ip_ltx.misc.treasure_manager.TreasureManager)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.include_supplies">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini">Ini (класс в ip_ltx.ip_ltx)</a>
+        </ul></li>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel.INFO">INFO (атрибут ip_ltx.utils_inspector.InspectorStep.MessageLevel)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.Error">Ini.Error</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.info">info() (метод ip_ltx.utils_inspector.InspectorStep)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.Spawn.init">init() (метод ip_ltx.spawn.Spawn)</a>
+        <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortion">InfoPortion (класс в ip_ltx.xml_data.info_portions)</a>
+</li>
+        <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortions">InfoPortions (класс в ip_ltx.xml_data.info_portions)</a>
+</li>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskManager.ini">ini (атрибут ip_ltx.misc.task_manager.TaskManager)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.init">(метод ip_ltx.spawn.SpawnObject)</a>
+        <ul>
+          <li><a href="ip_ltx.misc.treasure_manager.html#ip_ltx.misc.treasure_manager.TreasureManager.ini">(атрибут ip_ltx.misc.treasure_manager.TreasureManager)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.inspect">inspect() (в модуле ip_ltx.inspector)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini">Ini (класс в ip_ltx.ip_ltx)</a>
+</li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.Error">Ini.Error</a>
+</li>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.Spawn.init">init() (метод ip_ltx.spawn.Spawn)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.meta_inspector.inspect">(в модуле ip_ltx.meta_inspector)</a>
+        <ul>
+          <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.init">(метод ip_ltx.spawn.SpawnObject)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral">InspectionsGeneral (класс в ip_ltx.inspector)</a>
+        </ul></li>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.inspect">inspect() (в модуле ip_ltx.inspector)</a>
+
+        <ul>
+          <li><a href="ip_ltx.meta_inspector.html#ip_ltx.meta_inspector.inspect">(в модуле ip_ltx.meta_inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn">InspectionsSpawn (класс в ip_ltx.inspector)</a>
+        </ul></li>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral">InspectionsGeneral (класс в ip_ltx.inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector">Inspector (класс в ip_ltx.generator_character_desc)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn">InspectionsSpawn (класс в ip_ltx.inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorError">InspectorError</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector">Inspector (класс в ip_ltx.generator_character_desc)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep">InspectorStep (класс в ip_ltx.utils_inspector)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorError">InspectorError</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.Message">InspectorStep.Message (класс в ip_ltx.utils_inspector)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep">InspectorStep (класс в ip_ltx.utils_inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel">InspectorStep.MessageLevel (класс в ip_ltx.utils_inspector)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.Message">InspectorStep.Message (класс в ip_ltx.utils_inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.intro_width">intro_width (атрибут ip_ltx.utils_inspector.InspectorStep)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel">InspectorStep.MessageLevel (класс в ip_ltx.utils_inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.INVALID_CHARS">INVALID_CHARS (атрибут ip_ltx.utils.XML_PATTERNS)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.intro_width">intro_width (атрибут ip_ltx.utils_inspector.InspectorStep)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.INVALID_COMMENT_LINE">INVALID_COMMENT_LINE (атрибут ip_ltx.utils.XML_PATTERNS)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.INVALID_CHARS">INVALID_CHARS (атрибут ip_ltx.utils.XML_PATTERNS)</a>
 </li>
-      <li>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.INVALID_COMMENT_LINE">INVALID_COMMENT_LINE (атрибут ip_ltx.utils.XML_PATTERNS)</a>
+</li>
+        <li>
     ip_ltx
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx">module</a>
+        <ul>
+          <li><a href="ip_ltx.html#module-ip_ltx">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.acdc
 
-      <ul>
-        <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc">module</a>
+        <ul>
+          <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.acdc.ip_acdc_builder
 
-      <ul>
-        <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc.ip_acdc_builder">module</a>
+        <ul>
+          <li><a href="ip_ltx.acdc.ip_acdc_builder.html#module-ip_ltx.acdc.ip_acdc_builder">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.acdc.ip_acdc_extractor
 
-      <ul>
-        <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc.ip_acdc_extractor">module</a>
+        <ul>
+          <li><a href="ip_ltx.acdc.ip_acdc_extractor.html#module-ip_ltx.acdc.ip_acdc_extractor">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.analyzer_compare
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_compare">module</a>
+        <ul>
+          <li><a href="ip_ltx.analyzer_compare.html#module-ip_ltx.analyzer_compare">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.analyzer_general
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_general">module</a>
+        <ul>
+          <li><a href="ip_ltx.analyzer_general.html#module-ip_ltx.analyzer_general">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.analyzer_loot
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_loot">module</a>
+        <ul>
+          <li><a href="ip_ltx.analyzer_loot.html#module-ip_ltx.analyzer_loot">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.analyzer_spawn
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_spawn">module</a>
+        <ul>
+          <li><a href="ip_ltx.analyzer_spawn.html#module-ip_ltx.analyzer_spawn">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.db
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.db">module</a>
+        <ul>
+          <li><a href="ip_ltx.db.html#module-ip_ltx.db">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.generator_character_desc
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_character_desc">module</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#module-ip_ltx.generator_character_desc">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.generator_export
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_export">module</a>
+        <ul>
+          <li><a href="ip_ltx.generator_export.html#module-ip_ltx.generator_export">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.generator_task_manager
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_task_manager">module</a>
+        <ul>
+          <li><a href="ip_ltx.generator_task_manager.html#module-ip_ltx.generator_task_manager">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.generator_treasure_manager
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_treasure_manager">module</a>
+        <ul>
+          <li><a href="ip_ltx.generator_treasure_manager.html#module-ip_ltx.generator_treasure_manager">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.ini
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.ini">module</a>
+        <ul>
+          <li><a href="ip_ltx.ini.html#module-ip_ltx.ini">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.inspector
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.inspector">module</a>
+        <ul>
+          <li><a href="ip_ltx.inspector.html#module-ip_ltx.inspector">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.ip_ltx
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.ip_ltx">module</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#module-ip_ltx.ip_ltx">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.meta_inspector
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.meta_inspector">module</a>
+        <ul>
+          <li><a href="ip_ltx.meta_inspector.html#module-ip_ltx.meta_inspector">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.misc
 
-      <ul>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc">module</a>
+        <ul>
+          <li><a href="ip_ltx.misc.html#module-ip_ltx.misc">module</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
     ip_ltx.misc.task_manager
 
-      <ul>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc.task_manager">module</a>
+        <ul>
+          <li><a href="ip_ltx.misc.task_manager.html#module-ip_ltx.misc.task_manager">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.misc.trade
 
-      <ul>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc.trade">module</a>
+        <ul>
+          <li><a href="ip_ltx.misc.trade.html#module-ip_ltx.misc.trade">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.misc.treasure_manager
 
-      <ul>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc.treasure_manager">module</a>
+        <ul>
+          <li><a href="ip_ltx.misc.treasure_manager.html#module-ip_ltx.misc.treasure_manager">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.spawn
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.spawn">module</a>
+        <ul>
+          <li><a href="ip_ltx.spawn.html#module-ip_ltx.spawn">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.spawn_entries_collector
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.spawn_entries_collector">module</a>
+        <ul>
+          <li><a href="ip_ltx.spawn_entries_collector.html#module-ip_ltx.spawn_entries_collector">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.treasure_manager_ext
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.treasure_manager_ext">module</a>
+        <ul>
+          <li><a href="ip_ltx.treasure_manager_ext.html#module-ip_ltx.treasure_manager_ext">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.utils
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.utils">module</a>
+        <ul>
+          <li><a href="ip_ltx.utils.html#module-ip_ltx.utils">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.utils_inspector
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.utils_inspector">module</a>
+        <ul>
+          <li><a href="ip_ltx.utils_inspector.html#module-ip_ltx.utils_inspector">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.utils_meta
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx.utils_meta">module</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#module-ip_ltx.utils_meta">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.xml_data
 
-      <ul>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data">module</a>
+        <ul>
+          <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.xml_data.dialogs
 
-      <ul>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.dialogs">module</a>
+        <ul>
+          <li><a href="ip_ltx.xml_data.dialogs.html#module-ip_ltx.xml_data.dialogs">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.xml_data.info_portions
 
-      <ul>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.info_portions">module</a>
+        <ul>
+          <li><a href="ip_ltx.xml_data.info_portions.html#module-ip_ltx.xml_data.info_portions">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.xml_data.string_table
 
-      <ul>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.string_table">module</a>
+        <ul>
+          <li><a href="ip_ltx.xml_data.string_table.html#module-ip_ltx.xml_data.string_table">module</a>
 </li>
-      </ul></li>
-      <li>
+        </ul></li>
+        <li>
     ip_ltx.xml_data.texture_desc
 
-      <ul>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.texture_desc">module</a>
+        <ul>
+          <li><a href="ip_ltx.xml_data.texture_desc.html#module-ip_ltx.xml_data.texture_desc">module</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_addon">is_addon() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_addon">is_addon() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_addon_scope">is_addon_scope() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_addon_scope">is_addon_scope() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_ammo">is_ammo() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_ammo">is_ammo() (в модуле ip_ltx.analyzer_general)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_ammo">(метод ip_ltx.utils_meta.CLSIDs)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_ammo">(метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_anomaly">is_anomaly() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_anomaly">is_anomaly() (в модуле ip_ltx.analyzer_general)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_anomaly">(метод ip_ltx.utils_meta.CLSIDs)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_anomaly">(метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_anomaly2">is_anomaly2() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_anomaly2">is_anomaly2() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_art">is_art() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_art">is_art() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_artefact">is_artefact() (метод ip_ltx.utils_meta.CLSIDs)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_artefact">is_artefact() (метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.is_gamedata_dir">is_gamedata_dir() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.is_gamedata_dir">is_gamedata_dir() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.is_gamedata_file">is_gamedata_file() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.is_gamedata_file">is_gamedata_file() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_grenade">is_grenade() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_grenade">is_grenade() (в модуле ip_ltx.analyzer_general)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_grenade">(метод ip_ltx.utils_meta.CLSIDs)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_grenade">(метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item">is_inv_item() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_inv_item">is_inv_item() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item2">is_inv_item2() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_inv_item2">is_inv_item2() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item__old">is_inv_item__old() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_inv_item__old">is_inv_item__old() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item__old2">is_inv_item__old2() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_inv_item__old2">is_inv_item__old2() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_item">is_item() (метод ip_ltx.utils_meta.CLSIDs)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_item">is_item() (метод ip_ltx.utils_meta.CLSIDs)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.is_item">(метод ip_ltx.utils_meta.ObjectType)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.is_item">(метод ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_mob">is_mob() (метод ip_ltx.utils_meta.CLSIDs)</a>
+        </ul></li>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_mob">is_mob() (метод ip_ltx.utils_meta.CLSIDs)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.is_mob">(метод ip_ltx.utils_meta.ObjectType)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.is_mob">(метод ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_monster">is_monster() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_monster">is_monster() (в модуле ip_ltx.analyzer_general)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_monster">(метод ip_ltx.utils_meta.CLSIDs)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_monster">(метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_mutant_part">is_mutant_part() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_mutant_part">is_mutant_part() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_outfit">is_outfit() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_outfit">is_outfit() (в модуле ip_ltx.analyzer_general)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_outfit">(метод ip_ltx.utils_meta.CLSIDs)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_outfit">(метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_stalker">is_stalker() (в модуле ip_ltx.analyzer_general)</a>
+        </ul></li>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_stalker">is_stalker() (в модуле ip_ltx.analyzer_general)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_stalker">(метод ip_ltx.utils_meta.CLSIDs)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_stalker">(метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_weapon">is_weapon() (метод ip_ltx.utils_meta.CLSIDs)</a>
+        </ul></li>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_weapon">is_weapon() (метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_weapon_addon">is_weapon_addon() (метод ip_ltx.utils_meta.CLSIDs)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_weapon_addon">is_weapon_addon() (метод ip_ltx.utils_meta.CLSIDs)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_wpn">is_wpn() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_wpn">is_wpn() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.is_wpn2">is_wpn2() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.is_wpn2">is_wpn2() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ServerClasses.issubclass">issubclass() (метод ip_ltx.utils_meta.ServerClasses)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ServerClasses.issubclass">issubclass() (метод ip_ltx.utils_meta.ServerClasses)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_ADDON">ITEM_ADDON (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ITEM_ADDON">ITEM_ADDON (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_AMMO">ITEM_AMMO (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ITEM_AMMO">ITEM_AMMO (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_ART">ITEM_ART (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ITEM_ART">ITEM_ART (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_GRENADE">ITEM_GRENADE (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ITEM_GRENADE">ITEM_GRENADE (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_OTHER">ITEM_OTHER (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ITEM_OTHER">ITEM_OTHER (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_OUTFIT">ITEM_OUTFIT (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ITEM_OUTFIT">ITEM_OUTFIT (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_WEAPON">ITEM_WEAPON (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.ITEM_WEAPON">ITEM_WEAPON (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.items">items (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.items">items (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="L">L</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS.launcher">launcher (атрибут ip_ltx.db.ADDON_FLAGS)</a>
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS.launcher">launcher (атрибут ip_ltx.db.ADDON_FLAGS)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.Message.level">level (атрибут ip_ltx.utils_inspector.InspectorStep.Message)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.Message.level">level (атрибут ip_ltx.utils_inspector.InspectorStep.Message)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.level_vertex_id">level_vertex_id (атрибут ip_ltx.spawn.SpawnObject)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.level_vertex_id">level_vertex_id (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.Levels">Levels (класс в ip_ltx.utils_meta)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.Levels">Levels (класс в ip_ltx.utils_meta)</a>
 </li>
-      <li><a href="ip_ltx.acdc.html#ip_ltx.acdc.ip_acdc_extractor.Printer.line">line() (статический метод ip_ltx.acdc.ip_acdc_extractor.Printer)</a>
+        <li><a href="ip_ltx.acdc.ip_acdc_extractor.html#ip_ltx.acdc.ip_acdc_extractor.Printer.line">line() (статический метод ip_ltx.acdc.ip_acdc_extractor.Printer)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.line_exist">line_exist() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.line_exist">line_exist() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist_own">line_exist_own() (метод ip_ltx.ip_ltx.Section)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist_own">line_exist_own() (метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist_with_value">line_exist_with_value() (метод ip_ltx.ip_ltx.Section)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist_with_value">line_exist_with_value() (метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.LINE_WIDTH">LINE_WIDTH (атрибут ip_ltx.utils_inspector.InspectorStep)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.LINE_WIDTH">LINE_WIDTH (атрибут ip_ltx.utils_inspector.InspectorStep)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.lines">lines() (метод ip_ltx.ip_ltx.Section)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.lines">lines() (метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.log">log (атрибут ip_ltx.utils_inspector.InspectorStep)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.log">log (атрибут ip_ltx.utils_inspector.InspectorStep)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="M">M</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.merge">merge() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.merge">merge() (метод ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ini.meta_ini">meta_ini() (в модуле ip_ltx.ini)</a>
+        <li><a href="ip_ltx.ini.html#ip_ltx.ini.meta_ini">meta_ini() (в модуле ip_ltx.ini)</a>
 </li>
-      <li>
+        <li>
     module
 
-      <ul>
-        <li><a href="ip_ltx.html#module-ip_ltx">ip_ltx</a>
+        <ul>
+          <li><a href="ip_ltx.html#module-ip_ltx">ip_ltx</a>
 </li>
-        <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc">ip_ltx.acdc</a>
+          <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc">ip_ltx.acdc</a>
 </li>
-        <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc.ip_acdc_builder">ip_ltx.acdc.ip_acdc_builder</a>
+          <li><a href="ip_ltx.acdc.ip_acdc_builder.html#module-ip_ltx.acdc.ip_acdc_builder">ip_ltx.acdc.ip_acdc_builder</a>
 </li>
-        <li><a href="ip_ltx.acdc.html#module-ip_ltx.acdc.ip_acdc_extractor">ip_ltx.acdc.ip_acdc_extractor</a>
+          <li><a href="ip_ltx.acdc.ip_acdc_extractor.html#module-ip_ltx.acdc.ip_acdc_extractor">ip_ltx.acdc.ip_acdc_extractor</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_compare">ip_ltx.analyzer_compare</a>
+          <li><a href="ip_ltx.analyzer_compare.html#module-ip_ltx.analyzer_compare">ip_ltx.analyzer_compare</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_general">ip_ltx.analyzer_general</a>
+          <li><a href="ip_ltx.analyzer_general.html#module-ip_ltx.analyzer_general">ip_ltx.analyzer_general</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_loot">ip_ltx.analyzer_loot</a>
+          <li><a href="ip_ltx.analyzer_loot.html#module-ip_ltx.analyzer_loot">ip_ltx.analyzer_loot</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.analyzer_spawn">ip_ltx.analyzer_spawn</a>
+          <li><a href="ip_ltx.analyzer_spawn.html#module-ip_ltx.analyzer_spawn">ip_ltx.analyzer_spawn</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.db">ip_ltx.db</a>
+          <li><a href="ip_ltx.db.html#module-ip_ltx.db">ip_ltx.db</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_character_desc">ip_ltx.generator_character_desc</a>
+          <li><a href="ip_ltx.generator_character_desc.html#module-ip_ltx.generator_character_desc">ip_ltx.generator_character_desc</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_export">ip_ltx.generator_export</a>
+          <li><a href="ip_ltx.generator_export.html#module-ip_ltx.generator_export">ip_ltx.generator_export</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_task_manager">ip_ltx.generator_task_manager</a>
+          <li><a href="ip_ltx.generator_task_manager.html#module-ip_ltx.generator_task_manager">ip_ltx.generator_task_manager</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.generator_treasure_manager">ip_ltx.generator_treasure_manager</a>
+          <li><a href="ip_ltx.generator_treasure_manager.html#module-ip_ltx.generator_treasure_manager">ip_ltx.generator_treasure_manager</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.ini">ip_ltx.ini</a>
+          <li><a href="ip_ltx.ini.html#module-ip_ltx.ini">ip_ltx.ini</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.inspector">ip_ltx.inspector</a>
+          <li><a href="ip_ltx.inspector.html#module-ip_ltx.inspector">ip_ltx.inspector</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.ip_ltx">ip_ltx.ip_ltx</a>
+          <li><a href="ip_ltx.ip_ltx.html#module-ip_ltx.ip_ltx">ip_ltx.ip_ltx</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.meta_inspector">ip_ltx.meta_inspector</a>
+          <li><a href="ip_ltx.meta_inspector.html#module-ip_ltx.meta_inspector">ip_ltx.meta_inspector</a>
 </li>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc">ip_ltx.misc</a>
+          <li><a href="ip_ltx.misc.html#module-ip_ltx.misc">ip_ltx.misc</a>
 </li>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc.task_manager">ip_ltx.misc.task_manager</a>
+          <li><a href="ip_ltx.misc.task_manager.html#module-ip_ltx.misc.task_manager">ip_ltx.misc.task_manager</a>
 </li>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc.trade">ip_ltx.misc.trade</a>
+          <li><a href="ip_ltx.misc.trade.html#module-ip_ltx.misc.trade">ip_ltx.misc.trade</a>
 </li>
-        <li><a href="ip_ltx.misc.html#module-ip_ltx.misc.treasure_manager">ip_ltx.misc.treasure_manager</a>
+          <li><a href="ip_ltx.misc.treasure_manager.html#module-ip_ltx.misc.treasure_manager">ip_ltx.misc.treasure_manager</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.spawn">ip_ltx.spawn</a>
+          <li><a href="ip_ltx.spawn.html#module-ip_ltx.spawn">ip_ltx.spawn</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.spawn_entries_collector">ip_ltx.spawn_entries_collector</a>
+          <li><a href="ip_ltx.spawn_entries_collector.html#module-ip_ltx.spawn_entries_collector">ip_ltx.spawn_entries_collector</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.treasure_manager_ext">ip_ltx.treasure_manager_ext</a>
+          <li><a href="ip_ltx.treasure_manager_ext.html#module-ip_ltx.treasure_manager_ext">ip_ltx.treasure_manager_ext</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.utils">ip_ltx.utils</a>
+          <li><a href="ip_ltx.utils.html#module-ip_ltx.utils">ip_ltx.utils</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.utils_inspector">ip_ltx.utils_inspector</a>
+          <li><a href="ip_ltx.utils_inspector.html#module-ip_ltx.utils_inspector">ip_ltx.utils_inspector</a>
 </li>
-        <li><a href="ip_ltx.html#module-ip_ltx.utils_meta">ip_ltx.utils_meta</a>
+          <li><a href="ip_ltx.utils_meta.html#module-ip_ltx.utils_meta">ip_ltx.utils_meta</a>
 </li>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data">ip_ltx.xml_data</a>
+          <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data">ip_ltx.xml_data</a>
 </li>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.dialogs">ip_ltx.xml_data.dialogs</a>
+          <li><a href="ip_ltx.xml_data.dialogs.html#module-ip_ltx.xml_data.dialogs">ip_ltx.xml_data.dialogs</a>
 </li>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.info_portions">ip_ltx.xml_data.info_portions</a>
+          <li><a href="ip_ltx.xml_data.info_portions.html#module-ip_ltx.xml_data.info_portions">ip_ltx.xml_data.info_portions</a>
 </li>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.string_table">ip_ltx.xml_data.string_table</a>
+          <li><a href="ip_ltx.xml_data.string_table.html#module-ip_ltx.xml_data.string_table">ip_ltx.xml_data.string_table</a>
 </li>
-        <li><a href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.texture_desc">ip_ltx.xml_data.texture_desc</a>
+          <li><a href="ip_ltx.xml_data.texture_desc.html#module-ip_ltx.xml_data.texture_desc">ip_ltx.xml_data.texture_desc</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.money">money (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.money">money (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.money_inf">money_inf (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.money_inf">money_inf (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.money_inf">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.money_inf">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.money_max">money_max (атрибут ip_ltx.generator_character_desc.Character)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.money_max">money_max (атрибут ip_ltx.generator_character_desc.Character)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.money_min">money_min (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.money_min">money_min (атрибут ip_ltx.generator_character_desc.Character)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.MONSTER">MONSTER (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.MONSTER">MONSTER (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="N">N</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.name">name (атрибут ip_ltx.generator_character_desc.Character)</a>
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.name">name (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.name">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.name">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-        <li><a href="ip_ltx.misc.html#ip_ltx.misc.treasure_manager.Treasure.name">(атрибут ip_ltx.misc.treasure_manager.Treasure)</a>
+          <li><a href="ip_ltx.misc.treasure_manager.html#ip_ltx.misc.treasure_manager.Treasure.name">(атрибут ip_ltx.misc.treasure_manager.Treasure)</a>
 </li>
-        <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.name">(атрибут ip_ltx.spawn.SpawnObject)</a>
+          <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.name">(атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.name">name() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.name">name() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="O">O</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.Spawn.object">object() (метод ip_ltx.spawn.Spawn)</a>
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.Spawn.object">object() (метод ip_ltx.spawn.Spawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.object_flags">object_flags (атрибут ip_ltx.spawn.SpawnObject)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.object_flags">object_flags (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS">OBJECT_FLAGS (класс в ip_ltx.db)</a>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS">OBJECT_FLAGS (класс в ip_ltx.db)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.CLSID.object_type">object_type (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.CLSID.object_type">object_type (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.Spawn.objects">objects() (метод ip_ltx.spawn.Spawn)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.Spawn.objects">objects() (метод ip_ltx.spawn.Spawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType">ObjectType (класс в ip_ltx.utils_meta)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType">ObjectType (класс в ip_ltx.utils_meta)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector">ObjectTypeDetector (класс в ip_ltx.utils_meta)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector">ObjectTypeDetector (класс в ip_ltx.utils_meta)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule">ObjectTypeDetector.ObjectTypeRule (класс в ip_ltx.utils_meta)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule">ObjectTypeDetector.ObjectTypeRule (класс в ip_ltx.utils_meta)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.OTHER">OTHER (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.OTHER">OTHER (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="P">P</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskGeneric.parent">parent (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskGeneric.parent">parent (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.pool">pool (атрибут ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.pool">pool (атрибут ip_ltx.treasure_manager_ext.SpawnEntriesPool)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.position">position (атрибут ip_ltx.spawn.SpawnObject)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.position">position (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.preinit_singletons">preinit_singletons() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.preinit_singletons">preinit_singletons() (в модуле ip_ltx.utils)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils.print_error">print_error() (в модуле ip_ltx.utils)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.print_error">print_error() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.print_warning">print_warning() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.print_warning">print_warning() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.acdc.html#ip_ltx.acdc.ip_acdc_extractor.Printer">Printer (класс в ip_ltx.acdc.ip_acdc_extractor)</a>
+        <li><a href="ip_ltx.acdc.ip_acdc_extractor.html#ip_ltx.acdc.ip_acdc_extractor.Printer">Printer (класс в ip_ltx.acdc.ip_acdc_extractor)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.PURPLE">PURPLE (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.PURPLE">PURPLE (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="R">R</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.rank">rank (атрибут ip_ltx.generator_character_desc.Character)</a>
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.rank">rank (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.rank">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.rank">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.read">read() (метод ip_ltx.ip_ltx.Ini)</a>
+        </ul></li>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.read">read() (метод ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.read_file">read_file() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.read_file">read_file() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.read_raw">read_raw() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.read_raw">read_raw() (метод ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.read_xml">read_xml() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.read_xml">read_xml() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.RED">RED (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.RED">RED (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.refresh">refresh() (статический метод ip_ltx.generator_character_desc.CharacterFactory)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.refresh">refresh() (статический метод ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.reputation">reputation (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.reputation">reputation (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.reputation">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.reputation">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.result">result (атрибут ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
+        </ul></li>
+        <li><a href="ip_ltx.spawn_entries_collector.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.result">result (атрибут ip_ltx.spawn_entries_collector.SpawnEntriesCollector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.run">run() (в модуле ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.run">run() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.run_inspection">run_inspection() (в модуле ip_ltx.utils_inspector)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.run_inspection">run_inspection() (в модуле ip_ltx.utils_inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_loot.run_summary">run_summary() (в модуле ip_ltx.analyzer_loot)</a>
+        <li><a href="ip_ltx.analyzer_loot.html#ip_ltx.analyzer_loot.run_summary">run_summary() (в модуле ip_ltx.analyzer_loot)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.Runnable">Runnable (класс в ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.Runnable">Runnable (класс в ip_ltx.utils)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="S">S</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS.scope">scope (атрибут ip_ltx.db.ADDON_FLAGS)</a>
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS.scope">scope (атрибут ip_ltx.db.ADDON_FLAGS)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.scope_type">scope_type() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.scope_type">scope_type() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section">Section (класс в ip_ltx.ip_ltx)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section">Section (класс в ip_ltx.ip_ltx)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.section">section() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.section">section() (метод ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.Error">Section.Error</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.Error">Section.Error</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.section_exist">section_exist() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.section_exist">section_exist() (метод ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.section_name">section_name (атрибут ip_ltx.spawn.SpawnObject)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.section_name">section_name (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.sections">sections() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.sections">sections() (метод ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.CLSID.server_class">server_class (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.CLSID.server_class">server_class (атрибут ip_ltx.utils_meta.CLSIDs.CLSID)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_classes">server_classes (атрибут ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_classes">server_classes (атрибут ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ServerClasses">ServerClasses (класс в ip_ltx.utils_meta)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ServerClasses">ServerClasses (класс в ip_ltx.utils_meta)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.show_ltx_warnings">show_ltx_warnings (атрибут ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.show_ltx_warnings">show_ltx_warnings (атрибут ip_ltx.ip_ltx.Ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry.signature">signature() (метод ip_ltx.treasure_manager_ext.SpawnEntry)</a>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntry.signature">signature() (метод ip_ltx.treasure_manager_ext.SpawnEntry)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS.silencer">silencer (атрибут ip_ltx.db.ADDON_FLAGS)</a>
+        <li><a href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS.silencer">silencer (атрибут ip_ltx.db.ADDON_FLAGS)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.SingletonBase">SingletonBase (класс в ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.SingletonBase">SingletonBase (класс в ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils.SingletonMeta">SingletonMeta (класс в ip_ltx.utils)</a>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.SingletonMeta">SingletonMeta (класс в ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.snd_config">snd_config (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.snd_config">snd_config (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.snd_config">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.snd_config">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.snd_config">snd_config() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.snd_config">snd_config() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.Spawn">Spawn (класс в ip_ltx.spawn)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.Spawn">Spawn (класс в ip_ltx.spawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.spawn_id">spawn_id (атрибут ip_ltx.spawn.SpawnObject)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.spawn_id">spawn_id (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ini.spawn_ini">spawn_ini() (в модуле ip_ltx.ini)</a>
+        <li><a href="ip_ltx.ini.html#ip_ltx.ini.spawn_ini">spawn_ini() (в модуле ip_ltx.ini)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.spawn_items">spawn_items (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.spawn_items">spawn_items (атрибут ip_ltx.generator_character_desc.Character)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector">SpawnEntriesCollector (класс в ip_ltx.spawn_entries_collector)</a>
+        <li><a href="ip_ltx.spawn_entries_collector.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector">SpawnEntriesCollector (класс в ip_ltx.spawn_entries_collector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool">SpawnEntriesPool (класс в ip_ltx.treasure_manager_ext)</a>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool">SpawnEntriesPool (класс в ip_ltx.treasure_manager_ext)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry">SpawnEntry (класс в ip_ltx.treasure_manager_ext)</a>
+        <li><a href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntry">SpawnEntry (класс в ip_ltx.treasure_manager_ext)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject">SpawnObject (класс в ip_ltx.spawn)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject">SpawnObject (класс в ip_ltx.spawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.STALKER">STALKER (атрибут ip_ltx.utils_meta.ObjectType)</a>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.STALKER">STALKER (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.start_dialog">start_dialog (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.start_dialog">start_dialog (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.start_dialog">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.start_dialog">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.SpawnObject.story_id">story_id (атрибут ip_ltx.spawn.SpawnObject)</a>
+        </ul></li>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.SpawnObject.story_id">story_id (атрибут ip_ltx.spawn.SpawnObject)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.spawn.Spawn.story_object">story_object() (метод ip_ltx.spawn.Spawn)</a>
+        <li><a href="ip_ltx.spawn.html#ip_ltx.spawn.Spawn.story_object">story_object() (метод ip_ltx.spawn.Spawn)</a>
 </li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.string_table.StringTable">StringTable (класс в ip_ltx.xml_data.string_table)</a>
+        <li><a href="ip_ltx.xml_data.string_table.html#ip_ltx.xml_data.string_table.StringTable">StringTable (класс в ip_ltx.xml_data.string_table)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_loot.summary">summary() (в модуле ip_ltx.analyzer_loot)</a>
+        <li><a href="ip_ltx.analyzer_loot.html#ip_ltx.analyzer_loot.summary">summary() (в модуле ip_ltx.analyzer_loot)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ini.system_ini">system_ini() (в модуле ip_ltx.ini)</a>
+        <li><a href="ip_ltx.ini.html#ip_ltx.ini.system_ini">system_ini() (в модуле ip_ltx.ini)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="T">T</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskGeneric.target">target (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskGeneric.target">target (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
 
-      <ul>
-        <li><a href="ip_ltx.misc.html#ip_ltx.misc.treasure_manager.Treasure.target">(атрибут ip_ltx.misc.treasure_manager.Treasure)</a>
+        <ul>
+          <li><a href="ip_ltx.misc.treasure_manager.html#ip_ltx.misc.treasure_manager.Treasure.target">(атрибут ip_ltx.misc.treasure_manager.Treasure)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.info_portions.InfoPortion.task">task (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
+        </ul></li>
+        <li><a href="ip_ltx.xml_data.info_portions.html#ip_ltx.xml_data.info_portions.InfoPortion.task">task (атрибут ip_ltx.xml_data.info_portions.InfoPortion)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.Task">Task (класс в ip_ltx.misc.task_manager)</a>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.Task">Task (класс в ip_ltx.misc.task_manager)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskGeneric">TaskGeneric (класс в ip_ltx.misc.task_manager)</a>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskGeneric">TaskGeneric (класс в ip_ltx.misc.task_manager)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskManager">TaskManager (класс в ip_ltx.misc.task_manager)</a>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskManager">TaskManager (класс в ip_ltx.misc.task_manager)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.terrain_sect">terrain_sect (атрибут ip_ltx.generator_character_desc.Character)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.terrain_sect">terrain_sect (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.terrain_sect">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.terrain_sect">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.terrain_sect">terrain_sect() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.terrain_sect">terrain_sect() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_box_wood_01">test_box_wood_01() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_box_wood_01">test_box_wood_01() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_cond_weapons_on_level">test_cond_weapons_on_level() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_cond_weapons_on_level">test_cond_weapons_on_level() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_generate_name">test_generate_name() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_generate_name">test_generate_name() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_inv_items_visual">test_inv_items_visual() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_inv_items_visual">test_inv_items_visual() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_inv_name_desc">test_inv_name_desc() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_inv_name_desc">test_inv_name_desc() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_invariant_names_as_prefixes">test_invariant_names_as_prefixes() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_invariant_names_as_prefixes">test_invariant_names_as_prefixes() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_known_info">test_known_info() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_known_info">test_known_info() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_level_correspondence">test_level_correspondence() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_level_correspondence">test_level_correspondence() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_name_duplicates">test_name_duplicates() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_name_duplicates">test_name_duplicates() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_offline_objects">test_offline_objects() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_offline_objects">test_offline_objects() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_ph_capture_visuals">test_ph_capture_visuals() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_ph_capture_visuals">test_ph_capture_visuals() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_section_name_patterns">test_section_name_patterns() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_section_name_patterns">test_section_name_patterns() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_space_restrictors">test_space_restrictors() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_space_restrictors">test_space_restrictors() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_storage_tips">test_storage_tips() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_storage_tips">test_storage_tips() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_story_ids_miscellaneous">test_story_ids_miscellaneous() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_story_ids_miscellaneous">test_story_ids_miscellaneous() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_story_ids_unused">test_story_ids_unused() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_story_ids_unused">test_story_ids_unused() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_task_manager_unlisted">test_task_manager_unlisted() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_task_manager_unlisted">test_task_manager_unlisted() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_translations">test_translations() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_translations">test_translations() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_treasure_manager">test_treasure_manager() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_treasure_manager">test_treasure_manager() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_treasure_manager_sections">test_treasure_manager_sections() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_treasure_manager_sections">test_treasure_manager_sections() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_treasure_manager_unlisted">test_treasure_manager_unlisted() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsGeneral.test_treasure_manager_unlisted">test_treasure_manager_unlisted() (статический метод ip_ltx.inspector.InspectionsGeneral)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_upd_fields_consistency">test_upd_fields_consistency() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
+        <li><a href="ip_ltx.inspector.html#ip_ltx.inspector.InspectionsSpawn.test_upd_fields_consistency">test_upd_fields_consistency() (статический метод ip_ltx.inspector.InspectionsSpawn)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.task_manager.TaskGeneric.text">text (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
+        <li><a href="ip_ltx.misc.task_manager.html#ip_ltx.misc.task_manager.TaskGeneric.text">text (атрибут ip_ltx.misc.task_manager.TaskGeneric)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.Message.text">(атрибут ip_ltx.utils_inspector.InspectorStep.Message)</a>
+        <ul>
+          <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.Message.text">(атрибут ip_ltx.utils_inspector.InspectorStep.Message)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.Texture">Texture (класс в ip_ltx.xml_data.texture_desc)</a>
+        </ul></li>
+        <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.Texture">Texture (класс в ip_ltx.xml_data.texture_desc)</a>
 </li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.TextureDesc">TextureDesc (класс в ip_ltx.xml_data.texture_desc)</a>
+        <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.TextureDesc">TextureDesc (класс в ip_ltx.xml_data.texture_desc)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_loot.tm__calculate_prob_w">tm__calculate_prob_w() (в модуле ip_ltx.analyzer_loot)</a>
+        <li><a href="ip_ltx.analyzer_loot.html#ip_ltx.analyzer_loot.tm__calculate_prob_w">tm__calculate_prob_w() (в модуле ip_ltx.analyzer_loot)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_loot.tm__count_by_levels">tm__count_by_levels() (в модуле ip_ltx.analyzer_loot)</a>
+        <li><a href="ip_ltx.analyzer_loot.html#ip_ltx.analyzer_loot.tm__count_by_levels">tm__count_by_levels() (в модуле ip_ltx.analyzer_loot)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_loot.tm__extract_loot_each">tm__extract_loot_each() (в модуле ip_ltx.analyzer_loot)</a>
+        <li><a href="ip_ltx.analyzer_loot.html#ip_ltx.analyzer_loot.tm__extract_loot_each">tm__extract_loot_each() (в модуле ip_ltx.analyzer_loot)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_loot.tm__extract_position">tm__extract_position() (в модуле ip_ltx.analyzer_loot)</a>
+        <li><a href="ip_ltx.analyzer_loot.html#ip_ltx.analyzer_loot.tm__extract_position">tm__extract_position() (в модуле ip_ltx.analyzer_loot)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.to_float">to_float() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.to_float">to_float() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.to_int">to_int() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.to_int">to_int() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.to_uint">to_uint() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.to_uint">to_uint() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.trade.TradeBuy">TradeBuy (класс в ip_ltx.misc.trade)</a>
+        <li><a href="ip_ltx.misc.trade.html#ip_ltx.misc.trade.TradeBuy">TradeBuy (класс в ip_ltx.misc.trade)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.trade.TradeBuyImpl">TradeBuyImpl (класс в ip_ltx.misc.trade)</a>
+        <li><a href="ip_ltx.misc.trade.html#ip_ltx.misc.trade.TradeBuyImpl">TradeBuyImpl (класс в ip_ltx.misc.trade)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_general.translate_string">translate_string() (в модуле ip_ltx.analyzer_general)</a>
+        <li><a href="ip_ltx.analyzer_general.html#ip_ltx.analyzer_general.translate_string">translate_string() (в модуле ip_ltx.analyzer_general)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.treasure_manager.Treasure">Treasure (класс в ip_ltx.misc.treasure_manager)</a>
+        <li><a href="ip_ltx.misc.treasure_manager.html#ip_ltx.misc.treasure_manager.Treasure">Treasure (класс в ip_ltx.misc.treasure_manager)</a>
 </li>
-      <li><a href="ip_ltx.misc.html#ip_ltx.misc.treasure_manager.TreasureManager">TreasureManager (класс в ip_ltx.misc.treasure_manager)</a>
+        <li><a href="ip_ltx.misc.treasure_manager.html#ip_ltx.misc.treasure_manager.TreasureManager">TreasureManager (класс в ip_ltx.misc.treasure_manager)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="U">U</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.UNDEFINED">UNDEFINED (атрибут ip_ltx.utils_meta.ObjectType)</a>
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType.UNDEFINED">UNDEFINED (атрибут ip_ltx.utils_meta.ObjectType)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.UNESCAPED_AMPERSAND">UNESCAPED_AMPERSAND (атрибут ip_ltx.utils.XML_PATTERNS)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.UNESCAPED_AMPERSAND">UNESCAPED_AMPERSAND (атрибут ip_ltx.utils.XML_PATTERNS)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.unique_classes">unique_classes (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.unique_classes">unique_classes (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="V">V</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils.validate_data">validate_data() (в модуле ip_ltx.utils)</a>
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.validate_data">validate_data() (в модуле ip_ltx.utils)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.analyzer_loot.validate_spawn_data">validate_spawn_data() (в модуле ip_ltx.analyzer_loot)</a>
+        <li><a href="ip_ltx.analyzer_loot.html#ip_ltx.analyzer_loot.validate_spawn_data">validate_spawn_data() (в модуле ip_ltx.analyzer_loot)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.analyzer_spawn.validate_spawn_data">(в модуле ip_ltx.analyzer_spawn)</a>
+        <ul>
+          <li><a href="ip_ltx.analyzer_spawn.html#ip_ltx.analyzer_spawn.validate_spawn_data">(в модуле ip_ltx.analyzer_spawn)</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.visual">visual (атрибут ip_ltx.generator_character_desc.Character)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.visual">visual (атрибут ip_ltx.generator_character_desc.Character)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.visual">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <ul>
+          <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.visual">(атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.visual">visual() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Inspector.visual">visual() (статический метод ip_ltx.generator_character_desc.Inspector)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="W">W</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.w0">w0 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.w0">w0 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.w1">w1 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.w1">w1 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.w2">w2 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.CharacterFactory.w2">w2 (атрибут ip_ltx.generator_character_desc.CharacterFactory)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.warn">warn() (метод ip_ltx.utils_inspector.InspectorStep)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.warn">warn() (метод ip_ltx.utils_inspector.InspectorStep)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel.WARNING">WARNING (атрибут ip_ltx.utils_inspector.InspectorStep.MessageLevel)</a>
+        <li><a href="ip_ltx.utils_inspector.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel.WARNING">WARNING (атрибут ip_ltx.utils_inspector.InspectorStep.MessageLevel)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.WHITE">WHITE (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.WHITE">WHITE (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.Texture.width">width (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
+        <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.Texture.width">width (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
 </li>
-      <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Ini.write">write() (метод ip_ltx.ip_ltx.Ini)</a>
+        <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini.write">write() (метод ip_ltx.ip_ltx.Ini)</a>
 
-      <ul>
-        <li><a href="ip_ltx.html#ip_ltx.ip_ltx.Section.write">(метод ip_ltx.ip_ltx.Section)</a>
+        <ul>
+          <li><a href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section.write">(метод ip_ltx.ip_ltx.Section)</a>
 </li>
-      </ul></li>
-      <li><a href="ip_ltx.html#ip_ltx.generator_character_desc.Character.write_xml">write_xml() (метод ip_ltx.generator_character_desc.Character)</a>
+        </ul></li>
+        <li><a href="ip_ltx.generator_character_desc.html#ip_ltx.generator_character_desc.Character.write_xml">write_xml() (метод ip_ltx.generator_character_desc.Character)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="X">X</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.Texture.x">x (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
+<section id="X" class="genindex-section">
+  <h2>X</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.Texture.x">x (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS">XML_PATTERNS (класс в ip_ltx.utils)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS">XML_PATTERNS (класс в ip_ltx.utils)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
-<h2 id="Y">Y</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.xml_data.html#ip_ltx.xml_data.texture_desc.Texture.y">y (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
+<section id="Y" class="genindex-section">
+  <h2>Y</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.xml_data.texture_desc.html#ip_ltx.xml_data.texture_desc.Texture.y">y (атрибут ip_ltx.xml_data.texture_desc.Texture)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.YELLOW">YELLOW (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.YELLOW">YELLOW (атрибут ip_ltx.utils.ANSI_COLOR_CODE)</a>
 </li>
-  </ul></td>
-</tr></table>
+    </ul></td>
+  </tr></table>
+</section>
 
 
-
-          </div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
           
         </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">ip-ltx (3.7.1)</a></h1>
-
-
-
-
-
-
-
-
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Искать" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
-<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">ip_ltx</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-
-
-
-
-
-
-
-
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Vova Miller
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
         </div>
-      </div>
-      <div class="clearer"></div>
+        
+      </footer>
     </div>
-    <div class="footer">
-      &#169;2026, Vova Miller.
+    <aside class="toc-drawer no-toc">
       
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
-    </div>
-
-    
-
-    
-  </body>
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    </body>
 </html>

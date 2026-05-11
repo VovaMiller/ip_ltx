@@ -1,0 +1,7 @@
+ip\_ltx.xml\_data.info\_portions module
+=======================================
+
+.. automodule:: ip_ltx.xml_data.info_portions
+   :members:
+   :show-inheritance:
+   :undoc-members:

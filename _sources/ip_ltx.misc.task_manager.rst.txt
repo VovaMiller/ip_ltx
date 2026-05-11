@@ -1,0 +1,7 @@
+ip\_ltx.misc.task\_manager module
+=================================
+
+.. automodule:: ip_ltx.misc.task_manager
+   :members:
+   :show-inheritance:
+   :undoc-members:

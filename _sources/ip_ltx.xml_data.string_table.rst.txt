@@ -1,0 +1,7 @@
+ip\_ltx.xml\_data.string\_table module
+======================================
+
+.. automodule:: ip_ltx.xml_data.string_table
+   :members:
+   :show-inheritance:
+   :undoc-members:

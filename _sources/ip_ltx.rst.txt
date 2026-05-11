@@ -1,6 +1,11 @@
 ip\_ltx package
 ===============
 
+.. automodule:: ip_ltx
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 Subpackages
 -----------
 
@@ -14,162 +19,25 @@ Subpackages
 Submodules
 ----------
 
-ip\_ltx.analyzer\_compare module
---------------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: ip_ltx.analyzer_compare
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.analyzer\_general module
---------------------------------
-
-.. automodule:: ip_ltx.analyzer_general
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.analyzer\_loot module
------------------------------
-
-.. automodule:: ip_ltx.analyzer_loot
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.analyzer\_spawn module
-------------------------------
-
-.. automodule:: ip_ltx.analyzer_spawn
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.db module
------------------
-
-.. automodule:: ip_ltx.db
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.generator\_character\_desc module
------------------------------------------
-
-.. automodule:: ip_ltx.generator_character_desc
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.generator\_export module
---------------------------------
-
-.. automodule:: ip_ltx.generator_export
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.generator\_task\_manager module
----------------------------------------
-
-.. automodule:: ip_ltx.generator_task_manager
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.generator\_treasure\_manager module
--------------------------------------------
-
-.. automodule:: ip_ltx.generator_treasure_manager
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.ini module
-------------------
-
-.. automodule:: ip_ltx.ini
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.inspector module
-------------------------
-
-.. automodule:: ip_ltx.inspector
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.ip\_ltx module
-----------------------
-
-.. automodule:: ip_ltx.ip_ltx
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.meta\_inspector module
-------------------------------
-
-.. automodule:: ip_ltx.meta_inspector
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.spawn module
---------------------
-
-.. automodule:: ip_ltx.spawn
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.spawn\_entries\_collector module
-----------------------------------------
-
-.. automodule:: ip_ltx.spawn_entries_collector
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.treasure\_manager\_ext module
--------------------------------------
-
-.. automodule:: ip_ltx.treasure_manager_ext
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.utils module
---------------------
-
-.. automodule:: ip_ltx.utils
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.utils\_inspector module
--------------------------------
-
-.. automodule:: ip_ltx.utils_inspector
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-ip\_ltx.utils\_meta module
---------------------------
-
-.. automodule:: ip_ltx.utils_meta
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-Module contents
----------------
-
-.. automodule:: ip_ltx
-   :members:
-   :show-inheritance:
-   :undoc-members:
+   ip_ltx.analyzer_compare
+   ip_ltx.analyzer_general
+   ip_ltx.analyzer_loot
+   ip_ltx.analyzer_spawn
+   ip_ltx.db
+   ip_ltx.generator_character_desc
+   ip_ltx.generator_export
+   ip_ltx.generator_task_manager
+   ip_ltx.generator_treasure_manager
+   ip_ltx.ini
+   ip_ltx.inspector
+   ip_ltx.ip_ltx
+   ip_ltx.meta_inspector
+   ip_ltx.spawn
+   ip_ltx.spawn_entries_collector
+   ip_ltx.treasure_manager_ext
+   ip_ltx.utils
+   ip_ltx.utils_inspector
+   ip_ltx.utils_meta

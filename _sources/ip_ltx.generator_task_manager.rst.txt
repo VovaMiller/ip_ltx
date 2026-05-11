@@ -1,0 +1,7 @@
+ip\_ltx.generator\_task\_manager module
+=======================================
+
+.. automodule:: ip_ltx.generator_task_manager
+   :members:
+   :show-inheritance:
+   :undoc-members:

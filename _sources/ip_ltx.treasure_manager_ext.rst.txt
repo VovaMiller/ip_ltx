@@ -1,0 +1,7 @@
+ip\_ltx.treasure\_manager\_ext module
+=====================================
+
+.. automodule:: ip_ltx.treasure_manager_ext
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+ip\_ltx.analyzer\_loot module
+=============================
+
+.. automodule:: ip_ltx.analyzer_loot
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,7 @@
+ip\_ltx.meta\_inspector module
+==============================
+
+.. automodule:: ip_ltx.meta_inspector
+   :members:
+   :show-inheritance:
+   :undoc-members:

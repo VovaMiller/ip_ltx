@@ -1,0 +1,7 @@
+ip\_ltx.xml\_data.dialogs module
+================================
+
+.. automodule:: ip_ltx.xml_data.dialogs
+   :members:
+   :show-inheritance:
+   :undoc-members:

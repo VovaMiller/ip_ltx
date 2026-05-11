@@ -1,0 +1,7 @@
+ip\_ltx.xml\_data.texture\_desc module
+======================================
+
+.. automodule:: ip_ltx.xml_data.texture_desc
+   :members:
+   :show-inheritance:
+   :undoc-members:

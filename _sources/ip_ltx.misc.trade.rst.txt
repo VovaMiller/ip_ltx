@@ -1,0 +1,7 @@
+ip\_ltx.misc.trade module
+=========================
+
+.. automodule:: ip_ltx.misc.trade
+   :members:
+   :show-inheritance:
+   :undoc-members:
