@@ -6,6 +6,7 @@
 # -- Extra Installations -----------------------------------------------------
 # pip install sphinx-pyproject
 # pip install myst-parser
+# pip install furo
 
 # -- Making Project Discoverable ---------------------------------------------
 
@@ -26,6 +27,7 @@ project = "{}{}".format(
     f" ({globals()["version"]})" if ("version" in globals()) else ""
 )
 copyright = "2026, Vova Miller"
+html_title = f"{project} — Документация"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -61,5 +63,5 @@ nitpick_ignore = [
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = "furo"
 html_static_path = ['_static']

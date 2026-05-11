@@ -25,11 +25,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e .
-          pip install sphinx sphinx-pyproject myst-parser
+          pip install sphinx sphinx-pyproject myst-parser furo
 
       - name: Regenerate Module Blueprint Files (Apidoc)
         run: |
-          sphinx-apidoc -f -o docs/source/ src/ip_ltx/
+          sphinx-apidoc -f -e -M -o docs/source/ src/ip_ltx/
 
       - name: Compile HTML Site
         run: |

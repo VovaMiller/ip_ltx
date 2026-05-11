@@ -10,6 +10,6 @@ build:
   jobs:
     post_create_environment:
       - pip install -e .
-      - pip install sphinx sphinx-pyproject myst-parser
+      - pip install sphinx sphinx-pyproject myst-parser furo
     post_build:
-      - sphinx-apidoc -f -o docs/source/ src/ip_ltx/
+      - sphinx-apidoc -f -e -M -o docs/source/ src/ip_ltx/
