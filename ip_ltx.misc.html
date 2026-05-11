@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ip_ltx.misc package &#8212; документация ip-ltx (3.7.1) </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="ip_ltx.xml_data package" href="ip_ltx.xml_data.html" />
+    <link rel="prev" title="ip_ltx.acdc package" href="ip_ltx.acdc.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ip-ltx-misc-package">
+<h1>ip_ltx.misc package<a class="headerlink" href="#ip-ltx-misc-package" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Ссылка на этот заголовок">¶</a></h2>
+</section>
+<section id="module-ip_ltx.misc.task_manager">
+<span id="ip-ltx-misc-task-manager-module"></span><h2>ip_ltx.misc.task_manager module<a class="headerlink" href="#module-ip_ltx.misc.task_manager" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.Task">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.task_manager.</span></span><span class="sig-name descname"><span class="pre">Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.task_manager.Task" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>_type</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskGeneric">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.task_manager.</span></span><span class="sig-name descname"><span class="pre">TaskGeneric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">article</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskGeneric" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ip_ltx.misc.task_manager.Task" title="ip_ltx.misc.task_manager.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a></p>
+<p>Класс цикличного/второстепенного задания.</p>
+<p>Такое задание выдаётся по фразе «Мне нужна работа. Есть что на примете?»
+(если у него отдельно не настроена автоматическая выдача).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>_type</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>article</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>count</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskGeneric.article">
+<span class="sig-name descname"><span class="pre">article</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskGeneric.article" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskGeneric.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskGeneric.count" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskGeneric.parent">
+<span class="sig-name descname"><span class="pre">parent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskGeneric.parent" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskGeneric.target">
+<span class="sig-name descname"><span class="pre">target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskGeneric.target" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskGeneric.text">
+<span class="sig-name descname"><span class="pre">text</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskGeneric.text" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.task_manager.</span></span><span class="sig-name descname"><span class="pre">TaskManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskManager" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="ip_ltx.html#ip_ltx.utils.SingletonBase" title="ip_ltx.utils.SingletonBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></p>
+<p>Класс, хранящий данные об игровых заданиях,
+зарегистрированных в <code class="docutils literal notranslate"><span class="pre">task_manager</span></code>.</p>
+<p>Включает в себя цикличные, второстепенные и сюжетные задания - все задания,
+перечисленные в <code class="docutils literal notranslate"><span class="pre">[list]</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskManager.generic_task">
+<span class="sig-name descname"><span class="pre">generic_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskManager.generic_task" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить объект цикличного/второстепенного задания.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task_id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – id задания.</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#KeyError" title="(in Python v3.12)"><strong>KeyError</strong></a> – если указан id несуществующего задания.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – если указан id не второстепенного задания.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ip_ltx.misc.task_manager.TaskGeneric" title="ip_ltx.misc.task_manager.TaskGeneric"><em>TaskGeneric</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskManager.generic_tasks">
+<span class="sig-name descname"><span class="pre">generic_tasks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskManager.generic_tasks" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Итератор цикличных/второстепенных заданий.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ids</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>] </em><em>| </em><em>None</em>) – Список id заданий, которые нужно проитерировать.
+Если <code class="docutils literal notranslate"><span class="pre">None</span></code>, то итерирует все цикличные/второстепенные задания.</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#KeyError" title="(in Python v3.12)"><strong>KeyError</strong></a> – если в списке указан id несуществующего задания.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – если в списке указан id не второстепенного задания.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Iterator" title="(in Python v3.12)"><em>Iterator</em></a>[<a class="reference internal" href="#ip_ltx.misc.task_manager.TaskGeneric" title="ip_ltx.misc.task_manager.TaskGeneric"><em>TaskGeneric</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.task_manager.TaskManager.ini">
+<span class="sig-name descname"><span class="pre">ini</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini" title="ip_ltx.ip_ltx.Ini"><span class="pre">Ini</span></a></span><a class="headerlink" href="#ip_ltx.misc.task_manager.TaskManager.ini" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Считанный файл task_manager.ltx</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ip_ltx.misc.trade">
+<span id="ip-ltx-misc-trade-module"></span><h2>ip_ltx.misc.trade module<a class="headerlink" href="#module-ip_ltx.misc.trade" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.misc.trade.TradeBuy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.trade.</span></span><span class="sig-name descname"><span class="pre">TradeBuy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.trade.TradeBuy" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="ip_ltx.html#ip_ltx.utils.SingletonBase" title="ip_ltx.utils.SingletonBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingletonBase</span></code></a>, <a class="reference internal" href="#ip_ltx.misc.trade.TradeBuyImpl" title="ip_ltx.misc.trade.TradeBuyImpl"><code class="xref py py-class docutils literal notranslate"><span class="pre">TradeBuyImpl</span></code></a></p>
+<p>Класс, хранящий информацию о коэффициентах покупки торговцами предметов.</p>
+<p>Инициализация по этому классу всегда выдаёт единый экземпляр,
+инициализированный по секции, указанной в <code class="docutils literal notranslate"><span class="pre">[trade]</span></code> в meta-файле.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.misc.trade.TradeBuyImpl">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.trade.</span></span><span class="sig-name descname"><span class="pre">TradeBuyImpl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buy_section</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.trade.TradeBuyImpl" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Класс, инкапсулирующий логику считывания секции
+с коэффициентами покупки торговцем товаров
+и логику определения этого коэффициента
+по данному имени секции предмета.</p>
+<p>Для совместимости с <em>OGSR Engine</em>,
+секция с коэффициентами также может содержать
+регулярные выражения - маску имени секции предмета,
+а не имя секции напрямую. Формат: <code class="docutils literal notranslate"><span class="pre">/.../</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>buy_section</strong> (<a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a>) – секция из ltx-файла со всеми коэффициентами.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.misc.trade.TradeBuyImpl.get_buy_k">
+<span class="sig-name descname"><span class="pre">get_buy_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.trade.TradeBuyImpl.get_buy_k" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить коэффициент покупки торговцем предмета.</p>
+<p>Отношение игрока к торговцу полагается нулевым
+(т.е. результат - полусумма двух указанных коэффициентов).</p>
+<p>Логика получения коэффициента воспроизводит работу
+LUA-функции <code class="docutils literal notranslate"><span class="pre">ip_utils.get_buy_k</span></code> (<em>ИП v3.0</em>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section_name</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ip_ltx.misc.treasure_manager">
+<span id="ip-ltx-misc-treasure-manager-module"></span><h2>ip_ltx.misc.treasure_manager module<a class="headerlink" href="#module-ip_ltx.misc.treasure_manager" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.Treasure">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.treasure_manager.</span></span><span class="sig-name descname"><span class="pre">Treasure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.Treasure" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Класс одного тайника.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>)</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.Treasure.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.Treasure.description" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.Treasure.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.Treasure.name" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.Treasure.target">
+<span class="sig-name descname"><span class="pre">target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.Treasure.target" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.TreasureManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.treasure_manager.</span></span><span class="sig-name descname"><span class="pre">TreasureManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.TreasureManager" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="ip_ltx.html#ip_ltx.utils.SingletonBase" title="ip_ltx.utils.SingletonBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></p>
+<p>Класс, хранящий данные о тайниках, зарегистрированных в <code class="docutils literal notranslate"><span class="pre">treasure_manager</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.TreasureManager.ini">
+<span class="sig-name descname"><span class="pre">ini</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini" title="ip_ltx.ip_ltx.Ini"><span class="pre">Ini</span></a></span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.TreasureManager.ini" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Считанный файл treasure_manager.ltx</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ip_ltx.misc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ip_ltx.misc" title="Ссылка на этот заголовок">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ip-ltx (3.7.1)</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ip_ltx</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ip_ltx.html">ip_ltx package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">ip_ltx</a><ul>
+  <li><a href="ip_ltx.html">ip_ltx package</a><ul>
+      <li>Previous: <a href="ip_ltx.acdc.html" title="предыдущая глава">ip_ltx.acdc package</a></li>
+      <li>Next: <a href="ip_ltx.xml_data.html" title="следующая глава">ip_ltx.xml_data package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Vova Miller.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/ip_ltx.misc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ip_ltx &#8212; документация ip-ltx (3.7.1) </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="ip_ltx package" href="ip_ltx.html" />
+    <link rel="prev" title="ip_ltx documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ip-ltx">
+<h1>ip_ltx<a class="headerlink" href="#ip-ltx" title="Ссылка на этот заголовок">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ip_ltx.html">ip_ltx package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.acdc.html">ip_ltx.acdc package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.acdc.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.acdc.html#module-ip_ltx.acdc.ip_acdc_builder">ip_ltx.acdc.ip_acdc_builder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.acdc.html#module-ip_ltx.acdc.ip_acdc_extractor">ip_ltx.acdc.ip_acdc_extractor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.acdc.html#module-ip_ltx.acdc">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.misc.html">ip_ltx.misc package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.html#module-ip_ltx.misc.task_manager">ip_ltx.misc.task_manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.html#module-ip_ltx.misc.trade">ip_ltx.misc.trade module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.html#module-ip_ltx.misc.treasure_manager">ip_ltx.misc.treasure_manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.misc.html#module-ip_ltx.misc">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.xml_data.html">ip_ltx.xml_data package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.dialogs">ip_ltx.xml_data.dialogs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.info_portions">ip_ltx.xml_data.info_portions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.string_table">ip_ltx.xml_data.string_table module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.html#module-ip_ltx.xml_data.texture_desc">ip_ltx.xml_data.texture_desc module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.html#module-ip_ltx.xml_data">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.analyzer_compare">ip_ltx.analyzer_compare module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_compare.compare"><code class="docutils literal notranslate"><span class="pre">compare()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.analyzer_general">ip_ltx.analyzer_general module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.extract__addon_to_wpn"><code class="docutils literal notranslate"><span class="pre">extract__addon_to_wpn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.extract__ammo_to_wpn"><code class="docutils literal notranslate"><span class="pre">extract__ammo_to_wpn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.extract_fields"><code class="docutils literal notranslate"><span class="pre">extract_fields()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.extract_monsters_health"><code class="docutils literal notranslate"><span class="pre">extract_monsters_health()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.has_class"><code class="docutils literal notranslate"><span class="pre">has_class()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.has_cost"><code class="docutils literal notranslate"><span class="pre">has_cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.has_cost2"><code class="docutils literal notranslate"><span class="pre">has_cost2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.has_spawn_path"><code class="docutils literal notranslate"><span class="pre">has_spawn_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_addon"><code class="docutils literal notranslate"><span class="pre">is_addon()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_addon_scope"><code class="docutils literal notranslate"><span class="pre">is_addon_scope()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_ammo"><code class="docutils literal notranslate"><span class="pre">is_ammo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_anomaly"><code class="docutils literal notranslate"><span class="pre">is_anomaly()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_anomaly2"><code class="docutils literal notranslate"><span class="pre">is_anomaly2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_art"><code class="docutils literal notranslate"><span class="pre">is_art()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_grenade"><code class="docutils literal notranslate"><span class="pre">is_grenade()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item"><code class="docutils literal notranslate"><span class="pre">is_inv_item()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item2"><code class="docutils literal notranslate"><span class="pre">is_inv_item2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item__old"><code class="docutils literal notranslate"><span class="pre">is_inv_item__old()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_inv_item__old2"><code class="docutils literal notranslate"><span class="pre">is_inv_item__old2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_monster"><code class="docutils literal notranslate"><span class="pre">is_monster()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_mutant_part"><code class="docutils literal notranslate"><span class="pre">is_mutant_part()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_outfit"><code class="docutils literal notranslate"><span class="pre">is_outfit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_stalker"><code class="docutils literal notranslate"><span class="pre">is_stalker()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_wpn"><code class="docutils literal notranslate"><span class="pre">is_wpn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.is_wpn2"><code class="docutils literal notranslate"><span class="pre">is_wpn2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.scope_type"><code class="docutils literal notranslate"><span class="pre">scope_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.to_float"><code class="docutils literal notranslate"><span class="pre">to_float()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.to_int"><code class="docutils literal notranslate"><span class="pre">to_int()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.to_uint"><code class="docutils literal notranslate"><span class="pre">to_uint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_general.translate_string"><code class="docutils literal notranslate"><span class="pre">translate_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.analyzer_loot">ip_ltx.analyzer_loot module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_loot.run_summary"><code class="docutils literal notranslate"><span class="pre">run_summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_loot.summary"><code class="docutils literal notranslate"><span class="pre">summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_loot.tm__calculate_prob_w"><code class="docutils literal notranslate"><span class="pre">tm__calculate_prob_w()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_loot.tm__count_by_levels"><code class="docutils literal notranslate"><span class="pre">tm__count_by_levels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_loot.tm__extract_loot_each"><code class="docutils literal notranslate"><span class="pre">tm__extract_loot_each()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_loot.tm__extract_position"><code class="docutils literal notranslate"><span class="pre">tm__extract_position()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_loot.validate_spawn_data"><code class="docutils literal notranslate"><span class="pre">validate_spawn_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.analyzer_spawn">ip_ltx.analyzer_spawn module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_spawn.check_anomalies"><code class="docutils literal notranslate"><span class="pre">check_anomalies()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_spawn.extract_mobs"><code class="docutils literal notranslate"><span class="pre">extract_mobs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.analyzer_spawn.validate_spawn_data"><code class="docutils literal notranslate"><span class="pre">validate_spawn_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.db">ip_ltx.db module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS.launcher"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS.launcher</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS.scope"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS.scope</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.ADDON_FLAGS.silencer"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS.silencer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flCanSave"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flCanSave</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flCheckForSeparator"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flCheckForSeparator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flCorpseRemoval"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flCorpseRemoval</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flInteractive"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flInteractive</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flOfflineNoMove"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flOfflineNoMove</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOffline"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flSwitchOffline</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOnline"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flSwitchOnline</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUseGroupBehaviour"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUseGroupBehaviour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUseSmartTerrains"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUseSmartTerrains</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUseSwitches"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUseSwitches</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUsedAI_Locations"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUsedAI_Locations</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flUsefulForAI"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUsefulForAI</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForAI"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flVisibleForAI</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForMap"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flVisibleForMap</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.generator_character_desc">ip_ltx.generator_character_desc module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character"><code class="docutils literal notranslate"><span class="pre">Character</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.actor_dialog"><code class="docutils literal notranslate"><span class="pre">Character.actor_dialog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.bio"><code class="docutils literal notranslate"><span class="pre">Character.bio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.cls"><code class="docutils literal notranslate"><span class="pre">Character.cls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.community"><code class="docutils literal notranslate"><span class="pre">Character.community</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.crouch_type"><code class="docutils literal notranslate"><span class="pre">Character.crouch_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.get_id"><code class="docutils literal notranslate"><span class="pre">Character.get_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.icon"><code class="docutils literal notranslate"><span class="pre">Character.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.include"><code class="docutils literal notranslate"><span class="pre">Character.include</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.include_supplies"><code class="docutils literal notranslate"><span class="pre">Character.include_supplies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.money_inf"><code class="docutils literal notranslate"><span class="pre">Character.money_inf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.money_max"><code class="docutils literal notranslate"><span class="pre">Character.money_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.money_min"><code class="docutils literal notranslate"><span class="pre">Character.money_min</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.name"><code class="docutils literal notranslate"><span class="pre">Character.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.rank"><code class="docutils literal notranslate"><span class="pre">Character.rank</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.reputation"><code class="docutils literal notranslate"><span class="pre">Character.reputation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.snd_config"><code class="docutils literal notranslate"><span class="pre">Character.snd_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.spawn_items"><code class="docutils literal notranslate"><span class="pre">Character.spawn_items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.start_dialog"><code class="docutils literal notranslate"><span class="pre">Character.start_dialog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.terrain_sect"><code class="docutils literal notranslate"><span class="pre">Character.terrain_sect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.visual"><code class="docutils literal notranslate"><span class="pre">Character.visual</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Character.write_xml"><code class="docutils literal notranslate"><span class="pre">Character.write_xml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults"><code class="docutils literal notranslate"><span class="pre">CharacterDefaults</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_crouch_type"><code class="docutils literal notranslate"><span class="pre">CharacterDefaults.get_crouch_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_icon"><code class="docutils literal notranslate"><span class="pre">CharacterDefaults.get_icon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_include"><code class="docutils literal notranslate"><span class="pre">CharacterDefaults.get_include()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_include_supplies"><code class="docutils literal notranslate"><span class="pre">CharacterDefaults.get_include_supplies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterDefaults.get_name"><code class="docutils literal notranslate"><span class="pre">CharacterDefaults.get_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory"><code class="docutils literal notranslate"><span class="pre">CharacterFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.CharGenClsError"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.CharGenClsError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.CharGenIdError"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.CharGenIdError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.IncompleteError"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.IncompleteError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.ItemsError"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.ItemsError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.a0"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.a0</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.a1"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.a1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.a2"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.a2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.actor_dialog"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.actor_dialog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.bio"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.bio</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.builder"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.builder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.chr_cnt_by_cls"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.chr_cnt_by_cls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.chr_ids"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.chr_ids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.cls"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.cls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.community"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.community</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.crouch_type"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.crouch_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.gen_cnt_by_cls"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.gen_cnt_by_cls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.icon"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.include"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.include</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.include_supplies"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.include_supplies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.items"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.items</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.money"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.money</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.money_inf"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.money_inf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.name"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.rank"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.rank</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.refresh"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.refresh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.reputation"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.reputation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.snd_config"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.snd_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.start_dialog"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.start_dialog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.terrain_sect"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.terrain_sect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.unique_classes"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.unique_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.visual"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.visual</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.w0"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.w0</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.w1"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.w1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.CharacterFactory.w2"><code class="docutils literal notranslate"><span class="pre">CharacterFactory.w2</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector"><code class="docutils literal notranslate"><span class="pre">Inspector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.bio"><code class="docutils literal notranslate"><span class="pre">Inspector.bio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.community"><code class="docutils literal notranslate"><span class="pre">Inspector.community()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.dialog"><code class="docutils literal notranslate"><span class="pre">Inspector.dialog()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.icon"><code class="docutils literal notranslate"><span class="pre">Inspector.icon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.include"><code class="docutils literal notranslate"><span class="pre">Inspector.include()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.name"><code class="docutils literal notranslate"><span class="pre">Inspector.name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.snd_config"><code class="docutils literal notranslate"><span class="pre">Inspector.snd_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.terrain_sect"><code class="docutils literal notranslate"><span class="pre">Inspector.terrain_sect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.Inspector.visual"><code class="docutils literal notranslate"><span class="pre">Inspector.visual()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.form_characters"><code class="docutils literal notranslate"><span class="pre">form_characters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_character_desc.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.generator_export">ip_ltx.generator_export module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_export.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.generator_task_manager">ip_ltx.generator_task_manager module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_task_manager.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_task_manager.generate_articles"><code class="docutils literal notranslate"><span class="pre">generate_articles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_task_manager.generate_icons"><code class="docutils literal notranslate"><span class="pre">generate_icons()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_task_manager.generate_strings"><code class="docutils literal notranslate"><span class="pre">generate_strings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_task_manager.generate_tasks"><code class="docutils literal notranslate"><span class="pre">generate_tasks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.generator_treasure_manager">ip_ltx.generator_treasure_manager module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_treasure_manager.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_treasure_manager.generate_main"><code class="docutils literal notranslate"><span class="pre">generate_main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.generator_treasure_manager.generate_strings"><code class="docutils literal notranslate"><span class="pre">generate_strings()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.ini">ip_ltx.ini module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.ini.game_ini"><code class="docutils literal notranslate"><span class="pre">game_ini()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.ini.meta_ini"><code class="docutils literal notranslate"><span class="pre">meta_ini()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.ini.spawn_ini"><code class="docutils literal notranslate"><span class="pre">spawn_ini()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.ini.system_ini"><code class="docutils literal notranslate"><span class="pre">system_ini()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.inspector">ip_ltx.inspector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_generate_name"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_generate_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_inv_name_desc"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_inv_name_desc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_ph_capture_visuals"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_ph_capture_visuals()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_section_name_patterns"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_section_name_patterns()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_task_manager_unlisted"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_task_manager_unlisted()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_translations"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_translations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_treasure_manager_sections"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_treasure_manager_sections()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsGeneral.test_treasure_manager_unlisted"><code class="docutils literal notranslate"><span class="pre">InspectionsGeneral.test_treasure_manager_unlisted()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_box_wood_01"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_box_wood_01()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_cond_weapons_on_level"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_cond_weapons_on_level()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_inv_items_visual"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_inv_items_visual()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_invariant_names_as_prefixes"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_invariant_names_as_prefixes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_known_info"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_known_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_level_correspondence"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_level_correspondence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_name_duplicates"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_name_duplicates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_offline_objects"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_offline_objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_space_restrictors"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_space_restrictors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_storage_tips"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_storage_tips()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_story_ids_miscellaneous"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_story_ids_miscellaneous()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_story_ids_unused"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_story_ids_unused()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_treasure_manager"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_treasure_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.InspectionsSpawn.test_upd_fields_consistency"><code class="docutils literal notranslate"><span class="pre">InspectionsSpawn.test_upd_fields_consistency()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.inspector.inspect"><code class="docutils literal notranslate"><span class="pre">inspect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.ip_ltx">ip_ltx.ip_ltx module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip-ltx">ip_ltx</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#cinifile-x-ray-engine">Отличия от <code class="docutils literal notranslate"><span class="pre">CInifile</span></code> (X-Ray Engine):</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini"><code class="docutils literal notranslate"><span class="pre">Ini</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.Error"><code class="docutils literal notranslate"><span class="pre">Ini.Error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.add"><code class="docutils literal notranslate"><span class="pre">Ini.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.clear"><code class="docutils literal notranslate"><span class="pre">Ini.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.gda"><code class="docutils literal notranslate"><span class="pre">Ini.gda</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.gdm"><code class="docutils literal notranslate"><span class="pre">Ini.gdm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_bool"><code class="docutils literal notranslate"><span class="pre">Ini.get_bool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_bools"><code class="docutils literal notranslate"><span class="pre">Ini.get_bools()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_float"><code class="docutils literal notranslate"><span class="pre">Ini.get_float()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_floats"><code class="docutils literal notranslate"><span class="pre">Ini.get_floats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_int"><code class="docutils literal notranslate"><span class="pre">Ini.get_int()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_ints"><code class="docutils literal notranslate"><span class="pre">Ini.get_ints()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_items"><code class="docutils literal notranslate"><span class="pre">Ini.get_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_section_index"><code class="docutils literal notranslate"><span class="pre">Ini.get_section_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_string"><code class="docutils literal notranslate"><span class="pre">Ini.get_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_string_wb"><code class="docutils literal notranslate"><span class="pre">Ini.get_string_wb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_strings"><code class="docutils literal notranslate"><span class="pre">Ini.get_strings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_uint"><code class="docutils literal notranslate"><span class="pre">Ini.get_uint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.get_uints"><code class="docutils literal notranslate"><span class="pre">Ini.get_uints()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.ids"><code class="docutils literal notranslate"><span class="pre">Ini.ids()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.line_exist"><code class="docutils literal notranslate"><span class="pre">Ini.line_exist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.read"><code class="docutils literal notranslate"><span class="pre">Ini.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.read_raw"><code class="docutils literal notranslate"><span class="pre">Ini.read_raw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.section"><code class="docutils literal notranslate"><span class="pre">Ini.section()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.section_exist"><code class="docutils literal notranslate"><span class="pre">Ini.section_exist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.sections"><code class="docutils literal notranslate"><span class="pre">Ini.sections()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.show_ltx_warnings"><code class="docutils literal notranslate"><span class="pre">Ini.show_ltx_warnings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Ini.write"><code class="docutils literal notranslate"><span class="pre">Ini.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section"><code class="docutils literal notranslate"><span class="pre">Section</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.Error"><code class="docutils literal notranslate"><span class="pre">Section.Error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.add"><code class="docutils literal notranslate"><span class="pre">Section.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_bool"><code class="docutils literal notranslate"><span class="pre">Section.cast_bool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_float"><code class="docutils literal notranslate"><span class="pre">Section.cast_float()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_int"><code class="docutils literal notranslate"><span class="pre">Section.cast_int()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_string_wb"><code class="docutils literal notranslate"><span class="pre">Section.cast_string_wb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.cast_uint"><code class="docutils literal notranslate"><span class="pre">Section.cast_uint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.clear"><code class="docutils literal notranslate"><span class="pre">Section.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.field"><code class="docutils literal notranslate"><span class="pre">Section.field()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.fields"><code class="docutils literal notranslate"><span class="pre">Section.fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.fmt_value_whitespaces"><code class="docutils literal notranslate"><span class="pre">Section.fmt_value_whitespaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_bool"><code class="docutils literal notranslate"><span class="pre">Section.get_bool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_bools"><code class="docutils literal notranslate"><span class="pre">Section.get_bools()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_elem"><code class="docutils literal notranslate"><span class="pre">Section.get_elem()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_elems"><code class="docutils literal notranslate"><span class="pre">Section.get_elems()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_float"><code class="docutils literal notranslate"><span class="pre">Section.get_float()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_floats"><code class="docutils literal notranslate"><span class="pre">Section.get_floats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_int"><code class="docutils literal notranslate"><span class="pre">Section.get_int()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_ints"><code class="docutils literal notranslate"><span class="pre">Section.get_ints()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_items"><code class="docutils literal notranslate"><span class="pre">Section.get_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair"><code class="docutils literal notranslate"><span class="pre">Section.get_pair()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_bool"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_bool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_float"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_float()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_int"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_int()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_str"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_pair_uint"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_uint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_string"><code class="docutils literal notranslate"><span class="pre">Section.get_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_string_wb"><code class="docutils literal notranslate"><span class="pre">Section.get_string_wb()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_strings"><code class="docutils literal notranslate"><span class="pre">Section.get_strings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_uint"><code class="docutils literal notranslate"><span class="pre">Section.get_uint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.get_uints"><code class="docutils literal notranslate"><span class="pre">Section.get_uints()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.id"><code class="docutils literal notranslate"><span class="pre">Section.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist"><code class="docutils literal notranslate"><span class="pre">Section.line_exist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist_own"><code class="docutils literal notranslate"><span class="pre">Section.line_exist_own()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.line_exist_with_value"><code class="docutils literal notranslate"><span class="pre">Section.line_exist_with_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.lines"><code class="docutils literal notranslate"><span class="pre">Section.lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.ip_ltx.Section.write"><code class="docutils literal notranslate"><span class="pre">Section.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.meta_inspector">ip_ltx.meta_inspector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.meta_inspector.inspect"><code class="docutils literal notranslate"><span class="pre">inspect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.spawn">ip_ltx.spawn module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.Spawn"><code class="docutils literal notranslate"><span class="pre">Spawn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.Spawn.init"><code class="docutils literal notranslate"><span class="pre">Spawn.init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.Spawn.object"><code class="docutils literal notranslate"><span class="pre">Spawn.object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.Spawn.objects"><code class="docutils literal notranslate"><span class="pre">Spawn.objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.Spawn.story_object"><code class="docutils literal notranslate"><span class="pre">Spawn.story_object()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject"><code class="docutils literal notranslate"><span class="pre">SpawnObject</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.custom_data"><code class="docutils literal notranslate"><span class="pre">SpawnObject.custom_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.direction"><code class="docutils literal notranslate"><span class="pre">SpawnObject.direction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.game_vertex_id"><code class="docutils literal notranslate"><span class="pre">SpawnObject.game_vertex_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.get_condition"><code class="docutils literal notranslate"><span class="pre">SpawnObject.get_condition()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.init"><code class="docutils literal notranslate"><span class="pre">SpawnObject.init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.level_vertex_id"><code class="docutils literal notranslate"><span class="pre">SpawnObject.level_vertex_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.name"><code class="docutils literal notranslate"><span class="pre">SpawnObject.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.object_flags"><code class="docutils literal notranslate"><span class="pre">SpawnObject.object_flags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.position"><code class="docutils literal notranslate"><span class="pre">SpawnObject.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.section_name"><code class="docutils literal notranslate"><span class="pre">SpawnObject.section_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.spawn_id"><code class="docutils literal notranslate"><span class="pre">SpawnObject.spawn_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.SpawnObject.story_id"><code class="docutils literal notranslate"><span class="pre">SpawnObject.story_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn.get_spawn"><code class="docutils literal notranslate"><span class="pre">get_spawn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.spawn_entries_collector">ip_ltx.spawn_entries_collector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesCollector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_drop_box_items"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesCollector.from_drop_box_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_level_items"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesCollector.from_level_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_non_tm_inventories"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesCollector.from_non_tm_inventories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.from_treasure_manager"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesCollector.from_treasure_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.spawn_entries_collector.SpawnEntriesCollector.result"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesCollector.result</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.treasure_manager_ext">ip_ltx.treasure_manager_ext module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.add"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.clear"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.compress"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.compress()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.cost"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.cost()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.entries"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.entries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.from_items"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.from_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.game_objects_count"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.game_objects_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.merge"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntriesPool.pool"><code class="docutils literal notranslate"><span class="pre">SpawnEntriesPool.pool</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry"><code class="docutils literal notranslate"><span class="pre">SpawnEntry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry.cost"><code class="docutils literal notranslate"><span class="pre">SpawnEntry.cost()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry.get_params_str"><code class="docutils literal notranslate"><span class="pre">SpawnEntry.get_params_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.treasure_manager_ext.SpawnEntry.signature"><code class="docutils literal notranslate"><span class="pre">SpawnEntry.signature()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.utils">ip_ltx.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.BLACK"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.BLACK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.BLUE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.BLUE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.CYAN"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.CYAN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.DEF"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.DEF</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.GREEN"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.GREEN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.PURPLE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.PURPLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.RED"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.RED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.WHITE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.WHITE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.ANSI_COLOR_CODE.YELLOW"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.YELLOW</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.Runnable"><code class="docutils literal notranslate"><span class="pre">Runnable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.SingletonBase"><code class="docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.SingletonMeta"><code class="docutils literal notranslate"><span class="pre">SingletonMeta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.COMMENT"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.COMMENT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.INVALID_CHARS"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.INVALID_CHARS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.INVALID_COMMENT_LINE"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.INVALID_COMMENT_LINE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.XML_PATTERNS.UNESCAPED_AMPERSAND"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.UNESCAPED_AMPERSAND</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.cast_safe"><code class="docutils literal notranslate"><span class="pre">cast_safe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.is_gamedata_dir"><code class="docutils literal notranslate"><span class="pre">is_gamedata_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.is_gamedata_file"><code class="docutils literal notranslate"><span class="pre">is_gamedata_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.preinit_singletons"><code class="docutils literal notranslate"><span class="pre">preinit_singletons()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.print_error"><code class="docutils literal notranslate"><span class="pre">print_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.print_warning"><code class="docutils literal notranslate"><span class="pre">print_warning()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.read_file"><code class="docutils literal notranslate"><span class="pre">read_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.read_xml"><code class="docutils literal notranslate"><span class="pre">read_xml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.utils_inspector">ip_ltx.utils_inspector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorError"><code class="docutils literal notranslate"><span class="pre">InspectorError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep"><code class="docutils literal notranslate"><span class="pre">InspectorStep</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.LINE_WIDTH"><code class="docutils literal notranslate"><span class="pre">InspectorStep.LINE_WIDTH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.Message"><code class="docutils literal notranslate"><span class="pre">InspectorStep.Message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.MessageLevel"><code class="docutils literal notranslate"><span class="pre">InspectorStep.MessageLevel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.error"><code class="docutils literal notranslate"><span class="pre">InspectorStep.error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.info"><code class="docutils literal notranslate"><span class="pre">InspectorStep.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.intro_width"><code class="docutils literal notranslate"><span class="pre">InspectorStep.intro_width</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.log"><code class="docutils literal notranslate"><span class="pre">InspectorStep.log</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.InspectorStep.warn"><code class="docutils literal notranslate"><span class="pre">InspectorStep.warn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_inspector.run_inspection"><code class="docutils literal notranslate"><span class="pre">run_inspection()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx.utils_meta">ip_ltx.utils_meta module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs"><code class="docutils literal notranslate"><span class="pre">CLSIDs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.CLSID"><code class="docutils literal notranslate"><span class="pre">CLSIDs.CLSID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.data"><code class="docutils literal notranslate"><span class="pre">CLSIDs.data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.get_client_class"><code class="docutils literal notranslate"><span class="pre">CLSIDs.get_client_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.get_object_type"><code class="docutils literal notranslate"><span class="pre">CLSIDs.get_object_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.get_server_class"><code class="docutils literal notranslate"><span class="pre">CLSIDs.get_server_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_ammo"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_ammo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_anomaly"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_anomaly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_artefact"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_artefact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_grenade"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_grenade()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_item"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_item()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_mob"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_mob()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_monster"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_monster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_outfit"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_outfit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_stalker"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_stalker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_weapon"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_weapon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.CLSIDs.is_weapon_addon"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_weapon_addon()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.Levels"><code class="docutils literal notranslate"><span class="pre">Levels</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.Levels.as_list"><code class="docutils literal notranslate"><span class="pre">Levels.as_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.Levels.get_lvl_by_gvid"><code class="docutils literal notranslate"><span class="pre">Levels.get_lvl_by_gvid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType"><code class="docutils literal notranslate"><span class="pre">ObjectType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ANOMALY"><code class="docutils literal notranslate"><span class="pre">ObjectType.ANOMALY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_ADDON"><code class="docutils literal notranslate"><span class="pre">ObjectType.ITEM_ADDON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_AMMO"><code class="docutils literal notranslate"><span class="pre">ObjectType.ITEM_AMMO</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_ART"><code class="docutils literal notranslate"><span class="pre">ObjectType.ITEM_ART</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_GRENADE"><code class="docutils literal notranslate"><span class="pre">ObjectType.ITEM_GRENADE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_OTHER"><code class="docutils literal notranslate"><span class="pre">ObjectType.ITEM_OTHER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_OUTFIT"><code class="docutils literal notranslate"><span class="pre">ObjectType.ITEM_OUTFIT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.ITEM_WEAPON"><code class="docutils literal notranslate"><span class="pre">ObjectType.ITEM_WEAPON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.MONSTER"><code class="docutils literal notranslate"><span class="pre">ObjectType.MONSTER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.OTHER"><code class="docutils literal notranslate"><span class="pre">ObjectType.OTHER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.STALKER"><code class="docutils literal notranslate"><span class="pre">ObjectType.STALKER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.UNDEFINED"><code class="docutils literal notranslate"><span class="pre">ObjectType.UNDEFINED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.is_item"><code class="docutils literal notranslate"><span class="pre">ObjectType.is_item()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectType.is_mob"><code class="docutils literal notranslate"><span class="pre">ObjectType.is_mob()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ObjectTypeDetector.get_object_type"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.get_object_type()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ServerClasses"><code class="docutils literal notranslate"><span class="pre">ServerClasses</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.html#ip_ltx.utils_meta.ServerClasses.issubclass"><code class="docutils literal notranslate"><span class="pre">ServerClasses.issubclass()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html#module-ip_ltx">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ip-ltx (3.7.1)</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ip_ltx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.html">ip_ltx package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="предыдущая глава">ip_ltx documentation</a></li>
+      <li>Next: <a href="ip_ltx.html" title="следующая глава">ip_ltx package</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Vova Miller.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

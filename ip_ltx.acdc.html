@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ip_ltx.acdc package &#8212; документация ip-ltx (3.7.1) </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=372fde1a"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="ip_ltx.misc package" href="ip_ltx.misc.html" />
+    <link rel="prev" title="ip_ltx package" href="ip_ltx.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ip-ltx-acdc-package">
+<h1>ip_ltx.acdc package<a class="headerlink" href="#ip-ltx-acdc-package" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Ссылка на этот заголовок">¶</a></h2>
+</section>
+<section id="module-ip_ltx.acdc.ip_acdc_builder">
+<span id="ip-ltx-acdc-ip-acdc-builder-module"></span><h2>ip_ltx.acdc.ip_acdc_builder module<a class="headerlink" href="#module-ip_ltx.acdc.ip_acdc_builder" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Утилита для генерации конфигурационных файлов спавн-объектов - файлов
+типа <code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>, которые используются утилитой ACDC при компиляции <code class="docutils literal notranslate"><span class="pre">all.spawn</span></code>.</p>
+<p>Генерация происходит на основе ltx-файлов (условно говоря, файлов генерации).
+Эти файлы можно воспринимать как по сути всё те же привычные <code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>,
+но с расширенным синтаксисом, позволяющим более удобно и гибко описывать спавн-объекты.</p>
+<p>Особенности расширенного синтаксиса:</p>
+<ul>
+<li><p>Возможность использовать наследование как в обычных ltx-файлах.</p></li>
+<li><p>Возможность использовать include-директивы как в обычных ltx-файлах.</p></li>
+<li><p>Возможность определить т.н. «абстрактную» секцию. Это секции, ID которых
+начинается с символа &#64;. По этим секциям напрямую не генерируется секция
+спавн-объекта - они используются только для наследования другими секциями.</p></li>
+<li><p>Если поле имеет значение __NONE__, то оно считается условно незаполненным:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Такое значение позволяет осуществить автозаполнение:
+некоторые свойства upd-пакетов (поля <code class="docutils literal notranslate"><span class="pre">upd:*</span></code>) при отсутствии своего значения
+позаимствуют его у одноимённого свойства state-пакета.</p></li>
+<li><p>При наличии такого значения у поля name, оно заменится на ID секции.</p></li>
+<li><p>Таким образом, используя значение __NONE__ в абстрактных секциях, можно
+избавиться  от необходимости повторяться при описании спавн-объекта.
+Но кроме этого, значение __NONE__ какого-нибдуь поля в абстрактной секции
+можно использовать как метку о том, что это поле обязательно для заполнения.
+Генерация выдаст ошибку, если какое-то поле имеет значение __NONE__ и
+для него нашлось замены в соответствии с пунктами 1 и 2.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+<p>Поскольку это <strong>расширенный</strong> синтаксис (а не какой-то принципиально иной),
+то в качестве исходных файлов генерации можно использовать всё те же файлы
+<code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>, полученные при декомпиляции <code class="docutils literal notranslate"><span class="pre">all.spawn</span></code> утилитой ACDC
+(такие файлы генерации будут генерировать файлы по содержанию идентичные сами себе).</p>
+<p>Допускается использование значений полей с пробельными символами:
+они не будут удалены при считывании ltx-файла.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_ltx.acdc.ip_acdc_builder.acdc_compile">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.acdc.ip_acdc_builder.</span></span><span class="sig-name descname"><span class="pre">acdc_compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">acdc_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spawns_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.acdc.ip_acdc_builder.acdc_compile" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Функция для запуска компиляции all.spawn утилитой ACDC
+с переносом результата в нужную папку.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>acdc_dir</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Рабочая директория утилиты ACDC.</p></li>
+<li><p><strong>spawns_dir</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Директория, в которую сохранится скомпилированный all.spawn.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>True, если компиляция и сохранение прошли успешно.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_ltx.acdc.ip_acdc_builder.build">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.acdc.ip_acdc_builder.</span></span><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alife_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">way_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.acdc.ip_acdc_builder.build" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Преобразование ltx-файлов спавна с раширенным синтаксисом
+в обычные ltx-файлы для считывания утилитой ACDC при компиляции all.spawn.</p>
+<ul class="simple">
+<li><p>Преобразование осуществляется для файлов со спавн-объектами (<code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>).</p></li>
+<li><p>Файлы с точками путей (<code class="docutils literal notranslate"><span class="pre">way_*.ltx</span></code>) пока копируются как есть.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Директория с файлами на вход.
+Эта директория должна содержать ltx-файлы двух типов.
+Во-первых, файлы описания спавн-объектов в расширенном синтаксисе
+(<code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>).
+Во-вторых, файлы с точками путей в классическом для ACDC формате
+(<code class="docutils literal notranslate"><span class="pre">way_*.ltx</span></code>).</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Директория с файлами на выход.
+Как правило, это рабочая директория утилиты ACDC.
+Должна отличаться от <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.</p></li>
+<li><p><strong>alife_list</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список имён ltx-файлов (с расширением) со спавн-объектами.</p></li>
+<li><p><strong>way_list</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список имён ltx-файлов (с расширением) с точками путей.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>True, если преобразования и копирования полностью прошли успешно.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ip_ltx.acdc.ip_acdc_extractor">
+<span id="ip-ltx-acdc-ip-acdc-extractor-module"></span><h2>ip_ltx.acdc.ip_acdc_extractor module<a class="headerlink" href="#module-ip_ltx.acdc.ip_acdc_extractor" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Утилита для извлечения необходимых данных из <code class="docutils literal notranslate"><span class="pre">all.spawn</span></code>.
+Для предварительной декомпиляции полагается на <em>Universal ACDC</em>.</p>
+<p>Данная утилита в основном используется для импорта в свои конфиги <code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>
+спавн-объектов, расставленных через <em>X-Ray SDK Level Editor</em>.</p>
+<ol class="arabic simple">
+<li><p>Через <em>X-Ray SDK Level Editor</em> на локации расставляются спавн-объекты.</p></li>
+<li><p>Через <em>aiwrapper</em> осуществляется сборка <code class="docutils literal notranslate"><span class="pre">all.spawn</span></code>.</p></li>
+<li><p>Через <em>ACDC Universal</em> декомпилируется полученный <code class="docutils literal notranslate"><span class="pre">all.spawn</span></code>.</p></li>
+<li><p>Через <strong>*ip_acdc_extractor*</strong> из секций объектов извлекаются нужные поля.</p></li>
+<li><p>Результат переносится к себе с минимальными правками
+(например, подписать наследование) для дальнейшей сборки
+своего <code class="docutils literal notranslate"><span class="pre">all.spawn</span></code> при помощи <strong>*ip_acdc_builder*</strong> и <em>ACDC</em>.</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.acdc.ip_acdc_extractor.Printer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.acdc.ip_acdc_extractor.</span></span><span class="sig-name descname"><span class="pre">Printer</span></span><a class="headerlink" href="#ip_ltx.acdc.ip_acdc_extractor.Printer" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Функции для вывода, используемые данным модулем.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.acdc.ip_acdc_extractor.Printer.header">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">header</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.acdc.ip_acdc_extractor.Printer.header" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.acdc.ip_acdc_extractor.Printer.line">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.acdc.ip_acdc_extractor.Printer.line" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_ltx.acdc.ip_acdc_extractor.acdc_decompile">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.acdc.ip_acdc_extractor.</span></span><span class="sig-name descname"><span class="pre">acdc_decompile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_spawn_fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acdc_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.acdc.ip_acdc_extractor.acdc_decompile" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Функция для запуска декомпиляции all.spawn утилитой Universal ACDC
+с предварительным копированием файла all.spawn в папку утилиты.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all_spawn_fp</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Путь до файла all.spawn, который нужно декомпилировать.</p></li>
+<li><p><strong>acdc_dir</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Рабочая директория утилиты Universal ACDC.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>True, если декомпиляция прошла успешно.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_ltx.acdc.ip_acdc_extractor.extract">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.acdc.ip_acdc_extractor.</span></span><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alife_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extraction_rules</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exceptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exceptions_first_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exceptions_hide_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_universal_acdc_format</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.acdc.ip_acdc_extractor.extract" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Извлечение заданной информации из файлов <code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>,
+полученных в результате декомпиляции all.spawn утилитой Universal ACDC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Директория с файлами <code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code>.</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Директория, куда сохраняются результаты извлечения.
+Должна отличаться от <code class="docutils literal notranslate"><span class="pre">input_dir</span></code>.</p></li>
+<li><p><strong>alife_list</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список имён файлов <code class="docutils literal notranslate"><span class="pre">alife_*.ltx</span></code> (с расширением).</p></li>
+<li><p><strong>extraction_rules</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Набор правил, определяющих, какие поля выводить
+для каждой секции должны быть выведены в зависимости от значения поля
+<code class="docutils literal notranslate"><span class="pre">section_name</span></code>. Ключ - имя поля. Значение - маска (регулярное выражение)
+для <code class="docutils literal notranslate"><span class="pre">section_name</span></code>, по которой проверяется полное совпадение.</p></li>
+<li><p><strong>exceptions</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#set" title="(in Python v3.12)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – При выводе секций с перечисленными в этом параметре
+<code class="docutils literal notranslate"><span class="pre">section_name</span></code> игнорируются правила, определённые через <code class="docutils literal notranslate"><span class="pre">extraction_rules</span></code>.
+Вместо этого будут выведены все поля, кроме тех, что были исключены
+другими параметрами. Секции, поля которых выводятся подобным образом,
+далее обозначаются как «секции-исключения».</p></li>
+<li><p><strong>exceptions_first_fields</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список полей секций-исключений,
+которые будут выведены в первую очередь.</p></li>
+<li><p><strong>exceptions_hide_fields</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#set" title="(in Python v3.12)"><em>set</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Множество полей секций-исключений,
+которые не будут выведены.</p></li>
+<li><p><strong>keep_universal_acdc_format</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Сохранять ли формат Universal ACDC или же
+преобразовать набор полей и их значения в формат классического ACDC.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>True, если извлечение прошло успешно.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ip_ltx.acdc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ip_ltx.acdc" title="Ссылка на этот заголовок">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ip-ltx (3.7.1)</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ip_ltx</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ip_ltx.html">ip_ltx package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">ip_ltx</a><ul>
+  <li><a href="ip_ltx.html">ip_ltx package</a><ul>
+      <li>Previous: <a href="ip_ltx.html" title="предыдущая глава">ip_ltx package</a></li>
+      <li>Next: <a href="ip_ltx.misc.html" title="следующая глава">ip_ltx.misc package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Vova Miller.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/ip_ltx.acdc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

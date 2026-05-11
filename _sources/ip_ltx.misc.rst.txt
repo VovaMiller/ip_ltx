@@ -1,0 +1,37 @@
+ip\_ltx.misc package
+====================
+
+Submodules
+----------
+
+ip\_ltx.misc.task\_manager module
+---------------------------------
+
+.. automodule:: ip_ltx.misc.task_manager
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ip\_ltx.misc.trade module
+-------------------------
+
+.. automodule:: ip_ltx.misc.trade
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ip\_ltx.misc.treasure\_manager module
+-------------------------------------
+
+.. automodule:: ip_ltx.misc.treasure_manager
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: ip_ltx.misc
+   :members:
+   :show-inheritance:
+   :undoc-members:
