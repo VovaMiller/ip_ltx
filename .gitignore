@@ -1,6 +1,7 @@
 /.pytest_cache/
 /backup/
-/docs/
+/docs/build/
+/docs/source/ip_ltx*.rst
 *.egg-info
 *.egg
 __pycache__

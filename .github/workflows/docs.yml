@@ -1,0 +1,43 @@
+name: Deploy Sphinx Docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Triggers the build whenever you push to the main branch
+
+permissions:
+  contents: write  # Allows the action to write to the gh-pages deployment branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python Workspace
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip' # Automatically caches pip dependencies to speed up future builds
+
+      - name: Install Project Dependencies and Sphinx
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install sphinx sphinx-pyproject myst-parser
+
+      - name: Regenerate Module Blueprint Files (Apidoc)
+        run: |
+          sphinx-apidoc -f -o docs/source/ src/ip_ltx/
+
+      - name: Compile HTML Site
+        run: |
+          # Use standard make file variables to build the site into docs/build/html
+          sphinx-build -b html docs/source/ docs/build/html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/build/html  # Points exactly to the generated HTML artifacts

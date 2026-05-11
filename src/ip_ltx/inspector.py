@@ -58,8 +58,7 @@ def _run_all_from_class(cls) -> None:
 # ----------------------------------------------------------------
 
 class InspectionsGeneral:
-    """Набор проверок, которые автоматически
-    запускаются из :func:`_inspection_st2_general`.
+    """Набор проверок, которые автоматически запускаются из ``_inspection_st2_general``.
     """
 
     @staticmethod
@@ -315,8 +314,7 @@ class InspectionsGeneral:
 # ----------------------------------------------------------------
 
 class InspectionsSpawn:
-    """Набор проверок, которые автоматически
-    запускаются из :func:`_inspection_st3_spawn`.
+    """Набор проверок, которые автоматически запускаются из ``_inspection_st3_spawn``.
     """
 
     @staticmethod
