@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.analyzer_spawn module" href="ip_ltx.analyzer_spawn.html"><link rel="prev" title="ip_ltx.analyzer_general module" href="ip_ltx.analyzer_general.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.analyzer_loot module - ip-ltx (3.7.1) — Документация</title>
+        <title>ip_ltx.analyzer_loot module - ip-ltx (3.7.2) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.1) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.1) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -289,7 +289,7 @@
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>group_name</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя группы. Используется для наименования поддиректории.</p></li>
-<li><p><strong>levels</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список локаций, по которым осуществляются сводки.</p></li>
+<li><p><strong>levels</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Collection" title="(in Python v3.12)"><em>Collection</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Набор локаций, по которым осуществляются сводки.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Тип результата<span class="colon">:</span></dt>
@@ -300,7 +300,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ip_ltx.analyzer_loot.summary">
-<span class="sig-prename descclassname"><span class="pre">ip_ltx.analyzer_loot.</span></span><span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_treasure_manager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_non_tm_inventories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_drop_box_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_level_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_unlisted_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.analyzer_loot.summary" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.analyzer_loot.</span></span><span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_treasure_manager</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_non_tm_inventories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_drop_box_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_level_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_unlisted_items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.analyzer_loot.summary" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Сводка по предметам в игре из разных источников на указанных локациях.</p>
 <p>Сводка осуществляется в формате т.н. вхождений (синтаксис секции <code class="docutils literal notranslate"><span class="pre">[spawn]</span></code>).
 Вхождения с одинаковыми параметрами агрегируются по кол-ву (складываются count).
@@ -312,6 +312,7 @@
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fp</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Путь до файла для вывода.</p></li>
+<li><p><strong>levels</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Collection" title="(in Python v3.12)"><em>Collection</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Набор локаций, по которым осуществляется сводка.</p></li>
 <li><p><strong>include_treasure_manager</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Учесть предметы из тайников,
 зарегистрированных в системе treasure_manager.</p></li>
 <li><p><strong>include_non_tm_inventories</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Учесть предметы из хранилищ,
@@ -330,7 +331,6 @@
 с нулевым количеством (count). Не будут отображены секции,
 перечисленные в <code class="docutils literal notranslate"><span class="pre">[ignore_sections]</span></code>, а также вспомогательные
 секции оружия для многоприцельности.</p></li>
-<li><p><strong>levels</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список локаций, по которым осуществляется сводка.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Тип результата<span class="colon">:</span></dt>

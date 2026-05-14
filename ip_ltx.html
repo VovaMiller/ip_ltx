@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.acdc package" href="ip_ltx.acdc.html"><link rel="prev" title="ip_ltx" href="modules.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx package - ip-ltx (3.7.1) — Документация</title>
+        <title>ip_ltx package - ip-ltx (3.7.2) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.1) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.1) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -275,6 +275,1235 @@
         <article role="main" id="furo-main-content">
           <section id="module-ip_ltx">
 <span id="ip-ltx-package"></span><h1>ip_ltx package<a class="headerlink" href="#module-ip_ltx" title="Ссылка на этот заголовок">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.Ini">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.</span></span><span class="sig-name descname"><span class="pre">Ini</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Класс, считывающий ltx-файл(ы).</p>
+<p>Аналог LUA-класса <code class="docutils literal notranslate"><span class="pre">ini_file</span></code> (<code class="docutils literal notranslate"><span class="pre">CScriptIniFile</span></code>) и движкового <code class="docutils literal notranslate"><span class="pre">CInifile</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя экземпляра класса. Используется при выводе ошибок.</p></li>
+<li><p><strong>ini_meta</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Self" title="(in Python v3.12)"><em>Self</em></a><em> | </em><em>None</em>) – <p>Экземпляр этого же класса с настройками путей папок gamedata.
+Эти настройки полезны для последующего чтения файлов из gamedata.
+Пути указываются в секции <code class="docutils literal notranslate"><span class="pre">[settings]</span></code>:</p>
+<blockquote>
+<div><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamedata_path_mod</span></code> - путь до основной папки gamedata;
+как правило, это просто папка gamedata мода;
+указывается обязательно.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamedata_path_alt</span></code> - путь до альтернативной папки gamedata;
+как правило, это разархивированные <code class="docutils literal notranslate"><span class="pre">gamedata.db*</span></code>;
+указывать не обязательно, если в основной папке gamedata
+уже содержатся все ресурсы игры.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Ini.Error" title="ip_ltx.Ini.Error"><strong>Ini.Error</strong></a> – при ошибке инициализации.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ip_ltx.Ini.Error">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#ip_ltx.Ini.Error" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#Exception" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Исключение, вызываемое классом <a class="reference internal" href="#ip_ltx.Ini" title="ip_ltx.Ini"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ini</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.add" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Добавить секцию.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>section</strong> (<a class="reference internal" href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a>) – Объект секции.</p></li>
+<li><p><strong>by_reference</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если True, то не будет создавать копию объекта секции
+перед добавлением во внутреннее хранилище.</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если секция с таким ID уже существует, то
+можно ли её перезаписать.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Ini.Error" title="ip_ltx.Ini.Error"><strong>Ini.Error</strong></a> – если секция с таким ID уже существует,
+а <code class="docutils literal notranslate"><span class="pre">overwrite</span> <span class="pre">==</span> <span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.clear" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Удаление всех секций.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.Ini.gda">
+<span class="sig-name descname"><span class="pre">gda</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><a class="headerlink" href="#ip_ltx.Ini.gda" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Объект пути до альтернативной папки gamedata.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.Ini.gdm">
+<span class="sig-name descname"><span class="pre">gdm</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><a class="headerlink" href="#ip_ltx.Ini.gdm" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Объект пути до основной папки gamedata.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_bool">
+<span class="sig-name descname"><span class="pre">get_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_bool" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как bool.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_bool" title="ip_ltx.Section.get_bool"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_bool()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_bools">
+<span class="sig-name descname"><span class="pre">get_bools</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_bools" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как список из bool.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_bools" title="ip_ltx.Section.get_bools"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_bools()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_float">
+<span class="sig-name descname"><span class="pre">get_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_float" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как число c плавающей точкой (float).
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_float" title="ip_ltx.Section.get_float"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_float()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_floats">
+<span class="sig-name descname"><span class="pre">get_floats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_floats" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как список из чисел с плавающей точкой.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_floats" title="ip_ltx.Section.get_floats"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_floats()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_int">
+<span class="sig-name descname"><span class="pre">get_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_int" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как целое число (int).
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_int" title="ip_ltx.Section.get_int"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_int()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_ints">
+<span class="sig-name descname"><span class="pre">get_ints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_ints" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как список из целых чисел.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_ints" title="ip_ltx.Section.get_ints"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_ints()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_items">
+<span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsing_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'comma'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_items" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Парсит строку вида
+<code class="docutils literal notranslate"><span class="pre">&lt;section&gt;,&lt;count&gt;,&lt;section&gt;,&lt;section&gt;,...</span></code>
+в список пар <code class="docutils literal notranslate"><span class="pre">(&lt;section&gt;,</span> <span class="pre">&lt;count&gt;)</span></code>.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_items" title="ip_ltx.Section.get_items"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_items()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+<li><p><strong>parsing_mode</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Literal" title="(in Python v3.12)"><em>Literal</em></a><em>[</em><em>'comma'</em><em>, </em><em>'vanilla'</em><em>, </em><em>'vanilla_ext'</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_section_index">
+<span class="sig-name descname"><span class="pre">get_section_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_section_index" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить порядковый номер секции с указанным ID.
+Возвращает -1, если такой секции не существует.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section_id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_string">
+<span class="sig-name descname"><span class="pre">get_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_string" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как обычную строку (str).
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_string" title="ip_ltx.Section.get_string"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_string()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_string_wb">
+<span class="sig-name descname"><span class="pre">get_string_wb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_string_wb" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как обычную строку (str),
+но с обрезанными по краям кавычками.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_string_wb" title="ip_ltx.Section.get_string_wb"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_string_wb()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_strings">
+<span class="sig-name descname"><span class="pre">get_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_strings" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как список из обычных строк.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_strings" title="ip_ltx.Section.get_strings"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_strings()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_uint">
+<span class="sig-name descname"><span class="pre">get_uint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_uint" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как неотрицательное целое число.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_uint" title="ip_ltx.Section.get_uint"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_uint()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.get_uints">
+<span class="sig-name descname"><span class="pre">get_uints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.get_uints" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k секции id как список из неотрицательных целых чисел.
+Кидает исключение, если указанной секции не существует.
+В остальном, см. <a class="reference internal" href="#ip_ltx.Section.get_uints" title="ip_ltx.Section.get_uints"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.get_uints()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.ids">
+<span class="sig-name descname"><span class="pre">ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.ids" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.line_exist">
+<span class="sig-name descname"><span class="pre">line_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.line_exist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Проверка наличия поля в секции.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – ID секции.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя поля.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Ini.Error" title="ip_ltx.Ini.Error"><strong>Ini.Error</strong></a> – если секции с указанным ID не существует.</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Существует ли поле в секции с указанным ID.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inside_gamedata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_value_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.read" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Считать данные с файла.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp_str</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Путь до файла.</p></li>
+<li><p><strong>inside_gamedata</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если True, то интерпретирует путь до файла
+как указанный относительно папки gamedata.
+В первую очередь ищет файл в gamedata мода;
+если его там нет, то пробует gamedata оригинала.</p></li>
+<li><p><strong>preserve_value_whitespaces</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – При чтении значения поля сохранить
+все его пробельные символы (кроме тех, что с краю).
+По умолчанию они сохраняются только если находятся между парой кавычек.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Ini.Error" title="ip_ltx.Ini.Error"><strong>Ini.Error</strong></a> – при ошибке считывания.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.read_raw">
+<span class="sig-name descname"><span class="pre">read_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fp_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_current_section</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_value_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.read_raw" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Считывание данных о секциях непосредственно со строки (str).</p>
+<ul class="simple">
+<li><p>Поддерживает наследование (в т.ч. множественное).</p></li>
+<li><p>Поддерживает include-директивы.</p></li>
+<li><p>Для поля custom_data поддерживается формат многострочного значения.
+Синтаксис: <code class="docutils literal notranslate"><span class="pre">custom_data</span> <span class="pre">=</span> <span class="pre">&lt;&lt;END</span> <span class="pre">(new</span> <span class="pre">lines)</span> <span class="pre">END</span></code> (типа heredoc из Perl).
+Таким образом, поддерживается чтение ltx-файлов, полученных
+декомпиляцией all.spawn через ACDC.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Текст с данными.</p></li>
+<li><p><strong>fp_src</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a><em> | </em><em>None</em>) – Путь к файлу, откуда взят текст.
+Необходимо для поддержки <code class="docutils literal notranslate"><span class="pre">#include</span></code>, а также <code class="docutils literal notranslate"><span class="pre">Section._src</span></code>.</p></li>
+<li><p><strong>_current_section</strong> (<a class="reference internal" href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a><em> | </em><em>None</em>) – Указатель на объект секции,
+на которой остановилось чтение.
+Используется самой функцией; в остальном, можно оставлять None.</p></li>
+<li><p><strong>preserve_value_whitespaces</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – При чтении значения поля сохранить
+все его пробельные символы (кроме тех, что с краю).
+По умолчанию они сохраняются только если находятся между парой кавычек.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Ini.Error" title="ip_ltx.Ini.Error"><strong>Ini.Error</strong></a> – при ошибке считывания.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.section">
+<span class="sig-name descname"><span class="pre">section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.section" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получение объекта секции по её ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – ID секции.</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Ini.Error" title="ip_ltx.Ini.Error"><strong>Ini.Error</strong></a> – если секции с указанным ID не существует.</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Объект секции.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.section_exist">
+<span class="sig-name descname"><span class="pre">section_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.section_exist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Существует ли секция с указанным ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.sections">
+<span class="sig-name descname"><span class="pre">sections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.sections" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.Ini.show_ltx_warnings">
+<span class="sig-name descname"><span class="pre">show_ltx_warnings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><a class="headerlink" href="#ip_ltx.Ini.show_ltx_warnings" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Отображаются ли warning-сообщения при считывании ltx-файлов.</p>
+<p>По умолчанию <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Отображение отключается для ltx-файлов из gamedata при
+установке переменной окружения <code class="docutils literal notranslate"><span class="pre">HIDE_GAMEDATA_LTX_WARNINGS</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Ini.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Ini.write" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Запись всех секций в файл.</p>
+<p>О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.write" title="ip_ltx.Section.write"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.write()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.TextIO" title="(in Python v3.12)"><em>TextIO</em></a>) – Открытый файл для записи.</p></li>
+<li><p><strong>ids_mask</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>) – Маска-фильтр, определяющая, секции с каким ID выводить.
+Задаётся регулярным выражением. Проверяется полное совпадение.
+Если None, то выводит все существующие поля секции.</p></li>
+<li><p><strong>fields_mask</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>) – Маска-фильтр, определяющая, поля с каким именем выводить.</p></li>
+<li><p><strong>first</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>...</em><em>]</em>) – Перечисление имён полей, которые нужно вывести в первую очередь.</p></li>
+<li><p><strong>value_getter</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference internal" href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em><em>] </em><em>| </em><em>None</em>) – Функция, определяющая то, как по данной секции и
+имени её поля будет получено значение.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ip_ltx.Section">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.</span></span><span class="sig-name descname"><span class="pre">Section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Класс одной секции ltx-файла.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Идентификатор секции.</p></li>
+<li><p><strong>init</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Self" title="(in Python v3.12)"><em>Self</em></a><em> | </em><em>None</em>) – Другая секция, по которой можно инициализировать поля.</p></li>
+<li><p><strong>_src</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя файла-источника (откуда будет считана секция).
+Используется при логировании и в сообщениях об ошибках.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – при попытке инициализации с невалидным ID.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ip_ltx.Section.Error">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.Error" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#Exception" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Исключение, вызываемое классом <a class="reference internal" href="#ip_ltx.Section" title="ip_ltx.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Источник, откуда была считана секция (например, имя файла).</p></li>
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – ID секции.</p></li>
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Тело сообщения об ошибке.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_value_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.add" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Добавить поле с указанным значение.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя поля.
+Перед регистрацией пробельные символы с краю обрезаются.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>) – Значение поля.
+Перед присвоением полю пробельные символы будут отфильтрованы
+как при чтении ltx-файла. Исключение - поле <code class="docutils literal notranslate"><span class="pre">custom_data</span></code>.</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Можно ли перезаписать уже существующее поле.</p></li>
+<li><p><strong>preserve_value_whitespaces</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Не удалять из значения поля
+пробельные символы (кроме тех, что с краю).
+По умолчанию они удаляются, если не находятся между парой кавычек.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#ip_ltx.Section.Error" title="ip_ltx.Section.Error"><strong>Section.Error</strong></a> – если поле уже существует, а <code class="docutils literal notranslate"><span class="pre">overwrite</span> <span class="pre">==</span> <span class="pre">False</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – если дан неверный формат имени поля или значения.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.cast_bool">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cast_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.cast_bool" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.cast_float">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cast_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.cast_float" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.cast_int">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cast_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.cast_int" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.cast_string_wb">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cast_string_wb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.cast_string_wb" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.cast_uint">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cast_uint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.cast_uint" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.clear" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Удаление всех полей из секции.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.field">
+<span class="sig-name descname"><span class="pre">field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.field" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получение значения существующего поля.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя поля.</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Section.Error" title="ip_ltx.Section.Error"><strong>Section.Error</strong></a> – если указанного поля нет.</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Значение поля или None, если оно без значения.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.fields" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Набор всех пар (поле, значение).
+Представлен в том порядке, в котором в секцию добавлялись поля.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.fmt_value_whitespaces">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fmt_value_whitespaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.fmt_value_whitespaces" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Фильтрация пробельных символов перед присвоением значения полю.
+Все пробельные символы удаляются, за исключением тех, что расположены
+между парой прямых двойных кавычек. Если последней кавычке не нашлось пары,
+то все пробельные символы после неё будут сохранены.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_bool">
+<span class="sig-name descname"><span class="pre">get_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_bool" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как bool.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elem" title="ip_ltx.Section.get_elem"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elem()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_bools">
+<span class="sig-name descname"><span class="pre">get_bools</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_bools" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как список из bool.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elems" title="ip_ltx.Section.get_elems"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elems()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_elem">
+<span class="sig-name descname"><span class="pre">get_elem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_caster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_elem" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля с нужным типом.</p>
+<p>Базовый метод для ряда других методов (<code class="docutils literal notranslate"><span class="pre">get_*</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type_caster</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><em>R</em><em> | </em><em>None</em><em>]</em>) – Функция для конвертации значения поля в нужный тип,
+возвращающая <code class="docutils literal notranslate"><span class="pre">None</span></code> в случае невозможности конвертации.</p></li>
+<li><p><strong>type_label</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Текстовое обозначения типа.
+Используется в сообщении исключения.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя поля.</p></li>
+<li><p><strong>defval</strong> (<em>R</em><em> | </em><em>None</em>) – Значение по умолчанию.
+Определяет поведение функции в случае,
+когда указанного поля нет или оно без значения.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Section.Error" title="ip_ltx.Section.Error"><strong>Section.Error</strong></a> – <p>в двух случаях:</p>
+<ol class="arabic simple">
+<li><p>Конвертация значения поля невозможна.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">defval</span> <span class="pre">is</span> <span class="pre">None</span></code> и при этом указанного поля нет или оно без значения.</p></li>
+</ol>
+</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Преобразованное в нужный тип значение поля,
+либо <code class="docutils literal notranslate"><span class="pre">defval</span></code>, если он не <code class="docutils literal notranslate"><span class="pre">None</span></code>
+и указанного поля нет или оно без значения.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>R</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_elems">
+<span class="sig-name descname"><span class="pre">get_elems</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_caster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_elems" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля как список элементов нужного типа.
+Подразумевается, что элементы разделены запятой.</p>
+<p>Базовый метод для ряда других методов (<code class="docutils literal notranslate"><span class="pre">get_*s</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type_caster</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><em>R</em><em> | </em><em>None</em><em>]</em>) – Функция для конвертации элементов в нужный тип,
+возвращающая <code class="docutils literal notranslate"><span class="pre">None</span></code> в случае невозможности конвертации.</p></li>
+<li><p><strong>type_label</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Текстовое обозначения типа.
+Используется в сообщении исключения.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя поля.</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Обязательное ли это поле.
+Определяет поведение функции в случае,
+когда указанного поля нет или оно без значения.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Section.Error" title="ip_ltx.Section.Error"><strong>Section.Error</strong></a> – <p>в двух случаях:</p>
+<ol class="arabic simple">
+<li><p>Конвертация значения хотя бы одного элемента невозможна.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mandatory</span> <span class="pre">==</span> <span class="pre">True</span></code> и при этом
+указанного поля нет или оно без значения.</p></li>
+</ol>
+</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Построенный по значению поля список элементов нужного типа,
+либо пустой список, если <code class="docutils literal notranslate"><span class="pre">mandatory</span> <span class="pre">==</span> <span class="pre">False</span></code>
+и указанного поля нет или оно без значения.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[R]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_float">
+<span class="sig-name descname"><span class="pre">get_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_float" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как число с плавающей точкой (float).
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elem" title="ip_ltx.Section.get_elem"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elem()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_floats">
+<span class="sig-name descname"><span class="pre">get_floats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_floats" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как список из чисел с плавающей точкой.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elems" title="ip_ltx.Section.get_elems"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elems()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_int">
+<span class="sig-name descname"><span class="pre">get_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_int" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как целое число (int).
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elem" title="ip_ltx.Section.get_elem"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elem()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_ints">
+<span class="sig-name descname"><span class="pre">get_ints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_ints" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как список из целых чисел.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elems" title="ip_ltx.Section.get_elems"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elems()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_items">
+<span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsing_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'comma'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_items" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Парсит строку вида
+<code class="docutils literal notranslate"><span class="pre">&lt;section&gt;,&lt;count&gt;,&lt;section&gt;,&lt;section&gt;,...</span></code>
+в список пар <code class="docutils literal notranslate"><span class="pre">(&lt;section&gt;,</span> <span class="pre">&lt;count&gt;)</span></code>.</p>
+<p>Аналог LUA-функции <code class="docutils literal notranslate"><span class="pre">xr_box.r_items</span></code>,
+но допускает только целые числа (в том числе отрицательные).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя поля, значение которого нужно считать.</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – <p>Определяет поведение функции в случае,
+когда поля нет или оно без значения:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">mandatory=True</span></code>: выдаст исключение</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mandatory=False</span></code>: вернёт пустой список</p></li>
+</ul>
+</p></li>
+<li><p><strong>parsing_mode</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Literal" title="(in Python v3.12)"><em>Literal</em></a><em>[</em><em>'comma'</em><em>, </em><em>'vanilla'</em><em>, </em><em>'vanilla_ext'</em><em>]</em>) – <p>Как исходная строка будет преобразована в список:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">comma</span></code> - обычное разбиение по запятым.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vanilla</span></code> - алгоритм, повторяющий LUA-функцию <code class="docutils literal notranslate"><span class="pre">_g.parse_names</span></code>.
+Не поддерживает точки и дефисы в элементах списка.
+Не поддерживает отрицательные числа.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vanilla_ext</span></code> - алгоритм, повторяющий альтернативную LUA-функцию
+<code class="docutils literal notranslate"><span class="pre">parse_names</span></code>, использующуюся в скриптах <code class="docutils literal notranslate"><span class="pre">se_respawn</span></code>,
+<code class="docutils literal notranslate"><span class="pre">task_manager</span></code>, <code class="docutils literal notranslate"><span class="pre">treasure_manager</span></code>, <code class="docutils literal notranslate"><span class="pre">xr_box</span></code>.
+Поддерживает точки и дефисы внутри элементов списка.
+Не поддерживает отрицательные числа.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Section.Error" title="ip_ltx.Section.Error"><strong>Section.Error</strong></a> – если поля нет или оно без значения,
+и при этом <code class="docutils literal notranslate"><span class="pre">mandatory=True</span></code>.</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Список пар <code class="docutils literal notranslate"><span class="pre">(&lt;section&gt;,</span> <span class="pre">&lt;count&gt;)</span></code>.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_pair">
+<span class="sig-name descname"><span class="pre">get_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_caster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_pair" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля как пару элементов нужного типа.</p>
+<p>Базовый метод для ряда других методов (<code class="docutils literal notranslate"><span class="pre">get_pair_*</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type_caster</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><em>R</em><em> | </em><em>None</em><em>]</em>) – Функция для конвертации элементов в нужный тип,
+возвращающая <code class="docutils literal notranslate"><span class="pre">None</span></code> в случае невозможности конвертации.</p></li>
+<li><p><strong>type_label</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Текстовое обозначения типа.
+Используется в сообщении исключения.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя поля.</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Разделитель, по которому
+из строкового значения поля получается список.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ip_ltx.Section.Error" title="ip_ltx.Section.Error"><strong>Section.Error</strong></a> – <p>в одном из трёх случаев:</p>
+<ol class="arabic simple">
+<li><p>Указанного поля нет или оно без значения.</p></li>
+<li><p>Размер списка не равен двум.</p></li>
+<li><p>Конвертация значения хотя бы одного элемента невозможна.</p></li>
+</ol>
+</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Построенная по строковому значению поля пара элементов нужного типа.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[R, R]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_pair_bool">
+<span class="sig-name descname"><span class="pre">get_pair_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_pair_bool" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как пару bool.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_pair" title="ip_ltx.Section.get_pair"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_pair()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a>, <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_pair_float">
+<span class="sig-name descname"><span class="pre">get_pair_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_pair_float" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как пару чисел с плавающей точкой (float).
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_pair" title="ip_ltx.Section.get_pair"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_pair()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a>, <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_pair_int">
+<span class="sig-name descname"><span class="pre">get_pair_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_pair_int" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как пару целых чисел (int).
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_pair" title="ip_ltx.Section.get_pair"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_pair()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>, <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_pair_str">
+<span class="sig-name descname"><span class="pre">get_pair_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_pair_str" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как пару обычных строк (str).
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_pair" title="ip_ltx.Section.get_pair"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_pair()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_pair_uint">
+<span class="sig-name descname"><span class="pre">get_pair_uint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_pair_uint" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как пару неотрицательных целых чисел.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_pair" title="ip_ltx.Section.get_pair"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_pair()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>, <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_string">
+<span class="sig-name descname"><span class="pre">get_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_string" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как обычную строку (str).
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elem" title="ip_ltx.Section.get_elem"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elem()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_string_wb">
+<span class="sig-name descname"><span class="pre">get_string_wb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_string_wb" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как обычную строку (str),
+но с обрезанными по краям кавычками.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elem" title="ip_ltx.Section.get_elem"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elem()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_strings">
+<span class="sig-name descname"><span class="pre">get_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_strings" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как список из обычных строк.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elems" title="ip_ltx.Section.get_elems"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elems()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_uint">
+<span class="sig-name descname"><span class="pre">get_uint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_uint" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как неотрицательное целое число.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elem" title="ip_ltx.Section.get_elem"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elem()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>defval</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.get_uints">
+<span class="sig-name descname"><span class="pre">get_uints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mandatory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.get_uints" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить значение поля k как список из неотрицательных целых чисел.
+О деталях работы, см. <a class="reference internal" href="#ip_ltx.Section.get_elems" title="ip_ltx.Section.get_elems"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_elems()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>mandatory</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ip_ltx.Section.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><a class="headerlink" href="#ip_ltx.Section.id" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.line_exist">
+<span class="sig-name descname"><span class="pre">line_exist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.line_exist" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Проверка на то, что поле с укзанным именем существует.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.line_exist_own">
+<span class="sig-name descname"><span class="pre">line_exist_own</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.line_exist_own" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Проверка на то, что поле с укзанным именем существует
+и определено прямо в этой секции (а не унаследовано от другой).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.line_exist_with_value">
+<span class="sig-name descname"><span class="pre">line_exist_with_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.line_exist_with_value" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Проверка на то, что поле с укзанным именем существует и имеет значение
+(то есть оно не None).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.lines">
+<span class="sig-name descname"><span class="pre">lines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.lines" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Набор имён всех полей секции.
+Представлен в том порядке, в котором в секцию добавлялись поля.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ip_ltx.Section.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.Section.write" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Запись секции в файл.</p>
+<ul class="simple">
+<li><p>Поддерживает вывод многострочных значений для поля с именем <code class="docutils literal notranslate"><span class="pre">custom_data</span></code>.
+Таким образом, поддерживается совместимость с ltx-файлами,
+используемыми ACDC для компиляции all.spawn.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.TextIO" title="(in Python v3.12)"><em>TextIO</em></a>) – Открытый файл для записи.</p></li>
+<li><p><strong>fields_mask</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>) – Маска-фильтр, определяющая, поля с каким именем выводить.
+Задаётся регулярным выражением. Проверяется полное совпадение.
+Если None, то выводит все существующие поля секции.</p></li>
+<li><p><strong>first</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>...</em><em>]</em>) – Перечисление имён полей, которые нужно вывести в первую очередь.
+В остальном, поля выводятся в том порядке, в котором они
+изначально были записаны в секцию.</p></li>
+<li><p><strong>value_getter</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Self" title="(in Python v3.12)"><em>Self</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em><em>] </em><em>| </em><em>None</em>) – <p>Функция, определяющая то, как по данной секции и
+имени её поля будет получено значение.</p>
+<ul>
+<li><p>По умолчанию (если указано None) используется непосредственное значение,
+получаемое методом <a class="reference internal" href="#ip_ltx.Section.field" title="ip_ltx.Section.field"><code class="xref py py-func docutils literal notranslate"><span class="pre">field()</span></code></a>.</p></li>
+<li><p>Переопределение этого параметра может быть использовано
+для предобработки значений перед их выводом.</p></li>
+<li><p>При любом вызове этой функции гарантируется,
+что указанное поле в указанной секции существует.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <section id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Ссылка на этот заголовок">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -404,27 +1633,27 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ip_ltx.db.html">ip_ltx.db module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS.launcher"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS.launcher</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS.scope"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS.scope</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ADDON_FLAGS.silencer"><code class="docutils literal notranslate"><span class="pre">ADDON_FLAGS.silencer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.AddonFlags"><code class="docutils literal notranslate"><span class="pre">AddonFlags</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.AddonFlags.launcher"><code class="docutils literal notranslate"><span class="pre">AddonFlags.launcher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.AddonFlags.scope"><code class="docutils literal notranslate"><span class="pre">AddonFlags.scope</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.AddonFlags.silencer"><code class="docutils literal notranslate"><span class="pre">AddonFlags.silencer</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flCanSave"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flCanSave</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flCheckForSeparator"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flCheckForSeparator</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flCorpseRemoval"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flCorpseRemoval</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flInteractive"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flInteractive</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flOfflineNoMove"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flOfflineNoMove</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOffline"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flSwitchOffline</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flSwitchOnline"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flSwitchOnline</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUseGroupBehaviour"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUseGroupBehaviour</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUseSmartTerrains"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUseSmartTerrains</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUseSwitches"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUseSwitches</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUsedAI_Locations"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUsedAI_Locations</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flUsefulForAI"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flUsefulForAI</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForAI"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flVisibleForAI</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.OBJECT_FLAGS.flVisibleForMap"><code class="docutils literal notranslate"><span class="pre">OBJECT_FLAGS.flVisibleForMap</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags"><code class="docutils literal notranslate"><span class="pre">ObjectFlags</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flCanSave"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flCanSave</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flCheckForSeparator"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flCheckForSeparator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flCorpseRemoval"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flCorpseRemoval</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flInteractive"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flInteractive</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flOfflineNoMove"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flOfflineNoMove</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flSwitchOffline"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flSwitchOffline</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flSwitchOnline"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flSwitchOnline</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flUseGroupBehaviour"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUseGroupBehaviour</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flUseSmartTerrains"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUseSmartTerrains</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flUseSwitches"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUseSwitches</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flUsedAI_Locations"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUsedAI_Locations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flUsefulForAI"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUsefulForAI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flVisibleForAI"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flVisibleForAI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html#ip_ltx.db.ObjectFlags.flVisibleForMap"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flVisibleForMap</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -712,28 +1941,21 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ip_ltx.utils.html">ip_ltx.utils module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.BLACK"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.BLACK</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.BLUE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.BLUE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.CYAN"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.CYAN</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.DEF"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.DEF</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.GREEN"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.GREEN</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.PURPLE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.PURPLE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.RED"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.RED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.WHITE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.WHITE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSI_COLOR_CODE.YELLOW"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.YELLOW</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.BLACK"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.BLACK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.BLUE"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.BLUE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.CYAN"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.CYAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.DEF"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.DEF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.GREEN"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.GREEN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.PURPLE"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.PURPLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.RED"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.RED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.WHITE"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.WHITE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.ANSIColorCode.YELLOW"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.YELLOW</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.Runnable"><code class="docutils literal notranslate"><span class="pre">Runnable</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.SingletonBase"><code class="docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.SingletonMeta"><code class="docutils literal notranslate"><span class="pre">SingletonMeta</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.COMMENT"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.COMMENT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.INVALID_CHARS"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.INVALID_CHARS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.INVALID_COMMENT_LINE"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.INVALID_COMMENT_LINE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.XML_PATTERNS.UNESCAPED_AMPERSAND"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.UNESCAPED_AMPERSAND</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.cast_safe"><code class="docutils literal notranslate"><span class="pre">cast_safe()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.is_gamedata_dir"><code class="docutils literal notranslate"><span class="pre">is_gamedata_dir()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.is_gamedata_file"><code class="docutils literal notranslate"><span class="pre">is_gamedata_file()</span></code></a></li>
@@ -798,9 +2020,9 @@
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.CLSIDs.is_weapon_addon"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_weapon_addon()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.Levels"><code class="docutils literal notranslate"><span class="pre">Levels</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.Levels.as_list"><code class="docutils literal notranslate"><span class="pre">Levels.as_list()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.Levels.get_lvl_by_gvid"><code class="docutils literal notranslate"><span class="pre">Levels.get_lvl_by_gvid()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.GameLevels"><code class="docutils literal notranslate"><span class="pre">GameLevels</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.GameLevels.as_list"><code class="docutils literal notranslate"><span class="pre">GameLevels.as_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.GameLevels.get_lvl_by_gvid"><code class="docutils literal notranslate"><span class="pre">GameLevels.get_lvl_by_gvid()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectType"><code class="docutils literal notranslate"><span class="pre">ObjectType</span></code></a><ul>
@@ -822,11 +2044,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_classes"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.client_classes</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_classes"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.server_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_cls"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.client_cls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_cls"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.server_cls</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.get_object_type"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.get_object_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ObjectTypeDetector.get"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.get()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ip_ltx.utils_meta.html#ip_ltx.utils_meta.ServerClasses"><code class="docutils literal notranslate"><span class="pre">ServerClasses</span></code></a><ul>
@@ -896,6 +2118,76 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">ip_ltx package</a><ul>
+<li><a class="reference internal" href="#ip_ltx.Ini"><code class="docutils literal notranslate"><span class="pre">Ini</span></code></a><ul>
+<li><a class="reference internal" href="#ip_ltx.Ini.Error"><code class="docutils literal notranslate"><span class="pre">Ini.Error</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.add"><code class="docutils literal notranslate"><span class="pre">Ini.add()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.clear"><code class="docutils literal notranslate"><span class="pre">Ini.clear()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.gda"><code class="docutils literal notranslate"><span class="pre">Ini.gda</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.gdm"><code class="docutils literal notranslate"><span class="pre">Ini.gdm</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_bool"><code class="docutils literal notranslate"><span class="pre">Ini.get_bool()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_bools"><code class="docutils literal notranslate"><span class="pre">Ini.get_bools()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_float"><code class="docutils literal notranslate"><span class="pre">Ini.get_float()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_floats"><code class="docutils literal notranslate"><span class="pre">Ini.get_floats()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_int"><code class="docutils literal notranslate"><span class="pre">Ini.get_int()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_ints"><code class="docutils literal notranslate"><span class="pre">Ini.get_ints()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_items"><code class="docutils literal notranslate"><span class="pre">Ini.get_items()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_section_index"><code class="docutils literal notranslate"><span class="pre">Ini.get_section_index()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_string"><code class="docutils literal notranslate"><span class="pre">Ini.get_string()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_string_wb"><code class="docutils literal notranslate"><span class="pre">Ini.get_string_wb()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_strings"><code class="docutils literal notranslate"><span class="pre">Ini.get_strings()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_uint"><code class="docutils literal notranslate"><span class="pre">Ini.get_uint()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.get_uints"><code class="docutils literal notranslate"><span class="pre">Ini.get_uints()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.ids"><code class="docutils literal notranslate"><span class="pre">Ini.ids()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.line_exist"><code class="docutils literal notranslate"><span class="pre">Ini.line_exist()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.read"><code class="docutils literal notranslate"><span class="pre">Ini.read()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.read_raw"><code class="docutils literal notranslate"><span class="pre">Ini.read_raw()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.section"><code class="docutils literal notranslate"><span class="pre">Ini.section()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.section_exist"><code class="docutils literal notranslate"><span class="pre">Ini.section_exist()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.sections"><code class="docutils literal notranslate"><span class="pre">Ini.sections()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.show_ltx_warnings"><code class="docutils literal notranslate"><span class="pre">Ini.show_ltx_warnings</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Ini.write"><code class="docutils literal notranslate"><span class="pre">Ini.write()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ip_ltx.Section"><code class="docutils literal notranslate"><span class="pre">Section</span></code></a><ul>
+<li><a class="reference internal" href="#ip_ltx.Section.Error"><code class="docutils literal notranslate"><span class="pre">Section.Error</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.add"><code class="docutils literal notranslate"><span class="pre">Section.add()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.cast_bool"><code class="docutils literal notranslate"><span class="pre">Section.cast_bool()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.cast_float"><code class="docutils literal notranslate"><span class="pre">Section.cast_float()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.cast_int"><code class="docutils literal notranslate"><span class="pre">Section.cast_int()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.cast_string_wb"><code class="docutils literal notranslate"><span class="pre">Section.cast_string_wb()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.cast_uint"><code class="docutils literal notranslate"><span class="pre">Section.cast_uint()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.clear"><code class="docutils literal notranslate"><span class="pre">Section.clear()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.field"><code class="docutils literal notranslate"><span class="pre">Section.field()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.fields"><code class="docutils literal notranslate"><span class="pre">Section.fields()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.fmt_value_whitespaces"><code class="docutils literal notranslate"><span class="pre">Section.fmt_value_whitespaces()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_bool"><code class="docutils literal notranslate"><span class="pre">Section.get_bool()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_bools"><code class="docutils literal notranslate"><span class="pre">Section.get_bools()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_elem"><code class="docutils literal notranslate"><span class="pre">Section.get_elem()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_elems"><code class="docutils literal notranslate"><span class="pre">Section.get_elems()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_float"><code class="docutils literal notranslate"><span class="pre">Section.get_float()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_floats"><code class="docutils literal notranslate"><span class="pre">Section.get_floats()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_int"><code class="docutils literal notranslate"><span class="pre">Section.get_int()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_ints"><code class="docutils literal notranslate"><span class="pre">Section.get_ints()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_items"><code class="docutils literal notranslate"><span class="pre">Section.get_items()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_pair"><code class="docutils literal notranslate"><span class="pre">Section.get_pair()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_pair_bool"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_bool()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_pair_float"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_float()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_pair_int"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_int()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_pair_str"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_str()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_pair_uint"><code class="docutils literal notranslate"><span class="pre">Section.get_pair_uint()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_string"><code class="docutils literal notranslate"><span class="pre">Section.get_string()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_string_wb"><code class="docutils literal notranslate"><span class="pre">Section.get_string_wb()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_strings"><code class="docutils literal notranslate"><span class="pre">Section.get_strings()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_uint"><code class="docutils literal notranslate"><span class="pre">Section.get_uint()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.get_uints"><code class="docutils literal notranslate"><span class="pre">Section.get_uints()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.id"><code class="docutils literal notranslate"><span class="pre">Section.id</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.line_exist"><code class="docutils literal notranslate"><span class="pre">Section.line_exist()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.line_exist_own"><code class="docutils literal notranslate"><span class="pre">Section.line_exist_own()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.line_exist_with_value"><code class="docutils literal notranslate"><span class="pre">Section.line_exist_with_value()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.lines"><code class="docutils literal notranslate"><span class="pre">Section.lines()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.Section.write"><code class="docutils literal notranslate"><span class="pre">Section.write()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 </ul>

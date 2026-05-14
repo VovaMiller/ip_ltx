@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.meta_inspector module" href="ip_ltx.meta_inspector.html"><link rel="prev" title="ip_ltx.inspector module" href="ip_ltx.inspector.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.ip_ltx module - ip-ltx (3.7.1) — Документация</title>
+        <title>ip_ltx.ip_ltx module - ip-ltx (3.7.2) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.1) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.1) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -667,12 +667,12 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ip_ltx.ip_ltx.Ini.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inside_gamedata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_value_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Ini.read" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inside_gamedata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_value_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Ini.read" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Считать данные с файла.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fp0</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Путь до файла.</p></li>
+<li><p><strong>fp_str</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Путь до файла.</p></li>
 <li><p><strong>inside_gamedata</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если True, то интерпретирует путь до файла
 как указанный относительно папки gamedata.
 В первую очередь ищет файл в gamedata мода;
@@ -693,7 +693,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ip_ltx.ip_ltx.Ini.read_raw">
-<span class="sig-name descname"><span class="pre">read_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fp_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_current_section</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_value_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Ini.read_raw" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fp_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_current_section</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preserve_value_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Ini.read_raw" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Считывание данных о секциях непосредственно со строки (str).</p>
 <ul class="simple">
 <li><p>Поддерживает наследование (в т.ч. множественное).</p></li>
@@ -707,7 +707,7 @@
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>raw</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Текст с данными.</p></li>
-<li><p><strong>fp_src</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Путь к файлу, откуда взят текст.
+<li><p><strong>fp_src</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a><em> | </em><em>None</em>) – Путь к файлу, откуда взят текст.
 Необходимо для поддержки <code class="docutils literal notranslate"><span class="pre">#include</span></code>, а также <code class="docutils literal notranslate"><span class="pre">Section._src</span></code>.</p></li>
 <li><p><strong>_current_section</strong> (<a class="reference internal" href="#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a><em> | </em><em>None</em>) – Указатель на объект секции,
 на которой остановилось чтение.
@@ -776,7 +776,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ip_ltx.ip_ltx.Ini.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Ini.write" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Ini.write" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Запись всех секций в файл.</p>
 <p>О деталях работы, см. <a class="reference internal" href="#ip_ltx.ip_ltx.Section.write" title="ip_ltx.ip_ltx.Section.write"><code class="xref py py-func docutils literal notranslate"><span class="pre">Section.write()</span></code></a>.</p>
 <dl class="field-list simple">
@@ -787,7 +787,7 @@
 Задаётся регулярным выражением. Проверяется полное совпадение.
 Если None, то выводит все существующие поля секции.</p></li>
 <li><p><strong>fields_mask</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>) – Маска-фильтр, определяющая, поля с каким именем выводить.</p></li>
-<li><p><strong>first</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список имён полей, которые нужно вывести в первую очередь.</p></li>
+<li><p><strong>first</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>...</em><em>]</em>) – Перечисление имён полей, которые нужно вывести в первую очередь.</p></li>
 <li><p><strong>value_getter</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference internal" href="#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em><em>] </em><em>| </em><em>None</em>) – Функция, определяющая то, как по данной секции и
 имени её поля будет получено значение.</p></li>
 </ul>
@@ -1489,7 +1489,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ip_ltx.ip_ltx.Section.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Section.write" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.ip_ltx.Section.write" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Запись секции в файл.</p>
 <ul class="simple">
 <li><p>Поддерживает вывод многострочных значений для поля с именем <code class="docutils literal notranslate"><span class="pre">custom_data</span></code>.
@@ -1503,7 +1503,7 @@
 <li><p><strong>fields_mask</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>) – Маска-фильтр, определяющая, поля с каким именем выводить.
 Задаётся регулярным выражением. Проверяется полное совпадение.
 Если None, то выводит все существующие поля секции.</p></li>
-<li><p><strong>first</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Список имён полей, которые нужно вывести в первую очередь.
+<li><p><strong>first</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>...</em><em>]</em>) – Перечисление имён полей, которые нужно вывести в первую очередь.
 В остальном, поля выводятся в том порядке, в котором они
 изначально были записаны в секцию.</p></li>
 <li><p><strong>value_getter</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Self" title="(in Python v3.12)"><em>Self</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em><em>] </em><em>| </em><em>None</em>) – <p>Функция, определяющая то, как по данной секции и

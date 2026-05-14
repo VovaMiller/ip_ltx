@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="prev" title="ip_ltx.utils_inspector module" href="ip_ltx.utils_inspector.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.utils_meta module - ip-ltx (3.7.1) — Документация</title>
+        <title>ip_ltx.utils_meta module - ip-ltx (3.7.2) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.1) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.1) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -519,14 +519,14 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="ip_ltx.utils_meta.Levels">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.utils_meta.</span></span><span class="sig-name descname"><span class="pre">Levels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.Levels" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils_meta.GameLevels">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.utils_meta.</span></span><span class="sig-name descname"><span class="pre">GameLevels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.GameLevels" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Базовые классы: <a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.SingletonBase" title="ip_ltx.utils.SingletonBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></p>
 <p>Класс, хранящий информацию об игровых локациях и <code class="docutils literal notranslate"><span class="pre">game_vertex_id</span></code>.</p>
 <p>Определяется секцией <code class="docutils literal notranslate"><span class="pre">[level_gvids]</span></code> в meta-файле.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="ip_ltx.utils_meta.Levels.as_list">
-<span class="sig-name descname"><span class="pre">as_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.Levels.as_list" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils_meta.GameLevels.as_list">
+<span class="sig-name descname"><span class="pre">as_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.GameLevels.as_list" title="Ссылка на это определение">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Тип результата<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
@@ -535,8 +535,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ip_ltx.utils_meta.Levels.get_lvl_by_gvid">
-<span class="sig-name descname"><span class="pre">get_lvl_by_gvid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gvid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.Levels.get_lvl_by_gvid" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils_meta.GameLevels.get_lvl_by_gvid">
+<span class="sig-name descname"><span class="pre">get_lvl_by_gvid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gvid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.GameLevels.get_lvl_by_gvid" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Получить имя уровня по <code class="docutils literal notranslate"><span class="pre">game_vertex_id</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -651,31 +651,31 @@
 <p>Используется для инициализации <a class="reference internal" href="#ip_ltx.utils_meta.CLSIDs" title="ip_ltx.utils_meta.CLSIDs"><code class="xref py py-class docutils literal notranslate"><span class="pre">CLSIDs</span></code></a>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ObjectTypeRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule" title="Ссылка на это определение">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ObjectTypeRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_cls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_cls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>client_classes</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>)</p></li>
-<li><p><strong>server_classes</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>)</p></li>
+<li><p><strong>client_cls</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>)</p></li>
+<li><p><strong>server_cls</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_classes">
-<span class="sig-name descname"><span class="pre">client_classes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_classes" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_cls">
+<span class="sig-name descname"><span class="pre">client_cls</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_cls" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_classes">
-<span class="sig-name descname"><span class="pre">server_classes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_classes" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_cls">
+<span class="sig-name descname"><span class="pre">server_cls</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_cls" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ip_ltx.utils_meta.ObjectTypeDetector.get_object_type">
-<span class="sig-name descname"><span class="pre">get_object_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.get_object_type" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils_meta.ObjectTypeDetector.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_meta.ObjectTypeDetector.get" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Получить тип объекта по его клиентскому и серверному классам.</p>
 <p>Проверок на корректность указанных в аргументах классов не производится.</p>
 <dl class="field-list simple">
@@ -801,9 +801,9 @@
 <li><a class="reference internal" href="#ip_ltx.utils_meta.CLSIDs.is_weapon_addon"><code class="docutils literal notranslate"><span class="pre">CLSIDs.is_weapon_addon()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ip_ltx.utils_meta.Levels"><code class="docutils literal notranslate"><span class="pre">Levels</span></code></a><ul>
-<li><a class="reference internal" href="#ip_ltx.utils_meta.Levels.as_list"><code class="docutils literal notranslate"><span class="pre">Levels.as_list()</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils_meta.Levels.get_lvl_by_gvid"><code class="docutils literal notranslate"><span class="pre">Levels.get_lvl_by_gvid()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils_meta.GameLevels"><code class="docutils literal notranslate"><span class="pre">GameLevels</span></code></a><ul>
+<li><a class="reference internal" href="#ip_ltx.utils_meta.GameLevels.as_list"><code class="docutils literal notranslate"><span class="pre">GameLevels.as_list()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils_meta.GameLevels.get_lvl_by_gvid"><code class="docutils literal notranslate"><span class="pre">GameLevels.get_lvl_by_gvid()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectType"><code class="docutils literal notranslate"><span class="pre">ObjectType</span></code></a><ul>
@@ -825,11 +825,11 @@
 </li>
 <li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector</span></code></a><ul>
 <li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule</span></code></a><ul>
-<li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_classes"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.client_classes</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_classes"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.server_classes</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.client_cls"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.client_cls</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector.ObjectTypeRule.server_cls"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.ObjectTypeRule.server_cls</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector.get_object_type"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.get_object_type()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils_meta.ObjectTypeDetector.get"><code class="docutils literal notranslate"><span class="pre">ObjectTypeDetector.get()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ip_ltx.utils_meta.ServerClasses"><code class="docutils literal notranslate"><span class="pre">ServerClasses</span></code></a><ul>

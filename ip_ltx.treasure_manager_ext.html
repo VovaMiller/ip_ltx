@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.utils module" href="ip_ltx.utils.html"><link rel="prev" title="ip_ltx.spawn_entries_collector module" href="ip_ltx.spawn_entries_collector.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.treasure_manager_ext module - ip-ltx (3.7.1) — Документация</title>
+        <title>ip_ltx.treasure_manager_ext module - ip-ltx (3.7.2) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.1) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.1) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -359,13 +359,13 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ip_ltx.treasure_manager_ext.SpawnEntriesPool.cost">
-<span class="sig-name descname"><span class="pre">cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trade</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.treasure_manager_ext.SpawnEntriesPool.cost" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_trade</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.treasure_manager_ext.SpawnEntriesPool.cost" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Подсчёт стоимости всех вхождений с учётом их количеств и всех параметров.</p>
 <p>Учитываются также неразряженные боеприпасы и прикреплённые к оружию аддоны.</p>
 <p>Рекомендуется подсчитывать до compress.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>trade</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если <code class="docutils literal notranslate"><span class="pre">True</span></code>, то подсчитывается стоимость продажи торговцам.</p>
+<dd class="field-odd"><p><strong>in_trade</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если <code class="docutils literal notranslate"><span class="pre">True</span></code>, то подсчитывается стоимость продажи торговцам.</p>
 </dd>
 <dt class="field-even">Тип результата<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a></p>
@@ -445,12 +445,12 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="ip_ltx.treasure_manager_ext.SpawnEntry.cost">
-<span class="sig-name descname"><span class="pre">cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trade</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.treasure_manager_ext.SpawnEntry.cost" title="Ссылка на это определение">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_trade</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.treasure_manager_ext.SpawnEntry.cost" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Подсчёт стоимости вхождения с учётом кол-ва и всех параметров.</p>
 <p>Учитываются также неразряженные боеприпасы и прикреплённые к оружию аддоны.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>trade</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если <code class="docutils literal notranslate"><span class="pre">True</span></code>, то подсчитывается стоимость продажи торговцам.</p>
+<dd class="field-odd"><p><strong>in_trade</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Если <code class="docutils literal notranslate"><span class="pre">True</span></code>, то подсчитывается стоимость продажи торговцам.</p>
 </dd>
 <dt class="field-even">Тип результата<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)">float</a></p>

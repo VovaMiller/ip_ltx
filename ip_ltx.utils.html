@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.utils_inspector module" href="ip_ltx.utils_inspector.html"><link rel="prev" title="ip_ltx.treasure_manager_ext module" href="ip_ltx.treasure_manager_ext.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.utils module - ip-ltx (3.7.1) — Документация</title>
+        <title>ip_ltx.utils module - ip-ltx (3.7.2) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.1) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.1) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -276,52 +276,52 @@
           <section id="module-ip_ltx.utils">
 <span id="ip-ltx-utils-module"></span><h1>ip_ltx.utils module<a class="headerlink" href="#module-ip_ltx.utils" title="Ссылка на этот заголовок">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">ANSI_COLOR_CODE</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">ANSIColorCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/enum.html#enum.StrEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrEnum</span></code></a></p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.BLACK">
-<span class="sig-name descname"><span class="pre">BLACK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[90m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.BLACK" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.BLACK">
+<span class="sig-name descname"><span class="pre">BLACK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[90m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.BLACK" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.BLUE">
-<span class="sig-name descname"><span class="pre">BLUE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[94m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.BLUE" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.BLUE">
+<span class="sig-name descname"><span class="pre">BLUE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[94m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.BLUE" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.CYAN">
-<span class="sig-name descname"><span class="pre">CYAN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[96m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.CYAN" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.CYAN">
+<span class="sig-name descname"><span class="pre">CYAN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[96m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.CYAN" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.DEF">
-<span class="sig-name descname"><span class="pre">DEF</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[0m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.DEF" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.DEF">
+<span class="sig-name descname"><span class="pre">DEF</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[0m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.DEF" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.GREEN">
-<span class="sig-name descname"><span class="pre">GREEN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[92m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.GREEN" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.GREEN">
+<span class="sig-name descname"><span class="pre">GREEN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[92m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.GREEN" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.PURPLE">
-<span class="sig-name descname"><span class="pre">PURPLE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[95m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.PURPLE" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.PURPLE">
+<span class="sig-name descname"><span class="pre">PURPLE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[95m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.PURPLE" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.RED">
-<span class="sig-name descname"><span class="pre">RED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[91m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.RED" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.RED">
+<span class="sig-name descname"><span class="pre">RED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[91m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.RED" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.WHITE">
-<span class="sig-name descname"><span class="pre">WHITE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[97m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.WHITE" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.WHITE">
+<span class="sig-name descname"><span class="pre">WHITE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[97m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.WHITE" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.ANSI_COLOR_CODE.YELLOW">
-<span class="sig-name descname"><span class="pre">YELLOW</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[93m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSI_COLOR_CODE.YELLOW" title="Ссылка на это определение">¶</a></dt>
+<dt class="sig sig-object py" id="ip_ltx.utils.ANSIColorCode.YELLOW">
+<span class="sig-name descname"><span class="pre">YELLOW</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\x1b[93m'</span></span><a class="headerlink" href="#ip_ltx.utils.ANSIColorCode.YELLOW" title="Ссылка на это определение">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -342,32 +342,6 @@
 <dt class="sig sig-object py" id="ip_ltx.utils.SingletonMeta">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">SingletonMeta</span></span><a class="headerlink" href="#ip_ltx.utils.SingletonMeta" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#type" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a></p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="ip_ltx.utils.XML_PATTERNS">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">XML_PATTERNS</span></span><a class="headerlink" href="#ip_ltx.utils.XML_PATTERNS" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.XML_PATTERNS.COMMENT">
-<span class="sig-name descname"><span class="pre">COMMENT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('&lt;!--.*?--&gt;')</span></span><a class="headerlink" href="#ip_ltx.utils.XML_PATTERNS.COMMENT" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.XML_PATTERNS.INVALID_CHARS">
-<span class="sig-name descname"><span class="pre">INVALID_CHARS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('[^\\x09\\x0A\\x0D\\x20-\\uD7FF\\uE000-\\uFFFD\\U00010000-\\U0010FFFF]')</span></span><a class="headerlink" href="#ip_ltx.utils.XML_PATTERNS.INVALID_CHARS" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.XML_PATTERNS.INVALID_COMMENT_LINE">
-<span class="sig-name descname"><span class="pre">INVALID_COMMENT_LINE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('&lt;!--.*--.*--&gt;')</span></span><a class="headerlink" href="#ip_ltx.utils.XML_PATTERNS.INVALID_COMMENT_LINE" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.utils.XML_PATTERNS.UNESCAPED_AMPERSAND">
-<span class="sig-name descname"><span class="pre">UNESCAPED_AMPERSAND</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('&amp;(?!(amp|lt|gt|apos|quot|#\\d+|#x[a-fA-F0-9]+);)')</span></span><a class="headerlink" href="#ip_ltx.utils.XML_PATTERNS.UNESCAPED_AMPERSAND" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py function">
@@ -487,7 +461,7 @@
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>fp</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Путь до файла.</p>
+<dd class="field-odd"><p><strong>fp</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a>) – Путь до файла.</p>
 </dd>
 <dt class="field-even">Исключение<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -639,28 +613,21 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">ip_ltx.utils module</a><ul>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE</span></code></a><ul>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.BLACK"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.BLACK</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.BLUE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.BLUE</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.CYAN"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.CYAN</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.DEF"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.DEF</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.GREEN"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.GREEN</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.PURPLE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.PURPLE</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.RED"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.RED</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.WHITE"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.WHITE</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.ANSI_COLOR_CODE.YELLOW"><code class="docutils literal notranslate"><span class="pre">ANSI_COLOR_CODE.YELLOW</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode</span></code></a><ul>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.BLACK"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.BLACK</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.BLUE"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.BLUE</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.CYAN"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.CYAN</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.DEF"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.DEF</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.GREEN"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.GREEN</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.PURPLE"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.PURPLE</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.RED"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.RED</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.WHITE"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.WHITE</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.ANSIColorCode.YELLOW"><code class="docutils literal notranslate"><span class="pre">ANSIColorCode.YELLOW</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ip_ltx.utils.Runnable"><code class="docutils literal notranslate"><span class="pre">Runnable</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.SingletonBase"><code class="docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.SingletonMeta"><code class="docutils literal notranslate"><span class="pre">SingletonMeta</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.XML_PATTERNS"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS</span></code></a><ul>
-<li><a class="reference internal" href="#ip_ltx.utils.XML_PATTERNS.COMMENT"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.COMMENT</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.XML_PATTERNS.INVALID_CHARS"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.INVALID_CHARS</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.XML_PATTERNS.INVALID_COMMENT_LINE"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.INVALID_COMMENT_LINE</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.XML_PATTERNS.UNESCAPED_AMPERSAND"><code class="docutils literal notranslate"><span class="pre">XML_PATTERNS.UNESCAPED_AMPERSAND</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#ip_ltx.utils.cast_safe"><code class="docutils literal notranslate"><span class="pre">cast_safe()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.is_gamedata_dir"><code class="docutils literal notranslate"><span class="pre">is_gamedata_dir()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.is_gamedata_file"><code class="docutils literal notranslate"><span class="pre">is_gamedata_file()</span></code></a></li>
