@@ -3,7 +3,7 @@
 import re
 from collections.abc import Callable
 from dataclasses import dataclass
-from enum import auto, Enum
+from enum import Enum, auto
 
 from .ini import game_ini, meta_ini, spawn_ini, system_ini
 from .ip_ltx import Ini, Section
@@ -12,7 +12,13 @@ from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
 from .spawn_entries_collector import SpawnEntriesCollector
 from .utils_inspector import InspectorStep, run_inspection
-from .utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs, ObjectType
+from .utils_meta import (
+    CLSIDs,
+    GameLevels,
+    ObjectType,
+    ObjectTypeDetector,
+    ServerClasses,
+)
 from .xml_data.string_table import StringTable
 
 
@@ -40,12 +46,12 @@ def _inspection_pipeline() -> None:
                 _ = s.get_bool(line)
             else:
                 step.warn(f"[{s.id}] Не хватает флага '{line}'")
-        
+
         # [is_anomaly2]
         s = ini_meta.section("is_anomaly2")
         if len(s.lines()) == 0:
             step.warn(f"[{s.id}] Пустая секция")
-        
+
         # [ignore_sections]
         s = ini_meta.section("ignore_sections")
 
@@ -62,9 +68,9 @@ def _inspection_pipeline() -> None:
             step.warn("Не найдена секция [universal_acdc@ignore]")
 
     with InspectorStep("Инициализация данных об игровых классах и CLSID") as step:
-        SC = ServerClasses()
-        OTD = ObjectTypeDetector()
-        CLSIDS = CLSIDs()
+        _ = ServerClasses()
+        _ = ObjectTypeDetector()
+        clsids = CLSIDs()
 
     with InspectorStep("Инициализация system_ini") as step:
         ini_system = system_ini()
@@ -73,7 +79,7 @@ def _inspection_pipeline() -> None:
         unregistered: dict[str, list[str]] = {}
         for section in ini_system.sections():
             _class = section.get_string("class", "")
-            if (len(_class) > 0) and (_class not in CLSIDS):
+            if (len(_class) > 0) and (_class not in clsids):
                 unregistered.setdefault(_class, []).append(section.id)
         for clsid, sections in unregistered.items():
             step.error("{}:{} {}{}".format(
@@ -84,19 +90,19 @@ def _inspection_pipeline() -> None:
             ))
 
     with InspectorStep("Инициализация game_ini") as step:
-        ini_game = game_ini()
+        _ = game_ini()
 
     with InspectorStep("Инициализация таблицы переводов (string_table)") as step:
-        ST = StringTable()
+        _ = StringTable()
 
     with InspectorStep("Инициализация данных о локациях") as step:
-        LEVELS = Levels()
+        game_levels = GameLevels()
 
     with InspectorStep("Инициализация данных о коэффициентах торговли") as step:
-        trade = TradeBuy()
+        _ = TradeBuy()
 
     with InspectorStep("Инициализация данных о тайниках") as step:
-        treasure_manager = TreasureManager()
+        _ = TreasureManager()
 
     with InspectorStep("Инициализация данных о спавне (all.spawn)") as step:
         ini_spawn = spawn_ini()
@@ -166,12 +172,12 @@ def _inspection_pipeline() -> None:
                     if _type_global == SpawnDataType.UNIVERSAL_ACDC
                     else "False"
                 )
-                step.warn((
+                step.warn(
                     "Определённый формат данных all.spawn не совпадает с установленным:"
                     f"\n  [features] universal_acdc = {str_installed} ; установленный"
                     f"\n  [features] universal_acdc = {std_determined} ; определённый"
-                ))
-    
+                )
+
     if len(ini_spawn.sections()) > 0:
         with InspectorStep("Проверка секций из [ignore_sections]") as step:
             class SectionSource(Enum):
@@ -185,14 +191,14 @@ def _inspection_pipeline() -> None:
                 section_name: set()
                 for section_name in ini_meta.section("ignore_sections").lines()
             }
-            ALL_LEVELS = LEVELS.as_list()
+            all_levels = game_levels.as_list()
             collector = SpawnEntriesCollector()
 
             # Объекты из all.spawn
             for obj in spawn.objects():
                 if obj.section_name in ignored_src:
                     ignored_src[obj.section_name].add(SectionSource.ALL_SPAWN)
-            
+
             # Предметы из разных источников
             pipeline: list[tuple[Callable[[list[str]], None], SectionSource]]
             pipeline = [
@@ -201,18 +207,18 @@ def _inspection_pipeline() -> None:
                 (collector.from_non_tm_inventories, SectionSource.OTHER_INVENTORIES),
             ]
             for collect, src in pipeline:
-                collect(ALL_LEVELS)
+                collect(all_levels)
                 for entry in collector.result.entries():
                     if entry.name in ignored_src:
                         ignored_src[entry.name].add(src)
                 collector.result.clear()
 
-            if any([(len(srcs) > 0) for srcs in ignored_src.values()]):
+            if any((len(srcs) > 0) for srcs in ignored_src.values()):
                 step.info("Секции из [ignore_sections], которые встречаются в игре:")
                 for section_name, srcs in ignored_src.items():
                     if len(srcs) > 0:
                         step.warn("{}: {}".format(
-                            section_name,  
+                            section_name,
                             ", ".join([src.value for src in srcs])
                         ))
 
@@ -221,21 +227,24 @@ def _inspection_pipeline() -> None:
         class SectionWithDummyClass:
             section_name: str
             clsid: str
-        
+
         dummy_sections: list[SectionWithDummyClass] = []
         dummy_clsids: set[str] = {
             clsid
-            for clsid in CLSIDS
-            if CLSIDS.get_object_type(clsid) == ObjectType.UNDEFINED
+            for clsid in clsids
+            if clsids.get_object_type(clsid) == ObjectType.UNDEFINED
         }
         for s in ini_system.sections():
             clsid = s.get_string("class", "")
-            if (len(clsid) > 0) and (clsid in dummy_clsids):
-                if not ini_meta.line_exist("ignore_sections", s.id):
-                    dummy_sections.append(SectionWithDummyClass(
-                        section_name=s.id,
-                        clsid=clsid
-                    ))
+            if (
+                (len(clsid) > 0)
+                and (clsid in dummy_clsids)
+                and not ini_meta.line_exist("ignore_sections", s.id)
+            ):
+                dummy_sections.append(SectionWithDummyClass(
+                    section_name=s.id,
+                    clsid=clsid
+                ))
         if len(dummy_sections) > 0:
             step.info(
                 "Секции с CLSID-заглушкой рекомендуется прописать в [ignore_sections]:"
@@ -245,23 +254,23 @@ def _inspection_pipeline() -> None:
 
     with InspectorStep("Проверка правил определения типов объектов") as step:
         class InspectedType(Enum):
-            MOBS            = ("MONSTER | STALKER", CLSIDS.is_mob)
-            MONSTER         = ("MONSTER",           CLSIDS.is_monster)
-            STALKER         = ("STALKER",           CLSIDS.is_stalker)
-            ANOMALY         = ("ANOMALY",           CLSIDS.is_anomaly)
-            ITEMS           = ("ITEM_*",            CLSIDS.is_item)
-            ITEM_ART        = ("ITEM_ART",          CLSIDS.is_artefact)
-            ITEM_WEAPON     = ("ITEM_WEAPON",       CLSIDS.is_weapon)
-            ITEM_AMMO       = ("ITEM_AMMO",         CLSIDS.is_ammo)
-            ITEM_GRENADE    = ("ITEM_GRENADE",      CLSIDS.is_grenade)
-            ITEM_ADDON      = ("ITEM_ADDON",        CLSIDS.is_weapon_addon)
-            ITEM_OUTFIT     = ("ITEM_OUTFIT",       CLSIDS.is_outfit)
+            MOBS            = ("MONSTER | STALKER", clsids.is_mob)
+            MONSTER         = ("MONSTER",           clsids.is_monster)
+            STALKER         = ("STALKER",           clsids.is_stalker)
+            ANOMALY         = ("ANOMALY",           clsids.is_anomaly)
+            ITEMS           = ("ITEM_*",            clsids.is_item)
+            ITEM_ART        = ("ITEM_ART",          clsids.is_artefact)
+            ITEM_WEAPON     = ("ITEM_WEAPON",       clsids.is_weapon)
+            ITEM_AMMO       = ("ITEM_AMMO",         clsids.is_ammo)
+            ITEM_GRENADE    = ("ITEM_GRENADE",      clsids.is_grenade)
+            ITEM_ADDON      = ("ITEM_ADDON",        clsids.is_weapon_addon)
+            ITEM_OUTFIT     = ("ITEM_OUTFIT",       clsids.is_outfit)
 
             def __init__(self, type_label: str, type_checker: Callable[[str], bool]):
                 self.type_label = type_label
                 self.type_checker = type_checker
-        
-        INSPECTED_TYPES_DEPENDENCIES: dict[InspectedType, set[InspectedType]] = {
+
+        inspected_types_dependencies: dict[InspectedType, set[InspectedType]] = {
             InspectedType.MOBS: {
                 InspectedType.MONSTER,
                 InspectedType.STALKER,
@@ -297,8 +306,8 @@ def _inspection_pipeline() -> None:
             _class = s.get_string("class", "")
             if (
                 (len(_class) > 0)
-                and (_class in CLSIDS)
-                and (CLSIDS.get_object_type(_class) != ObjectType.UNDEFINED)
+                and (_class in clsids)
+                and (clsids.get_object_type(_class) != ObjectType.UNDEFINED)
                 and not ini_meta.line_exist("ignore_sections", s.id)
             ):
                 sections_data[s.id] = SectionData(
@@ -307,7 +316,7 @@ def _inspection_pipeline() -> None:
                 )
 
         # Поиск расхождений: оценка по полям объектов из all.spawn
-        HEURISTIC: dict[InspectedType, list[str]] = {
+        heuristic: dict[InspectedType, list[str]] = {
             InspectedType.MOBS: [
                 "base_out_restrictors",             # cse_alife_monster_abstract
                 "base_in_restrictors",              # cse_alife_monster_abstract
@@ -360,16 +369,16 @@ def _inspection_pipeline() -> None:
             section_name = s.get_string("section_name", "")
             if (len(section_name) == 0) or (section_name not in sections_data):
                 continue
-            for _type, fields in HEURISTIC.items():
+            for _type, fields in heuristic.items():
                 if _type.type_checker(sections_data[section_name].clsid):
                     continue
                 if any(s.line_exist(field) for field in fields):
                     sections_data[section_name].deviations.add(
                         (_type, DeviationReason.SPAWN_OBJECT_FIELDS)
                     )
-        
+
         # Поиск расхождений: оценка по полям конфига секции
-        HEURISTIC: dict[InspectedType, list[str]] = {
+        heuristic: dict[InspectedType, list[str]] = {
             InspectedType.MOBS: [
                 # CCustomMonster
                 "eye_fov", "eye_range",
@@ -476,16 +485,16 @@ def _inspection_pipeline() -> None:
         }
         for s in ini_system.sections():
             if s.id in sections_data:
-                for _type, fields in HEURISTIC.items():
+                for _type, fields in heuristic.items():
                     if _type.type_checker(sections_data[s.id].clsid):
                         continue
                     if any(s.line_exist(field) for field in fields):
                         sections_data[s.id].deviations.add(
                             (_type, DeviationReason.SECTION_CONFIG_FIELDS)
                         )
-        
+
         # Поиск расхождений: оценка по имени секции
-        HEURISTIC_SN: dict[InspectedType, re.Pattern] = {
+        heuristic_sn: dict[InspectedType, re.Pattern] = {
             # InspectedType.ANOMALY:      re.compile(r"zone_.*|.*_zone"),
             InspectedType.ITEM_ART:     re.compile(r"af_.*"),
             InspectedType.ITEM_WEAPON:  re.compile(r"wpn_(?!.*(addon|missile)).*"),
@@ -496,7 +505,7 @@ def _inspection_pipeline() -> None:
         }
         for s in ini_system.sections():
             if s.id in sections_data:
-                for _type, pattern in HEURISTIC_SN.items():
+                for _type, pattern in heuristic_sn.items():
                     if _type.type_checker(sections_data[s.id].clsid):
                         continue
                     if re.fullmatch(pattern, s.id):
@@ -505,14 +514,14 @@ def _inspection_pipeline() -> None:
                         )
 
         # Поиск расхождений: проверка аддонов оружия
-        WEAPON_ADDONS_CHECK : list[tuple[str, DeviationReason]] = [
+        weapon_addons_check : list[tuple[str, DeviationReason]] = [
             ("scope_name", DeviationReason.WEAPON_ADDON_SCOPE),
             ("silencer_name", DeviationReason.WEAPON_ADDON_SILENCER),
             ("grenade_launcher_name", DeviationReason.WEAPON_ADDON_LAUNCHER),
         ]
         for s in ini_system.sections():
-            if (s.id in sections_data) and CLSIDS.is_weapon(sections_data[s.id].clsid):
-                for field, reason in WEAPON_ADDONS_CHECK:
+            if (s.id in sections_data) and clsids.is_weapon(sections_data[s.id].clsid):
+                for field, reason in weapon_addons_check:
                     addon_sn = s.get_string(field, "")
                     if (
                         (len(addon_sn) > 0)
@@ -526,13 +535,13 @@ def _inspection_pipeline() -> None:
                         )
 
         # Поиск расхождений: проверка боеприпасов оружия
-        WEAPON_AMMO_CHECK : list[tuple[str, DeviationReason]] = [
+        weapon_ammo_check : list[tuple[str, DeviationReason]] = [
             ("ammo_class", DeviationReason.WEAPON_AMMO_CLASS),
             ("grenade_class", DeviationReason.WEAPON_GRENADE_CLASS),
         ]
         for s in ini_system.sections():
-            if (s.id in sections_data) and CLSIDS.is_weapon(sections_data[s.id].clsid):
-                for field, reason in WEAPON_AMMO_CHECK:
+            if (s.id in sections_data) and clsids.is_weapon(sections_data[s.id].clsid):
+                for field, reason in weapon_ammo_check:
                     for ammo_sn in s.get_strings(field, mandatory=False):
                         if (
                             (ammo_sn in sections_data)
@@ -543,7 +552,7 @@ def _inspection_pipeline() -> None:
                             sections_data[ammo_sn].deviations.add(
                                 (InspectedType.ITEM_AMMO, reason)
                             )
-        
+
         # Фильтрация найденных расхождений:
         # 1. По одной и той же причине оставляем только более точные оценки типа
         for sdata in sections_data.values():
@@ -553,9 +562,9 @@ def _inspection_pipeline() -> None:
             for dreason, dtype_list in dmap.items():
                 for dtype in dtype_list:
                     if (
-                        (dtype in INSPECTED_TYPES_DEPENDENCIES)
+                        (dtype in inspected_types_dependencies)
                         and any(
-                            (dtype2 in INSPECTED_TYPES_DEPENDENCIES[dtype])
+                            (dtype2 in inspected_types_dependencies[dtype])
                             for dtype2 in dtype_list
                         )
                     ):
@@ -571,7 +580,7 @@ def _inspection_pipeline() -> None:
                 for dtype, dreason in sdata.deviations:
                     step.warn("{}: {} -> {} ({})".format(
                         sname,
-                        CLSIDS.get_object_type(sdata.clsid).name,
+                        clsids.get_object_type(sdata.clsid).name,
                         dtype.type_label,
                         dreason.value
                     ))

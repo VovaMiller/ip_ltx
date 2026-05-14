@@ -1,15 +1,15 @@
 """Базовый инструментарий для извлечения кастомной информации из конфигов"""
 
-import re
 import math
-from collections import OrderedDict
+import re
 from collections.abc import Callable
+from pathlib import Path
 
-from .ip_ltx import Section
 from .ini import meta_ini, system_ini
-from .xml_data.string_table import StringTable
+from .ip_ltx import Section
 from .utils import print_warning
 from .utils_meta import CLSIDs, ObjectType
+from .xml_data.string_table import StringTable
 
 # ----------------------------------------------------------------
 
@@ -41,9 +41,9 @@ def is_inv_item(section: Section) -> bool:
     """Является ли секция инвентарным предметом.
     Используется проверка по классу (поле ``class``).
     """
-    CLSIDS = CLSIDs()
+    clsids = CLSIDs()
     _class = section.get_string("class", "")
-    return (len(_class) > 0) and (_class in CLSIDS) and CLSIDS.is_item(_class)
+    return (len(_class) > 0) and (_class in clsids) and clsids.is_item(_class)
 
 def is_inv_item2(section: Section) -> bool:
     """Является ли секция инвентарным предметом.
@@ -63,12 +63,12 @@ def is_mutant_part(section: Section) -> bool:
     )
 
 def _is_section_type(section: Section, _type: ObjectType) -> bool:
-    CLSIDS = CLSIDs()
+    clsids = CLSIDs()
     _class = section.get_string("class", "")
     return (
         (len(_class) > 0)
-        and (_class in CLSIDS)
-        and (CLSIDS.get_object_type(_class) == _type)
+        and (_class in clsids)
+        and (clsids.get_object_type(_class) == _type)
     )
 
 def is_art(section: Section) -> bool:
@@ -197,7 +197,7 @@ def to_float(v: str | None) -> float:
     v = v if v is not None else "invalid"
     try:
         r = float(v)
-    except:
+    except Exception:
         r = -999.9
     return r
 
@@ -224,7 +224,7 @@ def extract_fields(
         dont_ignore_sections: bool = False
 ) -> None:
     """Итерация по всем секциям system.ltx и извлечение полей.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param precond: Функция-фильтр секций.
     :param fields: Список полей для извлечения.
@@ -243,15 +243,15 @@ def extract_fields(
     if (fields_pp is not None) and (len(fields) != len(fields_pp)):
         raise Exception("len of lists 'fields' and 'fields_pp' must be equal")
     ini_system = system_ini()
-    
+
     # Extract data from system
-    d = OrderedDict()
+    d = {}
     for section in ini_system.sections():
         if not dont_ignore_sections and _is_ignored(section):
             continue
         if not precond(section):
             continue
-        d[section.id] = OrderedDict()
+        d[section.id] = {}
         if fields_pp is None:
             for field in fields:
                 d[section.id][field] = section._fields.get(field, "-")
@@ -260,11 +260,11 @@ def extract_fields(
                 d[section.id][field] = fields_pp[i](section._fields.get(field, None))
     if sort is not None:
         if sort == 0:
-            d = OrderedDict(sorted(d.items(), key=lambda x: x[0]))
+            d = dict(sorted(d.items(), key=lambda x: x[0]))
         elif 0 < sort <= len(fields):
-            d = OrderedDict(sorted(d.items(), key=lambda x: x[1][fields[sort-1]]))
-    
-    with open(fn, "w", encoding="utf-8") as file:
+            d = dict(sorted(d.items(), key=lambda x: x[1][fields[sort-1]]))
+
+    with Path(fn).open("w", encoding="utf-8") as file:
         if as_blocks:
             # Header
             file.write(
@@ -272,7 +272,7 @@ def extract_fields(
                     "\n".join(["; {}".format(field) for field in fields])
                 )
             )
-            
+
             # Sections' blocks
             for k, v in d.items():
                 file.write("\n")
@@ -281,12 +281,12 @@ def extract_fields(
                 file.write("\n")
         else:
             # Calculate tab offsets
-            tab_offset_0 = ((max([len(v) for v in d.keys()]) // 4) + 1) * 4
+            tab_offset_0 = ((max([len(v) for v in d]) // 4) + 1) * 4
             max_lens = [
                 max([len(field)] + [len(str(v[field])) for v in d.values()])
                 for field in fields
             ]
-            
+
             # Header
             column_0_name = "# id"
             file.write("{}{}".format(
@@ -296,7 +296,7 @@ def extract_fields(
             for i, field in enumerate(fields):
                 file.write("{}{}".format(" "*(2 + max_lens[i] - len(field)), field))
             file.write("\n")
-            
+
             # Print
             for k, v in d.items():
                 file.write("{}{}".format(k, " "*(tab_offset_0 - len(k))))
@@ -313,13 +313,13 @@ def extract__ammo_to_wpn(
         dont_ignore_sections: bool = False
 ) -> None:
     """Для каждого типа патронов/боеприпасов извлечь список стволов его использующих.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param dont_ignore_sections: Не игнорировать секции, перечисленные
         в мета-файле в [ignore_sections].
     """
     ini_system = system_ini()
-    da = OrderedDict()
+    da = {}
     for section in ini_system.sections():
         if not dont_ignore_sections and _is_ignored(section):
             continue
@@ -329,12 +329,10 @@ def extract__ammo_to_wpn(
         for ammo in ammo_classes:
             if not dont_ignore_sections and _is_ignored_id(ammo):
                 continue
-            if da.get(ammo, None) is None:
-                da[ammo] = []
-            da[ammo].append(section.id)
-    das = OrderedDict(sorted(da.items(), key=lambda x: x[0]))
-    tab_offset = ((max([len(v) for v in das.keys()]) // 4) + 1) * 4
-    with open(fn, "w", encoding="utf-8") as file:
+            da.setdefault(ammo, []).append(section.id)
+    das = dict(sorted(da.items(), key=lambda x: x[0]))
+    tab_offset = ((max([len(v) for v in das]) // 4) + 1) * 4
+    with Path(fn).open("w", encoding="utf-8") as file:
         for ammo, wpns in das.items():
             file.write("{}{}= {}\n".format(
                 ammo,
@@ -348,7 +346,7 @@ def extract__addon_to_wpn(
         dont_ignore_sections: bool = False
 ) -> None:
     """Для каждого аддона извлечь список стволов его использующих.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param dont_ignore_sections: Не игнорировать секции, перечисленные
         в мета-файле в [ignore_sections].
@@ -386,7 +384,7 @@ def extract__addon_to_wpn(
                 if wpn_sect_id not in d[addon_name]:
                     d[addon_name].append(wpn_sect_id)
     _class_last = ""
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         file.write("# <addon> = <weapons>\n")
         dsorted = sorted(d.items(), key=lambda x: ini_system.get_section_index(x[0]))
         for addon, wpns in dsorted:
@@ -404,10 +402,10 @@ def extract_monsters_health(
         dont_ignore_sections: bool = False
 ) -> None:
     """Вывод информации о том, за сколько хитов/ударов/попаданий умирает мутант.
-    
+
     Вывод осуществляется по каждому мутанту, по каждой перечисленной в его
     конфиге кости, по двум типам урона (``wound`` и ``fire_wound``).
-    
+
     :param fn: Путь/имя файла для вывода.
     :param hit_power_wound: Величина урона типа ``wound``,
         используемая при расчётах фатального кол-ва ударов.
@@ -416,22 +414,24 @@ def extract_monsters_health(
     :param dont_ignore_sections: Не игнорировать секции, перечисленные
         в мета-файле в [ignore_sections].
     """
+    def _ceil(f: float) -> int:
+        return math.ceil(round(f, 2))
+
     ini_system = system_ini()
-    ceil = lambda f: math.ceil(round(f, 2))
-    d = OrderedDict()
+    d = {}
     for section in ini_system.sections():
         if not dont_ignore_sections and _is_ignored(section):
             continue
         if not is_monster(section):
             continue
-        
+
         # Extracting health_hit_part.
         health_hit_part = section._fields.get("health_hit_part", None)
         if health_hit_part is None:
             print_warning(f"Skipping '{section.id}' as it has no 'health_hit_part'")
             continue
         health_hit_part = float(health_hit_part)
-        
+
         # Extracting immunitiy.
         immu_sect_id = section._fields.get("immunities_sect", None)
         if immu_sect_id is None:
@@ -439,29 +439,29 @@ def extract_monsters_health(
             continue
         immu_sect_id = immu_sect_id.lower()
         if not ini_system.section_exist(immu_sect_id):
-            print_warning((
+            print_warning(
                 f"Skipping '{section.id}': "
                 f"immunities section '{immu_sect_id}' doesn't exist"
-            ))
+            )
             continue
         immu_sect = ini_system.section(immu_sect_id)
         wound_immunity = immu_sect._fields.get("wound_immunity", None)
         fire_wound_immunity = immu_sect._fields.get("fire_wound_immunity", None)
         if wound_immunity is None:
-            print_warning((
+            print_warning(
                 f"Skipping '{section.id}': "
                 f"immunities section '{immu_sect_id}' has no 'wound_immunity'"
-            ))
+            )
             continue
         if fire_wound_immunity is None:
-            print_warning((
+            print_warning(
                 f"Skipping '{section.id}': "
                 f"immunities section '{immu_sect_id}' has no 'fire_wound_immunity'"
-            ))
+            )
             continue
         wound_immunity = float(wound_immunity)
         fire_wound_immunity = float(fire_wound_immunity)
-        
+
         # Extracting damage (bones).
         dmg_sect_id = section._fields.get("damage", None)
         if dmg_sect_id is None:
@@ -469,57 +469,57 @@ def extract_monsters_health(
             continue
         dmg_sect_id = dmg_sect_id.lower()
         if not ini_system.section_exist(dmg_sect_id):
-            print_warning((
+            print_warning(
                 f"Skipping '{section.id}': "
                 f"bone damage section '{dmg_sect_id}' doesn't exist"
-            ))
+            )
             continue
         dmg_sect = ini_system.section(dmg_sect_id)
-        
+
         # Calculating.
-        d[section.id] = OrderedDict()
+        d[section.id] = {}
         for k in dmg_sect.lines():
             try:
                 values = [float(vv) for vv in dmg_sect.get_floats(k, True)]
             except ValueError:
                 del d[section.id]
-                print_warning((
+                print_warning(
                     f"Skipping '{section.id}': "
                     f"bad format of bone values (section '{dmg_sect_id}', field '{k}')"
-                ))
+                )
                 break
             if (len(values) != 3) and (len(values) != 4):
                 del d[section.id]
-                print_warning((
+                print_warning(
                     f"Skipping '{section.id}': "
                     f"unexpected number of bone values"
                     f" (section '{dmg_sect_id}', field '{k}')"
-                ))
+                )
                 break
-            d[section.id][k] = OrderedDict()
-            d[section.id][k]["wound"] = ceil(1.0 / (
+            d[section.id][k] = {}
+            d[section.id][k]["wound"] = _ceil(1.0 / (
                 hit_power_wound
                 * wound_immunity
                 * values[0]
                 * health_hit_part
             ))
-            d[section.id][k]["fire_wound"] = ceil(1.0 / (
+            d[section.id][k]["fire_wound"] = _ceil(1.0 / (
                 hit_power_fire_wound
                 * fire_wound_immunity
                 * values[0]
                 * health_hit_part
             ))
             if len(values) == 4:
-                d[section.id][k]["fire_wound_super"] = ceil(1.0 / (
+                d[section.id][k]["fire_wound_super"] = _ceil(1.0 / (
                     hit_power_fire_wound
                     * fire_wound_immunity
                     * values[3]
                     * health_hit_part
                 ))
-    
+
     default_offset_1 = 16
     default_offset_2 = 8
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         file.write("# hit_power (wound) = {}\n".format(hit_power_wound))
         file.write("# hit_power (fire_wound) = {}\n".format(hit_power_fire_wound))
         file.write("# bone | wound | fire_wound (super fire_wound)\n")

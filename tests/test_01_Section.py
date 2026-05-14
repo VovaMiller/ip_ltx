@@ -7,7 +7,7 @@ from ip_ltx import Section
 
 def test_section_add_various_fields():
     section = Section(id="test")
-    FIELDS = [
+    fields = [
         "field",
         "FIELD",
         "FiElD",
@@ -17,11 +17,11 @@ def test_section_add_various_fields():
         " def ",
         "\t \t fld\t \t ",
     ]
-    for i, fld in enumerate(FIELDS):
+    for i, fld in enumerate(fields):
         section.add(fld, str(i))
-    
-    assert list(section.lines()) == [fld.strip() for fld in FIELDS]
-    for i, fld in enumerate(FIELDS):
+
+    assert list(section.lines()) == [fld.strip() for fld in fields]
+    for i, fld in enumerate(fields):
         assert section.field(fld.strip()) == str(i)
 
 def test_section_add_various_values():
@@ -74,15 +74,15 @@ def test_section_add_invalid_fields():
     # empty field name
     with pytest.raises(ValueError):
         section.add("", "value")
-    
+
     # multiline field name
     with pytest.raises(ValueError):
         section.add("line1\nline2", "value")
-    
+
     # field name with comment sequence: semicolon
     with pytest.raises(ValueError):
         section.add("abc;def", "value")
-    
+
     # field name with comment sequence: C-style
     with pytest.raises(ValueError):
         section.add("abc//def", "value")
@@ -104,28 +104,28 @@ def test_section_add_invalid_values():
 
 def test_section_basics():
     section = Section(id="test")
-    FIELDS = ["field_with_value", "field_with_empty_value", "field_without_value"]
-    VALUES = ["value_1", "", None]
-    for field, value in zip(FIELDS, VALUES):
+    fields = ["field_with_value", "field_with_empty_value", "field_without_value"]
+    values = ["value_1", "", None]
+    for field, value in zip(fields, values, strict=True):
         section.add(field, value)
-    
+
     # start point check
-    assert list(section.lines()) == FIELDS
-    assert list(section.fields()) == list(zip(FIELDS, VALUES))
+    assert list(section.lines()) == fields
+    assert list(section.fields()) == list(zip(fields, values, strict=True))
 
-    assert section.line_exist("field_with_value") == True
-    assert section.line_exist("field_with_empty_value") == True
-    assert section.line_exist("field_without_value") == True
-    assert section.line_exist("field_with_value_") == False
-    assert section.line_exist("_field_with_value") == False
-    assert section.line_exist("field") == False
+    assert section.line_exist("field_with_value")       is True
+    assert section.line_exist("field_with_empty_value") is True
+    assert section.line_exist("field_without_value")    is True
+    assert section.line_exist("field_with_value_")      is False
+    assert section.line_exist("_field_with_value")      is False
+    assert section.line_exist("field")                  is False
 
-    assert section.line_exist_with_value("field_with_value") == True
-    assert section.line_exist_with_value("field_with_empty_value") == True
-    assert section.line_exist_with_value("field_without_value") == False
-    assert section.line_exist_with_value("field_with_value_") == False
-    assert section.line_exist_with_value("_field_with_value") == False
-    assert section.line_exist_with_value("field") == False
+    assert section.line_exist_with_value("field_with_value")        is True
+    assert section.line_exist_with_value("field_with_empty_value")  is True
+    assert section.line_exist_with_value("field_without_value")     is False
+    assert section.line_exist_with_value("field_with_value_")       is False
+    assert section.line_exist_with_value("_field_with_value")       is False
+    assert section.line_exist_with_value("field")                   is False
 
     assert section.field("field_with_value") == "value_1"
     assert section.field("field_with_empty_value") == ""
@@ -139,15 +139,15 @@ def test_section_basics():
     section.add("field_with_value", "value_2", overwrite=True)
     assert section.field("field_with_value") == "value_2"
     section.add("field_with_value", None, overwrite=True)
-    assert section.line_exist("field_with_value") == True
-    assert section.line_exist_with_value("field_with_value") == False
+    assert section.line_exist("field_with_value") is True
+    assert section.line_exist_with_value("field_with_value") is False
     assert section.field("field_with_value") is None
     section.add("field_with_value", "value_1", overwrite=True)
     assert section.field("field_with_value") == "value_1"
-    
+
     # equal to the start point
-    assert list(section.lines()) == FIELDS
-    assert list(section.fields()) == list(zip(FIELDS, VALUES))
+    assert list(section.lines()) == fields
+    assert list(section.fields()) == list(zip(fields, values, strict=True))
 
 def test_section_write_without_params():
     section = Section(id="test")
@@ -158,7 +158,7 @@ def test_section_write_without_params():
     section.add("field_five", " 1, 2,  3,   4    ")
     section.add("custom_data", "line_1\nline_2")
     buffer = io.StringIO()
-    RESULT = "\n".join([
+    result = "\n".join([
         "[test]",
         "field_one = value_1",
         "field_two = ",
@@ -175,7 +175,7 @@ def test_section_write_without_params():
 
     section.write(buffer)
 
-    assert buffer.getvalue() == RESULT
+    assert buffer.getvalue() == result
 
 def test_section_write_with_first():
     section = Section(id="test")
@@ -187,7 +187,7 @@ def test_section_write_with_first():
     section.add("field_six", "value_6")
     section.add("field_seven", None)
     buffer = io.StringIO()
-    RESULT = "\n".join([
+    result = "\n".join([
         "[test]",
         "field_three",
         "field_one = value_1",
@@ -202,10 +202,10 @@ def test_section_write_with_first():
 
     section.write(
         buffer,
-        first=["field_three", "field_one", "field_eight", "field_four", "field_nine"]
+        first=("field_three", "field_one", "field_eight", "field_four", "field_nine")
     )
 
-    assert buffer.getvalue() == RESULT
+    assert buffer.getvalue() == result
 
 def test_section_write_with_filter():
     section = Section(id="test")
@@ -217,7 +217,7 @@ def test_section_write_with_filter():
     section.add("field_six", "value_6")
     section.add("field_seven", None)
     buffer = io.StringIO()
-    RESULT = "\n".join([
+    result = "\n".join([
         "[test]",
         "field_two = ",
         "field_three",
@@ -229,7 +229,7 @@ def test_section_write_with_filter():
 
     section.write(buffer, fields_mask=r"field_(t|s)\w+")
 
-    assert buffer.getvalue() == RESULT
+    assert buffer.getvalue() == result
 
 def test_section_write_with_getter():
     def _value_getter(section: Section, field: str) -> str | None:
@@ -241,7 +241,7 @@ def test_section_write_with_getter():
                 return None
             case _:
                 return value.upper()
-    
+
     section = Section(id="test")
     section.add("field_one", "value_1")
     section.add("field_two", "")
@@ -251,7 +251,7 @@ def test_section_write_with_getter():
     section.add("field_six", "value_6")
     section.add("field_seven", None)
     buffer = io.StringIO()
-    RESULT = "\n".join([
+    result = "\n".join([
         "[test]",
         "field_one = VALUE_1",
         "field_two",
@@ -266,7 +266,7 @@ def test_section_write_with_getter():
 
     section.write(buffer, value_getter=_value_getter)
 
-    assert buffer.getvalue() == RESULT
+    assert buffer.getvalue() == result
 
 def test_section_write_with_all_params():
     def _value_getter(section: Section, field: str) -> str | None:
@@ -278,7 +278,7 @@ def test_section_write_with_all_params():
                 return None
             case _:
                 return value.upper()
-    
+
     section = Section(id="test")
     section.add("field_one", "value_1")
     section.add("field_two", "")
@@ -288,7 +288,7 @@ def test_section_write_with_all_params():
     section.add("field_six", "value_6")
     section.add("field_seven", None)
     buffer = io.StringIO()
-    RESULT = "\n".join([
+    result = "\n".join([
         "[test]",
         "field_six = VALUE_6",
         "field_four = VALUE_4",
@@ -302,11 +302,11 @@ def test_section_write_with_all_params():
     section.write(
         buffer,
         fields_mask=r"field_(?!one|five)\w+",
-        first=["field_six", "field_five", "field_four"],
+        first=("field_six", "field_five", "field_four"),
         value_getter=_value_getter
     )
 
-    assert buffer.getvalue() == RESULT
+    assert buffer.getvalue() == result
 
 def test_section_casts():
     # string_wb
@@ -397,33 +397,33 @@ def test_section_casts():
     assert Section.cast_uint("123.456") is None  # 123
 
     # bool
-    assert Section.cast_bool("on") == True
-    assert Section.cast_bool("On") == True
-    assert Section.cast_bool("ON") == True
-    assert Section.cast_bool("yes") == True
-    assert Section.cast_bool("Yes") == True
-    assert Section.cast_bool("YES") == True
-    assert Section.cast_bool("true") == True
-    assert Section.cast_bool("True") == True
-    assert Section.cast_bool("TRUE") == True
-    assert Section.cast_bool("1") == True
-    assert Section.cast_bool("off") == False
-    assert Section.cast_bool("Off") == False
-    assert Section.cast_bool("OFF") == False
-    assert Section.cast_bool("no") == False
-    assert Section.cast_bool("No") == False
-    assert Section.cast_bool("NO") == False
-    assert Section.cast_bool("false") == False
-    assert Section.cast_bool("False") == False
-    assert Section.cast_bool("FALSE") == False
-    assert Section.cast_bool("0") == False
-    assert Section.cast_bool("") is None
-    assert Section.cast_bool("on_") is None
-    assert Section.cast_bool("_on") is None
-    assert Section.cast_bool("not") is None
-    assert Section.cast_bool("00") is None
-    assert Section.cast_bool("11") is None
-    assert Section.cast_bool("2") is None
+    assert Section.cast_bool("on")      is True
+    assert Section.cast_bool("On")      is True
+    assert Section.cast_bool("ON")      is True
+    assert Section.cast_bool("yes")     is True
+    assert Section.cast_bool("Yes")     is True
+    assert Section.cast_bool("YES")     is True
+    assert Section.cast_bool("true")    is True
+    assert Section.cast_bool("True")    is True
+    assert Section.cast_bool("TRUE")    is True
+    assert Section.cast_bool("1")       is True
+    assert Section.cast_bool("off")     is False
+    assert Section.cast_bool("Off")     is False
+    assert Section.cast_bool("OFF")     is False
+    assert Section.cast_bool("no")      is False
+    assert Section.cast_bool("No")      is False
+    assert Section.cast_bool("NO")      is False
+    assert Section.cast_bool("false")   is False
+    assert Section.cast_bool("False")   is False
+    assert Section.cast_bool("FALSE")   is False
+    assert Section.cast_bool("0")       is False
+    assert Section.cast_bool("")        is None
+    assert Section.cast_bool("on_")     is None
+    assert Section.cast_bool("_on")     is None
+    assert Section.cast_bool("not")     is None
+    assert Section.cast_bool("00")      is None
+    assert Section.cast_bool("11")      is None
+    assert Section.cast_bool("2")       is None
 
 def test_section_get_string_wb():
     section = Section(id="test")
@@ -432,13 +432,13 @@ def test_section_get_string_wb():
     section.add("valid_3", 'Text')
     section.add("valid_4", '"Long Text"')
     section.add("no_value", None)
-    
+
     # valid format
     assert section.get_string_wb("valid_1") == ""
     assert section.get_string_wb("valid_2") == ""
     assert section.get_string_wb("valid_3") == "Text"
     assert section.get_string_wb("valid_4") == "Long Text"
-    
+
     # valid format with defval
     assert section.get_string_wb("valid_1", defval="def") == ""
     assert section.get_string_wb("valid_2", defval="def") == ""
@@ -499,7 +499,7 @@ def test_section_get_elem():
     section.add("field_bool_invalid_1", None)
     section.add("field_bool_invalid_2", "")
     section.add("field_bool_invalid_3", "not")
-    
+
     # valid format
     assert section.get_string("field_string_valid_1") == ""
     assert section.get_string("field_string_valid_2") == "123"
@@ -512,15 +512,15 @@ def test_section_get_elem():
     assert section.get_int("field_int_valid_3") == -123
     assert section.get_uint("field_uint_valid_1") == 0
     assert section.get_uint("field_uint_valid_2") == 123
-    assert section.get_bool("field_bool_valid_1") == True
-    assert section.get_bool("field_bool_valid_2") == True
-    assert section.get_bool("field_bool_valid_3") == True
-    assert section.get_bool("field_bool_valid_4") == True
-    assert section.get_bool("field_bool_valid_5") == False
-    assert section.get_bool("field_bool_valid_6") == False
-    assert section.get_bool("field_bool_valid_7") == False
-    assert section.get_bool("field_bool_valid_8") == False
-    
+    assert section.get_bool("field_bool_valid_1") is True
+    assert section.get_bool("field_bool_valid_2") is True
+    assert section.get_bool("field_bool_valid_3") is True
+    assert section.get_bool("field_bool_valid_4") is True
+    assert section.get_bool("field_bool_valid_5") is False
+    assert section.get_bool("field_bool_valid_6") is False
+    assert section.get_bool("field_bool_valid_7") is False
+    assert section.get_bool("field_bool_valid_8") is False
+
     # valid format with defval
     assert section.get_string("field_string_valid_1", defval="def") == ""
     assert section.get_string("field_string_valid_2", defval="def") == "123"
@@ -533,14 +533,14 @@ def test_section_get_elem():
     assert section.get_int("field_int_valid_3", defval=-999) == -123
     assert section.get_uint("field_uint_valid_1", defval=999) == 0
     assert section.get_uint("field_uint_valid_2", defval=999) == 123
-    assert section.get_bool("field_bool_valid_1", defval=False) == True
-    assert section.get_bool("field_bool_valid_2", defval=False) == True
-    assert section.get_bool("field_bool_valid_3", defval=False) == True
-    assert section.get_bool("field_bool_valid_4", defval=False) == True
-    assert section.get_bool("field_bool_valid_5", defval=True) == False
-    assert section.get_bool("field_bool_valid_6", defval=True) == False
-    assert section.get_bool("field_bool_valid_7", defval=True) == False
-    assert section.get_bool("field_bool_valid_8", defval=True) == False
+    assert section.get_bool("field_bool_valid_1", defval=False) is True
+    assert section.get_bool("field_bool_valid_2", defval=False) is True
+    assert section.get_bool("field_bool_valid_3", defval=False) is True
+    assert section.get_bool("field_bool_valid_4", defval=False) is True
+    assert section.get_bool("field_bool_valid_5", defval=True) is False
+    assert section.get_bool("field_bool_valid_6", defval=True) is False
+    assert section.get_bool("field_bool_valid_7", defval=True) is False
+    assert section.get_bool("field_bool_valid_8", defval=True) is False
 
     # no value with defval
     assert section.get_string("field_string_invalid_1", defval="def_1") == "def_1"
@@ -551,8 +551,8 @@ def test_section_get_elem():
     assert section.get_int("field_int_invalid_1", defval=-999) == -999
     assert section.get_uint("field_uint_invalid_1", defval=999) == 999
     assert section.get_uint("field_uint_invalid_1", defval=9999) == 9999
-    assert section.get_bool("field_bool_invalid_1", defval=True) == True
-    assert section.get_bool("field_bool_invalid_1", defval=False) == False
+    assert section.get_bool("field_bool_invalid_1", defval=True) is True
+    assert section.get_bool("field_bool_invalid_1", defval=False) is False
 
     # non-existent with defval
     assert section.get_string("field_string_unknown", defval="def_1") == "def_1"
@@ -563,8 +563,8 @@ def test_section_get_elem():
     assert section.get_int("field_int_unknown", defval=-999) == -999
     assert section.get_uint("field_uint_unknown", defval=999) == 999
     assert section.get_uint("field_uint_unknown", defval=9999) == 9999
-    assert section.get_bool("field_bool_unknown", defval=True) == True
-    assert section.get_bool("field_bool_unknown", defval=False) == False
+    assert section.get_bool("field_bool_unknown", defval=True) is True
+    assert section.get_bool("field_bool_unknown", defval=False) is False
 
     # invalid format OR no value
     with pytest.raises(Section.Error):
@@ -646,7 +646,7 @@ def test_section_get_elems():
     section.add("field_bools_valid_9", "FALSE, TRUE")
     section.add("field_bools_invalid_1", None)
     section.add("field_bools_invalid_2", "no, not")
-    
+
     # valid format
     assert section.get_strings("field_strings_valid_1") == []
     assert section.get_strings("field_strings_valid_2") == ["123"]
@@ -795,7 +795,7 @@ def test_section_get_items_parsing_mode():
     assert section.get_items("items_7", True, "vanilla_ext") == [
         ("medkit_army", 2), ("wpn_rg-6", 1), ("ammo_5.45x39_fmj", 30), ("config\\misc", 1)
     ]
-    
+
 def test_section_get_pair():
     section = Section(id="test")
     section.add("pair_str_1", "Hello, world!")
@@ -829,7 +829,7 @@ def test_section_get_pair():
         _ = section.get_pair_str("unknown_field")
     with pytest.raises(Section.Error):
         _ = section.get_pair_str("list_without_values")
-    
+
     # Размер списка не равен двум
     with pytest.raises(Section.Error):
         _ = section.get_pair_str("list_len_0")
@@ -837,7 +837,7 @@ def test_section_get_pair():
         _ = section.get_pair_str("list_len_1")
     with pytest.raises(Section.Error):
         _ = section.get_pair_str("list_len_3")
-    
+
     # Конвертация значения хотя бы одного элемента невозможна
     with pytest.raises(Section.Error):
         _ = section.get_pair_float("pair_str_1")

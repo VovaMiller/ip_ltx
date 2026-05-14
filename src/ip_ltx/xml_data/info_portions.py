@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 
 from ..ini import system_ini
-from ..utils import print_error, print_warning, read_xml, SingletonBase
+from ..utils import SingletonBase, print_error, print_warning, read_xml
 
 
 @dataclass(frozen=True, slots=True)
@@ -22,7 +22,7 @@ class InfoPortion:
 
 class InfoPortions(SingletonBase):
     """Класс, хранящий информацию о всех инфопоршнях в игре.
-    
+
     Данные об инфопоршнях считываются из xml-файлов,
     перечисленных в секции ``[info_portions]`` из ``system.ltx``.
     """
@@ -46,7 +46,7 @@ class InfoPortions(SingletonBase):
                 root = ET.fromstringlist(xml_lines)
             except ET.ParseError:
                 root = None
-            
+
             # Парсинг: режим совместимости
             if root is None:
                 # Пустые файлы просто пропускаем
@@ -70,10 +70,10 @@ class InfoPortions(SingletonBase):
                 if id is None:
                     continue
                 if id in self._data:
-                    print_warning((
+                    print_warning(
                         f"[XML:{fp_from_config}] "
                         f"Duplicate <info_portion id=\"{id}\" ...>"
-                    ))
+                    )
                     continue
                 self._data[id] = InfoPortion(
                     id=id,
@@ -96,7 +96,7 @@ class InfoPortions(SingletonBase):
 
     def __contains__(self, id: str) -> bool:
         return id in self._data
-    
+
     def __iter__(self):
         return iter(self._data)
 

@@ -1,17 +1,17 @@
+from collections.abc import Container
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Container
 
 import networkx as nx
 
 from .ini import meta_ini
-from .utils import print_error, print_warning, SingletonBase
+from .utils import SingletonBase, print_error, print_warning
 
 # ----------------------------------------------------------------
 
-class Levels(SingletonBase):
+class GameLevels(SingletonBase):
     """Класс, хранящий информацию об игровых локациях и ``game_vertex_id``.
-    
+
     Определяется секцией ``[level_gvids]`` в meta-файле.
     """
 
@@ -31,7 +31,7 @@ class Levels(SingletonBase):
 
     def __len__(self) -> int:
         return len(self._level_gvids)
-    
+
     def as_list(self) -> list[str]:
         return list(self._level_gvids.keys())
 
@@ -63,10 +63,10 @@ class ServerClasses(SingletonBase):
     """
 
     def __init__(self):
-        SN = "server_classes"
+        sn = "server_classes"
 
         # Построение графа
-        sc = meta_ini().section(SN)
+        sc = meta_ini().section(sn)
         self._graph = nx.DiGraph()
         self._graph.add_nodes_from(sc.lines())
         for cse_child in sc.lines():
@@ -74,16 +74,16 @@ class ServerClasses(SingletonBase):
                 if len(cse_parent) > 0:
                     self._graph.add_edge(cse_child, cse_parent)
                 else:
-                    print_warning((
-                        f"[{SN}] {cse_child} "
+                    print_warning(
+                        f"[{sn}] {cse_child} "
                         "is derived from a class with zero-lenth name (ignored)"
-                    ))
-        
+                    )
+
         # Проверка на циклы
         if not nx.is_directed_acyclic_graph(self._graph):
             cycles = nx.simple_cycles(self._graph)
             print_warning("[{}] Server classes' hierarchy has cycles:\n    {}".format(
-                SN,
+                sn,
                 "\n    ".join(
                     [f"{i}: {cycle}" for i, cycle in enumerate(cycles, start=1)]
                 )
@@ -130,14 +130,13 @@ class ObjectType(Enum):
     UNDEFINED       = auto()
 
     def is_mob(self) -> bool:
-        MOB_TYPES = {
+        return self in (
             ObjectType.MONSTER,
             ObjectType.STALKER,
-        }
-        return self in MOB_TYPES
+        )
 
     def is_item(self) -> bool:
-        ITEM_TYPES = {
+        return self in (
             ObjectType.ITEM_ART,
             ObjectType.ITEM_WEAPON,
             ObjectType.ITEM_AMMO,
@@ -145,8 +144,7 @@ class ObjectType(Enum):
             ObjectType.ITEM_ADDON,
             ObjectType.ITEM_OUTFIT,
             ObjectType.ITEM_OTHER,
-        }
-        return self in ITEM_TYPES
+        )
 
 class ObjectTypeDetector(SingletonBase):
     """Класс для определения типа объекта по его клиентскому и серверному классам.
@@ -158,15 +156,15 @@ class ObjectTypeDetector(SingletonBase):
 
     @dataclass(frozen=True)
     class ObjectTypeRule:
-        client_classes: list[str]
-        server_classes: list[str]
+        client_cls: list[str]
+        server_cls: list[str]
 
     _rules: dict[ObjectType, ObjectTypeRule]
     """Правила определения типа объекта. Задаётся для каждого типа, кроме ``OTHER``."""
 
     def __init__(self):
-        SECT_NAME = "object_types"
-        SC = ServerClasses()
+        sn = "object_types"
+        server_classes = ServerClasses()
         fatal = False
 
         # Задание соответствий
@@ -186,33 +184,29 @@ class ObjectTypeDetector(SingletonBase):
 
         # Считывание данных
         self._rules = {}
-        sect = meta_ini().section(SECT_NAME)
+        sect = meta_ini().section(sn)
         for object_type, field in map:
-            client_classes, server_classes = [], []
+            client_cls, server_cls = [], []
             for cls in sect.get_strings(field, mandatory=False):
                 if len(cls) > 0:
-                    if cls in SC:
-                        server_classes.append(cls)
+                    if cls in server_classes:
+                        server_cls.append(cls)
                     else:
-                        client_classes.append(cls)
+                        client_cls.append(cls)
                 else:
-                    print_warning(
-                        f"[{SECT_NAME}] '{field}' has zero-length element (ignored)"
-                    )
-            if (len(client_classes) == 0) and (len(server_classes) == 0):
-                print_error(
-                    f"[{SECT_NAME}] '{field}' is undefined"
-                )
+                    print_warning(f"[{sn}] '{field}' has zero-length element (ignored)")
+            if (len(client_cls) == 0) and (len(server_cls) == 0):
+                print_error(f"[{sn}] '{field}' is undefined")
                 fatal = True
             self._rules[object_type] = self.ObjectTypeRule(
-                client_classes=client_classes,
-                server_classes=server_classes
+                client_cls=client_cls,
+                server_cls=server_cls
             )
-        
-        if fatal:
-            raise Exception(f"[{SECT_NAME}] is not complete")
 
-    def get_object_type(
+        if fatal:
+            raise Exception(f"[{sn}] is not complete")
+
+    def get(
             self,
             client_class: str | None,
             server_class: str | None
@@ -223,14 +217,13 @@ class ObjectTypeDetector(SingletonBase):
         """
         if (client_class is None) and (server_class is None):
             return ObjectType.UNDEFINED
-        SC = ServerClasses()
+        server_classes = ServerClasses()
         for object_type, rules in self._rules.items():
-            if client_class is not None:
-                if client_class in rules.client_classes:
-                    return object_type
+            if (client_class is not None) and (client_class in rules.client_cls):
+                return object_type
             if server_class is not None:
-                for server_class_rule in rules.server_classes:
-                    if SC.issubclass(server_class, server_class_rule):
+                for server_class_rule in rules.server_cls:
+                    if server_classes.issubclass(server_class, server_class_rule):
                         return object_type
         return ObjectType.OTHER
 
@@ -252,18 +245,18 @@ class CLSIDs(SingletonBase):
     _clsids: dict[str, CLSID]
 
     def __init__(self):
-        SECT_NAME = "clsid_to_classes"
-        SC = ServerClasses()
-        OTD = ObjectTypeDetector()
+        sn = "clsid_to_classes"
+        server_classes = ServerClasses()
+        object_type_detector = ObjectTypeDetector()
         fatal = False
-        
+
         # Считывание данных
-        sect = meta_ini().section(SECT_NAME)
+        sect = meta_ini().section(sn)
         self._clsids = {}
         for clsid in sect.lines():
             # Проверка: длина CLSID
             if len(clsid) > 8:
-                print_warning(f"[{SECT_NAME}] len('{clsid}') > 8")
+                print_warning(f"[{sn}] len('{clsid}') > 8")
 
             # Получение классов
             pair = sect.get_pair_str(clsid)
@@ -271,25 +264,25 @@ class CLSIDs(SingletonBase):
             server_class = pair[1] if len(pair[1]) > 0 else None
 
             # Валидация: указанный серверный класс зарегистрирован
-            if (server_class is not None) and (server_class not in SC):
-                print_error((
-                    f"[{SECT_NAME}] {clsid} is assigned "
+            if (server_class is not None) and (server_class not in server_classes):
+                print_error(
+                    f"[{sn}] {clsid} is assigned "
                     f"to an unregistered server class '{server_class}'"
-                ))
+                )
                 fatal = True
                 continue
 
             # Валидация: указанный клиентский класс не является серверным
-            if (client_class is not None) and (client_class in SC):
-                print_error((
-                    f"[{SECT_NAME}] Client class of {clsid} "
+            if (client_class is not None) and (client_class in server_classes):
+                print_error(
+                    f"[{sn}] Client class of {clsid} "
                     f"('{client_class}') is registered as a server class"
-                ))
+                )
                 fatal = True
                 continue
 
             # Получение типа объекта
-            object_type = OTD.get_object_type(client_class, server_class)
+            object_type = object_type_detector.get(client_class, server_class)
 
             # Сохранение
             self._clsids[clsid] = self.CLSID(
@@ -304,18 +297,18 @@ class CLSIDs(SingletonBase):
 
     def __contains__(self, clsid: str) -> bool:
         return clsid in self._clsids
-    
+
     def __getitem__(self, clsid: str) -> CLSID:
         if clsid not in self._clsids:
             raise KeyError(f"clsid {clsid} doesn't exist")
         return self._clsids[clsid]
-    
+
     def __iter__(self):
         return iter(self._clsids)
 
     def __len__(self):
         return len(self._clsids)
-    
+
     def data(self):
         return self._clsids.values()
 
@@ -358,31 +351,31 @@ class CLSIDs(SingletonBase):
             return (ot == types)
         else:
             return (ot in types)
-        
+
     def is_monster(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.MONSTER)
-        
+
     def is_stalker(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.STALKER)
 
     def is_anomaly(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ANOMALY)
-        
+
     def is_artefact(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ITEM_ART)
-        
+
     def is_weapon(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ITEM_WEAPON)
-        
+
     def is_ammo(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ITEM_AMMO)
-        
+
     def is_grenade(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ITEM_GRENADE)
-        
+
     def is_weapon_addon(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ITEM_ADDON)
-        
+
     def is_outfit(self, clsid: str) -> bool:
         return self._is_object_type(clsid, ObjectType.ITEM_OUTFIT)
 

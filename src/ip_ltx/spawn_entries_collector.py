@@ -1,8 +1,10 @@
-from .db import ADDON_FLAGS
-from .ini import system_ini, spawn_ini
+from collections.abc import Container
+
+from .db import AddonFlags
+from .ini import spawn_ini, system_ini
 from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
-from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
+from .treasure_manager_ext import SpawnEntriesPool, SpawnEntry
 from .utils_meta import ObjectType
 
 
@@ -14,60 +16,65 @@ class SpawnEntriesCollector:
     def __init__(self):
         self.result = SpawnEntriesPool()
 
-    def from_treasure_manager(self, levels: list[str] = []) -> None:
+    def from_treasure_manager(self, levels: Container[str]) -> None:
         """Сборка вхождений с тайников из системы treasure_manager.
 
         Учитывает список ``items`` из конфига тайника и предметы
         из секций ``[spawn]`` и ``[spawn_tm]`` из ``custom_data``
         соответствующего тайнику спавн-объекта.
 
-        :param levels: Список локаций, по которым осуществляется сборка.
+        :param levels: Набор локаций, по которым осуществляется сборка.
         """
-        TM = TreasureManager()
+        treasure_manager = TreasureManager()
         spawn = get_spawn()
         entries = SpawnEntriesPool()
-        for treasure in TM:
+        for treasure in treasure_manager:
             obj = spawn.story_object(treasure.target)
             if obj._level in levels:
                 # all.spawn: [spawn] & [spawn_tm]
                 entries.merge(obj._loot)
                 # treasure_manager.ltx: items
-                entries.merge(SpawnEntriesPool.from_items(TM.ini.section(treasure._id)))
+                entries.merge(SpawnEntriesPool.from_items(
+                    treasure_manager.ini.section(treasure._id)
+                ))
         self.result.merge(entries)
 
-    def from_non_tm_inventories(self, levels: list[str] = []) -> None:
+    def from_non_tm_inventories(self, levels: Container[str]) -> None:
         """Сборка вхождений с некоторых инвентарей.
 
         1. inventory_box (``O_INVBOX``) вне системы тайников.
         2. Мёртвые NPC (``AI_STL_S``) с предзаспавненным лутом.
            Эта сборка не учитывает лут, определённый системой
            death_manager и/или полем supplies в характеристике NPC.
-        
-        :param levels: Список локаций, по которым осуществляется сборка.
+
+        :param levels: Набор локаций, по которым осуществляется сборка.
         """
-        TM = TreasureManager()
+        treasure_manager = TreasureManager()
         spawn = get_spawn()
         ini_spawn = spawn_ini()
         entries = SpawnEntriesPool()
         for obj in spawn.objects():
             if obj._level not in levels:
                 continue
-            if obj._class == "O_INVBOX":
-                if obj.story_id not in TM:
-                    entries.merge(obj._loot)
-            elif obj._class == "AI_STL_S":
-                if ini_spawn.get_float(obj._id, "health", 1.0) < 0.01:
-                    if obj.custom_data.section_exist("dont_touch_old_loot"):
+            match obj._class:
+                case "O_INVBOX":
+                    if obj.story_id not in treasure_manager:
+                        entries.merge(obj._loot)
+                case "AI_STL_S":
+                    if (
+                        (ini_spawn.get_float(obj._id, "health", 1.0) < 0.01)
+                        and obj.custom_data.section_exist("dont_touch_old_loot")
+                    ):
                         entries.merge(obj._loot)
         self.result.merge(entries)
 
-    def from_drop_box_items(self, levels: list[str] = []) -> None:
+    def from_drop_box_items(self, levels: Container[str]) -> None:
         """Сборка предметов из drop_box/items (``xr_box``).
 
         Эта сборка учитывает только детерминированный спавн,
         рандомизированный игнорируется.
 
-        :param levels: Список локаций, по которым осуществляется сборка.
+        :param levels: Набор локаций, по которым осуществляется сборка.
         """
         spawn = get_spawn()
         entries = SpawnEntriesPool()
@@ -82,7 +89,7 @@ class SpawnEntriesCollector:
                     entries.add(SpawnEntry(item, str(count), f"custom_data@{obj.name}"))
         self.result.merge(entries)
 
-    def from_level_items(self, levels: list[str] = []) -> None:
+    def from_level_items(self, levels: Container[str]) -> None:
         """Сборка предметов, лежащих в открытую на локации.
 
         В специфических случаях, когда состояние боеприпасов
@@ -91,8 +98,8 @@ class SpawnEntriesCollector:
         а оружие при этом считается разряженным.
 
         Предметы с `can_take = false` в конфиге секции игнорируются.
-        
-        :param levels: Список локаций, по которым осуществляется сборка.
+
+        :param levels: Набор локаций, по которым осуществляется сборка.
         """
         ini_system = system_ini()
         ini_spawn = spawn_ini()
@@ -108,7 +115,7 @@ class SpawnEntriesCollector:
             if not ini_system.get_bool(obj.section_name, "can_take", True):
                 # Пропускаем предмет, если его нельзя подобрать
                 continue
-            
+
             # alias
             sname = obj.section_name
 
@@ -120,7 +127,7 @@ class SpawnEntriesCollector:
             launcher = False
             unload = False
             extra_ammo = None  # боеприпасы оружия как доп. вхождение
-            
+
             # Сборка инфы спавна
             cond = obj.get_condition()
             if obj._type == ObjectType.ITEM_AMMO:
@@ -145,10 +152,10 @@ class SpawnEntriesCollector:
                         )
                         unload = True
                 addon_flags = ini_spawn.get_uint(obj._id, "upd:addon_flags", 0)
-                scope       = ((addon_flags & ADDON_FLAGS.scope) != 0)
-                launcher    = ((addon_flags & ADDON_FLAGS.launcher) != 0)
-                silencer    = ((addon_flags & ADDON_FLAGS.silencer) != 0)
-            
+                scope       = ((addon_flags & AddonFlags.scope) != 0)
+                launcher    = ((addon_flags & AddonFlags.launcher) != 0)
+                silencer    = ((addon_flags & AddonFlags.silencer) != 0)
+
             # Запись собранной инфы
             params = "{}{}{}{}{}{}".format(
                 "" if (cond is None) else " cond={:.2f}".format(cond),

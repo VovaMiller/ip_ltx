@@ -7,7 +7,7 @@ def main():
 
     asp.validate_spawn_data()
 
-    LEVELS_ALL = [
+    _levels_all = [
         "l01_escape",
         "l02_garbage",
         "l03_agroprom",
@@ -31,13 +31,13 @@ def main():
     print("-"*80)
 
     run(asp.check_anomalies, "anomalies",
-        levels=LEVELS_ALL,
+        levels=_levels_all,
         level_for_details="l03_agroprom"
     )
 
-    for level in LEVELS_ALL:
+    for level in _levels_all:
         run(asp.extract_mobs, f"mobs__{level}", level=level)
-    
+
     print("-"*80)
 
 # ----------------------------------------------------------------
@@ -50,13 +50,13 @@ if __name__ == "__main__":
         from pathlib import Path
         if (
             "META_FILEPATH" in globals()
-            and type(META_FILEPATH) == str
+            and isinstance(META_FILEPATH, str)
             and len(META_FILEPATH) > 0
         ):
             os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())
         if (
             "HIDE_GAMEDATA_LTX_WARNINGS" in globals()
-            and type(HIDE_GAMEDATA_LTX_WARNINGS) == bool
+            and isinstance(HIDE_GAMEDATA_LTX_WARNINGS, bool)
         ):
             os.environ["HIDE_GAMEDATA_LTX_WARNINGS"] = (
                 str(int(HIDE_GAMEDATA_LTX_WARNINGS))

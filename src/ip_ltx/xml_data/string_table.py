@@ -3,7 +3,7 @@
 import xml.etree.ElementTree as ET
 
 from ..ini import system_ini
-from ..utils import print_error, print_warning, read_xml, SingletonBase
+from ..utils import SingletonBase, print_error, print_warning, read_xml
 
 
 class StringTable(SingletonBase):
@@ -45,12 +45,9 @@ class StringTable(SingletonBase):
                         )
                     self._data[id] = str(elem_text.text)
 
-    def get[R](self, id: str, defval: R) -> str | R:
-        return self._data.get(id, defval)
-
     def __contains__(self, id: str) -> bool:
         return id in self._data
-    
+
     def __iter__(self):
         return iter(self._data)
 
@@ -59,3 +56,6 @@ class StringTable(SingletonBase):
 
     def __len__(self):
         return len(self._data)
+
+    def get[R](self, id: str, defval: R) -> str | R:
+        return self._data.get(id, defval)

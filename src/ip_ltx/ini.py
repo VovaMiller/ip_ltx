@@ -3,20 +3,22 @@ from pathlib import Path
 
 from .ip_ltx import Ini
 
-
 _INI_META = None
 _INI_SYSTEM = None
 _INI_SPAWN = None
 _INI_GAME = None
 
 def _read_ini_meta():
-    meta_fp = os.environ.get("META_FILEPATH", "")
-    if len(meta_fp) == 0:
-        meta_fp = str(Path(os.getcwd()).joinpath(Path("_meta.ltx")))
-    if not os.path.isfile(meta_fp):
-        raise FileNotFoundError(meta_fp)
-    ini = Ini(name=os.path.basename(meta_fp))
-    ini.read(meta_fp)
+    meta_fp_environ: str = os.environ.get("META_FILEPATH", "")
+    meta_fp: Path = (
+        Path(meta_fp_environ)
+        if len(meta_fp_environ) > 0
+        else Path.cwd().joinpath("_meta.ltx")
+    )
+    if not meta_fp.is_file():
+        raise FileNotFoundError(str(meta_fp))
+    ini = Ini(name=meta_fp.name)
+    ini.read(str(meta_fp))
     return ini
 
 def _read_ini_system():
@@ -26,10 +28,7 @@ def _read_ini_system():
 
 def _read_ini_spawn():
     ini = Ini(name="all.spawn", ini_meta=meta_ini())
-    sect_db = meta_ini()._s.get("spawn", None)
-    if sect_db is None:
-        raise Exception("meta-file doesn't have mandatory section [spawn]")
-    for path in sect_db._fields.keys():
+    for path in meta_ini().section("spawn").lines():
         ini.read(path, inside_gamedata=True)
     return ini
 

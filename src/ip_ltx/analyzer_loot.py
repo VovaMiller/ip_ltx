@@ -3,23 +3,23 @@
 import itertools
 import math
 import traceback
-from pathlib import Path
 from collections import OrderedDict
+from collections.abc import Collection
+from pathlib import Path
 
-from .ini import meta_ini, system_ini, spawn_ini
+from .ini import meta_ini, spawn_ini, system_ini
 from .misc.treasure_manager import TreasureManager
-from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
-from .xml_data.string_table import StringTable
 from .spawn import get_spawn
 from .spawn_entries_collector import SpawnEntriesCollector
+from .treasure_manager_ext import SpawnEntriesPool, SpawnEntry
 from .utils import (
-    ANSI_COLOR_CODE,
+    ANSIColorCode,
     preinit_singletons,
-    print_warning,
     print_error,
     validate_data,
 )
 from .utils_meta import CLSIDs
+from .xml_data.string_table import StringTable
 
 # ----------------------------------------------------------------
 
@@ -34,20 +34,18 @@ def tm__extract_loot_each(
     :param show_strings: Также показать имя и описание тайника.
     :param show_visual: Также показать используемый тайником визуал.
     """
-    TM = TreasureManager()
+    tm = TreasureManager()
     ini_spawn = spawn_ini()
     spawn = get_spawn()
-
-    # Извлекаем имена и описания
-    ST = StringTable() if show_strings else {}
+    st = StringTable() if show_strings else {}
 
     # Выписываем содержимое тайников.
-    with open(fn, "w", encoding="utf-8") as file:
-        for treasure in TM:
+    with Path(fn).open("w", encoding="utf-8") as file:
+        for treasure in tm:
             obj = spawn.story_object(treasure.target)
             if show_strings:
-                name_txt = ST.get(treasure.name, treasure.name) or "?"
-                desc_txt = ST.get(treasure.description, treasure.description) or "?"
+                name_txt = st.get(treasure.name, treasure.name) or "?"
+                desc_txt = st.get(treasure.description, treasure.description) or "?"
                 file.write(f"; {name_txt}\n")
                 file.write(f"; {desc_txt}\n")
             if show_visual:
@@ -58,7 +56,7 @@ def tm__extract_loot_each(
             ))
             file.write("\n".join([
                 str(e) for e in itertools.chain(
-                    SpawnEntriesPool.from_items(TM.ini.section(treasure._id)).entries(),
+                    SpawnEntriesPool.from_items(tm.ini.section(treasure._id)).entries(),
                     obj._loot.entries()
                 )
             ]))
@@ -70,10 +68,10 @@ def tm__extract_position(fn: str) -> None:
 
     :param fn: Путь/имя файла для вывода.
     """
-    TM = TreasureManager()
+    tm = TreasureManager()
     spawn = get_spawn()
-    with open(fn, "w", encoding="utf-8") as file:
-        for treasure in TM:
+    with Path(fn).open("w", encoding="utf-8") as file:
+        for treasure in tm:
             obj = spawn.story_object(treasure.target)
             str_pos = ",".join([str(p) for p in obj.position])
             file.write(f"{{\"{treasure._id}\", {{{str_pos}}}}},\n")
@@ -81,23 +79,23 @@ def tm__extract_position(fn: str) -> None:
 
 def tm__count_by_levels(fn: str) -> None:
     """Подсчёт кол-ва тайников по каждой локации.
-    
+
     :param fn: Путь/имя файла для вывода.
     """
-    TM = TreasureManager()
+    tm = TreasureManager()
     spawn = get_spawn()
 
     # counting
     cnt_by_lvl = {}
-    for treasure in TM:
+    for treasure in tm:
         obj = spawn.story_object(treasure.target)
         if obj._level not in cnt_by_lvl:
             cnt_by_lvl[obj._level] = 0
         cnt_by_lvl[obj._level] += 1
 
     # writing down
-    with open(fn, "w", encoding="utf-8") as file:
-        offset = ((max([len(lvl) for lvl in cnt_by_lvl.keys()]) // 4) + 1) * 4
+    with Path(fn).open("w", encoding="utf-8") as file:
+        offset = ((max([len(lvl) for lvl in cnt_by_lvl]) // 4) + 1) * 4
         for lvl, cnt in sorted(cnt_by_lvl.items(), key=lambda x: x[0]):
             file.write("{}{}{}\n".format(lvl, " "*(offset - len(lvl)), cnt))
         file.write("{}\n".format("-"*(offset+2)))
@@ -110,17 +108,17 @@ def tm__calculate_prob_w(fn: str) -> None:
 
     :param fn: Путь/имя файла для вывода.
     """
-    TM = TreasureManager()
+    tm = TreasureManager()
     spawn = get_spawn()
     d = OrderedDict()
-    for treasure in TM:
+    for treasure in tm:
         obj = spawn.story_object(treasure.target)
-        cost = round(obj._loot.cost(trade=False))
+        cost = round(obj._loot.cost(in_trade=False))
         prob_w = 0 if (cost == 0) else math.ceil(1000000 / cost)
         d[treasure._id] = prob_w
-    offset_0 = ((max([len(k) for k in d.keys()]) // 4) + 1) * 4
+    offset_0 = ((max([len(k) for k in d]) // 4) + 1) * 4
     offset_1 = ((max([len(str(v)) for v in d.values()]) // 4) + 1) * 4
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         file.write("# treasure_id, prob_w\n")
         for tid, prob_w in d.items():
             file.write("{}{}{}{}\n".format(
@@ -133,13 +131,13 @@ def tm__calculate_prob_w(fn: str) -> None:
 
 def summary(
         fp: str,
+        levels: Collection[str],
         include_treasure_manager: bool = False,
         include_non_tm_inventories: bool = False,
         include_drop_box_items: bool = False,
         include_level_items: bool = False,
         compress: bool = False,
-        show_unlisted_items: bool = False,
-        levels: list[str] = []
+        show_unlisted_items: bool = False
 ) -> None:
     """Сводка по предметам в игре из разных источников на указанных локациях.
 
@@ -149,9 +147,10 @@ def summary(
     В пределах каждого типа сохраняется порядок секций,
     как они встречаются в ``system.ltx``.
     Также выводится метрика по всему собранному содержимому.
-    
+
     :param fp: Путь до файла для вывода.
-    
+    :param levels: Набор локаций, по которым осуществляется сводка.
+
     :param include_treasure_manager: Учесть предметы из тайников,
         зарегистрированных в системе treasure_manager.
     :param include_non_tm_inventories: Учесть предметы из хранилищ,
@@ -171,8 +170,6 @@ def summary(
         с нулевым количеством (count). Не будут отображены секции,
         перечисленные в ``[ignore_sections]``, а также вспомогательные
         секции оружия для многоприцельности.
-    
-    :param levels: Список локаций, по которым осуществляется сводка.
 
     **Примеры использования**:
 
@@ -183,7 +180,7 @@ def summary(
     """
     ini_meta = meta_ini()
     ini_system = system_ini()
-    CLSIDS = CLSIDs()
+    clsids = CLSIDs()
     _sections = {}
     msgs_w, msgs_e = [], []
     metrics = []
@@ -191,7 +188,7 @@ def summary(
     # meta verification
     if not ini_meta.section_exist("ignore_sections"):
         raise Exception("meta-file doesn't have mandatory section [ignore_sections]")
-    
+
     # Запоминаем порядковые номера секций предметов для финальной сортировки
     _sections = {id: i for i, id in enumerate(ini_system._s.keys())}
 
@@ -207,13 +204,13 @@ def summary(
         if include:
             collector(levels=levels)
     entries = sec.result
-    
+
     # Подсчёт различных метрик.
     metrics.append((
-        "cost", round(entries.cost(trade=False))
+        "cost", round(entries.cost(in_trade=False))
     ))
     metrics.append((
-        "cost_trade", round(entries.cost(trade=True))
+        "cost_trade", round(entries.cost(in_trade=True))
     ))
     metrics.append((
         "game_objects_count", entries.game_objects_count(ignore_prob=False)
@@ -227,10 +224,10 @@ def summary(
             if (len(_class) == 0):
                 # Пропускаем секции без поля class.
                 continue
-            if (_class not in CLSIDS):
+            if (_class not in clsids):
                 # Пропускаем секции с невалидным значением поля class.
                 continue
-            if not CLSIDS.is_item(_class):
+            if not clsids.is_item(_class):
                 # Если не инвентарный предмет, то пропускаем.
                 continue
             if _section_exists.get(id, False):
@@ -240,7 +237,7 @@ def summary(
                 # Пропускаем игнорируемые секции.
                 continue
             if (
-                CLSIDS.is_weapon(_class)
+                clsids.is_weapon(_class)
                 and (len(sect.get_string("scope_respawn", "")) > 0)
             ):
                 # Пропускаем вспомогательные секции оружия для многоприцельности.
@@ -259,7 +256,7 @@ def summary(
 
     # Финальное преобразование: ряд сортировок
     entries = sorted(
-        list(entries.pool.values()),
+        entries.pool.values(),
         key=lambda se: (
             se._type.value,     # (1) по порядковому номеру типа инвентарного предмета
             _sections[se.name], # (2) по порядковому номеру секции
@@ -279,11 +276,11 @@ def summary(
     for se in entries:
         if len(se.name) > offset_by_type.get(se._type, 0):
             offset_by_type[se._type] = len(se.name)
-    for _type in offset_by_type.keys():
+    for _type in offset_by_type:
         offset_by_type[_type] = ((offset_by_type[_type] // 4) + 1) * 4
 
     # Вывод в файл
-    with open(fp, "w", encoding="utf-8") as file:
+    with Path(fp).open("w", encoding="utf-8") as file:
         file.write("[options]\n")
         file.write(f"include_treasure_manager = {include_treasure_manager}\n")
         file.write(f"include_non_tm_inventories = {include_non_tm_inventories}\n")
@@ -302,7 +299,7 @@ def summary(
         if len(metrics) > 0:
             file.write("[metrics]\n")
             for label, value in metrics:
-                if type(value) == float:
+                if isinstance(value, float):
                     file.write("{} = {:.1f}\n".format(label, value))
                 else:
                     file.write("{} = {}\n".format(label, value))
@@ -322,20 +319,20 @@ def summary(
 
 # ----------------------------------------------------------------
 
-def run_summary(group_name: str, levels: list[str]) -> None:
+def run_summary(group_name: str, levels: Collection[str]) -> None:
     """Функция для запуска ряда сводок по данном списку локаций.
-    
+
     * Местный аналог функции-обёртки :func:`~ip_ltx.utils.run`.
     * Перехватывает любые исключения и выводит информацию о них.
     * Вывод всех сводок осуществляется в отдельную поддиректорию.
-    
+
     :param group_name: Имя группы. Используется для наименования поддиректории.
-    :param levels: Список локаций, по которым осуществляются сводки.
+    :param levels: Набор локаций, по которым осуществляются сводки.
     """
     def _run_summary(dir_name, file_tag, **kwargs):
         fn = "{}__{}.txt".format(dir_name, file_tag)
         fp = "{}/{}".format(dir_name, fn)
-        summary(fp, **kwargs)
+        summary(fp, levels, **kwargs)
 
     dn = f"{summary.__name__}__{group_name}"
     Path(dn).mkdir(exist_ok=True)
@@ -343,58 +340,51 @@ def run_summary(group_name: str, levels: list[str]) -> None:
         _run_summary(dn, "01_TM",
             include_treasure_manager=True, include_non_tm_inventories=False,
             include_drop_box_items=False, include_level_items=False,
-            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1),
-            levels=levels
+            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1)
         )
         _run_summary(dn, "02_NonTM",
             include_treasure_manager=False, include_non_tm_inventories=True,
             include_drop_box_items=False, include_level_items=False,
-            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1),
-            levels=levels
+            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1)
         )
         _run_summary(dn, "03_DropBox",
             include_treasure_manager=False, include_non_tm_inventories=False,
             include_drop_box_items=True, include_level_items=False,
-            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1),
-            levels=levels
+            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1)
         )
         _run_summary(dn, "04_NoParent",
             include_treasure_manager=False, include_non_tm_inventories=False,
             include_drop_box_items=False, include_level_items=True,
-            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1),
-            levels=levels
+            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1)
         )
         _run_summary(dn, "05_All",
             include_treasure_manager=True, include_non_tm_inventories=True,
             include_drop_box_items=True, include_level_items=True,
-            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1),
-            levels=levels
+            compress=(len(levels) > 1), show_unlisted_items=(len(levels) > 1)
         )
         if len(levels) == 1:
             _run_summary(dn, "06_AllExt",
                 include_treasure_manager=True, include_non_tm_inventories=True,
                 include_drop_box_items=True, include_level_items=True,
-                compress=False, show_unlisted_items=True,
-                levels=levels
+                compress=False, show_unlisted_items=True
             )
             _run_summary(dn, "07_AllExtComp",
                 include_treasure_manager=True, include_non_tm_inventories=True,
                 include_drop_box_items=True, include_level_items=True,
-                compress=True, show_unlisted_items=True,
-                levels=levels
+                compress=True, show_unlisted_items=True
             )
-    except Exception as e:
+    except Exception:
         print("")
-        print((
-            f"{ANSI_COLOR_CODE.RED}"
+        print(
+            f"{ANSIColorCode.RED}"
             f"! {dn}"
-            f"{ANSI_COLOR_CODE.DEF}"
-        ))
+            f"{ANSIColorCode.DEF}"
+        )
         print(traceback.format_exc())
         print("", flush=True)
     else:
         print(
-            f"{ANSI_COLOR_CODE.GREEN}+{ANSI_COLOR_CODE.DEF}",
+            f"{ANSIColorCode.GREEN}+{ANSIColorCode.DEF}",
             dn,
             flush=True
         )

@@ -45,12 +45,11 @@ from typing import TextIO
 from pathvalidate import is_valid_filename
 
 from ..ip_ltx import Ini, Section
-from ..utils import ANSI_COLOR_CODE, print_error, print_warning
-
+from ..utils import ANSIColorCode, print_error, print_warning
 
 _IDS_MASK = r"^[^@].*$"
 _VNONE = "__NONE__"
-_FIRST = [
+_FIRST = (
     "section_name",
     "name",
     "position",
@@ -64,7 +63,7 @@ _FIRST = [
     "custom_data",
     "story_id",
     "visual_name",
-]
+)
 _OVERRIDE = {
     "upd:position": "position",
     "upd:g_team": "g_team",
@@ -76,7 +75,7 @@ _OVERRIDE_ID = {
     "name"
 }
 
-_ACDC_LABEL = f"{ANSI_COLOR_CODE.BLACK}ACDC/compiler{ANSI_COLOR_CODE.DEF}"
+_ACDC_LABEL = f"{ANSIColorCode.BLACK}ACDC/compiler{ANSIColorCode.DEF}"
 _ACDC_CMD = ["perl", "acdc.pl", "-c", "all.ltx"]
 
 
@@ -84,7 +83,7 @@ def _ini_write(
         ini: Ini,
         file: TextIO,
         ids_mask: str | None,
-        first: list[str],
+        first: tuple[str, ...],
         vnone: str,
         override: dict[str, str],
         override_id: set[str]
@@ -95,7 +94,7 @@ def _ini_write(
 
     :param file: Открытый файл для записи.
     :param ids_mask: Маска-фильтр, определяющая, секции с каким ID выводить.
-    :param first: Список имён полей, которые нужно вывести в первую очередь.
+    :param first: Перечисление имён полей, которые нужно вывести в первую очередь.
 
     :param vnone: Значение поля, при котором оно считается условно незаполненным.
         Попытка вывода поля с таким значением вызывает исключение,
@@ -129,7 +128,7 @@ def _ini_write(
 def _print_line() -> None:
     """Функция для вывода разделительной линии, используемая функциями данного модуля.
     """
-    print(ANSI_COLOR_CODE.BLACK, "-"*64, ANSI_COLOR_CODE.DEF, sep="")
+    print(ANSIColorCode.BLACK, "-"*64, ANSIColorCode.DEF, sep="")
 
 
 def build(
@@ -160,9 +159,9 @@ def build(
     """
     _print_line()
     print(
-        ANSI_COLOR_CODE.BLACK,
+        ANSIColorCode.BLACK,
         f"# {Path(__file__).name}",
-        ANSI_COLOR_CODE.DEF,
+        ANSIColorCode.DEF,
         sep="",
         flush=True
     )
@@ -183,7 +182,7 @@ def build(
         print_error("Input and output directories can't be the same")
         _print_line()
         return False
-    
+
     # Проверка имён файлов
     filenames_ok = True
     for filename in itertools.chain(alife_list, way_list):
@@ -204,7 +203,7 @@ def build(
     if not all_files_exist:
         _print_line()
         return False
-    
+
     # Компиляция alife_*.ltx
     if len(alife_list) == 0:
         print_warning("No alife_*.ltx files")
@@ -215,14 +214,14 @@ def build(
                 output_fp = str(output_path.joinpath(fn))
                 ini = Ini()
                 ini.read(input_fp, preserve_value_whitespaces=True)
-                with open(output_fp, "w", encoding="utf-8") as file:
+                with Path(output_fp).open("w", encoding="utf-8") as file:
                     _ini_write(
                         ini, file, _IDS_MASK, _FIRST, _VNONE, _OVERRIDE, _OVERRIDE_ID
                     )
-            except Exception as e:
+            except Exception:
                 print("")
                 print(
-                    f"{ANSI_COLOR_CODE.RED}-{ANSI_COLOR_CODE.DEF}",
+                    f"{ANSIColorCode.RED}-{ANSIColorCode.DEF}",
                     f"({i+1}/{len(alife_list)}) {fn}"
                 )
                 print(traceback.format_exc())
@@ -231,7 +230,7 @@ def build(
             else:
                 shift = len(str(len(alife_list))) - len(str(i+1))
                 print(
-                    f"{ANSI_COLOR_CODE.GREEN}+{ANSI_COLOR_CODE.DEF}",
+                    f"{ANSIColorCode.GREEN}+{ANSIColorCode.DEF}",
                     f"{" "*shift}({i+1}/{len(alife_list)}) {fn}",
                     flush=True
                 )
@@ -242,12 +241,12 @@ def build(
         print_warning("No way_*.ltx files")
     else:
         copied_counter = 0
-        for i, fn in enumerate(way_list):
+        for fn in way_list:
             try:
                 shutil.copy2(input_path.joinpath(fn), output_path.joinpath(fn))
             except Exception as e:
                 print(
-                    f"{ANSI_COLOR_CODE.RED}-{ANSI_COLOR_CODE.DEF}",
+                    f"{ANSIColorCode.RED}-{ANSIColorCode.DEF}",
                     f"{fn}:",
                     str(e)
                 )
@@ -257,9 +256,9 @@ def build(
         else:
             if copied_counter > 0:
                 prefix = (
-                    f"{ANSI_COLOR_CODE.GREEN}+{ANSI_COLOR_CODE.DEF}"
+                    f"{ANSIColorCode.GREEN}+{ANSIColorCode.DEF}"
                     if copied_counter == len(way_list)
-                    else f"{ANSI_COLOR_CODE.YELLOW}+{ANSI_COLOR_CODE.DEF}"
+                    else f"{ANSIColorCode.YELLOW}+{ANSIColorCode.DEF}"
                 )
                 postfix = (
                     f"({copied_counter})"
@@ -323,6 +322,6 @@ def acdc_compile(acdc_dir: str, spawns_dir: str) -> bool:
         print_error(f"Can't save compiled all.spawn: {e}")
         _print_line()
         return False
-    
+
     _print_line()
     return True

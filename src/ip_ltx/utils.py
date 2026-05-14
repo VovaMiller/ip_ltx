@@ -3,14 +3,15 @@ import re
 import sys
 import traceback
 from collections.abc import Callable
+from enum import StrEnum
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Any, ClassVar, Protocol
 
 # ----------------------------------------------------------------
 
 os.system("")  # enables colors for Windows consoles
 
-class ANSI_COLOR_CODE:
+class ANSIColorCode(StrEnum):
     DEF = '\033[0m'
     BLACK   = '\033[90m'  # '\033[30m'
     RED     = '\033[91m'  # '\033[31m'
@@ -29,25 +30,25 @@ class ANSI_COLOR_CODE:
 
 def print_warning(msg, prefix: bool = True, color: bool = True):
     msg_fmt = "{}{}{}{} ".format(
-        ANSI_COLOR_CODE.YELLOW if color else "",
+        ANSIColorCode.YELLOW if color else "",
         "~ " if prefix else "",
         msg,
-        ANSI_COLOR_CODE.DEF if color else "",
+        ANSIColorCode.DEF if color else "",
     )
     print(msg_fmt, file=sys.stderr)
 
 def print_error(msg, prefix: bool = True, color: bool = True):
     msg_fmt = "{}{}{}{} ".format(
-        ANSI_COLOR_CODE.RED if color else "",
+        ANSIColorCode.RED if color else "",
         "! " if prefix else "",
         msg,
-        ANSI_COLOR_CODE.DEF if color else "",
+        ANSIColorCode.DEF if color else "",
     )
     print(msg_fmt, file=sys.stderr)
 
 # ----------------------------------------------------------------
 
-def read_file(fp: str) -> str:
+def read_file(fp: Path) -> str:
     """Основная функция для считывания содержимого файла.
 
     При открытии пробует ряд основных кодировок:
@@ -61,13 +62,13 @@ def read_file(fp: str) -> str:
     :raises UnicodeDecodeError: если файл не удалось считать ни одной кодировкой.
     :returns: Содержимое файла.
     """
-    ENCODINGS = ["utf-8-sig", "cp1251", None]
-    for i, encoding in enumerate(ENCODINGS):
+    encodings = ("utf-8-sig", "cp1251", None)
+    for i, encoding in enumerate(encodings):
         try:
-            with open(fp, "r", encoding=encoding) as file:
+            with fp.open("r", encoding=encoding) as file:
                 return file.read()
         except UnicodeDecodeError:
-            if i == (len(ENCODINGS) - 1):
+            if i == (len(encodings) - 1):
                 raise
             continue
     return ""
@@ -87,7 +88,7 @@ def cast_safe[R,D](
 # ----------------------------------------------------------------
 
 class SingletonMeta(type):
-    _instances = {}
+    _instances: ClassVar[dict[Any, Any]] = {}
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
             cls._instances[cls] = super().__call__(*args, **kwargs)
@@ -115,20 +116,20 @@ def validate_data(funcs: list[Callable[[], Any]]) -> None:
     except Exception as e:
         msg = f"Mandatory data validation failed ({func_name})"
         print("")
-        print((
-            f"{ANSI_COLOR_CODE.RED}"
+        print(
+            f"{ANSIColorCode.RED}"
             f"! {msg}"
-            f"{ANSI_COLOR_CODE.DEF}"
-        ))
+            f"{ANSIColorCode.DEF}"
+        )
         print(traceback.format_exc())
         print("", flush=True)
-        raise Exception(msg)
+        raise Exception(msg) from e
 
 def preinit_singletons(singletons: list[type[SingletonBase]]) -> None:
     """Вспомогательная функция для предварительной инициализации singleton-классов.
 
     Может быть использована для предварительной валидации всех необходимых данных.
-    
+
     :param singletons: Список классов, базирующихся на :class:`SingletonBase`.
     :raises Exception: если валидация не пройдена.
     """
@@ -165,20 +166,18 @@ def run(f: Runnable, tag: str, **kwargs: Any) -> None:
     fn = f"{prefix}__{tag}.txt"
     try:
         f(fn, **kwargs)
-    except Exception as e:
+    except Exception:
         print("")
-        print((
-            f"{ANSI_COLOR_CODE.RED}"
+        print(
+            f"{ANSIColorCode.RED}"
             f"! {fn}"
-            f"{ANSI_COLOR_CODE.DEF}"
-        ))
-        # print("    {}".format(f.__name__))
-        # print("    {}".format(repr(e)))
+            f"{ANSIColorCode.DEF}"
+        )
         print(traceback.format_exc())
         print("", flush=True)
     else:
         print(
-            f"{ANSI_COLOR_CODE.GREEN}+{ANSI_COLOR_CODE.DEF}",
+            f"{ANSIColorCode.GREEN}+{ANSIColorCode.DEF}",
             fn,
             flush=True
         )
@@ -223,7 +222,7 @@ def is_gamedata_dir(
 
 # ----------------------------------------------------------------
 
-class XML_PATTERNS:
+class _XMLPatterns:
     COMMENT = re.compile(r"<!--.*?-->")
     INVALID_COMMENT_LINE = re.compile(r"<!--.*--.*-->")
     INVALID_CHARS = re.compile(
@@ -262,21 +261,21 @@ def read_xml(
     """
     def _warn(msg: str) -> None:
         print_warning(f"[XML] ({fp_from_config}) {msg}")
-    
+
     def _process_line(line: str) -> str:
         # comments
-        if XML_PATTERNS.INVALID_COMMENT_LINE.search(line):
+        if _XMLPatterns.INVALID_COMMENT_LINE.search(line):
             _warn(f"Line {i+1}: 2+ hyphens inside a comment")
-        line = XML_PATTERNS.COMMENT.sub("", line)
+        line = _XMLPatterns.COMMENT.sub("", line)
 
         # invalid characters
-        if XML_PATTERNS.INVALID_CHARS.search(line):
+        if _XMLPatterns.INVALID_CHARS.search(line):
             _warn(f"Line {i+1}: invalid character(s)")
 
         # unescaped ampersand
-        if XML_PATTERNS.UNESCAPED_AMPERSAND.search(line):
+        if _XMLPatterns.UNESCAPED_AMPERSAND.search(line):
             _warn(f"Line {i+1}: unescaped ampersand(s)")
-        line = XML_PATTERNS.UNESCAPED_AMPERSAND.sub("", line)
+        line = _XMLPatterns.UNESCAPED_AMPERSAND.sub("", line)
 
         return line
 
@@ -284,13 +283,12 @@ def read_xml(
     for gd_path in [gd_path_main, gd_path_alt]:
         if gd_path is None:
             continue
-        if (path := gd_path.joinpath("config", fp_from_config)).is_file():
-            fp = str(path)
+        if (fp := gd_path.joinpath("config", fp_from_config)).is_file():
             break
     else:
         _warn("Not found")
         return []
-    
+
     # Читаем файл
     if Path(fp_from_config).is_relative_to("text\\rus\\"):
         encodings = ["cp1251", "utf-8-sig", None]
@@ -300,7 +298,7 @@ def read_xml(
         decode_error_warn = False
     for encoding in encodings:
         try:
-            with open(fp, "r", encoding=encoding) as f:
+            with fp.open("r", encoding=encoding) as f:
                 lines_input = f.readlines()
                 break
         except UnicodeDecodeError:
@@ -313,7 +311,7 @@ def read_xml(
     else:
         _warn("Skipping: unexpected encoding")
         return []
-    
+
     # Обработка строк и поддержка include-директив
     lines_output = []
     for i, line in enumerate(lines_input):

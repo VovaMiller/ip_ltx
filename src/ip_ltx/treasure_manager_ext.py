@@ -1,8 +1,8 @@
 """Доп. инструменты для работы с лутом: :class:`SpawnEntry`, :class:`SpawnEntriesPool`.
 """
 
-import re
 import copy
+import re
 from typing import Self
 
 from .ini import system_ini
@@ -11,9 +11,7 @@ from .misc.trade import TradeBuy
 from .utils import print_warning
 from .utils_meta import CLSIDs, ObjectType
 
-
 # ----------------------------------------------------------------
-
 
 class SpawnEntry:
     """Класс, представляющий одну строчку секции спавна ``[spawn]``.
@@ -52,16 +50,16 @@ class SpawnEntry:
 
         # pulling section data
         ini_system = system_ini()
-        CLSIDS = CLSIDs()
+        clsids = CLSIDs()
         _section = ini_system.section(name)
         _class = _section.get_string("class", "")
         if len(_class) == 0:
             raise Exception(f"section '{name}' has no 'class' field")
-        if _class not in CLSIDS:
+        if _class not in clsids:
             raise Exception(f"section '{name}' has unknown class ({_class})")
-        if not CLSIDS.is_item(_class):
+        if not clsids.is_item(_class):
             raise Exception(f"section '{name}' has non-item class ({_class})")
-        self._type = CLSIDS.get_object_type(_class)
+        self._type = clsids.get_object_type(_class)
 
         # parsing params
         params = str(params) if params is not None else ""
@@ -75,8 +73,8 @@ class SpawnEntry:
                 else:
                     try:
                         self.count = float(params)
-                    except:
-                        raise Exception("Invalid syntax")
+                    except Exception as e:
+                        raise Exception("Invalid syntax") from e
             elif comma == 0:
                 raise Exception("Invalid syntax")
             else:
@@ -86,8 +84,8 @@ class SpawnEntry:
                 else:
                     try:
                         self.count = float(params[:comma])
-                    except:
-                        raise Exception("Invalid syntax")
+                    except Exception as e:
+                        raise Exception("Invalid syntax") from e
                 params = params[comma+1:]
 
                 # prob
@@ -166,18 +164,18 @@ class SpawnEntry:
                     _warn(f"Ignoring option 'scope': [{name}] has no scope_name")
                     self.scope = False
                 elif scope_name == "wpn_addon_scope_dummy":
-                    _warn((
+                    _warn(
                         f"Forbidden scope [{scope_name}] is attached to [{name}]. "
                         f"Probably, [{name}] is a base multiscope weapon section "
                         "and is not supposed to have an attached scope."
-                    ))
+                    )
             else:
                 if len(_section.get_string("scope_respawn", "")) > 0:
-                    _warn((
+                    _warn(
                         f"Missing option 'scope' for [{name}]"
                         " (multiscope weapon section is supposed"
                         " to have an attached scope)"
-                    ))
+                    )
 
         # Unifying some params
         if self.cond == 100:
@@ -190,7 +188,7 @@ class SpawnEntry:
 
     def get_params_str(self) -> str:
         str_count = str(self.count)
-        if type(self.count) == float:
+        if isinstance(self.count, float):
             str_count = "{:.2f}".format(self.count)
         params = []
         if self.prob is not None:
@@ -198,7 +196,7 @@ class SpawnEntry:
         if self.cond is not None:
             params.append("cond={:.2f}".format(self.cond / 100.0))
         if self.box_size is not None:
-            if type(self.box_size) == float:
+            if isinstance(self.box_size, float):
                 params.append("box_size={:.2f}".format(self.box_size))
             else:
                 params.append("box_size={}".format(self.box_size))
@@ -238,20 +236,20 @@ class SpawnEntry:
             parts.append("unload")
         return "|".join(parts)
 
-    def cost(self, trade: bool = False) -> float:
+    def cost(self, in_trade: bool = False) -> float:
         """Подсчёт стоимости вхождения с учётом кол-ва и всех параметров.
 
         Учитываются также неразряженные боеприпасы и прикреплённые к оружию аддоны.
 
-        :param trade: Если ``True``, то подсчитывается стоимость продажи торговцам.
+        :param in_trade: Если ``True``, то подсчитывается стоимость продажи торговцам.
         """
-        TRADE = TradeBuy()
+        trade = TradeBuy()
         ini_system = system_ini()
         count = float(self.count)
         prob = 1.0 if (self.prob is None) else (self.prob / 100.0)
         cond = 1.0 if (self.cond is None) else (self.cond / 100.0)
         cond = (cond*0.9 + 0.1)**0.75  # condition_factor как в движке
-        buy_k = 1.0 if not trade else TRADE.get_buy_k(self.name)
+        buy_k = 1.0 if not in_trade else trade.get_buy_k(self.name)
         base_cost = ini_system.get_uint(self.name, "cost")
         if self._type == ObjectType.ITEM_AMMO:
             base_box_size = ini_system.get_uint(self.name, "box_size")
@@ -269,14 +267,14 @@ class SpawnEntry:
                 addons.append(ini_system.get_string(self.name, "grenade_launcher_name"))
             for addon_name in addons:
                 addon_cost = ini_system.get_uint(addon_name, "cost")
-                addon_buy_k = 1.0 if not trade else TRADE.get_buy_k(addon_name)
+                addon_buy_k = 1.0 if not in_trade else trade.get_buy_k(addon_name)
                 cost_sum += addon_cost * count * prob * addon_buy_k
             if not self.unload:
                 ammo_class = ini_system.get_strings(self.name, "ammo_class")[0]
                 ammo_mag_size = ini_system.get_uint(self.name, "ammo_mag_size")
                 ammo_base_cost = ini_system.get_uint(ammo_class, "cost")
                 ammo_base_box_size = ini_system.get_uint(ammo_class, "box_size")
-                ammo_buy_k = 1.0 if not trade else TRADE.get_buy_k(ammo_class)
+                ammo_buy_k = 1.0 if not in_trade else trade.get_buy_k(ammo_class)
                 box_count = (count * ammo_mag_size) / ammo_base_box_size
                 cost_sum += ammo_base_cost * box_count * prob * ammo_buy_k
             return cost_sum
@@ -300,7 +298,7 @@ class SpawnEntriesPool:
     def from_items(cls: type[Self], section: Section) -> Self:
         """Конструктор по полю ``items`` из указанной секции.
         """
-        CLSIDS = CLSIDs()
+        clsids = CLSIDs()
         ini_system = system_ini()
         entries = cls()
         if section.line_exist("items"):
@@ -312,7 +310,7 @@ class SpawnEntriesPool:
             )
             for item, cnt in items:
                 if (
-                    CLSIDS.is_ammo(ini_system.get_string(item, "class"))
+                    clsids.is_ammo(ini_system.get_string(item, "class"))
                     and ini_system.get_uint(item, "box_size") != 1
                 ):
                     se = SpawnEntry(item, f"1, box_size={cnt}", context)
@@ -331,27 +329,27 @@ class SpawnEntriesPool:
     def merge(self, entries: "SpawnEntriesPool"):
         for se in entries.pool.values():
             self.add(se)
-    
+
     def entries(self):
         return self.pool.values()
 
     def clear(self):
         self.pool.clear()
-    
+
     def __len__(self):
         return len(self.pool)
 
-    def cost(self, trade: bool = False) -> float:
+    def cost(self, in_trade: bool = False) -> float:
         """Подсчёт стоимости всех вхождений с учётом их количеств и всех параметров.
 
         Учитываются также неразряженные боеприпасы и прикреплённые к оружию аддоны.
 
         Рекомендуется подсчитывать до compress.
 
-        :param trade: Если ``True``, то подсчитывается стоимость продажи торговцам.
+        :param in_trade: Если ``True``, то подсчитывается стоимость продажи торговцам.
         """
-        return sum([se.cost(trade=trade) for se in self.pool.values()])
-    
+        return sum([se.cost(in_trade=in_trade) for se in self.pool.values()])
+
     def game_objects_count(self, ignore_prob: bool = True) -> int | float:
         """Подсчёт кол-ва игровых объектов (game_object) в сумме по всем вхождениям.
 
@@ -399,7 +397,7 @@ class SpawnEntriesPool:
             * кол-во любых патронов обозначается через *box_size*
             * при этом count всегда считается единицей
         """
-        CLSIDS = CLSIDs()
+        clsids = CLSIDs()
         ini_system = system_ini()
         buffer = SpawnEntriesPool()
         buffer_ammo = SpawnEntriesPool()  # count as box_size for aggregation
@@ -426,7 +424,7 @@ class SpawnEntriesPool:
             if not se.unload and (se._type == ObjectType.ITEM_WEAPON):
                 ammo_class = ini_system.get_strings(se.name, "ammo_class")[0]
                 ammo_mag_size = ini_system.get_uint(se.name, "ammo_mag_size")
-                if CLSIDS.is_ammo(ini_system.get_string(ammo_class, "class")):
+                if clsids.is_ammo(ini_system.get_string(ammo_class, "class")):
                     buffer_ammo.add(SpawnEntry(
                         ammo_class, str(ammo_mag_size * se.count), se.context
                     ))

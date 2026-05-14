@@ -1,10 +1,13 @@
-import sys
-if sys.version_info < (3, 12):
-    raise ImportError("ip_ltx requires Python 3.12+")
-
-from .ip_ltx import Section, Ini
 
 import importlib.metadata
+
+from .ip_ltx import Ini, Section
+
+__all__ = [
+    "Ini",
+    "Section",
+]
+
 try:
     __version__ = importlib.metadata.version("ip_ltx")
 except importlib.metadata.PackageNotFoundError:

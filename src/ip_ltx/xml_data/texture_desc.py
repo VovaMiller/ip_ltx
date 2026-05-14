@@ -1,11 +1,10 @@
 """[texture_desc] из system.ltx."""
 
 import xml.etree.ElementTree as ET
-from collections import OrderedDict
 from dataclasses import dataclass
 
 from ..ini import system_ini
-from ..utils import cast_safe, print_error, print_warning, read_xml, SingletonBase
+from ..utils import SingletonBase, cast_safe, print_error, print_warning, read_xml
 
 
 @dataclass(frozen=True)
@@ -21,13 +20,13 @@ class TextureDesc(SingletonBase):
     """Данные из xml-файлов, перечисленных в секции [texture_desc] из system.ltx.
     Порядок определения текстур сохранён.
     """
-    _data: OrderedDict[str, Texture]
+    _data: dict[str, Texture]
 
     def __init__(self):
         ini_system = system_ini()
         xml_names = ini_system.get_strings("texture_desc", "files", mandatory=True)
         xml_paths = [f"ui\\{fn}.xml" for fn in xml_names]
-        self._data = OrderedDict()
+        self._data = {}
         for fp_from_config in xml_paths:
             try:
                 root = ET.fromstringlist(
@@ -47,7 +46,7 @@ class TextureDesc(SingletonBase):
             if file_name is None:
                 print_warning(f"[XML:{fp_from_config}] Can't find <file_name>")
                 file_name = ""
-            
+
             # <texture>
             for elem in root.iterfind("texture"):
                 # id
@@ -55,16 +54,16 @@ class TextureDesc(SingletonBase):
                 if id is None:
                     continue
                 if id in self._data:
-                    print_warning((
+                    print_warning(
                         f"[XML:{fp_from_config}] "
                         f"Duplicate <texture id=\"{id}\" ...>"
-                    ))
+                    )
                     continue
 
                 # integer properties
-                area = OrderedDict.fromkeys(["x", "y", "width", "height"], 0)
+                area = dict.fromkeys(["x", "y", "width", "height"], 0)
                 missing, invalid = [], []
-                for k in area.keys():
+                for k in area:
                     v = elem.attrib.get(k, None)
                     if v is None:
                         missing.append(k)
@@ -76,23 +75,23 @@ class TextureDesc(SingletonBase):
                         v = 0
                     area[k] = v
                 if len(missing) > 0:
-                    print_warning((
+                    print_warning(
                         f"[XML:{fp_from_config}] "
                         f"Texture '{id}' has no attribute(s): "
                         f"{", ".join(missing)}"
-                    ))
+                    )
                 if len(invalid) > 0:
-                    print_warning((
+                    print_warning(
                         f"[XML:{fp_from_config}] "
                         f"Texture '{id}' has invalid attribute(s): "
                         f"{", ".join(invalid)}"
-                    ))
+                    )
 
                 self._data[id] = Texture(id, **area, file_name=file_name)
 
     def __contains__(self, id: str) -> bool:
         return id in self._data
-    
+
     def __iter__(self):
         return iter(self._data)
 

@@ -31,7 +31,7 @@ from .utils import cast_safe, print_warning, read_file
 
 class Section:
     """Класс одной секции ltx-файла.
-    
+
     :param id: Идентификатор секции.
     :param init: Другая секция, по которой можно инициализировать поля.
     :param _src: Имя файла-источника (откуда будет считана секция).
@@ -84,7 +84,7 @@ class Section:
             self,
             file: TextIO,
             fields_mask: str | None = None,
-            first: list[str] = [],
+            first: tuple[str, ...] = (),
             value_getter: Callable[[Self, str], str | None] | None = None
     ) -> None:
         """Запись секции в файл.
@@ -97,7 +97,7 @@ class Section:
         :param fields_mask: Маска-фильтр, определяющая, поля с каким именем выводить.
             Задаётся регулярным выражением. Проверяется полное совпадение.
             Если None, то выводит все существующие поля секции.
-        :param first: Список имён полей, которые нужно вывести в первую очередь.
+        :param first: Перечисление имён полей, которые нужно вывести в первую очередь.
             В остальном, поля выводятся в том порядке, в котором они
             изначально были записаны в секцию.
         :param value_getter: Функция, определяющая то, как по данной секции и
@@ -120,11 +120,11 @@ class Section:
             if not self.line_exist(field):
                 continue
             if ("\n" in field) or ("\r" in field):
-                print_warning((
+                print_warning(
                     f"[{self.id}] "
                     "Skipped field with multiline name: "
                     f"'{"\\n".join(field.splitlines())}'"
-                ))
+                )
                 continue
             if (fields_mask is not None) and not re.fullmatch(fields_mask, field):
                 continue
@@ -135,17 +135,17 @@ class Section:
                 file.write(f"{field}\n")
             elif ("\n" in value) or ("\r" in value):
                 if field == "custom_data":
-                    file.write((
+                    file.write(
                         "custom_data = <<END\n"
                         f"{value.replace("\r", "").removesuffix("\n")}\n"
                         "END\n"
-                    ))
+                    )
                 else:
-                    print_warning((
+                    print_warning(
                         f"[{self.id}] "
                         f"Value of the field '{field}' is multiline,"
                         " so it was flattened"
-                    ))
+                    )
                     value_fmt = " ".join(value.splitlines()).strip()
                     file.write(f"{field} = {value_fmt}\n")
             else:
@@ -223,9 +223,9 @@ class Section:
         :raises Section.Error: если поле уже существует, а ``overwrite == False``.
         :raises ValueError: если дан неверный формат имени поля или значения.
         """
-        if type(field) != str:
+        if not isinstance(field, str):
             raise ValueError("Field must be string")
-        if (type(value) != str) and (value is not None):
+        if not isinstance(value, str) and (value is not None):
             raise ValueError("Field value must be string or None")
         field = field.strip()
         if not overwrite and self.line_exist(field):
@@ -268,14 +268,14 @@ class Section:
 
     @staticmethod
     def cast_string_wb(v: str) -> str:
-        l = 1 if v.startswith('"') else 0
-        r = (len(v) - 1) if v.endswith('"') else len(v)
-        return v[l:r]
+        p0 = 1 if v.startswith('"') else 0
+        p1 = (len(v) - 1) if v.endswith('"') else len(v)
+        return v[p0:p1]
 
     @staticmethod
     def cast_float(v: str) -> float | None:
         return cast_safe(v, float, defval=None)
-    
+
     @staticmethod
     def cast_int(v: str) -> int | None:
         return cast_safe(v, int, defval=None)
@@ -283,7 +283,7 @@ class Section:
     @staticmethod
     def cast_uint(v: str) -> int | None:
         return int(v) if v.isdecimal() else None
-    
+
     @staticmethod
     def cast_bool(v: str) -> bool | None:
         match v.strip().lower():
@@ -313,9 +313,9 @@ class Section:
         :param defval: Значение по умолчанию.
             Определяет поведение функции в случае,
             когда указанного поля нет или оно без значения.
-        
+
         :raises Section.Error: в двух случаях:
-        
+
             1. Конвертация значения поля невозможна.
             2. ``defval is None`` и при этом указанного поля нет или оно без значения.
 
@@ -358,13 +358,13 @@ class Section:
         О деталях работы, см. :func:`get_elem`.
         """
         return self.get_elem(Section.cast_int, "int", k, defval)
-    
+
     def get_uint(self, k: str, defval: int | None = None) -> int:
         """Получить значение поля k как неотрицательное целое число.
         О деталях работы, см. :func:`get_elem`.
         """
         return self.get_elem(Section.cast_uint, "uint", k, defval)
-    
+
     def get_bool(self, k: str, defval: bool | None = None) -> bool:
         """Получить значение поля k как bool.
         О деталях работы, см. :func:`get_elem`.
@@ -392,9 +392,9 @@ class Section:
         :param mandatory: Обязательное ли это поле.
             Определяет поведение функции в случае,
             когда указанного поля нет или оно без значения.
-        
+
         :raises Section.Error: в двух случаях:
-        
+
             1. Конвертация значения хотя бы одного элемента невозможна.
             2. ``mandatory == True`` и при этом
                указанного поля нет или оно без значения.
@@ -410,10 +410,10 @@ class Section:
             r = []
             for i, rr in enumerate([type_caster(vv.strip()) for vv in v.split(",")]):
                 if rr is None:
-                    self._raise((
+                    self._raise(
                         f"field '{k}' can't be read as *list[{type_label}]*"
                         f": value #{i+1} is invalid"
-                    ))
+                    )
                 r.append(rr)
             return r
         if mandatory:
@@ -468,10 +468,10 @@ class Section:
         :param k: Имя поля, значение которого нужно считать.
         :param mandatory: Определяет поведение функции в случае,
             когда поля нет или оно без значения:
-            
+
             * ``mandatory=True``: выдаст исключение
             * ``mandatory=False``: вернёт пустой список
-        
+
         :param parsing_mode: Как исходная строка будет преобразована в список:
 
             * ``comma`` - обычное разбиение по запятым.
@@ -545,9 +545,9 @@ class Section:
         :param k: Имя поля.
         :param sep: Разделитель, по которому
             из строкового значения поля получается список.
-        
+
         :raises Section.Error: в одном из трёх случаев:
-        
+
             1. Указанного поля нет или оно без значения.
             2. Размер списка не равен двум.
             3. Конвертация значения хотя бы одного элемента невозможна.
@@ -556,16 +556,16 @@ class Section:
         """
         def _err(why: str) -> NoReturn:
             self._raise(f"field '{k}' can't be read as a pair of *{type_label}*: {why}")
-        
+
         v = self._fields.get(k, None)
         if v is None:
             _err("None value" if (k in self._fields) else "non-existent")
-        
+
         v = v.strip()
         v = v.split(sep) if len(v) > 0 else []
         if len(v) != 2:
             _err(f"expected exactly 2 values, got {len(v)}")
-        
+
         v = [type_caster(vv.strip()) for vv in v]
         if v[0] is None:
             _err("value #1 is invalid")
@@ -591,13 +591,13 @@ class Section:
         О деталях работы, см. :func:`get_pair`.
         """
         return self.get_pair(Section.cast_int, "int", k, sep)
-    
+
     def get_pair_uint(self, k: str, sep: str = ",") -> tuple[int, int]:
         """Получить значение поля k как пару неотрицательных целых чисел.
         О деталях работы, см. :func:`get_pair`.
         """
         return self.get_pair(Section.cast_uint, "uint", k, sep)
-    
+
     def get_pair_bool(self, k: str, sep: str = ",") -> tuple[bool, bool]:
         """Получить значение поля k как пару bool.
         О деталях работы, см. :func:`get_pair`.
@@ -610,11 +610,11 @@ class Section:
 
 class Ini:
     """Класс, считывающий ltx-файл(ы).
-    
+
     Аналог LUA-класса ``ini_file`` (``CScriptIniFile``) и движкового ``CInifile``.
 
     :param name: Имя экземпляра класса. Используется при выводе ошибок.
-    
+
     :param ini_meta: Экземпляр этого же класса с настройками путей папок gamedata.
         Эти настройки полезны для последующего чтения файлов из gamedata.
         Пути указываются в секции ``[settings]``:
@@ -640,7 +640,7 @@ class Ini:
 
     show_ltx_warnings: bool
     """Отображаются ли warning-сообщения при считывании ltx-файлов.
-    
+
     По умолчанию ``True``.
 
     Отображение отключается для ltx-файлов из gamedata при
@@ -660,32 +660,32 @@ class Ini:
         if ini_meta is not None:
             if not ini_meta.section_exist("settings"):
                 raise Ini.Error("ini_meta doesn't have mandatory section [settings]")
-            
+
             # gamedata_path_mod
             gdm_str = ini_meta.get_string_wb("settings", "gamedata_path_mod", "")
             if len(gdm_str) > 0:
                 self.gdm = Path(gdm_str).resolve()
                 if not self.gdm.is_dir():
-                    raise Ini.Error((
+                    raise Ini.Error(
                         "Directory provided in 'gamedata_path_mod' doesn't exist: "
                         f"{gdm_str}"
-                    ))
+                    )
             else:
-                raise Ini.Error((
+                raise Ini.Error(
                     "ini_meta: 'gamedata_path_mod' must be provided"
                     " in section [settings]"
-                ))
+                )
 
             # gamedata_path_alt
             gda_str = ini_meta.get_string_wb("settings", "gamedata_path_alt", "")
             if len(gda_str) > 0:
                 self.gda = Path(gda_str).resolve()
                 if not self.gda.is_dir():
-                    raise Ini.Error((
+                    raise Ini.Error(
                         "Directory provided in 'gamedata_path_alt' doesn't exist: "
                         f"{gda_str}"
-                    ))
-            
+                    )
+
             # Доп. проверка путей
             if (self.gdm is not None) and (self.gda is not None):
                 if self.gdm == self.gda:
@@ -708,26 +708,25 @@ class Ini:
         )
 
 
-    def _get_fptr(self, fp: str, line_num: int | None) -> str:
+    def _get_fptr(self, fp: Path, line_num: int | None) -> str:
         suffix = f":{line_num}" if (line_num is not None) else ""
-        file_path = Path(fp)
-        if (self.gdm is not None) and file_path.is_relative_to(self.gdm):
-            return f"MOD:{file_path.relative_to(self.gdm)}{suffix}"
-        elif (self.gda is not None) and file_path.is_relative_to(self.gda):
-            return f"ALT:{file_path.relative_to(self.gda)}{suffix}"
+        if (self.gdm is not None) and fp.is_relative_to(self.gdm):
+            return f"MOD:{fp.relative_to(self.gdm)}{suffix}"
+        elif (self.gda is not None) and fp.is_relative_to(self.gda):
+            return f"ALT:{fp.relative_to(self.gda)}{suffix}"
         else:
-            return f"{file_path}{suffix}"
+            return f"{fp}{suffix}"
 
     def _reader_error(
             self,
-            fp: str | None,
+            fp: Path | None,
             ln: int | None,
             msg: str
-    ):
+    ) -> NoReturn:
         parts = []
         if len(self._name) > 0:
             parts.append(self._name)
-        if (fp is not None) and (len(fp) > 0):
+        if fp is not None:
             parts.append(self._get_fptr(fp, ln))
         elif ln is not None:
             parts.append(f"_:{ln}")
@@ -736,7 +735,7 @@ class Ini:
 
     def _reader_warning(
             self,
-            fp: str | None,
+            fp: Path | None,
             ln: int | None,
             sid: str | None,
             msg: str
@@ -745,7 +744,7 @@ class Ini:
             parts = []
             if len(self._name) > 0:
                 parts.append(self._name)
-            if (fp is not None) and (len(fp) > 0):
+            if fp is not None:
                 parts.append(self._get_fptr(fp, ln))
             elif ln is not None:
                 parts.append(f"_:{ln}")
@@ -757,7 +756,7 @@ class Ini:
     def read_raw(
             self,
             raw: str,
-            fp_src: str = "",
+            fp_src: Path | None = None,
             _current_section: Section | None = None,
             preserve_value_whitespaces: bool = False
     ) -> None:
@@ -781,11 +780,11 @@ class Ini:
             По умолчанию они сохраняются только если находятся между парой кавычек.
         :raises Ini.Error: при ошибке считывания.
         """
-        def _err(ln: int, msg: str):
+        def _err(ln: int, msg: str) -> NoReturn:
             self._reader_error(fp_src, ln, msg)
         def _wrn(ln: int, sid: str | None, msg: str) -> None:
             self._reader_warning(fp_src, ln, sid, msg)
-        
+
         custom_data_buffer: str | None = None
         for i, line in enumerate(raw.splitlines(), start=1):
             line = line.strip()
@@ -799,10 +798,10 @@ class Ini:
                 and line[semi_1 + 1] == "/"
                 and (semi == -1 or semi_1 < semi)
              ):
-                semi = semi_1;
+                semi = semi_1
             if semi != -1:
                 line = line[:semi]
-            
+
             # Warning about C-style comment bug
             if line.find("//") != -1:
                 _wrn(i, None, "C-style comment was not recognized due to xrEngine bug")
@@ -834,9 +833,9 @@ class Ini:
                 part_fp = parts[1].strip()
 
                 # Получение абсолютного пути базовой директории.
-                if len(fp_src) == 0:
+                if fp_src is None:
                     _err(i, "Can't process #include: unknown base path")
-                dir_base = Path(fp_src).parent.resolve()
+                dir_base = fp_src.parent.resolve()
 
                 # Объекты путей до gamedata
                 gdm = self.gdm
@@ -844,18 +843,25 @@ class Ini:
 
                 # Если это внутри оригинальной gamedata,
                 #  то нужно перепрыгнуть в gamedata мода.
-                if (gdm is not None) and (gda is not None):
-                    if dir_base.is_relative_to(gda):
-                        dir_base = gdm.joinpath(dir_base.relative_to(gda))
+                if (
+                    (gdm is not None)
+                    and (gda is not None)
+                    and dir_base.is_relative_to(gda)
+                ):
+                    dir_base = gdm.joinpath(dir_base.relative_to(gda))
 
                 # Путь до файла, который нужно включить.
                 p_inc = dir_base.joinpath(part_fp).resolve()
 
                 # Если файла нет, а его путь внутри gamedata мода,
                 #  то пробуем найти его в папке оригинальной gamedata.
-                if not p_inc.is_file() and (gdm is not None) and (gda is not None):
-                    if p_inc.is_relative_to(gdm):
-                        p_inc = gda.joinpath(p_inc.relative_to(gdm))
+                if (
+                    not p_inc.is_file()
+                    and (gdm is not None)
+                    and (gda is not None)
+                    and p_inc.is_relative_to(gdm)
+                ):
+                    p_inc = gda.joinpath(p_inc.relative_to(gdm))
 
                 # Если файла всё равно нет, то приплыли.
                 if not p_inc.is_file():
@@ -878,11 +884,10 @@ class Ini:
                         _err(i, (
                             f"#include error: file doesn't exist (\"{str_inc}\")"
                         ))
-                
-                str_inc = str(p_inc)
+
                 self.read_raw(
-                    raw=read_file(str_inc),
-                    fp_src=str_inc,
+                    raw=read_file(p_inc),
+                    fp_src=p_inc,
                     _current_section=_current_section,
                     preserve_value_whitespaces=preserve_value_whitespaces
                 )
@@ -895,7 +900,7 @@ class Ini:
                 idx_inh = line.find("]:")
                 if (idx_cls == -1):
                     _err(i, "Invalid section declaration")
-                
+
                 # Some warnings about strange declarations
                 if idx_inh != -1:
                     if idx_cls != idx_inh:
@@ -909,7 +914,7 @@ class Ini:
                             i, None,
                             "Garbage text at the end of the section declaration line"
                         )
-                
+
                 # Initializing section
                 _id = line[1:idx_cls].lower()
                 if _id in self._s:
@@ -918,7 +923,7 @@ class Ini:
                     _wrn(i, _id, "Unsafe section ID: whitespaces")
                 if len(_id) == 0:
                     _wrn(i, _id, "Section with empty ID found")
-                fn_src = Path(fp_src).name if (len(fp_src) > 0) else ""
+                fn_src = fp_src.name if (fp_src is not None) else ""
                 section = Section(_id, _src=fn_src)
 
                 # Inheritance
@@ -964,7 +969,7 @@ class Ini:
                         #     _wrn(i, _id, "Value has redundant whitespaces")
                 else:
                     field, value = line.strip(), None
-                
+
                 # Setting field's value
                 if field in _current_section._fields_own:
                     _wrn(i, _id, f"Redeclaration of '{field}'")
@@ -976,13 +981,13 @@ class Ini:
 
     def read(
             self,
-            fp0: str,
+            fp_str: str,
             inside_gamedata: bool = False,
             preserve_value_whitespaces: bool = False
     ) -> None:
         """Считать данные с файла.
 
-        :param fp0: Путь до файла.
+        :param fp_str: Путь до файла.
         :param inside_gamedata: Если True, то интерпретирует путь до файла
             как указанный относительно папки gamedata.
             В первую очередь ищет файл в gamedata мода;
@@ -992,23 +997,17 @@ class Ini:
             По умолчанию они сохраняются только если находятся между парой кавычек.
         :raises Ini.Error: при ошибке считывания.
         """
-        fp = None
         if inside_gamedata:
             if self.gdm is None:
                 self._raise("gamedata path is not specified")
-            p = self.gdm.joinpath(fp0).resolve()
-            if p.is_file():
-                fp = str(p)
-            elif self.gda is not None:
-                p = self.gda.joinpath(fp0).resolve()
-                if p.is_file():
-                    fp = str(p)
-            if fp is None:
-                self._raise(f"gamedata doesn't have this file (\"{fp0}\")")
+            fp = self.gdm.joinpath(fp_str).resolve()
+            if not fp.is_file() and (self.gda is not None):
+                fp = self.gda.joinpath(fp_str).resolve()
+            if not fp.is_file():
+                self._raise(f"gamedata doesn't have this file (\"{fp_str}\")")
         else:
-            if Path(fp0).is_file():
-                fp = fp0
-            if fp is None:
+            fp = Path(fp_str)
+            if not fp.is_file():
                 self._raise(f"FILE DOES NOT EXIST (\"{fp}\")")
         self.read_raw(
             raw=read_file(fp),
@@ -1022,19 +1021,19 @@ class Ini:
             file: TextIO,
             ids_mask: str | None = None,
             fields_mask: str | None = None,
-            first: list[str] = [],
+            first: tuple[str, ...] = (),
             value_getter: Callable[[Section, str], str | None] | None = None
     ) -> None:
         """Запись всех секций в файл.
 
         О деталях работы, см. :func:`Section.write`.
-        
+
         :param file: Открытый файл для записи.
         :param ids_mask: Маска-фильтр, определяющая, секции с каким ID выводить.
             Задаётся регулярным выражением. Проверяется полное совпадение.
             Если None, то выводит все существующие поля секции.
         :param fields_mask: Маска-фильтр, определяющая, поля с каким именем выводить.
-        :param first: Список имён полей, которые нужно вывести в первую очередь.
+        :param first: Перечисление имён полей, которые нужно вывести в первую очередь.
         :param value_getter: Функция, определяющая то, как по данной секции и
             имени её поля будет получено значение.
         """
@@ -1060,7 +1059,7 @@ class Ini:
 
     def sections(self):
         return self._s.values()
-    
+
     def get_section_index(self, section_id: str) -> int:
         """Получить порядковый номер секции с указанным ID.
         Возвращает -1, если такой секции не существует.

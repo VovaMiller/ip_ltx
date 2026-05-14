@@ -1,10 +1,10 @@
 from collections import OrderedDict
 
-from .ip_ltx import Section, Ini
-from .ini import meta_ini, system_ini, spawn_ini
-from .treasure_manager_ext import SpawnEntry, SpawnEntriesPool
+from .ini import meta_ini, spawn_ini, system_ini
+from .ip_ltx import Ini, Section
+from .treasure_manager_ext import SpawnEntriesPool, SpawnEntry
 from .utils import print_error
-from .utils_meta import Levels, CLSIDs, ObjectType
+from .utils_meta import CLSIDs, GameLevels, ObjectType
 
 # ----------------------------------------------------------------
 
@@ -92,10 +92,10 @@ class SpawnObject:
             if len(tmp) == 3:
                 self.position = (float(tmp[0]), float(tmp[1]), float(tmp[2]))
             else:
-                self._errors.append((
+                self._errors.append(
                     f"'position': expected to get 3 numbers,"
                     f" but got {len(tmp)}"
-                ))
+                )
 
         self.direction = (0, 0, 0)
         try:
@@ -106,10 +106,10 @@ class SpawnObject:
             if len(tmp) == 3:
                 self.direction = (float(tmp[0]), float(tmp[1]), float(tmp[2]))
             else:
-                self._errors.append((
+                self._errors.append(
                     f"'direction': expected to get 3 numbers,"
                     f" but got {len(tmp)}"
-                ))
+                )
 
         self.game_vertex_id = -1
         try:
@@ -126,7 +126,7 @@ class SpawnObject:
             self._errors.append(str(e))
         else:
             self.level_vertex_id = tmp
-        
+
         self.object_flags = -1
         try:
             tmp = int(section.get_string("object_flags"), 16)
@@ -153,7 +153,7 @@ class SpawnObject:
         except Exception as e:
             self._errors.append(str(e))
         else:
-            if type(tmp) == int:
+            if isinstance(tmp, int):
                 self.story_id = tmp
             else:
                 self._errors.append("'story_id' is not an integer")
@@ -174,9 +174,9 @@ class SpawnObject:
 
         self._type = ObjectType.UNDEFINED
         if len(self._class) > 0:
-            CLSIDS = CLSIDs()
-            if self._class in CLSIDS:
-                self._type = CLSIDS.get_object_type(self._class)
+            clsids = CLSIDs()
+            if self._class in clsids:
+                self._type = clsids.get_object_type(self._class)
                 if self._type == ObjectType.UNDEFINED:
                     self._errors.append(
                         "unable to get type of this object (dummy clsid)"
@@ -186,10 +186,10 @@ class SpawnObject:
                     "unable to get type of this object (unknown clsid)"
                 )
 
-        self._level = "";
+        self._level = ""
         if self.game_vertex_id >= 0:
             try:
-                tmp = Levels().get_lvl_by_gvid(self.game_vertex_id)
+                tmp = GameLevels().get_lvl_by_gvid(self.game_vertex_id)
             except Exception as e:
                 self._errors.append(str(e))
             else:
@@ -199,7 +199,7 @@ class SpawnObject:
                     self._errors.append(
                         "unable to get location of this object"
                     )
-        
+
         self._loot.clear()
         _success = True
         context = f"custom_data@{self.name}" if len(self.name) > 0 else ""
@@ -209,15 +209,15 @@ class SpawnObject:
                     try:
                         self._loot.add(SpawnEntry(k, v, context))
                     except Exception as e:
-                        self._errors.append((
+                        self._errors.append(
                             f"can't process loot entry"
                             f" '{k if v is None else f"{k} = {v}"}'"
                             f" ({e})"
-                        ))
+                        )
                         _success = False
         if not _success:
             self._loot.clear()
-        
+
         # Валидация
         if len(self._errors) > 0:
             raise Exception("object {} is invalid".format(
@@ -258,7 +258,7 @@ class Spawn:
     def __init__(self):
         self._so: OrderedDict[str, SpawnObject] = OrderedDict()
         """Основное хранилище. Не рекомендуется использовать напрямую"""
-        
+
         self._id_by_sid: dict[int, str] = {}
         """Вспомогательная структура для быстрого поиска по story_id"""
 
@@ -305,7 +305,7 @@ class Spawn:
         if id not in self._so:
             raise Exception(f"spawn object [{id}] doesn't exist")
         return self._so[id]
-    
+
     def story_object(self, sid: int) -> SpawnObject:
         """Получение спавн-объекта по его story_id
 
@@ -316,7 +316,7 @@ class Spawn:
         if sid not in self._id_by_sid:
             raise Exception(f"spawn object with story_id={sid} doesn't exist")
         return self._so[self._id_by_sid[sid]]
-    
+
     def objects(self):
         """Получение всех спавн-объектов
         """

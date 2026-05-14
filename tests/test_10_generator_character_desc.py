@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 from ip_ltx.generator_character_desc import form_characters
 
 
@@ -11,10 +9,10 @@ def _test(tmp_path, filename) -> None:
     output_fn = f"{filename}.xml"
 
     input_path = root_path.joinpath("input", input_fn)
-    assert input_path.is_file() == True
+    assert input_path.is_file() is True
 
     expected_output_path = root_path.joinpath("output", output_fn)
-    assert expected_output_path.is_file() == True
+    assert expected_output_path.is_file() is True
     expected_output = expected_output_path.read_text(encoding="utf-8")
 
     result_output_path = tmp_path / output_fn
@@ -24,7 +22,7 @@ def _test(tmp_path, filename) -> None:
         independent_input=False,
         tab="\t"
     )
-    assert result_output_path.is_file() == True
+    assert result_output_path.is_file() is True
     result_output = result_output_path.read_text(encoding="utf-8")
 
     assert expected_output == result_output

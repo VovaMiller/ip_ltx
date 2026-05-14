@@ -8,7 +8,7 @@ def main():
 
     al.validate_spawn_data()
 
-    LEVELS_ALL = [
+    _levels_all = [
         "l01_escape",
         "l02_garbage",
         "l03_agroprom",
@@ -32,9 +32,9 @@ def main():
     # Summaries: default
     run_summary(
         "all",
-        LEVELS_ALL
+        _levels_all
     )
-    for level in LEVELS_ALL:
+    for level in _levels_all:
         run_summary(level, [level])
 
     # Summaries: custom
@@ -55,7 +55,7 @@ def main():
             "l12_stancia",
         ]
     )
-    
+
     # Other
     run(al.tm__count_by_levels, "tm-counts")
     run(al.tm__extract_loot_each, "tm-each", show_strings=True, show_visual=True)
@@ -73,13 +73,13 @@ if __name__ == "__main__":
         from pathlib import Path
         if (
             "META_FILEPATH" in globals()
-            and type(META_FILEPATH) == str
+            and isinstance(META_FILEPATH, str)
             and len(META_FILEPATH) > 0
         ):
             os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())
         if (
             "HIDE_GAMEDATA_LTX_WARNINGS" in globals()
-            and type(HIDE_GAMEDATA_LTX_WARNINGS) == bool
+            and isinstance(HIDE_GAMEDATA_LTX_WARNINGS, bool)
         ):
             os.environ["HIDE_GAMEDATA_LTX_WARNINGS"] = (
                 str(int(HIDE_GAMEDATA_LTX_WARNINGS))

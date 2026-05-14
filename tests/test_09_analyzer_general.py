@@ -1,15 +1,13 @@
 from pathlib import Path
 
-import pytest
-
 import ip_ltx.analyzer_general as ag
 
 
 def _test(tmp_path, runnable, tag, **kwargs) -> None:
-    FN = f"analyzer_general__{tag}.txt"
-    fp_result = tmp_path / FN
-    fp_expected = Path(__file__).parent / Path(__file__).stem / FN
-    assert fp_expected.is_file() == True
+    fn = f"analyzer_general__{tag}.txt"
+    fp_result = tmp_path / fn
+    fp_expected = Path(__file__).parent / Path(__file__).stem / fn
+    assert fp_expected.is_file() is True
     text_expected = fp_expected.read_text(encoding="utf-8")
 
     runnable(str(fp_result), **kwargs)
@@ -121,7 +119,7 @@ def test_inv_visual(tmp_path):
         precond=ag.is_inv_item__old2,
         fields=["visual"]
     )
-    
+
 def test_monsters_health(tmp_path):
     _test(tmp_path,
         ag.extract_monsters_health, "monsters__health",

@@ -5,7 +5,7 @@ from collections import OrderedDict
 from dataclasses import dataclass
 
 from ..ini import system_ini
-from ..utils import print_error, print_warning, read_xml, SingletonBase
+from ..utils import SingletonBase, print_error, print_warning, read_xml
 
 
 @dataclass(frozen=True)
@@ -47,17 +47,17 @@ class Dialogs(SingletonBase):
                 if id is None:
                     continue
                 if id in self._data:
-                    print_warning((
+                    print_warning(
                         f"[XML:{fp_from_config}] "
                         f"Duplicate dialog id ('{id}')"
-                    ))
+                    )
                     continue
 
                 self._data[id] = Dialog(id)
 
     def __contains__(self, id: str) -> bool:
         return id in self._data
-    
+
     def __iter__(self):
         return iter(self._data)
 

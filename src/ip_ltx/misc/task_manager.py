@@ -1,9 +1,9 @@
-from dataclasses import dataclass
 from collections.abc import Iterator
+from dataclasses import dataclass
 
-from ..ip_ltx import Ini, Section
 from ..ini import meta_ini
-from ..utils import print_error, print_warning, SingletonBase
+from ..ip_ltx import Ini, Section
+from ..utils import SingletonBase, print_error
 
 
 @dataclass(frozen=True, slots=True)
@@ -37,13 +37,13 @@ class TaskManager(SingletonBase):
     """Считанный файл task_manager.ltx"""
 
     def __init__(self):
-        NAME = "task_manager.ltx"
-        self.ini = Ini(name=NAME, ini_meta=meta_ini())
+        _name = "task_manager.ltx"
+        self.ini = Ini(name=_name, ini_meta=meta_ini())
         self.ini.read("config\\misc\\task_manager.ltx", inside_gamedata=True)
         self._data = {}
         for task_id in list(self.ini.section("list").lines()):
             if not self.ini.section_exist(task_id):
-                print_error(f"({NAME}) Task '{task_id}' from [list] doesn't exist")
+                print_error(f"({_name}) Task '{task_id}' from [list] doesn't exist")
                 continue
             task_sect = self.ini.section(task_id)
             try:
@@ -75,10 +75,10 @@ class TaskManager(SingletonBase):
                 print_error(str(e))
             else:
                 self._data[task_id] = task
-    
+
     def __contains__(self, id: str) -> bool:
         return id in self._data
-    
+
     def __iter__(self):
         return iter(self._data)
 
@@ -87,7 +87,7 @@ class TaskManager(SingletonBase):
 
     def __len__(self):
         return len(self._data)
-    
+
     def generic_task(self, task_id: str) -> TaskGeneric:
         """Получить объект цикличного/второстепенного задания.
 

@@ -16,13 +16,13 @@ if __name__ == "__main__":
         from pathlib import Path
         if (
             "META_FILEPATH" in globals()
-            and type(META_FILEPATH) == str
+            and isinstance(META_FILEPATH, str)
             and len(META_FILEPATH) > 0
         ):
             os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())
         if (
             "HIDE_GAMEDATA_LTX_WARNINGS" in globals()
-            and type(HIDE_GAMEDATA_LTX_WARNINGS) == bool
+            and isinstance(HIDE_GAMEDATA_LTX_WARNINGS, bool)
         ):
             os.environ["HIDE_GAMEDATA_LTX_WARNINGS"] = (
                 str(int(HIDE_GAMEDATA_LTX_WARNINGS))

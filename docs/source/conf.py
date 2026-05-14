@@ -56,8 +56,9 @@ autodoc_typehints = "description"  # "signature"
 
 nitpicky = True
 nitpick_ignore = [
-    ("py:class", "R"),
     ("py:class", "D"),
+    ("py:class", "R"),
+    ("py:class", "T"),
 ]
 
 # -- Options for HTML output -------------------------------------------------

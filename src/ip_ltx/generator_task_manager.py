@@ -4,8 +4,13 @@
 ***Истинный путь v3.0***
 """
 
+from pathlib import Path
+
 from .misc.task_manager import TaskManager
 from .utils import run
+
+# Allowing long lines
+# ruff: noqa: E501
 
 # ----------------------------------------------------------------
 
@@ -15,14 +20,14 @@ def generate_tasks(
         tab: str = "    "
 ) -> None:
     """Генерация конфига для ``game_tasks.xml``.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param task_ids: Список ID заданий из ``task_manager.ltx``,
         или None для генерации по всем заданиям.
     :param tab: Отступ, используемый при выводе в файл.
     """
 
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         for task in TaskManager().generic_tasks(task_ids):
             file.write(f"{tab*1}<game_task id=\"{task._id}\" prio=\"199\">\n")
             file.write(f"{tab*2}<title>{task._id}</title>\n")
@@ -41,20 +46,20 @@ def generate_icons(
         tab: str = "    "
 ) -> None:
     """Генерация конфига для ``ui_iconstotal.xml``.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param task_ids: Список ID заданий из ``task_manager.ltx``,
         или None для генерации по всем заданиям.
     :param tab: Отступ, используемый при выводе в файл.
     """
-    OFFSET_BY_TYPE = {
+    offset_by_type = {
         "artefact":         (0, 0),
         "monster_part":     (0, 47),
         "find_item":        (0, 94),
         "find_wpn":         (0, 141),
         "eliminate_lager":  (0, 188),
     }
-    OFFSET_BY_VENDOR = {
+    offset_by_vendor = {
         # "DEFAULT":           (0, 0),
         "trader":           (83, 0),
         "hound":            (166, 0),
@@ -67,7 +72,7 @@ def generate_icons(
         "freedom":          (747, 0),
         "wild":             (830, 0),
     }
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         file.write("<ui_texture>\n")
         file.write(f"{tab*1}<file_name>ui\\ui_iconstotal_tm</file_name>\n")
         file.write("\n")
@@ -79,10 +84,10 @@ def generate_icons(
         file.write("\n")
         for task in TaskManager().generic_tasks(task_ids):
             # calculating icon position
-            pos1 = OFFSET_BY_TYPE.get(task._type, None)
+            pos1 = offset_by_type.get(task._type)
             if (pos1 is None):
                 raise Exception(f"Unexpected task type ({task._type}) in '{task._id}'")
-            pos2 = OFFSET_BY_VENDOR.get(task.parent, None)
+            pos2 = offset_by_vendor.get(task.parent)
             if (pos2 is None):
                 raise Exception(f"Unexpected parent ({task.parent}) in '{task._id}'")
             pos = (pos1[0] + pos2[0], pos1[1] + pos2[1])
@@ -97,13 +102,13 @@ def generate_articles(
         tab: str = "    "
 ) -> None:
     """Генерация конфига для ``storyline_info_to_diary.xml``.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param task_ids: Список ID заданий из ``task_manager.ltx``,
         или None для генерации по всем заданиям.
     :param tab: Отступ, используемый при выводе в файл.
     """
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         for task in TaskManager().generic_tasks(task_ids):
             file.write(f"<article id=\"{task.article}\" name=\"{task._type}\" article_type=\"task\">\n")
             file.write(f"{tab*1}<text>{task.text}</text>\n")
@@ -116,13 +121,13 @@ def generate_strings(
         tab: str = "    "
 ) -> None:
     """Генерация шаблонов для ``string_table``.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param task_ids: Список ID заданий из ``task_manager.ltx``,
         или None для генерации по всем заданиям.
     :param tab: Отступ, используемый при выводе в файл.
     """
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         file.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n")
         file.write("<string_table>\n")
         for task in TaskManager().generic_tasks(task_ids):

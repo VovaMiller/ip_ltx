@@ -15,7 +15,7 @@ if __name__ == "__main__":
         from pathlib import Path
         if (
             "META_FILEPATH" in globals()
-            and type(META_FILEPATH) == str
+            and isinstance(META_FILEPATH, str)
             and len(META_FILEPATH) > 0
         ):
             os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())

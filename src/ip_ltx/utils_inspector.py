@@ -7,7 +7,7 @@ from contextlib import redirect_stderr
 from dataclasses import dataclass
 from enum import Enum
 
-from .utils import ANSI_COLOR_CODE
+from .utils import ANSIColorCode
 
 
 class InspectorError(Exception):
@@ -19,21 +19,21 @@ class InspectorError(Exception):
 
 class InspectorStep:
     """Контекстный менеджер для отдельного шага общего процесса проверки.
-    
+
     :param msg: Короткое описание шага проверки.
     :param raise_on_error: Если ``True`` (по умолчанию), то
         при наличии хотя бы одного сообщения об ошибке
         на выходе из контексного менеджера
         будет вызвано исключение :class:`InspectorError`.
     """
-    
+
     LINE_WIDTH = 64
 
     class MessageLevel(Enum):
         INFO = 0
         WARNING = 1
         ERROR = 2
-    
+
     @dataclass(frozen=True, slots=True)
     class Message:
         level: "InspectorStep.MessageLevel"
@@ -51,10 +51,10 @@ class InspectorStep:
 
     def __enter__(self):
         return self
-    
+
     def info(self, *msgs: str, header: bool = False):
         """Вывести серое сообщение с доп. информацией.
-        
+
         Если ``header == True``, то сообщение отделится от предыдущих.
         """
         self.log.append(self.Message(
@@ -65,7 +65,7 @@ class InspectorStep:
 
     def warn(self, *msgs: str, header: bool = False):
         """Вывести жёлтое сообщение-предупреждение.
-        
+
         Если ``header == True``, то сообщение отделится от предыдущих.
         """
         self.log.append(self.Message(
@@ -73,7 +73,7 @@ class InspectorStep:
             text="\n  ".join(msgs),
             header=header
         ))
-    
+
     def error(self, *msgs: str, header: bool = False):
         """Вывести красное сообщение об ошибке.
 
@@ -82,7 +82,7 @@ class InspectorStep:
         если ``raise_on_error == True``.
 
         В отличие прямого вызова исключения, позволяет вывести несколько ошибок сразу.
-        
+
         Если ``header == True``, то сообщение отделится от предыдущих.
         """
         self.log.append(self.Message(
@@ -90,7 +90,7 @@ class InspectorStep:
             text="\n  ".join(msgs),
             header=header
         ))
-    
+
     def __exit__(self, exc_type, exc, tb):
         cnt_warning = len(
             [msg for msg in self.log if msg.level == self.MessageLevel.WARNING]
@@ -99,30 +99,30 @@ class InspectorStep:
             [msg for msg in self.log if msg.level == self.MessageLevel.ERROR]
         )
         res_clr = (
-            ANSI_COLOR_CODE.RED if (exc_type is not None) or (cnt_error > 0)
-            else ANSI_COLOR_CODE.YELLOW if (cnt_warning > 0)
-            else ANSI_COLOR_CODE.GREEN
+            ANSIColorCode.RED if (exc_type is not None) or (cnt_error > 0)
+            else ANSIColorCode.YELLOW if (cnt_warning > 0)
+            else ANSIColorCode.GREEN
         )
         res_txt = "OK" if (exc_type is None) and (cnt_error == 0) else "FAIL"
         dots = max(0, self.LINE_WIDTH - self.intro_width - len(res_txt))
-        print(f"{"."*dots}{res_clr}{res_txt}{ANSI_COLOR_CODE.DEF}")
+        print(f"{"."*dots}{res_clr}{res_txt}{ANSIColorCode.DEF}")
         if (len(self.log) > 0) or (exc_type is not None):
             print("")
             for i, msg in enumerate(self.log):
                 match msg.level:
                     case self.MessageLevel.INFO:
-                        prefix = f"{ANSI_COLOR_CODE.BLACK}* "
+                        prefix = f"{ANSIColorCode.BLACK}* "
                     case self.MessageLevel.WARNING:
-                        prefix = f"{ANSI_COLOR_CODE.YELLOW}~ "
+                        prefix = f"{ANSIColorCode.YELLOW}~ "
                     case self.MessageLevel.ERROR:
-                        prefix = f"{ANSI_COLOR_CODE.RED}! "
+                        prefix = f"{ANSIColorCode.RED}! "
                     case _:
-                        prefix = f"* {ANSI_COLOR_CODE.WHITE}"
+                        prefix = f"* {ANSIColorCode.WHITE}"
                 if (i > 0) and msg.header:
                     print("")
-                print(f"{prefix}{msg.text}{ANSI_COLOR_CODE.DEF}")
+                print(f"{prefix}{msg.text}{ANSIColorCode.DEF}")
             if exc_type is not None:
-                print(f"{ANSI_COLOR_CODE.RED}! {exc}{ANSI_COLOR_CODE.DEF}")
+                print(f"{ANSIColorCode.RED}! {exc}{ANSIColorCode.DEF}")
             print("")
         if exc_type is not None:
             raise InspectorError() from exc
@@ -172,7 +172,7 @@ def run_inspection(
     if show_stderr and (len(stderr_str) > 0):
         print(stderr_str)
         _print_line()
-    
+
     # traceback
     if show_traceback and (len(tb) > 0):
         print(tb)

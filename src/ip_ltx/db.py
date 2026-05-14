@@ -1,12 +1,15 @@
+from enum import IntEnum
+
+# Allowing mixedCase for resemblance with LUA constants
+# ruff: noqa: N815
 
 
-class ADDON_FLAGS:
+class AddonFlags(IntEnum):
     scope    = 1
     launcher = 2
     silencer = 4
 
-
-class OBJECT_FLAGS:
+class ObjectFlags(IntEnum):
     flUseSwitches       = 1     # 0x00000001
     flSwitchOnline      = 2     # 0x00000002
     flSwitchOffline     = 4     # 0x00000004

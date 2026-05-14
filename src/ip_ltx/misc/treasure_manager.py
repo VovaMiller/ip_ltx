@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..ip_ltx import Ini, Section
 from ..ini import meta_ini
-from ..utils import print_error, print_warning, SingletonBase
+from ..ip_ltx import Ini, Section
+from ..utils import SingletonBase, print_error
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,15 +25,15 @@ class TreasureManager(SingletonBase):
     """Считанный файл treasure_manager.ltx"""
 
     def __init__(self):
-        FP = Path("config/misc/treasure_manager.ltx")
-        FN = FP.name
-        self.ini = Ini(name=FN, ini_meta=meta_ini())
-        self.ini.read(str(FP), inside_gamedata=True)
+        fp = Path("config/misc/treasure_manager.ltx")
+        fn = fp.name
+        self.ini = Ini(name=fn, ini_meta=meta_ini())
+        self.ini.read(str(fp), inside_gamedata=True)
         self._data_by_id = {}
         self._data_by_sid = {}
         for _id in self.ini.section("list").lines():
             if not self.ini.section_exist(_id):
-                print_error(f"({FN}) Treasure '{_id}' from [list] doesn't exist")
+                print_error(f"({fn}) Treasure '{_id}' from [list] doesn't exist")
                 continue
             s = self.ini.section(_id)
             try:
@@ -47,11 +47,11 @@ class TreasureManager(SingletonBase):
                 print_error(str(e))
             else:
                 if treasure.target in self._data_by_sid:
-                    print_error((
-                        f"({FN}) Skipping '{treasure._id}', "
+                    print_error(
+                        f"({fn}) Skipping '{treasure._id}', "
                         f"as its target ({treasure.target}) has already been used "
                         f"('{self._data_by_sid[treasure.target]._id}')"
-                    ))
+                    )
                 else:
                     self._data_by_id[_id] = treasure
                     self._data_by_sid[treasure.target] = treasure
@@ -65,7 +65,7 @@ class TreasureManager(SingletonBase):
             return treasure in self._data_by_sid
         else:
             raise TypeError("Treasure can only be identified by either str or int")
-    
+
     def __iter__(self):
         return iter(self._data_by_id.values())
 
@@ -81,3 +81,8 @@ class TreasureManager(SingletonBase):
 
     def __len__(self):
         return len(self._data_by_id)
+
+    def get[T](self, treasure: str | int, defval: T) -> Treasure | T:
+        if treasure in self:
+            return self[treasure]
+        return defval

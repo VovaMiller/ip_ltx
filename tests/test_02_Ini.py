@@ -33,24 +33,24 @@ def sample_ini(tmp_path_factory):
         #include "file_2.ltx"
 
         [test_elems]
-        strings_0 = 
+        strings_0 =
         strings_1 = abc
         strings_2 = abc, def
-        floats_0 = 
+        floats_0 =
         floats_1 = 1.1
         floats_2 = 1.1, 2.2
-        ints_0 = 
+        ints_0 =
         ints_1 = -1
         ints_2 = -1, -2
-        uints_0 = 
+        uints_0 =
         uints_1 = 1
         utints_2 = 1, 2
-        bools_0 = 
+        bools_0 =
         bools_1 = True
         bools_2 = True, False
 
         [test_items]
-        items_0 = 
+        items_0 =
         items_1 = item
         items_2 = item_1,10, item_2,20
         items_3 = q,w,2,e,r,t,-10,y
@@ -127,21 +127,21 @@ def test_sample_ini_sections(sample_ini):
         "test_1", "test_3", "test_2", "test_5", "test_6",
         "test_elems", "test_items", "test_none",
     ]
-    assert list([section.id for section in ini.sections()]) == [
+    assert [section.id for section in ini.sections()] == [
         "test_1", "test_3", "test_2", "test_5", "test_6",
         "test_elems", "test_items", "test_none",
     ]
-    assert ini.section_exist("test_1") == True
-    assert ini.section_exist("test_2") == True
-    assert ini.section_exist("test_3") == True
-    assert ini.section_exist("test_4") == False
-    assert ini.section_exist("test_5") == True
-    assert ini.section_exist("test_6") == True
-    assert ini.section_exist("test_7") == False
-    assert ini.section_exist("test_8") == False
-    assert ini.section_exist("test_elems") == True
-    assert ini.section_exist("test_items") == True
-    assert ini.section_exist("test_none") == True
+    assert ini.section_exist("test_1")      is True
+    assert ini.section_exist("test_2")      is True
+    assert ini.section_exist("test_3")      is True
+    assert ini.section_exist("test_4")      is False
+    assert ini.section_exist("test_5")      is True
+    assert ini.section_exist("test_6")      is True
+    assert ini.section_exist("test_7")      is False
+    assert ini.section_exist("test_8")      is False
+    assert ini.section_exist("test_elems")  is True
+    assert ini.section_exist("test_items")  is True
+    assert ini.section_exist("test_none")   is True
 
     assert ini.get_section_index("test_1") == 0
     assert ini.get_section_index("test_2") == 2
@@ -200,8 +200,8 @@ def test_sample_ini_fields(sample_ini):
 
     for section_id in ini.ids():
         for field in ini.section(section_id).lines():
-            assert ini.line_exist(section_id, field) == True
-    assert ini.line_exist("test_3", "field_unknown") == False
+            assert ini.line_exist(section_id, field) is True
+    assert ini.line_exist("test_3", "field_unknown") is False
     with pytest.raises(Ini.Error):
         _ = ini.line_exist("unknown", "field_str")
 
@@ -213,32 +213,32 @@ def test_sample_ini_values(sample_ini):
     assert ini.get_float("test_1", "field_float") == pytest.approx(1.1, abs=1e-6)
     assert ini.get_int("test_1", "field_int") == -1
     assert ini.get_uint("test_1", "field_uint") == 1
-    assert ini.get_bool("test_1", "field_bool") == True
+    assert ini.get_bool("test_1", "field_bool") is True
     assert ini.get_string("test_2", "field_str") == "word_2"
     assert ini.get_float("test_2", "field_float") == pytest.approx(2.2, abs=1e-6)
     assert ini.get_int("test_2", "field_int") == -2
     assert ini.get_uint("test_2", "field_uint") == 2
-    assert ini.get_bool("test_2", "field_bool") == False
+    assert ini.get_bool("test_2", "field_bool") is False
     assert ini.get_string("test_2", "field2_str") == "word_22"
     assert ini.get_float("test_2", "field2_float") == pytest.approx(22.2, abs=1e-6)
     assert ini.get_int("test_2", "field2_int") == -22
     assert ini.get_uint("test_2", "field2_uint") == 22
-    assert ini.get_bool("test_2", "field2_bool") == False
+    assert ini.get_bool("test_2", "field2_bool") is False
     assert ini.get_string("test_3", "field_str") == "word_3"
     assert ini.get_float("test_3", "field_float") == pytest.approx(3.3, abs=1e-6)
     assert ini.get_int("test_3", "field_int") == -3
     assert ini.get_uint("test_3", "field_uint") == 3
-    assert ini.get_bool("test_3", "field_bool") == True
+    assert ini.get_bool("test_3", "field_bool") is True
     assert ini.get_string("test_5", "field_str") == "word_1"
     assert ini.get_float("test_5", "field_float") == pytest.approx(1.1, abs=1e-6)
     assert ini.get_int("test_5", "field_int") == -1
     assert ini.get_uint("test_5", "field_uint") == 1
-    assert ini.get_bool("test_5", "field_bool") == True
+    assert ini.get_bool("test_5", "field_bool") is True
     assert ini.get_string("test_5", "field2_str") == "word_22"
     assert ini.get_float("test_5", "field2_float") == pytest.approx(22.2, abs=1e-6)
     assert ini.get_int("test_5", "field2_int") == -22
     assert ini.get_uint("test_5", "field2_uint") == 22
-    assert ini.get_bool("test_5", "field2_bool") == False
+    assert ini.get_bool("test_5", "field2_bool") is False
     assert ini.get_string("test_5", "field_self_str") == "word_5"
     assert ini.get_float("test_5", "field_self_float") == pytest.approx(5.5, abs=1e-6)
     assert ini.get_int("test_5", "field_self_int") == -5
@@ -246,12 +246,12 @@ def test_sample_ini_values(sample_ini):
     assert ini.get_float("test_6", "field_float") == pytest.approx(1.1, abs=1e-6)
     assert ini.get_int("test_6", "field_int") == -1
     assert ini.get_uint("test_6", "field_uint") == 1
-    assert ini.get_bool("test_6", "field_bool") == True
+    assert ini.get_bool("test_6", "field_bool") is True
     assert ini.get_string("test_6", "field2_str") == "word_22"
     assert ini.get_float("test_6", "field2_float") == pytest.approx(22.2, abs=1e-6)
     assert ini.get_int("test_6", "field2_int") == -22
     assert ini.get_uint("test_6", "field2_uint") == 22
-    assert ini.get_bool("test_6", "field2_bool") == False
+    assert ini.get_bool("test_6", "field2_bool") is False
     assert ini.get_string("test_6", "field_self_str") == "word_6"
     assert ini.get_float("test_6", "field_self_float") == pytest.approx(6.6, abs=1e-6)
     assert ini.get_int("test_6", "field_self_int") == -6
@@ -337,7 +337,7 @@ def test_sample_ini_access_nonexistent_fields(sample_ini):
     assert ini.get_float("test_1", "unknown_float", defval=0.0) == pytest.approx(0.0, abs=1e-6)
     assert ini.get_int("test_1", "unknown_int", defval=0) == 0
     assert ini.get_uint("test_1", "unknown_uint", defval=0) == 0
-    assert ini.get_bool("test_1", "unknown_bool", defval=False) == False
+    assert ini.get_bool("test_1", "unknown_bool", defval=False) is False
     assert ini.get_strings("test_elems", "unknown_strings", mandatory=False) == []
     assert ini.get_floats("test_elems", "unknown_floats", mandatory=False) == []
     assert ini.get_ints("test_elems", "unknown_ints", mandatory=False) == []
@@ -380,7 +380,7 @@ def test_sample_ini_access_fields_without_values(sample_ini):
     assert ini.get_ints("test_none", "no_ints", mandatory=False) == []
     assert ini.get_uint("test_none", "no_uint", defval=0) == 0
     assert ini.get_uints("test_none", "no_uints", mandatory=False) == []
-    assert ini.get_bool("test_none", "no_bool", defval=True) == True
+    assert ini.get_bool("test_none", "no_bool", defval=True) is True
     assert ini.get_bools("test_none", "no_bools", mandatory=False) == []
     assert ini.get_items("test_none", "no_items", mandatory=False) == []
 
@@ -388,7 +388,7 @@ def test_sample_ini_access_fields_without_values(sample_ini):
 def test_sample_ini_write(sample_ini, tmp_path):
     ini: Ini = sample_ini
     tmp_file = tmp_path / "sample_ini.ltx"
-    RESULT = "\n".join([
+    result = "\n".join([
         "[test_1]",
         "field_str = word_1",
         "field_float = 1.1",
@@ -484,17 +484,17 @@ def test_sample_ini_write(sample_ini, tmp_path):
         "",
     ])
 
-    with open(tmp_file, "w", encoding="utf-8") as file:
+    with tmp_file.open("w", encoding="utf-8") as file:
         ini.write(file)
 
-    assert tmp_file.read_text() == RESULT
+    assert tmp_file.read_text() == result
 
 
 def test_sample_ini_write_with_ids_mask(sample_ini, tmp_path):
     ini: Ini = sample_ini
     tmp_file = tmp_path / "sample_ini.ltx"
-    IDS_MASK = "test_(3|6|items)"
-    RESULT = "\n".join([
+    ids_mask = "test_(3|6|items)"
+    result = "\n".join([
         "[test_3]",
         "field_str = word_3",
         "field_float = 3.3",
@@ -526,17 +526,17 @@ def test_sample_ini_write_with_ids_mask(sample_ini, tmp_path):
         "",
     ])
 
-    with open(tmp_file, "w", encoding="utf-8") as file:
-        ini.write(file, ids_mask=IDS_MASK)
+    with tmp_file.open("w", encoding="utf-8") as file:
+        ini.write(file, ids_mask=ids_mask)
 
-    assert tmp_file.read_text() == RESULT
+    assert tmp_file.read_text() == result
 
 
 def test_sample_ini_write_with_fields_mask(sample_ini, tmp_path):
     ini: Ini = sample_ini
     tmp_file = tmp_path / "sample_ini.ltx"
-    FIELDS_MASK = ".*(float|bool).*"
-    RESULT = "\n".join([
+    fields_mask = ".*(float|bool).*"
+    result = "\n".join([
         "[test_1]",
         "field_float = 1.1",
         "field_bool = 1",
@@ -584,23 +584,23 @@ def test_sample_ini_write_with_fields_mask(sample_ini, tmp_path):
         "",
     ])
 
-    with open(tmp_file, "w", encoding="utf-8") as file:
-        ini.write(file, fields_mask=FIELDS_MASK)
+    with tmp_file.open("w", encoding="utf-8") as file:
+        ini.write(file, fields_mask=fields_mask)
 
-    assert tmp_file.read_text() == RESULT
+    assert tmp_file.read_text() == result
 
 
 def test_sample_ini_write_with_first(sample_ini, tmp_path):
     ini: Ini = sample_ini
     tmp_file = tmp_path / "sample_ini.ltx"
-    FIRST = [
+    first = (
         "field2_bool",
         "field2_uint",
         "field2_int",
         "field2_float",
         "field2_str",
-    ]
-    RESULT = "\n".join([
+    )
+    result = "\n".join([
         "[test_1]",
         "field_str = word_1",
         "field_float = 1.1",
@@ -696,10 +696,10 @@ def test_sample_ini_write_with_first(sample_ini, tmp_path):
         "",
     ])
 
-    with open(tmp_file, "w", encoding="utf-8") as file:
-        ini.write(file, first=FIRST)
+    with tmp_file.open("w", encoding="utf-8") as file:
+        ini.write(file, first=first)
 
-    assert tmp_file.read_text() == RESULT
+    assert tmp_file.read_text() == result
 
 
 def test_sample_ini_write_with_value_getter(sample_ini, tmp_path):
@@ -717,7 +717,7 @@ def test_sample_ini_write_with_value_getter(sample_ini, tmp_path):
 
     ini: Ini = sample_ini
     tmp_file = tmp_path / "sample_ini.ltx"
-    RESULT = "\n".join([
+    result = "\n".join([
         "[test_1]",
         "field_str = WORD_1",
         "field_float = -1.10",
@@ -813,10 +813,10 @@ def test_sample_ini_write_with_value_getter(sample_ini, tmp_path):
         "",
     ])
 
-    with open(tmp_file, "w", encoding="utf-8") as file:
+    with tmp_file.open("w", encoding="utf-8") as file:
         ini.write(file, value_getter=_value_getter)
 
-    assert tmp_file.read_text() == RESULT
+    assert tmp_file.read_text() == result
 
 
 def test_sample_ini_write_with_all_params(sample_ini, tmp_path):
@@ -834,15 +834,15 @@ def test_sample_ini_write_with_all_params(sample_ini, tmp_path):
 
     ini: Ini = sample_ini
     tmp_file = tmp_path / "sample_ini.ltx"
-    IDS_MASK = "test_(3|elems|items|none)"
-    FIELDS_MASK = r"(field_\w+|.*string.*|.*item.*)"
-    FIRST = [
+    ids_mask = "test_(3|elems|items|none)"
+    fields_mask = r"(field_\w+|.*string.*|.*item.*)"
+    first = (
         "no_strings",
         "strings_1",
         "items_3", "items_2",
         "field_bool", "field_uint", "field_int", "field_float", "field_str"
-    ]
-    RESULT = "\n".join([
+    )
+    result = "\n".join([
         "[test_3]",
         "field_bool = -1.00",
         "field_uint = -3.00",
@@ -869,16 +869,16 @@ def test_sample_ini_write_with_all_params(sample_ini, tmp_path):
         "",
     ])
 
-    with open(tmp_file, "w", encoding="utf-8") as file:
+    with tmp_file.open("w", encoding="utf-8") as file:
         ini.write(
             file,
-            ids_mask=IDS_MASK,
-            fields_mask=FIELDS_MASK,
-            first=FIRST,
+            ids_mask=ids_mask,
+            fields_mask=fields_mask,
+            first=first,
             value_getter=_value_getter
         )
 
-    assert tmp_file.read_text() == RESULT
+    assert tmp_file.read_text() == result
 
 
 def test_ini_read_several_equal_signs():
@@ -929,7 +929,7 @@ def test_ini_read_fields_with_empty_name():
         " = v5",
         "=v6=v7",
     ]))
-    assert ini.section_exist("") == False
+    assert ini.section_exist("") is False
     assert len(ini.section("test").lines()) == 1
     assert ini.get_string("test", "f") == "v4"
 
@@ -1110,9 +1110,9 @@ def test_ini_read_with_odd_inheritance_1():
         "field_3",
         "[main]:    test 1    ,\t\ttest\t2\t\t, \tTEST_3 \t",
     ]))
-    assert ini.line_exist("main", "field_1") == True
-    assert ini.line_exist("main", "field_2") == True
-    assert ini.line_exist("main", "field_3") == True
+    assert ini.line_exist("main", "field_1") is True
+    assert ini.line_exist("main", "field_2") is True
+    assert ini.line_exist("main", "field_3") is True
 
 def test_ini_read_with_odd_inheritance_2():
     """Рассинхрон конца ID и начала списка наследования.
@@ -1123,8 +1123,8 @@ def test_ini_read_with_odd_inheritance_2():
         "field_1",
         "[main]wtf_is_this]:test_1",
     ]))
-    assert ini.section_exist("main") == True
-    assert ini.line_exist("main", "field_1") == True
+    assert ini.section_exist("main") is True
+    assert ini.line_exist("main", "field_1") is True
 
 def test_ini_read_with_odd_inheritance_3():
     """Лишние символы между ``]:`` убирают наследование.
@@ -1135,8 +1135,8 @@ def test_ini_read_with_odd_inheritance_3():
         "field",
         "[child] :parent",
     ]))
-    assert ini.section_exist("child") == True
-    assert ini.line_exist("child", "field") == False
+    assert ini.section_exist("child") is True
+    assert ini.line_exist("child", "field") is False
 
 def test_ini_read_with_odd_inheritance_4():
     """Наследоваться от пустой секции нельзя.
@@ -1158,7 +1158,7 @@ def test_ini_read_with_odd_include_1(tmp_path):
         '#include "unknown.ltx"'
     ]))
     ini = Ini(name="test_ini")
-    assert file_path.is_file() == True
+    assert file_path.is_file() is True
     with pytest.raises(Ini.Error):
         ini.read(str(file_path), inside_gamedata=False)
 
@@ -1170,7 +1170,7 @@ def test_ini_read_with_odd_include_2(tmp_path):
         '#include unknown.ltx'
     ]))
     ini = Ini(name="test_ini")
-    assert file_path.is_file() == True
+    assert file_path.is_file() is True
     with pytest.raises(Ini.Error):
         ini.read(str(file_path), inside_gamedata=False)
 
@@ -1187,7 +1187,7 @@ def test_ini_read_with_odd_include_3(tmp_path):
     ]))
     ini = Ini(name="test_ini")
     ini.read(str(f1_path), inside_gamedata=False)
-    assert ini.section_exist("test") == True
+    assert ini.section_exist("test") is True
 
 def test_ini_read_with_odd_include_4(tmp_path):
     """Строка include-директивы с пробельными символами вокруг пути - OK.
@@ -1202,7 +1202,7 @@ def test_ini_read_with_odd_include_4(tmp_path):
     ]))
     ini = Ini(name="test_ini")
     ini.read(str(f1_path), inside_gamedata=False)
-    assert ini.section_exist("test") == True
+    assert ini.section_exist("test") is True
 
 def test_ini_read_with_odd_include_5(tmp_path):
     """Строка include-директивы с мусором вокруг кавычек - OK.
@@ -1217,7 +1217,7 @@ def test_ini_read_with_odd_include_5(tmp_path):
     ]))
     ini = Ini(name="test_ini")
     ini.read(str(f1_path), inside_gamedata=False)
-    assert ini.section_exist("test") == True
+    assert ini.section_exist("test") is True
 
 
 def test_ini_add():
@@ -1248,13 +1248,13 @@ def test_ini_add_without_reference():
     ini = Ini()
 
     ini.add(s1, by_reference=False)
-    assert ini.section_exist("s1") == True
-    assert ini.line_exist("s1", "f1") == True
+    assert ini.section_exist("s1") is True
+    assert ini.line_exist("s1", "f1") is True
     assert ini.get_string("s1", "f1") == "v1"
 
     s1.clear()
-    assert ini.section_exist("s1") == True
-    assert ini.line_exist("s1", "f1") == True
+    assert ini.section_exist("s1") is True
+    assert ini.line_exist("s1", "f1") is True
     assert ini.get_string("s1", "f1") == "v1"
 
 
@@ -1264,13 +1264,13 @@ def test_ini_add_by_reference():
     ini = Ini()
 
     ini.add(s1, by_reference=True)
-    assert ini.section_exist("s1") == True
-    assert ini.line_exist("s1", "f1") == True
+    assert ini.section_exist("s1") is True
+    assert ini.line_exist("s1", "f1") is True
     assert ini.get_string("s1", "f1") == "v1"
 
     s1.clear()
-    assert ini.section_exist("s1") == True
-    assert ini.line_exist("s1", "f1") == False
+    assert ini.section_exist("s1") is True
+    assert ini.line_exist("s1", "f1") is False
 
 
 def test_ini_add_overwrite():
@@ -1281,27 +1281,27 @@ def test_ini_add_overwrite():
     ini = Ini()
 
     ini.add(s1)
-    assert ini.line_exist("test", "f1") == True
-    assert ini.line_exist("test", "f2") == False
+    assert ini.line_exist("test", "f1") is True
+    assert ini.line_exist("test", "f2") is False
 
     with pytest.raises(Ini.Error):
         ini.add(s2, overwrite=False)
 
     ini.add(s2, overwrite=True)
-    assert ini.line_exist("test", "f1") == False
-    assert ini.line_exist("test", "f2") == True
+    assert ini.line_exist("test", "f1") is False
+    assert ini.line_exist("test", "f2") is True
 
 
 def test_ini_clear():
     ini = Ini()
     ini.add(Section(id="s1"))
     ini.add(Section(id="s2"))
-    assert ini.section_exist("s1") == True
-    assert ini.section_exist("s2") == True
+    assert ini.section_exist("s1") is True
+    assert ini.section_exist("s2") is True
 
     ini.clear()
-    assert ini.section_exist("s1") == False
-    assert ini.section_exist("s2") == False
+    assert ini.section_exist("s1") is False
+    assert ini.section_exist("s2") is False
 
 
 def _test_ini_read_encoding(tmp_path, encoding):
@@ -1330,10 +1330,10 @@ def _test_ini_read_encoding(tmp_path, encoding):
     ini = Ini()
     ini.read(str(file_path), inside_gamedata=False)
 
-    assert ini.section_exist("eng") == True
-    assert ini.section_exist("symbols") == True
-    assert ini.section_exist("rus") == True
-    assert ini.section_exist("numbers") == True
+    assert ini.section_exist("eng") is True
+    assert ini.section_exist("symbols") is True
+    assert ini.section_exist("rus") is True
+    assert ini.section_exist("numbers") is True
 
     assert ini.get_string("eng", "lower") == "qwertyuiopasdfghjklzxcvbnm"
     assert ini.get_string("eng", "UPPER") == "QWERTYUIOPASDFGHJKLZXCVBNM"
@@ -1377,8 +1377,8 @@ def test_ini_read_inside_gamedata(tmp_path):
 
     # Setting up meta ini
     _ss = Section(id="settings")
-    _ss.add("gamedata_path_mod", f'"{str(gd_mod_path)}"')
-    _ss.add("gamedata_path_alt", f'"{str(gd_alt_path)}"')
+    _ss.add("gamedata_path_mod", f'"{gd_mod_path}"')
+    _ss.add("gamedata_path_alt", f'"{gd_alt_path}"')
     ini_meta = Ini(name="meta")
     ini_meta.add(_ss, by_reference=True)
 
@@ -1411,9 +1411,9 @@ def test_ini_read_inside_gamedata(tmp_path):
         ini = Ini(name=entry_path.stem, ini_meta=ini_meta)
         ini.read(f"config\\{entry_path.name}", inside_gamedata=True)
 
-        assert ini.section_exist("section_shared") == True
-        assert ini.section_exist("section_mod") == True
-        assert ini.section_exist("section_alt") == True
+        assert ini.section_exist("section_shared") is True
+        assert ini.section_exist("section_mod") is True
+        assert ini.section_exist("section_alt") is True
         assert ini.get_string("section_shared", "taken_from") == "mod"
         assert ini.get_string("section_mod", "taken_from") == "mod"
         assert ini.get_string("section_alt", "taken_from") == "alt"
@@ -1434,8 +1434,8 @@ def test_ini_read_inside_gamedata_prefix_1(tmp_path):
 
     # Setting up meta ini
     _ss = Section(id="settings")
-    _ss.add("gamedata_path_mod", f'"{str(gd_mod_path)}"')
-    _ss.add("gamedata_path_alt", f'"{str(gd_alt_path)}"')
+    _ss.add("gamedata_path_mod", f'"{gd_mod_path}"')
+    _ss.add("gamedata_path_alt", f'"{gd_alt_path}"')
     ini_meta = Ini(name="meta")
     ini_meta.add(_ss, by_reference=True)
 
@@ -1450,7 +1450,7 @@ def test_ini_read_inside_gamedata_prefix_1(tmp_path):
     # Testing
     ini = Ini(name="entry", ini_meta=ini_meta)
     ini.read(mod_entry.name, inside_gamedata=True)
-    assert ini.section_exist("section_test") == True
+    assert ini.section_exist("section_test") is True
 
 def test_ini_read_inside_gamedata_prefix_2(tmp_path):
     """Строка пути до MOD является префиксом строки пути до ALT.
@@ -1468,8 +1468,8 @@ def test_ini_read_inside_gamedata_prefix_2(tmp_path):
 
     # Setting up meta ini
     _ss = Section(id="settings")
-    _ss.add("gamedata_path_mod", f'"{str(gd_mod_path)}"')
-    _ss.add("gamedata_path_alt", f'"{str(gd_alt_path)}"')
+    _ss.add("gamedata_path_mod", f'"{gd_mod_path}"')
+    _ss.add("gamedata_path_alt", f'"{gd_alt_path}"')
     ini_meta = Ini(name="meta")
     ini_meta.add(_ss, by_reference=True)
 
@@ -1508,7 +1508,7 @@ def test_ini_get_string_wb():
     assert ini.get_string_wb("test", "valid_2") == ""
     assert ini.get_string_wb("test", "valid_3") == "Text"
     assert ini.get_string_wb("test", "valid_4") == "Long Text"
-    
+
     # valid format with defval
     assert ini.get_string_wb("test", "valid_1", defval="def") == ""
     assert ini.get_string_wb("test", "valid_2", defval="def") == ""

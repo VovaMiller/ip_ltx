@@ -1,6 +1,7 @@
 """Извлечение разной информации по объектам, определённым в all.spawn"""
 
 from dataclasses import dataclass
+from pathlib import Path
 
 from .ini import meta_ini, spawn_ini
 from .spawn import get_spawn
@@ -58,13 +59,15 @@ def check_anomalies(
     if sort_by_spawn_id and ini_meta.get_bool("features", "universal_acdc", False):
         anomalies.sort(key=lambda x: x.spawn_id)
 
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         # Поиск аномалий с установленным story_id
         file.write("Anomalies with story_id:\n")
         for obj in spawn.objects():
-            if obj._type == ObjectType.ANOMALY:
-                if (obj.story_id is not None) and (obj.story_id != -1):
-                    file.write("- {}\n".format(obj.name))
+            if (
+                obj._type == ObjectType.ANOMALY
+                and ((obj.story_id is not None) and (obj.story_id != -1))
+            ):
+                file.write("- {}\n".format(obj.name))
 
         # Кол-во зон, у которых restrictor_type = 2
         cnt_by_lvls = {}
@@ -75,7 +78,7 @@ def check_anomalies(
                 cnt_by_lvls[obj._level] = cnt_by_lvls.get(obj._level, 0) + 1
         for lvl in levels:
             file.write("- {}: {}\n".format(lvl, cnt_by_lvls.get(lvl, 0)))
-        
+
         # Список позиций аномалий на локации не с типом 2
         file.write("\n")
         file.write(f"Anomalies invisible by mobs ({level_for_details}):\n")
@@ -88,7 +91,7 @@ def extract_mobs(
         sort_by_spawn_id: bool = True
 ) -> None:
     """Вывод некоторой информации по всем мобам (мутанты и NPC) на указанной локации.
-    
+
     :param fn: Путь/имя файла для вывода.
     :param level: Локация, по которой выводится информация.
     :param sort_by_spawn_id: Список выводимых мобов будет отсортирован
@@ -122,7 +125,7 @@ def extract_mobs(
         if obj._type not in info:
             continue
         ss = ini_spawn.section(obj._id)
-        
+
         health = None
         g_team, g_squad, g_group = None, None, None
         try:
@@ -131,7 +134,7 @@ def extract_mobs(
             g_squad = ss.get_uint("g_squad")
             g_group = ss.get_uint("g_group")
         except Exception as e:
-            print_warning(f"Unable to process creature '{obj.name}' ({str(e)})")
+            print_warning(f"Unable to process creature '{obj.name}' ({e})")
             continue
         if health < 0.01:
             # ignoring corpses
@@ -145,11 +148,11 @@ def extract_mobs(
                 print_warning(
                     f"Creature '{obj.name}' has [spawner], but no 'cond' in it"
                 )
-                
+
         gulag = ""
         if obj.custom_data.section_exist("smart_terrains"):
             gulag = ", ".join(list(obj.custom_data.section("smart_terrains").lines()))
-        
+
         info[obj._type].append(MobInfo(
             spawn_id=obj.spawn_id,
             name=obj.name,
@@ -162,11 +165,11 @@ def extract_mobs(
             gulag=gulag
         ))
     if sort_by_spawn_id and meta_ini().get_bool("features", "universal_acdc", False):
-        for ot in info.keys():
+        for ot in info:
             info[ot].sort(key=lambda x: x.spawn_id)
-    
+
     # writing down
-    with open(fn, "w", encoding="utf-8") as file:
+    with Path(fn).open("w", encoding="utf-8") as file:
         file.write(f"# {level}\n")
         file.write("\n")
         for _caption, _type in [

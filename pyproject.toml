@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ip_ltx"
-version = "3.7.1"
+version = "3.7.2"
 description = "Python utils for working with S.T.A.L.K.E.R. SoC ltx-files"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -38,6 +38,32 @@ extend-exclude = [
 ]
 
 [tool.ruff.lint]
-select = ["ALL"]
+# select = ["ALL"]
 # select = ["E", "W", "F", "I", "B", "C4"]
-# ignore = ["E501"]
+select = [
+    "E",    # pycodestyle errors (standard syntax checking)
+    "W",    # pycodestyle warnings (formatting/style issues)
+    "F",    # Pyflakes (catches logical bugs like unused variables/imports)
+    "I",    # isort (automatically sorts imports alphabetically)
+    "N",    # pep8-naming (enforces camelCase for classes, snake_case for functions)
+    "UP",   # pyupgrade (automatically modernizes older Python syntax)
+    "B",    # flake8-bugbear (catches subtle, common Python design flaws)
+    "C4",   # flake8-comprehensions (optimizes list/dict comprehensions)
+    "SIM",  # flake8-simplify (helps to refactor complex code into simpler lines)
+    "ARG",  # flake8-unused-arguments (flags unused parameters in functions)
+    "PTH",  # flake8-use-pathlib (encourages modern pathlib instead of raw os.path strings)
+    "RUF",  # Ruff-specific rules (catches hidden bugs unique to Ruff's deep analysis)
+]
+ignore = [
+    "UP032",  # Don't force f-strings
+
+    # Mute ambiguous character checks
+    "RUF001",  # Checks inside raw strings
+    "RUF002",  # Checks inside docstrings
+    "RUF003",  # Checks inside code comments
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/test_*.py" = [
+    "E501",  # Allowing long lines
+]

@@ -1,7 +1,7 @@
 
 def main():
     from ip_ltx.acdc import ip_acdc_extractor
-    
+
     _ = ip_acdc_extractor.acdc_decompile(
         all_spawn_fp=r"C:\X-Ray SDK\gamedata\spawns\all.spawn",
         acdc_dir=r"C:\X-Ray SDK\_ACDC"
@@ -35,14 +35,14 @@ def main():
             "zone_radioactive_average",
             "zone_radioactive_strong",
         },
-        exceptions_first_fields=[
+        exceptions_first_fields=(
             "section_name",
             "name",
             "position",
             "game_vertex_id",
             "level_vertex_id",
             "direction",
-        ],
+        ),
         exceptions_hide_fields={
             # cse_alife_object
             "distance",

@@ -1,15 +1,15 @@
 from pathlib import Path
 
-import pytest
-
 import ip_ltx.analyzer_loot as al
 
+# Allowing non-lowercase function names
+# ruff: noqa: N802
 
 def _test(tmp_path, runnable, tag, **kwargs) -> None:
-    FN = f"analyzer_loot__{tag}.txt"
-    fp_result = tmp_path / FN
-    fp_expected = Path(__file__).parent / Path(__file__).stem / FN
-    assert fp_expected.is_file() == True
+    fn = f"analyzer_loot__{tag}.txt"
+    fp_result = tmp_path / fn
+    fp_expected = Path(__file__).parent / Path(__file__).stem / fn
+    assert fp_expected.is_file() is True
     text_expected = fp_expected.read_text(encoding="utf-8")
 
     runnable(str(fp_result), **kwargs)
@@ -24,15 +24,15 @@ def _test_summary(
         levels: list[str],
         **kwargs
 ) -> None:
-    DN = f"summary__{tag_levels}"
-    FN = f"{DN}__{tag_options}.txt"
+    dn = f"summary__{tag_levels}"
+    fn = f"{dn}__{tag_options}.txt"
 
-    exp_fp = Path(__file__).parent / Path(__file__).stem / DN / FN
-    assert exp_fp.is_file() == True
+    exp_fp = Path(__file__).parent / Path(__file__).stem / dn / fn
+    assert exp_fp.is_file() is True
 
-    res_fp = tmp_path / FN
-    al.summary(str(res_fp), **kwargs, levels=levels)
-    assert res_fp.is_file() == True
+    res_fp = tmp_path / fn
+    al.summary(str(res_fp), levels, **kwargs)
+    assert res_fp.is_file() is True
 
     assert res_fp.read_text(encoding="utf-8") == exp_fp.read_text(encoding="utf-8")
 

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pygtrie
 
-from .db import OBJECT_FLAGS
+from .db import ObjectFlags
 from .ini import game_ini, meta_ini, spawn_ini, system_ini
 from .ip_ltx import Ini, Section
 from .misc.task_manager import TaskManager
@@ -15,7 +15,13 @@ from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
 from .utils import cast_safe
 from .utils_inspector import InspectorStep, run_inspection
-from .utils_meta import Levels, ServerClasses, ObjectTypeDetector, CLSIDs, ObjectType
+from .utils_meta import (
+    CLSIDs,
+    GameLevels,
+    ObjectType,
+    ObjectTypeDetector,
+    ServerClasses,
+)
 from .xml_data.dialogs import Dialogs
 from .xml_data.info_portions import InfoPortions
 from .xml_data.string_table import StringTable
@@ -47,9 +53,11 @@ def _run_all_from_class(cls) -> None:
     for name, attr in cls.__dict__.items():
         if isinstance(attr, staticmethod) and name.startswith("test_"):
             func = attr.__func__
-            if hasattr(func, "require_feature"):
-                if not ini_meta.get_bool("features", func.require_feature, False):
-                    continue
+            if (
+                hasattr(func, "require_feature")
+                and not ini_meta.get_bool("features", func.require_feature, False)
+            ):
+                continue
             doc = getdoc(func)
             label = " ".join(doc.split("\n\n")[0].split()) if doc else name
             with InspectorStep(label, raise_on_error=False) as step:
@@ -73,7 +81,7 @@ class InspectionsGeneral:
                     step.error(f"Storyline task '{s.id}' is unlisted")
                 else:
                     step.error(f"Task '{s.id}' is unlisted")
-    
+
     @staticmethod
     def test_treasure_manager_unlisted(step: InspectorStep):
         """Поиск незарегистрированных тайников treasure_manager.
@@ -99,20 +107,20 @@ class InspectionsGeneral:
     def test_translations(step: InspectorStep):
         """Проверка наличия переводов некоторых строк.
         """
-        ST = StringTable()
+        string_table = StringTable()
 
         # task_manager
         msgs = []
         for task in TaskManager().generic_tasks():
             if len(task.text) == 0:
                 msgs.append(f"[{task._id}] Пустое поле 'text'")
-            elif task.text not in ST:
+            elif task.text not in string_table:
                 msgs.append(f"[{task._id}] Для строки '{task.text}' нет перевода")
         if len(msgs) > 0:
             step.info("task_manager", header=True)
             for msg in msgs:
                 step.error(msg)
-        
+
         # treasure_manager
         msgs = []
         for treasure in TreasureManager():
@@ -120,7 +128,7 @@ class InspectionsGeneral:
                 msgs.append(
                     f"[{treasure._id}] Пустое поле 'name'"
                 )
-            elif treasure.name not in ST:
+            elif treasure.name not in string_table:
                 msgs.append(
                     f"[{treasure._id}] Для строки '{treasure.name}' нет перевода"
                 )
@@ -128,7 +136,7 @@ class InspectionsGeneral:
                 msgs.append(
                     f"[{treasure._id}] Пустое поле 'description'"
                 )
-            elif treasure.description not in ST:
+            elif treasure.description not in string_table:
                 msgs.append(
                     f"[{treasure._id}] Для строки '{treasure.description}' нет перевода"
                 )
@@ -136,25 +144,25 @@ class InspectionsGeneral:
             step.info("treasure_manager", header=True)
             for msg in msgs:
                 step.error(msg)
-        
+
         # inventory items
         ini_meta = meta_ini()
-        CLSIDS = CLSIDs()
-        FIELDS = ["inv_name", "inv_name_short", "inv_name_desc", "description"]
-        NO_ST_PATTERN = re.compile('[ "а-яА-Я]')
+        clsids = CLSIDs()
+        text_fields = ["inv_name", "inv_name_short", "inv_name_desc", "description"]
+        no_st_pattern = re.compile('[ "а-яА-Я]')
         found_no_st: dict[str, list[str]] = {}
         found_no_tr: dict[str, list[str]] = {}
         for s in system_ini().sections():
             if ini_meta.line_exist("ignore_sections", s.id):
                 continue
             _class = s.get_string("class", "")
-            if (len(_class) > 0) and (_class in CLSIDS) and CLSIDS.is_item(_class):
-                for field in FIELDS:
+            if (len(_class) > 0) and (_class in clsids) and clsids.is_item(_class):
+                for field in text_fields:
                     value = s.get_string(field, "")
                     if (len(value) > 0):
-                        if re.search(NO_ST_PATTERN, value):
+                        if re.search(no_st_pattern, value):
                             found_no_st.setdefault(s.id, []).append(field)
-                        elif (value not in ST):
+                        elif (value not in string_table):
                             found_no_tr.setdefault(s.id, []).append(value)
         if len(found_no_st) > 0:
             step.info(
@@ -183,7 +191,7 @@ class InspectionsGeneral:
     def test_generate_name(step: InspectorStep):
         """Проверка наличия имён GENERATE_NAME.
         """
-        ST = StringTable()
+        string_table = StringTable()
         sections = [
             s
             for s in system_ini().sections()
@@ -197,18 +205,18 @@ class InspectionsGeneral:
             except Section.Error as e:
                 step.error(str(e))
             else:
-                ITERATION_DATA = [
+                iteration_data = [
                     ("name_cnt", fname_cnt, "name_"),
                     ("last_name_cnt", lname_cnt, "lname_"),
                 ]
-                for field, cnt, prefix in ITERATION_DATA:
+                for field, cnt, prefix in iteration_data:
                     if cnt == 0:
                         step.error(f"[{s.id}] {field} = 0")
                         continue
                     not_found = []
                     for i in range(cnt):
                         string_id = f"{prefix}{subset}_{i}"
-                        if string_id not in ST:
+                        if string_id not in string_table:
                             not_found.append(string_id)
                     if len(not_found) > 0:
                         step.error("[{}] These strings were not found:\n  {}{}".format(
@@ -216,7 +224,7 @@ class InspectionsGeneral:
                             "\n  ".join(not_found[:10]),
                             "\n  ..." if (len(not_found) > 10) else ""
                         ))
-    
+
     @staticmethod
     @_require_feature("iPv30")
     def test_ph_capture_visuals(step: InspectorStep):
@@ -224,7 +232,7 @@ class InspectionsGeneral:
         """
         ini_meta = meta_ini()
         ini_system = system_ini()
-        CLSIDS = CLSIDs()
+        clsids = CLSIDs()
         ph_capture_visuals: set[Path] = {
             Path(line).with_suffix(".ogf")
             for line in ini_system.section("ph_capture_visuals").lines()
@@ -234,7 +242,7 @@ class InspectionsGeneral:
             if ini_meta.line_exist("ignore_sections", s.id):
                 continue
             _class = s.get_string("class", "")
-            if (len(_class) > 0) and (_class in CLSIDS) and CLSIDS.is_item(_class):
+            if (len(_class) > 0) and (_class in clsids) and clsids.is_item(_class):
                 _visual = s.get_string("visual", "")
                 if (len(_visual) > 0):
                     _visual_path = Path(_visual).with_suffix(".ogf")
@@ -242,10 +250,10 @@ class InspectionsGeneral:
                         found_inv_visuals.append((s.id, _visual_path))
         if len(found_inv_visuals) > 0:
             step.info("Визуалы инвентарных предметов обнаружены в [ph_capture_visuals]")
-            step.info((
+            step.info(
                 "Это значит, что для предмета будет высвечена подсказка о\n"
                 "  перетаскивании, хотя на деле таскать его будет невозможно."
-            ))
+            )
             for section_name, visual_path in found_inv_visuals:
                 step.error(f"[{section_name}] {visual_path}")
 
@@ -254,7 +262,7 @@ class InspectionsGeneral:
     def test_section_name_patterns(step: InspectorStep):
         """Проверка имён секций инвентарных предметов.
         """
-        PATTERNS_BY_TYPE = {
+        patterns_by_type = {
             ObjectType.ITEM_ART:        r"^af_",
             ObjectType.ITEM_AMMO:       r"^ammo_",
             ObjectType.ITEM_GRENADE:    r"^grenade_",
@@ -263,23 +271,25 @@ class InspectionsGeneral:
             ObjectType.ITEM_OUTFIT:     r"_outfit$",
         }
         ini_meta = meta_ini()
-        CLSIDS = CLSIDs()
+        clsids = CLSIDs()
         irregular_sections: list[tuple[str, ObjectType]] = []
         for s in system_ini().sections():
             if ini_meta.line_exist("ignore_sections", s.id):
                 continue
             _class = s.get_string("class", "")
-            if (len(_class) > 0) and (_class in CLSIDS):
-                _type = CLSIDS.get_object_type(_class)
-                if _type in PATTERNS_BY_TYPE:
-                    if re.search(PATTERNS_BY_TYPE[_type], s.id) is None:
-                        irregular_sections.append((s.id, _type))
+            if (len(_class) > 0) and (_class in clsids):
+                _type = clsids.get_object_type(_class)
+                if (
+                    _type in patterns_by_type
+                    and re.search(patterns_by_type[_type], s.id) is None
+                ):
+                    irregular_sections.append((s.id, _type))
         if len(irregular_sections) > 0:
             step.info("Обнаружены секции с неверным форматом имени")
-            step.info((
+            step.info(
                 "Такие секции не будут распознаны как нужный\n"
                 "  тип предмета в конфиге торговли"
-            ))
+            )
             for section_name, _type in irregular_sections:
                 step.error(f"[{section_name}] - {_type.name}")
 
@@ -290,19 +300,21 @@ class InspectionsGeneral:
         """
         ini_meta = meta_ini()
         ini_system = system_ini()
-        CLSIDS = CLSIDs()
+        clsids = CLSIDs()
         sections_without_alias: list[str] = []
         for s in ini_system.sections():
             if ini_meta.line_exist("ignore_sections", s.id):
                 continue
             _class = s.get_string("class", "")
-            if (len(_class) > 0) and (_class in CLSIDS):
-                if CLSIDS.is_ammo(_class) or CLSIDS.is_weapon_addon(_class):
-                    if (
-                        not s.line_exist_own("inv_name_desc")
-                        or len(s.get_string("inv_name_desc")) == 0
-                    ):
-                        sections_without_alias.append(s.id)
+            if (len(_class) == 0) or (_class not in clsids):
+                continue
+            if not clsids.is_ammo(_class) and not clsids.is_weapon_addon(_class):
+                continue
+            if (
+                not s.line_exist_own("inv_name_desc")
+                or len(s.get_string("inv_name_desc")) == 0
+            ):
+                sections_without_alias.append(s.id)
         if len(sections_without_alias) > 0:
             step.info("Обнаружены секции беоприпасов/аддонов без `inv_name_desc`")
             step.info(
@@ -320,7 +332,7 @@ class InspectionsSpawn:
     @staticmethod
     def test_name_duplicates(step: InspectorStep):
         """Проверка на отсутствие дубликатов name.
-        
+
         Если отключен флаг ``inspector_pedantic``,
         то ищет дубликаты только в рамках одной локации.
         """
@@ -336,15 +348,15 @@ class InspectionsSpawn:
         d = {key: ids for key, ids in d.items() if len(ids) > 1}
         if len(d) > 0:
             if pedantic:
-                step.info((
+                step.info(
                     "Обнаружены дубликаты name\n"
                     "  при поиске по всем локациям."
-                ))
-                step.info((
+                )
+                step.info(
                     "Дубликаты name могут приводить к нестабильным безлоговым\n"
                     "  вылетам при загрузке сохранения, в том числе\n"
                     "  при переходе на другую локацию."
-                ))
+                )
                 for key, ids in d.items():
                     _, name = key
                     step.error("name = {}{}{}".format(
@@ -353,15 +365,15 @@ class InspectionsSpawn:
                         "\n  ..." if (len(ids) > 3) else ""
                     ))
             else:
-                step.info((
+                step.info(
                     "Обнаружены дубликаты name\n"
                     "  при поиске по каждой отдельной локации."
-                ))
-                step.info((
+                )
+                step.info(
                     "Дубликаты name могут приводить к нестабильным безлоговым\n"
                     "  вылетам при загрузке сохранения, в том числе\n"
                     "  при переходе на другую локацию."
-                ))
+                )
                 for key, ids in d.items():
                     level, name = key
                     step.error("{} | name = {}{}".format(
@@ -375,15 +387,15 @@ class InspectionsSpawn:
         """
         for obj in get_spawn().objects():
             if (len(obj._src) > 0) and (obj._src.find(obj._level) < 0):
-                step.error((
+                step.error(
                     f"object '{obj.name}' is on level '{obj._level}',"
                     f"\n  but defined in '{obj._src}'"
-                ))
+                )
 
     @staticmethod
     def test_upd_fields_consistency(step: InspectorStep):
         """Значения указанных полей state и update совпадают.
-        
+
         ``health == upd:health``, ``position == upd:position``,
         ``g_team == upd:g_team``, ...
 
@@ -442,15 +454,15 @@ class InspectionsSpawn:
             if obj.story_id != -1:
                 d.setdefault(obj.story_id, []).append(obj._id)
                 if not (0 < obj.story_id < 65535):
-                    step.error((
+                    step.error(
                         f"object [{obj._id}] ('{obj.name}'):"
                         f"\n  story_id = {obj.story_id}  ; strange value"
-                    ))
+                    )
                 elif obj.story_id not in story_ids:
-                    step.error((
+                    step.error(
                         f"object [{obj._id}] ('{obj.name}'):"
                         f"\n  story_id = {obj.story_id}  ; unregistered value"
-                    ))
+                    )
         for sid, ids in d.items():
             if len(ids) > 1:
                 step.error("story_id '{}' is used more than once:{}".format(
@@ -494,37 +506,35 @@ class InspectionsSpawn:
           иначе не будут срабатывать необходимые
           колбеки в ``bind_physic_object.script``.
         """
-        iPv20 = meta_ini().get_bool("features", "iPv20", False)
-        iPv30 = meta_ini().get_bool("features", "iPv30", False)
-        TM = TreasureManager()
+        ipv20 = meta_ini().get_bool("features", "iPv20", False)
+        ipv30 = meta_ini().get_bool("features", "iPv30", False)
+        treasure_manager = TreasureManager()
         found_treasures = {}
         for obj in get_spawn().objects():
-            treasure = TM[obj.story_id] if (obj.story_id in TM) else None
+            treasure = treasure_manager.get(obj.story_id, None)
             if treasure is not None:
                 # registered in treasure_manager
                 found_treasures[treasure._id] = True
                 has_spawn = obj.custom_data.section_exist("spawn")
                 has_spawn_tm = obj.custom_data.section_exist("spawn_tm")
                 if not has_spawn and not has_spawn_tm:
-                    if iPv20:
+                    if ipv20:
                         step.error(
                             f"treasure '{treasure._id}':",
                             "custom_data has neither [spawn] nor [spawn_tm]"
                         )
                 else:
-                    if has_spawn:
-                        if iPv30:
-                            step.error(
-                                f"treasure '{treasure._id}':",
-                                "custom_data has [spawn]; use [spawn_tm] instead"
-                            )
-                    if len(obj._loot) == 0:
-                        if iPv20:
-                            step.error(
-                                f"treasure '{treasure._id}':",
-                                "has no items"
-                            )
-                    else:
+                    if has_spawn and ipv30:
+                        step.error(
+                            f"treasure '{treasure._id}':",
+                            "custom_data has [spawn]; use [spawn_tm] instead"
+                        )
+                    if (len(obj._loot) == 0) and ipv20:
+                        step.error(
+                            f"treasure '{treasure._id}':",
+                            "has no items"
+                        )
+                    if len(obj._loot) > 0:
                         for se in obj._loot.entries():
                             g = True
                             g = g and (se.count > 0)
@@ -539,23 +549,21 @@ class InspectionsSpawn:
                             )
 
                 # Проверка правильности используемой секции
-                if iPv30:
-                    if obj.section_name != "inventory_box":
-                        step.error(
-                            f"treasure '{treasure._id}':",
-                            f"section_name = {obj.section_name}",
-                            "use \"inventory_box\" instead"
-                        )
+                if ipv30 and (obj.section_name != "inventory_box"):
+                    step.error(
+                        f"treasure '{treasure._id}':",
+                        f"section_name = {obj.section_name}",
+                        "use \"inventory_box\" instead"
+                    )
             else:
                 # non-treasure_manager object
-                if obj.custom_data.section_exist("spawn_tm"):
-                    if iPv30:
-                        step.error(
-                            f"object '{obj.name}':",
-                            "not registered in treasure_manager, but has [spawn_tm]",
-                            "use [spawn] instead"
-                        )
-        for treasure in TM:
+                if ipv30 and obj.custom_data.section_exist("spawn_tm"):
+                    step.error(
+                        f"object '{obj.name}':",
+                        "not registered in treasure_manager, but has [spawn_tm]",
+                        "use [spawn] instead"
+                    )
+        for treasure in treasure_manager:
             if treasure._id not in found_treasures:
                 step.error(
                     f"treasure '{treasure._id}':",
@@ -574,11 +582,11 @@ class InspectionsSpawn:
 
         Заодно проверяется наличие ``[logic]`` у тайников.
         """
-        TM = TreasureManager()
+        treasure_manager = TreasureManager()
         for obj in get_spawn().objects():
-            if (obj.story_id != -1) and (obj.story_id in TM):
+            if (obj.story_id != -1) and (obj.story_id in treasure_manager):
                 # Проверка правильности подсказки ("Обыскать тайник")
-                treasure = TM[obj.story_id]
+                treasure = treasure_manager[obj.story_id]
                 if obj.custom_data.section_exist("logic"):
                     if obj.custom_data.line_exist("logic", "cfg"):
                         cfg_obj = obj.custom_data.get_string("logic", "cfg")
@@ -657,12 +665,15 @@ class InspectionsSpawn:
                 for _id, _name in having_any:
                     step.error(f"object [{_id}] ('{_name}')")
         else:
-            IP = InfoPortions()
+            info_portions = InfoPortions()
             having_action: list[tuple[str, str, str]] = []
             for obj in get_spawn().objects():
                 if obj.custom_data.section_exist("known_info"):
                     for info in obj.custom_data.section("known_info").lines():
-                        if (info in IP) and (len(IP[info].action) > 0):
+                        if (
+                            (info in info_portions)
+                            and (len(info_portions[info].action) > 0)
+                        ):
                             having_action.append((obj._id, obj.name, info))
             if len(having_action) > 0:
                 step.info(
@@ -692,16 +703,18 @@ class InspectionsSpawn:
         """
         pedantic = meta_ini().get_bool("features", "inspector_pedantic", False)
         ini_spawn = spawn_ini()
-        CLSIDS = CLSIDs()
+        clsids = CLSIDs()
         trie = pygtrie.CharTrie()  # префиксное дерево
         zones_all: list[tuple[str, str]] = []
         for obj in get_spawn().objects():
-            if ini_spawn.line_exist(obj._id, "restrictor_type"):
-                if pedantic or CLSIDS.is_anomaly(obj._class):
-                    trie[obj.name] = True
-                    rt = ini_spawn.get_uint(obj._id, "restrictor_type")
-                    if (rt == 0) or (rt == 2):
-                        zones_all.append((obj._id, obj.name))
+            if (
+                ini_spawn.line_exist(obj._id, "restrictor_type")
+                and (pedantic or clsids.is_anomaly(obj._class))
+            ):
+                trie[obj.name] = True
+                rt = ini_spawn.get_uint(obj._id, "restrictor_type")
+                if (rt == 0) or (rt == 2):
+                    zones_all.append((obj._id, obj.name))
         zones_prefixes = [
             (_id, _name) for _id, _name in zones_all if trie.has_subtrie(_name)
         ]
@@ -735,15 +748,17 @@ class InspectionsSpawn:
         счётчик в достижении "Крушитель" (ИП v3.0)
         """
         ini_spawn = spawn_ini()
-        VISUAL_BOX_WOOD_01 = Path("physics\\box\\box_wood_01")
+        visual_box_wood_01 = Path("physics\\box\\box_wood_01")
         found: list[tuple[str, str]] = []
         for obj in get_spawn().objects():
             if obj._class == "P_DSTRBL":  # physic_destroyable_object
                 visual_name = ini_spawn.get_string(obj._id, "visual_name", "")
                 visual_path = Path(visual_name).with_suffix("")
-                if visual_path == VISUAL_BOX_WOOD_01:
-                    if not obj.custom_data.section_exist("drop_box"):
-                        found.append((obj._id, obj.name))
+                if (
+                    (visual_path == visual_box_wood_01)
+                    and not obj.custom_data.section_exist("drop_box")
+                ):
+                    found.append((obj._id, obj.name))
         if len(found) > 0:
             step.info("Обнаружены разрушаемые деревянные коробки без [drop_box]")
             step.info("Наличие этой секции необходимо для достижения 'ip_a_boxcrusher'")
@@ -755,7 +770,7 @@ class InspectionsSpawn:
         """Поиск объектов в оффлайне.
         """
         for obj in get_spawn().objects():
-            if (obj.object_flags & OBJECT_FLAGS.flSwitchOnline) == 0:
+            if (obj.object_flags & ObjectFlags.flSwitchOnline) == 0:
                 step.error(f"object [{obj._id}] ('{obj.name}') is offline")
 
     @staticmethod
@@ -790,10 +805,10 @@ class InspectionsSpawn:
     @_require_feature("iPv30")
     def test_invariant_names_as_prefixes(step: InspectorStep):
         """Запрет на префиксность имён любых объектов.
-        
+
         Экспериментальный инвариант: имя любого объекта не должно
         являться префиксом имени другого объекта.
-        
+
         Проверяемые имена:
 
         * **[1]** Имена изначально заспавненных объектов (all.spawn)
@@ -849,11 +864,11 @@ class InspectionsSpawn:
     @_require_feature("iPv30")
     def test_cond_weapons_on_level(step: InspectorStep):
         """Проверка condition у оружия (ip_cleaner).
-        
+
         Проверка наличия заспавненного на локации оружия,
         которое по умолчанию попадает под условия ``ip_cleaner``.
         """
-        CLEANER_COND__WEAPONS = 0.899
+        cleaner_cond__weapons = 0.899
         death_ini = Ini(name="death_generic.ltx", ini_meta=meta_ini())
         death_ini.read(
             "config\\misc\\death_generic.ltx",
@@ -871,17 +886,17 @@ class InspectionsSpawn:
             if (obj.story_id is not None) and (-1 < obj.story_id < 65535):
                 continue
             # Объект должен быть достаточно сломан
-            if obj.get_condition() > CLEANER_COND__WEAPONS:
+            if obj.get_condition() > cleaner_cond__weapons:
                 continue
             # Объект попадает под условия ip_cleaner
             if first_error:
                 step.info(
                     "Обнаружено оружие вне хранилища, попадающее под условия ip_cleaner"
                 )
-                step.info((
+                step.info(
                     "Необходимо добавить story_id"
-                    f" или увеличить condition (>{CLEANER_COND__WEAPONS:.3f})"
-                ))
+                    f" или увеличить condition (>{cleaner_cond__weapons:.3f})"
+                )
                 first_error = False
             step.error(f"object [{obj._id}] ('{obj.name}')")
 
@@ -896,39 +911,39 @@ def _inspection_st1_init() -> None:
         step.info(f"ALT: {ini_test.gda or "--"}")
 
     with InspectorStep("Инициализация game_ini") as step:
-        ini_system = game_ini()
+        _ = game_ini()
 
     with InspectorStep("Инициализация system_ini") as step:
-        ini_system = system_ini()
+        _ = system_ini()
 
     with InspectorStep("Инициализация данных о локациях") as step:
-        LEVELS = Levels()
+        _ = GameLevels()
 
     with InspectorStep("Инициализация данных об игровых классах и CLSID") as step:
-        SC = ServerClasses()
-        OTD = ObjectTypeDetector()
-        CLSIDS = CLSIDs()
+        _ = ServerClasses()
+        _ = ObjectTypeDetector()
+        _ = CLSIDs()
 
     with InspectorStep("Инициализация XML-данных") as step:
-        D = Dialogs()
-        IP = InfoPortions()
-        ST = StringTable()
-        TD = TextureDesc()
+        _ = Dialogs()
+        _ = InfoPortions()
+        _ = StringTable()
+        _ = TextureDesc()
 
     with InspectorStep("Инициализация данных task_manager") as step:
-        task_manager = TaskManager()
+        _ = TaskManager()
 
     with InspectorStep("Инициализация данных о торговле") as step:
-        trade = TradeBuy()
+        _ = TradeBuy()
 
     with InspectorStep("Инициализация данных treasure_manager") as step:
-        treasure_manager = TreasureManager()
+        _ = TreasureManager()
 
     with InspectorStep("Инициализация данных all.spawn") as step:
         ini_spawn = spawn_ini()
         if len(ini_spawn.sections()) == 0:
             step.warn("[spawn] Нет данных о спавне")
-        spawn = get_spawn()
+        _ = get_spawn()
 
 def _inspection_st2_general() -> None:
     """Вторая стадия валидации: общие проверки."""

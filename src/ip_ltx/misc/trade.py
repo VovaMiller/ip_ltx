@@ -1,9 +1,9 @@
 import re
 from pathlib import Path
 
-from ..ip_ltx import Ini, Section
 from ..ini import meta_ini
-from ..utils import print_error, print_warning, SingletonBase
+from ..ip_ltx import Ini, Section
+from ..utils import SingletonBase, print_error
 
 
 class TradeBuyImpl:
@@ -55,7 +55,7 @@ class TradeBuyImpl:
         # Прописана ли секция напрямую?
         if section_name in self._buy_k:
             return self._buy_k[section_name]
-        
+
         # Проверяем по-очереди регулярки и выдаём первое соответствие.
         for pattern, value in self._buy_k_regex.items():
             if re.search(pattern, section_name) is not None:
@@ -67,7 +67,7 @@ class TradeBuyImpl:
 
 class TradeBuy(SingletonBase, TradeBuyImpl):
     """Класс, хранящий информацию о коэффициентах покупки торговцами предметов.
-    
+
     Инициализация по этому классу всегда выдаёт единый экземпляр,
     инициализированный по секции, указанной в ``[trade]`` в meta-файле.
     """

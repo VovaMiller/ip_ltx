@@ -1,15 +1,13 @@
 from pathlib import Path
 
-import pytest
-
 import ip_ltx.analyzer_spawn as asp
 
 
 def _test(tmp_path, runnable, tag, **kwargs) -> None:
-    FN = f"analyzer_spawn__{tag}.txt"
-    fp_result = tmp_path / FN
-    fp_expected = Path(__file__).parent / Path(__file__).stem / FN
-    assert fp_expected.is_file() == True
+    fn = f"analyzer_spawn__{tag}.txt"
+    fp_result = tmp_path / fn
+    fp_expected = Path(__file__).parent / Path(__file__).stem / fn
+    assert fp_expected.is_file() is True
     text_expected = fp_expected.read_text(encoding="utf-8")
 
     runnable(str(fp_result), **kwargs)

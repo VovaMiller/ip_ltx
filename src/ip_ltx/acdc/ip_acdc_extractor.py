@@ -24,10 +24,9 @@ from typing import TextIO
 from pathvalidate import is_valid_filename
 
 from ..ip_ltx import Ini, Section
-from ..utils import ANSI_COLOR_CODE, print_error, print_warning
+from ..utils import ANSIColorCode, print_error, print_warning
 
-
-_ACDC_LABEL = f"{ANSI_COLOR_CODE.BLACK}ACDC/decompiler{ANSI_COLOR_CODE.DEF}"
+_ACDC_LABEL = f"{ANSIColorCode.BLACK}ACDC/decompiler{ANSIColorCode.DEF}"
 _ACDC_CMD = [
     "perl", "universal_acdc.pl", "-d", "all.spawn", "-out", "acdc_decompile", "-nofatal"
 ]
@@ -39,16 +38,16 @@ class Printer:
 
     @staticmethod
     def line() -> None:
-        print(ANSI_COLOR_CODE.BLACK, "-"*64, ANSI_COLOR_CODE.DEF, sep="")
+        print(ANSIColorCode.BLACK, "-"*64, ANSIColorCode.DEF, sep="")
 
     @staticmethod
     def header() -> None:
         if not Printer._header_printed:
             Printer.line()
             print(
-                ANSI_COLOR_CODE.BLACK,
+                ANSIColorCode.BLACK,
                 f"# {Path(__file__).name}",
-                ANSI_COLOR_CODE.DEF,
+                ANSIColorCode.DEF,
                 sep="",
                 flush=True
             )
@@ -61,7 +60,7 @@ def _ini_write(
         file: TextIO,
         extraction_rules: dict[str, str],
         exceptions: set[str],
-        exceptions_first_fields: list[str],
+        exceptions_first_fields: tuple[str, ...],
         exceptions_hide_fields: set[str],
         u_acdc: bool
 ) -> None:
@@ -89,7 +88,7 @@ def _ini_write(
                 )
         return value
 
-    HIDDEN_FIELDS = (
+    hidden_fields = (
         exceptions_hide_fields | {"id", "version", "script_version", "spawn_id"}
         if not u_acdc
         else {*exceptions_hide_fields}
@@ -108,7 +107,7 @@ def _ini_write(
         section = Section(id=name)
         if section_name in exceptions:
             for field, value in base_section.fields():
-                if field not in HIDDEN_FIELDS:
+                if field not in hidden_fields:
                     section._fields[field] = value
             section.write(
                 file=file,
@@ -173,7 +172,7 @@ def acdc_decompile(all_spawn_fp: str, acdc_dir: str) -> bool:
         print_error(f"ACDC: Decompilation failed (code: {e.returncode})")
         Printer.line()
         return False
-    
+
     Printer.line()
     return True
 
@@ -183,13 +182,13 @@ def extract(
         alife_list: list[str],
         extraction_rules: dict[str, str],
         exceptions: set[str],
-        exceptions_first_fields: list[str],
+        exceptions_first_fields: tuple[str, ...],
         exceptions_hide_fields: set[str],
         keep_universal_acdc_format: bool
 ) -> bool:
     """Извлечение заданной информации из файлов ``alife_*.ltx``,
     полученных в результате декомпиляции all.spawn утилитой Universal ACDC.
-    
+
     :param input_dir: Директория с файлами ``alife_*.ltx``.
     :param output_dir: Директория, куда сохраняются результаты извлечения.
         Должна отличаться от ``input_dir``.
@@ -199,19 +198,19 @@ def extract(
         для каждой секции должны быть выведены в зависимости от значения поля
         ``section_name``. Ключ - имя поля. Значение - маска (регулярное выражение)
         для ``section_name``, по которой проверяется полное совпадение.
-    
+
     :param exceptions: При выводе секций с перечисленными в этом параметре
         ``section_name`` игнорируются правила, определённые через ``extraction_rules``.
         Вместо этого будут выведены все поля, кроме тех, что были исключены
         другими параметрами. Секции, поля которых выводятся подобным образом,
         далее обозначаются как "секции-исключения".
-    :param exceptions_first_fields: Список полей секций-исключений,
+    :param exceptions_first_fields: Перечисление полей секций-исключений,
         которые будут выведены в первую очередь.
     :param exceptions_hide_fields: Множество полей секций-исключений,
         которые не будут выведены.
     :param keep_universal_acdc_format: Сохранять ли формат Universal ACDC или же
         преобразовать набор полей и их значения в формат классического ACDC.
-    
+
     :return: True, если извлечение прошло успешно.
     """
     Printer.header()
@@ -231,7 +230,7 @@ def extract(
         print_error("Input and output directories can't be the same")
         Printer.line()
         return False
-    
+
     # Проверка имён файлов
     filenames_ok = True
     for filename in alife_list:
@@ -252,7 +251,7 @@ def extract(
     if not all_files_exist:
         Printer.line()
         return False
-    
+
     # Извлечение информации из alife_*.ltx
     if len(alife_list) == 0:
         print_warning("No alife_*.ltx files")
@@ -263,7 +262,7 @@ def extract(
                 output_fp = str(output_path.joinpath(f"_{fn}"))
                 ini = Ini()
                 ini.read(input_fp)
-                with open(output_fp, "w", encoding="utf-8") as file:
+                with Path(output_fp).open("w", encoding="utf-8") as file:
                     _ini_write(
                         ini,
                         file,
@@ -276,7 +275,7 @@ def extract(
             except Exception:
                 print("")
                 print(
-                    f"{ANSI_COLOR_CODE.RED}-{ANSI_COLOR_CODE.DEF}",
+                    f"{ANSIColorCode.RED}-{ANSIColorCode.DEF}",
                     f"({i+1}/{len(alife_list)}) {fn}"
                 )
                 print(traceback.format_exc())
@@ -285,7 +284,7 @@ def extract(
             else:
                 shift = len(str(len(alife_list))) - len(str(i+1))
                 print(
-                    f"{ANSI_COLOR_CODE.GREEN}+{ANSI_COLOR_CODE.DEF}",
+                    f"{ANSIColorCode.GREEN}+{ANSIColorCode.DEF}",
                     f"{" "*shift}({i+1}/{len(alife_list)}) {fn}",
                     flush=True
                 )

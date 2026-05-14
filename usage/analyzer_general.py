@@ -3,7 +3,6 @@ HIDE_GAMEDATA_LTX_WARNINGS = True
 
 def main():
     import ip_ltx.analyzer_general as ag
-    from ip_ltx.ini import meta_ini
     from ip_ltx.utils import run
 
 
@@ -22,7 +21,7 @@ def main():
         fields=["$spawn"],
         dont_ignore_sections=True
     )
-    
+
 
     run(ag.extract_fields, "INV__class",
         precond=ag.is_inv_item__old2,
@@ -32,21 +31,21 @@ def main():
         precond=ag.is_inv_item__old2,
         fields=["visual"]
     )
-    
+
 
     run(ag.extract_fields, "mutant_parts",
         precond=ag.is_mutant_part,
         fields=["cost", "inv_name"],
         fields_pp=[ag.to_uint, ag.translate_string]
     )
-    
+
 
     run(ag.extract_fields, "arts",
         precond=ag.is_art,
         fields=["cost", "inv_name"],
         fields_pp=[ag.to_uint, ag.translate_string]
     )
-    
+
 
     run(ag.extract_fields, "outfit",
         precond=ag.is_outfit,
@@ -242,13 +241,13 @@ if __name__ == "__main__":
         from pathlib import Path
         if (
             "META_FILEPATH" in globals()
-            and type(META_FILEPATH) == str
+            and isinstance(META_FILEPATH, str)
             and len(META_FILEPATH) > 0
         ):
             os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())
         if (
             "HIDE_GAMEDATA_LTX_WARNINGS" in globals()
-            and type(HIDE_GAMEDATA_LTX_WARNINGS) == bool
+            and isinstance(HIDE_GAMEDATA_LTX_WARNINGS, bool)
         ):
             os.environ["HIDE_GAMEDATA_LTX_WARNINGS"] = (
                 str(int(HIDE_GAMEDATA_LTX_WARNINGS))

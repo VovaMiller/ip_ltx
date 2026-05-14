@@ -1,25 +1,21 @@
 """Генерация характеристик NPC"""
 
-import re
-import os.path
-import traceback
 import itertools
 import random
+import re
+import traceback
 from collections import Counter
 from collections.abc import Callable
 from pathlib import Path, PureWindowsPath
-from typing import TextIO
+from typing import ClassVar, TextIO
 
 from pathvalidate import is_valid_filepath
 
-from .ip_ltx import Ini, Section
 from .ini import system_ini
-from .xml_data.dialogs import Dialogs
-from .xml_data.string_table import StringTable
-from .xml_data.texture_desc import TextureDesc
+from .ip_ltx import Ini, Section
 from .treasure_manager_ext import SpawnEntry
 from .utils import (
-    ANSI_COLOR_CODE,
+    ANSIColorCode,
     cast_safe,
     is_gamedata_dir,
     is_gamedata_file,
@@ -29,6 +25,9 @@ from .utils import (
     validate_data,
 )
 from .utils_meta import ObjectType
+from .xml_data.dialogs import Dialogs
+from .xml_data.string_table import StringTable
+from .xml_data.texture_desc import TextureDesc
 
 # ----------------------------------------------------------------
 
@@ -52,14 +51,14 @@ class CharacterDefaults:
                 return "GENERATE_NAME_captain"
             case _:
                 return "GENERATE_NAME_stalker"
-    
+
     @staticmethod
     def get_icon(community: str, visual: str) -> str:
         if community == "zombied":
-            TD = TextureDesc()
-            ICON_NONE = "ui_npc_u_none"
-            if ICON_NONE in TD:
-                return ICON_NONE
+            texture_desc = TextureDesc()
+            icon_none = "ui_npc_u_none"
+            if icon_none in texture_desc:
+                return icon_none
         return f"ui_npc_u_{Path(visual).stem}"
 
     @staticmethod
@@ -88,24 +87,24 @@ class Inspector:
     с ресурсами игры. Выявленные несоответствия лишь выводят предупреждение,
     причём не дублируют их при повторном вызове одной и той же проверки.
     """
-    _name:          set[str] = set()
-    _icon:          set[str] = set()
-    _bio:           set[str] = set()
-    _community:     set[str] = set()
-    _terrain_sect:  set[str] = set()
-    _visual:        set[str] = set()
-    _snd_config:    set[str] = set()
-    _include:       set[str] = set()
-    _dialog:        set[str] = set()
+    _name:          ClassVar[set[str]] = set()
+    _icon:          ClassVar[set[str]] = set()
+    _bio:           ClassVar[set[str]] = set()
+    _community:     ClassVar[set[str]] = set()
+    _terrain_sect:  ClassVar[set[str]] = set()
+    _visual:        ClassVar[set[str]] = set()
+    _snd_config:    ClassVar[set[str]] = set()
+    _include:       ClassVar[set[str]] = set()
+    _dialog:        ClassVar[set[str]] = set()
 
     @staticmethod
     def name(v: str) -> None:
         if v not in Inspector._name:
             Inspector._name.add(v)
-            GEN_PREFIX = "GENERATE_NAME_"
-            if v.startswith(GEN_PREFIX):
+            gen_prefix = "GENERATE_NAME_"
+            if v.startswith(gen_prefix):
                 ini_system = system_ini()
-                section_name = f"stalker_names_{v[len(GEN_PREFIX):]}"
+                section_name = f"stalker_names_{v[len(gen_prefix):]}"
                 ok = False
                 if ini_system.section_exist(section_name):
                     s = ini_system.section(section_name)
@@ -115,24 +114,21 @@ class Inspector:
                 if not ok:
                     print_warning(f"<name> Generator '{v}' is not set up properly")
             else:
-                ST = StringTable()
-                if v not in ST:
+                if v not in StringTable():
                     print_warning(f"<name> Not found: '{v}'")
-    
+
     @staticmethod
     def icon(v: str) -> None:
         if v not in Inspector._icon:
             Inspector._icon.add(v)
-            TD = TextureDesc()
-            if v not in TD:
+            if v not in TextureDesc():
                 print_warning(f"<icon> Not found: '{v}'")
-    
+
     @staticmethod
     def bio(v: str | None) -> None:
         if (v is not None) and (v not in Inspector._bio):
             Inspector._bio.add(v)
-            ST = StringTable()
-            if v not in ST:
+            if v not in StringTable():
                 print_warning(f"<bio> Not found: '{v}'")
 
     @staticmethod
@@ -200,14 +196,13 @@ class Inspector:
                 )
                 if not exists:
                     print_warning(f"#include: not found ({v})")
-    
+
     @staticmethod
     def dialog(vv: list[str]) -> None:
         for v in vv:
             if v not in Inspector._dialog:
                 Inspector._dialog.add(v)
-                D = Dialogs()
-                if v not in D:
+                if v not in Dialogs():
                     print_warning(f"<*_dialog> Not found: '{v}'")
 
 # ----------------------------------------------------------------
@@ -257,9 +252,9 @@ class Character:
         :param tab: Отступ, используемый при выводе в файл.
         """
         id = Character.get_id(self._unique, self.cls, self._num)
-        f.write((
+        f.write(
             f"{tab*1}<specific_character id=\"{id}\" team_default=\"1\">\n"
-        ))
+        )
         f.write(f"{tab*2}<name>{self.name}</name>\n")
         f.write(f"{tab*2}<icon>{self.icon}</icon>\n")
         if self.bio is not None:
@@ -275,10 +270,10 @@ class Character:
                 f"{tab*2}<money min=\"100000\" max=\"110000\" infinitive=\"1\" />\n"
             )
         else:
-            f.write((
+            f.write(
                 f"{tab*2}<money min=\"{self.money_min}\" max=\"{self.money_max}\""
                 f" infinitive=\"0\" />\n"
-            ))
+            )
         f.write(f"{tab*2}<rank>{self.rank}</rank>\n")
         f.write(f"{tab*2}<reputation>{self.reputation}</reputation>\n")
         f.write(f"{tab*2}<visual>{self.visual}</visual>\n")
@@ -314,7 +309,7 @@ class CharacterFactory:
 
     Описывается конфигурационной секцией в ltx-файле.
     Генерирует список экземпляров класса :class:`Character`.
-    
+
     :param s: Секция, на базе которой осуществляется инициализация.
     :raises IncompleteError: если настройка неполная
         (например, когда не указан обязательный параметр).
@@ -333,16 +328,16 @@ class CharacterFactory:
         """Вызывается при ошибке генерации характеристики в связи с её ID."""
         pass
 
-    chr_ids: set[str] = set()
+    chr_ids: ClassVar[set[str]] = set()
     """Множество ID уже сгенерированных характеристик."""
 
-    chr_cnt_by_cls: Counter[str] = Counter()
+    chr_cnt_by_cls: ClassVar[Counter[str]] = Counter()
     """Кол-во уже сгенерированных характеристик по каждому классу."""
 
-    gen_cnt_by_cls: Counter[str] = Counter()
+    gen_cnt_by_cls: ClassVar[Counter[str]] = Counter()
     """Кол-во запущенных генераций по каждому классу."""
 
-    unique_classes: set[str] = set()
+    unique_classes: ClassVar[set[str]] = set()
     """Множество классов, занятых уникальной характеристикой."""
 
     _id:                str
@@ -383,7 +378,7 @@ class CharacterFactory:
                 print_error("", prefix=False, color=False)
                 _ok = False
             print_error(f"[{s.id}] {msg}")
-        
+
         def _read_range(
                 tag: str,
                 only_positive: bool,
@@ -442,7 +437,7 @@ class CharacterFactory:
             else:
                 _err("$GENMODE: Invalid value")
         except Section.Error:
-            _err(f"$GENMODE: No value")
+            _err("$GENMODE: No value")
 
         # <name>, <icon>, <bio>, <snd_config>, <terrain_sect>
         # These are optional string fields
@@ -466,21 +461,21 @@ class CharacterFactory:
                     setattr(self, to_attr.get(field, field), tmp)
                 else:
                     _err(f"<{field}> Empty string")
-        
+
         # Validating and uniforming: <visual>, <snd_config>
         if hasattr(self, "visual"):
             if is_valid_filepath(self.visual):
                 self.visual = str(PureWindowsPath(self.visual)).removesuffix(".ogf")
             else:
                 delattr(self, "visual")
-                _err(f"<visual> Invalid filepath")
+                _err("<visual> Invalid filepath")
         if hasattr(self, "snd_config") and (self.snd_config is not None):
             if is_valid_filepath(self.snd_config):
                 self.snd_config = f"{PureWindowsPath(self.snd_config)}\\"
             else:
                 delattr(self, "snd_config")
-                _err(f"<snd_config> Invalid filepath")
-        
+                _err("<snd_config> Invalid filepath")
+
         # <rank>
         tmp = _read_range(
             tag="rank",
@@ -491,7 +486,7 @@ class CharacterFactory:
             if (tmp[0] < 100) or (tmp[1] < 100):
                 self._warn("Don't set rank below 100 to avoid NPC absurd accuracy bug")
             self.rank = tmp
-        
+
         # <reputation>
         tmp = _read_range(
             tag="reputation",
@@ -524,9 +519,11 @@ class CharacterFactory:
                     case _:
                         _err("<money> Too many parameters")
             self.money_inf = False
-        if hasattr(self, "money"):
-            if (self.money[0] == 0) or (self.money[1] == 0):
-                self._warn("<money> min or max value is zero")
+        if (
+            hasattr(self, "money")
+            and ((self.money[0] == 0) or (self.money[1] == 0))
+        ):
+            self._warn("<money> min or max value is zero")
 
         # <crouch_type>
         self.crouch_type = None
@@ -539,7 +536,7 @@ class CharacterFactory:
                 if tmp in [-1, 0, 1]:
                     self.crouch_type = tmp
                 else:
-                    _err(f"<crouch_type> Invalid value")
+                    _err("<crouch_type> Invalid value")
 
         # <w0>, <w1>, <w2>, <items>
         self.w0, self.w1, self.w2 = [], [], []
@@ -549,13 +546,13 @@ class CharacterFactory:
                 setattr(self, field, CharacterFactory._read_items(s, field))
             except CharacterFactory.ItemsError as e:
                 _err(f"<{field}> {e}")
-        
+
         # Checking <w0>, <w1>, <w2>
         # Проверка, что указано действительно оружие.
         for se in itertools.chain(self.w0, self.w1, self.w2):
             if (se is not None) and (se._type != ObjectType.ITEM_WEAPON):
                 self._warn(f"Not a weapon: '{se.name}'")
-        
+
         # Checking <w1>, <w2>
         # Проверка, чтобы в одной характеристике не комбинировалось
         #  оружие, которое NPC использует в одном и том же слоте.
@@ -575,7 +572,8 @@ class CharacterFactory:
         for field, w, a in zip(
             ["w0", "w1", "w2"],
             [self.w0, self.w1, self.w2],
-            [self.a0, self.a1, self.a2]
+            [self.a0, self.a1, self.a2],
+            strict=True
         ):
             for wse in w:
                 if wse is None:
@@ -606,7 +604,7 @@ class CharacterFactory:
                 self.include = s.get_strings("include")
             except Section.Error as e:
                 _err(f"<include> {e.msg}")
-        
+
         # <start_dialog>
         try:
             self.start_dialog = s.get_strings("start_dialog", mandatory=False)
@@ -620,17 +618,17 @@ class CharacterFactory:
             self.actor_dialog = s.get_strings("actor_dialog", mandatory=False)
         except Section.Error as e:
             _err(f"<actor_dialog> {e.msg}")
-        
+
         # Extra check for <start_dialog> and <actor_dialog>
         if hasattr(self, "start_dialog") and hasattr(self, "actor_dialog"):
             cnt_total = len(self.start_dialog) + len(self.actor_dialog)
-            cnt_unique = len(set([*self.start_dialog, *self.actor_dialog]))
+            cnt_unique = len({*self.start_dialog, *self.actor_dialog})
             if cnt_total != cnt_unique:
                 self._warn("The same dialog is used twice")
 
         if not _ok:
             raise CharacterFactory.IncompleteError()
-    
+
     def _warn(self, msg: str) -> None:
         print_warning(f"[{self._id}] {msg}")
 
@@ -651,7 +649,7 @@ class CharacterFactory:
         Ранг новичков начинается со 100 (а не с 0),
         чтобы избежать бага с завышенной точностью стрельбы
         (см. ``report_57``).
-        
+
         :param rank: Идентификатор ранга.
         :return: Пара минимального и максимального численных значений для данного ранга.
             Возвращает None, если идентификатор не опознан.
@@ -670,7 +668,7 @@ class CharacterFactory:
     @staticmethod
     def _get_reputation_lims(reputation: str) -> tuple[int, int] | None:
         """Получение пары численных значений для данного идентификатора репутации.
-        
+
         :param rank: Идентификатор репутации.
         :return: Пара минимального и максимального численных значений
             для данной репутации. Возвращает None, если идентификатор не опознан.
@@ -695,9 +693,9 @@ class CharacterFactory:
     @staticmethod
     def _read_items(section: Section, field: str) -> list[SpawnEntry | None]:
         """Прочитать строку с предметами из указанного поля данной секции.
-        
+
         Пример строки: ``bread, vodka (2), wpn_pm (1, silencer)``
-        
+
         :param section: Секция, из которой считывается поле.
         :param field: Поле, в котором записана строка с предметами.
         :raises ItemsError: при ошибке считывания.
@@ -705,42 +703,42 @@ class CharacterFactory:
             :class:`~ip_ltx.treasure_manager_ext.SpawnEntry`.
 
             Также в списке сохраняется как None:
-            
+
             * Специальный элемент списка - нижнее подчёркивание (``_``)
             * Предмет с нулевым количеством
             * Предмет с нулевой вероятностью
         """
-        Err = CharacterFactory.ItemsError
+        items_error = CharacterFactory.ItemsError
         line = section.get_string(field, "").strip()
         if len(line) == 0:
             return []
         if line.find("|") != -1:
-            raise Err("wrong item list format")
-        
+            raise items_error("wrong item list format")
+
         # Предобработка разделителей
         line_p = list(line)
         parenthesis = False
         for i in range(len(line_p)):
             if parenthesis:
                 if line_p[i] == "(":
-                    raise Err("wrong item list format")
+                    raise items_error("wrong item list format")
                 if line_p[i] == ")":
                     parenthesis = False
             else:
                 if line_p[i] == ")":
-                    raise Err("wrong item list format")
+                    raise items_error("wrong item list format")
                 if line_p[i] == "(":
                     parenthesis = True
                 elif line_p[i] == ",":
                     line_p[i] = "|"
         line_p = "".join(line_p)
-        
+
         # Считывание предметов
         items = []
         for i, s1 in enumerate(line_p.split("|")):
             s1 = s1.strip()
             if len(s1) == 0:
-                raise Err(f"empty list element (#{i+1})")
+                raise items_error(f"empty list element (#{i+1})")
             if s1 == "_":
                 items.append(None)
                 continue
@@ -752,22 +750,22 @@ class CharacterFactory:
             else:
                 tmp = re.match(r"^(\S+)$", s1)
                 if tmp is None:
-                    raise Err(f"wrong item list format (elem #{i+1})")
+                    raise items_error(f"wrong item list format (elem #{i+1})")
                 name = tmp.group(1)
                 params = "1"
             try:
                 context = f"{field}@{section.id}"
                 se = SpawnEntry(name, params, context)
             except Exception as e:
-                raise Err(f"{e} (elem #{i+1})")
+                raise items_error(f"{e} (elem #{i+1})") from None
             else:
                 if (se.count > 0) and (se.prob is None or se.prob > 0):
                     items.append(se)
                 else:
                     items.append(None)
-        
+
         return items
-    
+
     @staticmethod
     def refresh():
         CharacterFactory.chr_ids.clear()
@@ -781,7 +779,7 @@ class CharacterFactory:
             wpn: tuple[int | None, int | None, int | None]
     ) -> Character:
         """Генерация характеристики - экземпляра класса :class:`Character`.
-        
+
         :param unique: Уникальная ли это характеристика.
         :param wpn: Выбор оружия из настроек характеристики.
         :raises CharGenClsError: если характеристика не была сгенерирована
@@ -791,16 +789,16 @@ class CharacterFactory:
         :return: Экземпляр класса :class:`Character`.
         """
         if self.cls in CharacterFactory.unique_classes:
-            raise CharacterFactory.CharGenClsError((
+            raise CharacterFactory.CharGenClsError(
                 f"class '{self.cls}' is already taken"
                 " by some unique character"
-            ))
+            )
         if unique and (CharacterFactory.chr_cnt_by_cls[self.cls] > 0):
-            raise CharacterFactory.CharGenClsError((
+            raise CharacterFactory.CharGenClsError(
                 f"class '{self.cls}' is already taken"
                 " and can't be used for a unique character"
-            ))
-        
+            )
+
         num = CharacterFactory.chr_cnt_by_cls[self.cls] + 1
         id = Character.get_id(unique, self.cls, num)
         if id in CharacterFactory.chr_ids:
@@ -866,7 +864,8 @@ class CharacterFactory:
         for idx, ww, aa in zip(
             wpn,
             [self.w0, self.w1, self.w2],
-            [self.a0, self.a1, self.a2]
+            [self.a0, self.a1, self.a2],
+            strict=True
         ):
             se_w = ww[idx] if idx is not None else None
             se_a = aa[idx] if idx is not None else None
@@ -877,7 +876,7 @@ class CharacterFactory:
         for se in self.items:
             if se is not None:
                 ch.spawn_items.append(se)
-        
+
         # Inspecting
         Inspector.name(ch.name)
         Inspector.icon(ch.icon)
@@ -892,7 +891,7 @@ class CharacterFactory:
         Inspector.dialog(ch.actor_dialog)
 
         return ch
-    
+
     def _builder_mode_0(self) -> list[Character]:
         """``w0+w1*w2``"""
         characters = []
@@ -919,7 +918,7 @@ class CharacterFactory:
                 continue
         CharacterFactory.gen_cnt_by_cls[self.cls] += 1
         return characters
-    
+
     def _builder_mode_1(self) -> list[Character]:
         """``unique``"""
         characters = []
@@ -927,7 +926,7 @@ class CharacterFactory:
         if count == 0:
             self._warn("Zero characters")
         if (count > 1):
-            self._warn(f"Too many weapons choices for a unique character")
+            self._warn("Too many weapons choices for a unique character")
         if count > 0:
             try:
                 wpn = (
@@ -942,7 +941,7 @@ class CharacterFactory:
                 self._warn(f"Stopped: {e}")
         CharacterFactory.gen_cnt_by_cls[self.cls] += 1
         return characters
-    
+
     def _builder_mode_2(self) -> list[Character]:
         """``w0+w2``"""
         characters = []
@@ -989,7 +988,7 @@ def form_characters(
     :param tab: Отступ, используемый при выводе в файл.
     :raises CharacterFactory.IncompleteError: при ошибке в конфигурации.
     """
-    ini_cfg = Ini(name=os.path.basename(fp_in))
+    ini_cfg = Ini(name=Path(fp_in).name)
     ini_cfg.read(fp_in)
     cf_list: list[CharacterFactory] = []
     ok = True
@@ -1003,13 +1002,13 @@ def form_characters(
         raise CharacterFactory.IncompleteError("Invalid configuration file")
     if independent_input:
         CharacterFactory.refresh()
-    with open(fp_out, "w", encoding="utf-8") as f:
+    with Path(fp_out).open("w", encoding="utf-8") as f:
         f.write("<?xml version='1.0' encoding=\"UTF-8\"?>\n")
-        f.write((
+        f.write(
             "<!-- This file was generated using"
             " \"ip_ltx.generator_character_desc\" -->\n"
             "<!-- https://github.com/VovaMiller/ip_ltx -->\n"
-        ))
+        )
         f.write("<xml>\n")
         for cf in cf_list:
             for ch in cf.builder():
@@ -1039,8 +1038,8 @@ def generate(
     :param tab: Отступ, используемый при выводе в файлы.
     """
     def _construct_fp_out(fp_in: str) -> str:
-        ifn = os.path.basename(fp_in)
-        ifn, ife = os.path.splitext(ifn)
+        ipath = Path(fp_in)
+        ifn, ife = ipath.stem, ipath.suffix
         if ife == ".xml":
             raise Exception("xml file input is not supported")
         if output_dir is None:
@@ -1049,21 +1048,21 @@ def generate(
         if not odp.is_dir():
             raise Exception("output directory doesn't exist")
         return str(odp.joinpath(f"{ifn}.xml"))
-    
+
     if len(fps) == 0:
         print_warning("zero-length input provided")
         return
-    
+
     try:
         validate_data([system_ini])
     except Exception:
         return
     preinit_singletons([Dialogs, StringTable, TextureDesc])
-    
+
     if (output_dir is not None) and not Path(output_dir).is_dir():
         print_error(f"Output directory doesn't exist: '{output_dir}'")
         return
-    
+
     max_len_ifp = max([len(ifp) for ifp in fps])
     max_len_num = len(str(len(fps)))
     for i, ifp in enumerate(fps):
@@ -1073,7 +1072,7 @@ def generate(
         except Exception:
             print("")
             print(
-                f"{ANSI_COLOR_CODE.RED}-{ANSI_COLOR_CODE.DEF}",
+                f"{ANSIColorCode.RED}-{ANSIColorCode.DEF}",
                 f"({i+1}/{len(fps)}) {ifp}"
             )
             print(traceback.format_exc())
@@ -1082,7 +1081,7 @@ def generate(
             shift_before = max_len_num - len(str(i+1))
             shift_after = max_len_ifp - len(ifp)
             print(
-                f"{ANSI_COLOR_CODE.GREEN}+{ANSI_COLOR_CODE.DEF}",
+                f"{ANSIColorCode.GREEN}+{ANSIColorCode.DEF}",
                 f"({i+1}/{len(fps)})",
                 f"{" "*shift_before}{ifp}{" "*shift_after} -> {ofp}",
                 flush=True
