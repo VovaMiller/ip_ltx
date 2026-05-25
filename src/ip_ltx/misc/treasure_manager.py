@@ -3,7 +3,7 @@ from pathlib import Path
 
 from ..ini import meta_ini
 from ..ip_ltx import Ini, Section
-from ..utils import SingletonBase, print_error
+from ..utils import SingletonBase, print_error, print_warning
 
 
 @dataclass(frozen=True, slots=True)
@@ -17,20 +17,31 @@ class Treasure:
 
 class TreasureManager(SingletonBase):
     """Класс, хранящий данные о тайниках, зарегистрированных в ``treasure_manager``.
+
+    Путь до конфига указывается в настройках (*meta.ltx*):
+    секция ``[cfg_path]``, поле ``treasure_manager``.
     """
     _data_by_id: dict[str, Treasure]
     _data_by_sid: dict[int, Treasure]
 
     ini: Ini
-    """Считанный файл treasure_manager.ltx"""
+    """Считанный файл конфига (*treasure_manager.ltx*)"""
 
     def __init__(self):
-        fp = Path("config/misc/treasure_manager.ltx")
-        fn = fp.name
-        self.ini = Ini(name=fn, ini_meta=meta_ini())
-        self.ini.read(str(fp), inside_gamedata=True)
+        ini_meta = meta_ini()
+        self.ini = Ini(name="treasure_manager", ini_meta=ini_meta)
         self._data_by_id = {}
         self._data_by_sid = {}
+
+        fp_str = ini_meta.get_string_wb("cfg_path", "treasure_manager", "")
+        if len(fp_str) == 0:
+            # print_warning("treasure_manager: no data")
+            return
+        fp = Path(fp_str)
+        fn = fp.name
+        self.ini._name = fn
+        self.ini.read(str(fp), inside_gamedata=True)
+
         for _id in self.ini.section("list").lines():
             if not self.ini.section_exist(_id):
                 print_error(f"({fn}) Treasure '{_id}' from [list] doesn't exist")

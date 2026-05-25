@@ -13,6 +13,7 @@ from .misc.task_manager import TaskManager
 from .misc.trade import TradeBuy
 from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
+from .spawn_entries_collector import SpawnEntriesCollector
 from .utils import cast_safe
 from .utils_inspector import InspectorStep, run_inspection
 from .utils_meta import (
@@ -161,7 +162,13 @@ class InspectionsGeneral:
                     value = s.get_string(field, "")
                     if (len(value) > 0):
                         if re.search(no_st_pattern, value):
-                            found_no_st.setdefault(s.id, []).append(field)
+                            if (
+                                field == "description"
+                                and not s.get_bool("can_take", True)
+                            ):
+                                pass
+                            else:
+                                found_no_st.setdefault(s.id, []).append(field)
                         elif (value not in string_table):
                             found_no_tr.setdefault(s.id, []).append(value)
         if len(found_no_st) > 0:
@@ -328,6 +335,22 @@ class InspectionsGeneral:
 class InspectionsSpawn:
     """Набор проверок, которые автоматически запускаются из ``_inspection_st3_spawn``.
     """
+
+    @staticmethod
+    def test_spawn_entries_collector(_: InspectorStep):
+        """Сборка лута из разных источников.
+
+        Эта проверка нужна, чтобы вывести в ``stderr`` сообщения о некритических
+        ошибках при инициализации различных объектов
+        :class:`~ip_ltx.treasure_manager_ext.SpawnEntry`.
+        Например, сообщения о наличии флага аддона, который к оружию прикрепить нельзя.
+       """
+        all_levels = GameLevels().as_list()
+        collector = SpawnEntriesCollector()
+        collector.from_treasure_manager(all_levels)
+        collector.from_non_tm_inventories(all_levels)
+        collector.from_drop_box_items(all_levels)
+        collector.from_level_items(all_levels)
 
     @staticmethod
     def test_name_duplicates(step: InspectorStep):

@@ -1,9 +1,10 @@
 from collections.abc import Iterator
 from dataclasses import dataclass
+from pathlib import Path
 
 from ..ini import meta_ini
 from ..ip_ltx import Ini, Section
-from ..utils import SingletonBase, print_error
+from ..utils import SingletonBase, print_error, print_warning
 
 
 @dataclass(frozen=True, slots=True)
@@ -30,20 +31,32 @@ class TaskManager(SingletonBase):
 
     Включает в себя цикличные, второстепенные и сюжетные задания - все задания,
     перечисленные в ``[list]``.
+
+    Путь до конфига указывается в настройках (*meta.ltx*):
+    секция ``[cfg_path]``, поле ``task_manager``.
     """
     _data: dict[str, Task]
 
     ini: Ini
-    """Считанный файл task_manager.ltx"""
+    """Считанный файл конфига (*task_manager.ltx*)"""
 
     def __init__(self):
-        _name = "task_manager.ltx"
-        self.ini = Ini(name=_name, ini_meta=meta_ini())
-        self.ini.read("config\\misc\\task_manager.ltx", inside_gamedata=True)
+        ini_meta = meta_ini()
+        self.ini = Ini(name="task_manager", ini_meta=ini_meta)
         self._data = {}
+
+        fp_str = ini_meta.get_string_wb("cfg_path", "task_manager", "")
+        if len(fp_str) == 0:
+            # print_warning("task_manager: no data")
+            return
+        fp = Path(fp_str)
+        fn = fp.name
+        self.ini._name = fn
+        self.ini.read(str(fp), inside_gamedata=True)
+
         for task_id in list(self.ini.section("list").lines()):
             if not self.ini.section_exist(task_id):
-                print_error(f"({_name}) Task '{task_id}' from [list] doesn't exist")
+                print_error(f"({fn}) Task '{task_id}' from [list] doesn't exist")
                 continue
             task_sect = self.ini.section(task_id)
             try:

@@ -1220,6 +1220,52 @@ def test_ini_read_with_odd_include_5(tmp_path):
     assert ini.section_exist("test") is True
 
 
+def test_ini_read_with_include_shenanigans_1(tmp_path):
+    f1_path = tmp_path / "f1.ltx"
+    f1_path.write_text("\n".join([
+        '[section_1]',
+        'f1',
+        '#include "f2.ltx"',
+        'f4',
+    ]))
+    f2_path = tmp_path / "f2.ltx"
+    f2_path.write_text("\n".join([
+        'f2',
+        'f3',
+    ]))
+    ini = Ini(name="test_ini")
+    ini.read(str(f1_path), inside_gamedata=False)
+    assert ini.line_exist("section_1", "f1") is True
+    assert ini.line_exist("section_1", "f2") is False
+    assert ini.line_exist("section_1", "f3") is False
+    assert ini.line_exist("section_1", "f4") is True
+
+def test_ini_read_with_include_shenanigans_2(tmp_path):
+    f1_path = tmp_path / "f1.ltx"
+    f1_path.write_text("\n".join([
+        '[section_1]',
+        'f1',
+        '#include "f2.ltx"',
+        'f4',
+    ]))
+    f2_path = tmp_path / "f2.ltx"
+    f2_path.write_text("\n".join([
+        '[section_2]',
+        'f2',
+        'f3',
+    ]))
+    ini = Ini(name="test_ini")
+    ini.read(str(f1_path), inside_gamedata=False)
+    assert ini.line_exist("section_1", "f1") is True
+    assert ini.line_exist("section_1", "f2") is False
+    assert ini.line_exist("section_1", "f3") is False
+    assert ini.line_exist("section_1", "f4") is True
+    assert ini.line_exist("section_2", "f1") is False
+    assert ini.line_exist("section_2", "f2") is True
+    assert ini.line_exist("section_2", "f3") is True
+    assert ini.line_exist("section_2", "f4") is False
+
+
 def test_ini_add():
     s1 = Section(id="s1")
     s1.add("f1", "s1v1")

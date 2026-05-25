@@ -27,7 +27,7 @@ class InspectorStep:
         будет вызвано исключение :class:`InspectorError`.
     """
 
-    LINE_WIDTH = 64
+    LINE_WIDTH = 80  # 64
 
     class MessageLevel(Enum):
         INFO = 0

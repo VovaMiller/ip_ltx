@@ -1,11 +1,28 @@
+import os
 from collections.abc import Container
 
 from .db import AddonFlags
 from .ini import spawn_ini, system_ini
+from .ip_ltx import Section
 from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
-from .treasure_manager_ext import SpawnEntriesPool, SpawnEntry
+from .treasure_manager_ext import (
+    SpawnEntriesPool,
+    SpawnEntry,
+    SpawnEntryError,
+    SpawnEntryNonItemError,
+)
+from .utils import print_error, print_warning
 from .utils_meta import ObjectType
+
+
+def _print_warning_extra(msg) -> None:
+    """Сообщение о некритической ошибке, отображение которой
+    регулируется переменной среды ``HIDE_EXTRA_WARNINGS``.
+    """
+    opt: str = os.environ.get("HIDE_EXTRA_WARNINGS", "off")
+    if Section.cast_bool(opt) is not True:
+        print_warning(msg)
 
 
 class SpawnEntriesCollector:
@@ -86,7 +103,19 @@ class SpawnEntriesCollector:
             if obj.custom_data.section_exist("drop_box"):
                 items = obj.custom_data.get_items("drop_box", "items", mandatory=False)
                 for item, count in items:
-                    entries.add(SpawnEntry(item, str(count), f"custom_data@{obj.name}"))
+                    context = f"custom_data@{obj.name}"
+                    try:
+                        entries.add(
+                            SpawnEntry(item, str(count), context)
+                        )
+                    except SpawnEntryNonItemError:
+                        # Иногда через [drop_box] нарочно спавнится,
+                        #  например, какой-нибудь мутант.
+                        _print_warning_extra(
+                            f"[drop_box] ({context}) Skipping non-item section [{item}]"
+                        )
+                    except SpawnEntryError as e:
+                        print_error(f"Ignoring item '{item}' from [drop_box]:\n  {e}")
         self.result.merge(entries)
 
     def from_level_items(self, levels: Container[str]) -> None:
@@ -167,8 +196,17 @@ class SpawnEntriesCollector:
             )
             params = "1" if (len(params) == 0) else "1," + params
             context = f"all.spawn@{obj.name}"
-            entries.add(SpawnEntry(sname, params, context))
-            if extra_ammo is not None:
-                ammo_name, ammo_size = extra_ammo
-                entries.add(SpawnEntry(ammo_name, f"1, box_size={ammo_size}", context))
+            try:
+                entries.add(SpawnEntry(sname, params, context))
+            except SpawnEntryError as e:
+                print_error(f"Ignoring level-item '{sname}':\n  {e}")
+            else:
+                if extra_ammo is not None:
+                    ammo_name, ammo_size = extra_ammo
+                    try:
+                        entries.add(
+                            SpawnEntry(ammo_name, f"1, box_size={ammo_size}", context)
+                        )
+                    except SpawnEntryError as e:
+                        print_error(f"Ignoring ammo for level-item '{sname}':\n  {e}")
         self.result.merge(entries)

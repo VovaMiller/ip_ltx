@@ -10,6 +10,11 @@ iPv30               = False ; Использовать особенности И
 universal_acdc      = False ; Файлы, указанные в [spawn], были получены декомпиляцией через Universal ACDC
 inspector_pedantic  = False ; Скрупулёзный режим inspector.py
 
+; (treasure_manager)
+; Указанное в поле items кол-во для боеприпасов
+;  интерпретировать как кол-во патронов, а не единиц предмета
+tm_vanilla_ammo_count = True
+
 ; ----------------------------------------------------------------
 
 [spawn]
@@ -34,6 +39,10 @@ spawns\ACDC\alife_l12u_sarcofag.ltx
 
 ; ----------------------------------------------------------------
 
+[cfg_path]
+task_manager        = "config/misc/task_manager.ltx"
+treasure_manager    = "config/misc/treasure_manager.ltx"
+
 [trade]
 ; Секция с коэффициентами покупки торговцами предметов.
 file_path = config\misc\trade_trader.ltx    ; config\misc\trade.ltx
@@ -42,7 +51,7 @@ buy_section = trader_generic_buy            ; trade_buy_all
 ; ----------------------------------------------------------------
 
 [level_gvids]
-; vanilla game.graph
+; Данные о локациях и их game_vertex_id из game.graph
 l01_escape              = 0
 l02_garbage             = 252
 l03_agroprom            = 416
@@ -61,17 +70,17 @@ l12u_sarcofag           = 2402
 l12u_control_monolith   = 2467
 l12_stancia_2           = 2517
 l10u_bunker             = 2661
-stohe_selo              = 2792
-ai_test                 = 2798
-ai_test2                = 2841
-jim_dark                = 2885
-slipch_al_test          = 2890
-plecha_selo             = 2929
-ai_test_new             = 2931
-koan_test               = 2959
-l05_bar_hw              = 2964
-l03_agroprom_hw         = 3115
-l03u_agr_underground_hw = 3403
+;stohe_selo              = 2792
+;ai_test                 = 2798
+;ai_test2                = 2841
+;jim_dark                = 2885
+;slipch_al_test          = 2890
+;plecha_selo             = 2929
+;ai_test_new             = 2931
+;koan_test               = 2959
+;l05_bar_hw              = 2964
+;l03_agroprom_hw         = 3115
+;l03u_agr_underground_hw = 3403
 
 ; ----------------------------------------------------------------
 
@@ -268,7 +277,6 @@ binocular_a
 attachable_item
 
 ; --extra items--
-ecolog_device
 hand_radio
 
 ; --special items--
@@ -328,16 +336,10 @@ zombie_immortal
 ; Настройки генерации таблицы для ACDC (11.10.2007)
 
 [acdc@ignore]
-SPECT       ; useless
-AI_FLE_G    ; useless
-AI_DOG_F    ; useless
-O_SWITCH    ; useless
-AI_RAT_G    ; non-existent
-AI_RAT      ; non-existent
-EVENT       ; non-existent
-AI_SPGRP    ; non-existent
-II_BTTCH    ; non-existent
-NW_ATTCH    ; non-existent
+SPECT
+AI_FLE_G
+AI_DOG_F
+O_SWITCH
 
 [acdc@conversion]
 cse_alife_mounted_weapon    = cse_alife_dynamic_object_visual
@@ -361,14 +363,8 @@ se_restrictor               = cse_alife_space_restrictor
 ; Настройки генерации таблиц для Universal ACDC (v1.38)
 
 [universal_acdc@ignore]
-EVENT       ; useless
-T_ASS       ; useless
-T_CS        ; useless
-AI_RAT      ; non-existent
-AI_RAT_G    ; non-existent
-AI_SPGRP    ; non-existent
-II_BTTCH    ; non-existent
-NW_ATTCH    ; non-existent
+T_ASS
+T_CS
 
 [universal_acdc@conversion]
 cse_temporary               = unknown

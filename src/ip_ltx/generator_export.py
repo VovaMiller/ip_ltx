@@ -6,6 +6,7 @@ from pathlib import Path
 from .ini import meta_ini, system_ini
 from .utils import print_warning, run
 from .utils_meta import CLSIDs, ObjectType
+from .utils_system import is_multiscope_section
 
 # ----------------------------------------------------------------
 
@@ -34,7 +35,7 @@ def _ip_test_static_tables(fn: str) -> None:
     for sect in ini_system.sections():
         if ini_meta.line_exist("ignore_sections", sect.id):
             continue
-        if len(ini_system.get_string(sect.id, "scope_respawn", "")) > 0:
+        if is_multiscope_section(sect):
             # skipping auxiliary multi-scope sections
             continue
         _class = sect.get_string("class", "")
@@ -74,11 +75,17 @@ def _acdc_tables(fn: str) -> None:
     sn_conversion = "acdc@conversion"
 
     # Множество CLSID, которые будут проигнорированы
+    ignore_clsid: set[str] = set()
+    # 1. Кастомный набор
     if ini_meta.section_exist(sn_ignore):
-        ignore_clsid = set(ini_meta.section(sn_ignore).lines())
+        ignore_clsid.update(ini_meta.section(sn_ignore).lines())
     else:
-        ignore_clsid = set()
         print_warning(f"Section [{sn_ignore}] doesn't exist")
+    # 2. CLSID-заглушки
+    ignore_clsid.update(
+        clsid for clsid in clsids
+        if clsids[clsid].object_type == ObjectType.UNDEFINED
+    )
 
     # Словарь перевода имён серверных классов в имена пакетов ACDC.
     if ini_meta.section_exist(sn_conversion):
@@ -158,11 +165,17 @@ def _universal_acdc_tables(fn: str) -> None:
     sn_conversion = "universal_acdc@conversion"
 
     # Множество CLSID, которые будут проигнорированы
+    ignore_clsid: set[str] = set()
+    # 1. Кастомный набор
     if ini_meta.section_exist(sn_ignore):
-        ignore_clsid = set(ini_meta.section(sn_ignore).lines())
+        ignore_clsid.update(ini_meta.section(sn_ignore).lines())
     else:
-        ignore_clsid = set()
         print_warning(f"Section [{sn_ignore}] doesn't exist")
+    # 2. CLSID-заглушки
+    ignore_clsid.update(
+        clsid for clsid in clsids
+        if clsids[clsid].object_type == ObjectType.UNDEFINED
+    )
 
     # Словарь перевода имён серверных классов в имена пакетов Universal ACDC.
     if ini_meta.section_exist(sn_conversion):

@@ -3,7 +3,8 @@
 import xml.etree.ElementTree as ET
 
 from ..ini import system_ini
-from ..utils import SingletonBase, print_error, print_warning, read_xml
+from ..utils import SingletonBase, print_error
+from ..utils_xml import print_warning_xml, read_xml
 
 
 class StringTable(SingletonBase):
@@ -40,7 +41,7 @@ class StringTable(SingletonBase):
                     if (elem_text := elem.find("text")) is None:
                         continue
                     if id in self._data:
-                        print_warning(
+                        print_warning_xml(
                             f"localization: duplicate string with id=\"{id}\""
                         )
                     self._data[id] = str(elem_text.text)

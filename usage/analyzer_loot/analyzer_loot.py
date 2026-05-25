@@ -1,60 +1,33 @@
 META_FILEPATH = "../_settings/meta.ltx"
-HIDE_GAMEDATA_LTX_WARNINGS = True
+HIDE_LTX_WARNINGS = True
+HIDE_XML_WARNINGS = True
+HIDE_EXTRA_WARNINGS = True
 
 def main():
     import ip_ltx.analyzer_loot as al
     from ip_ltx.analyzer_loot import run_summary
     from ip_ltx.utils import run
+    from ip_ltx.utils_meta import GameLevels
 
     al.validate_spawn_data()
 
-    _levels_all = [
-        "l01_escape",
-        "l02_garbage",
-        "l03_agroprom",
-        "l03u_agr_underground",
-        "l04_darkvalley",
-        "l04u_labx18",
-        "l05_bar",
-        "l06_rostok",
-        "l07_military",
-        "l08_yantar",
-        "l08u_brainlab",
-        "l10_radar",
-        "l10u_bunker",
-        "l11_pripyat",
-        "l12_stancia",
-        "l12_stancia_2",
-        "l12u_control_monolith",
-        "l12u_sarcofag",
+    _levels_exclude: list[str] = [
+        # "l03u_agr_underground",
+        # "l04u_labx18",
+        # "l10u_bunker",
+        # "l12_stancia_2",
+        # "l12u_control_monolith",
+        # "l12u_sarcofag",
     ]
 
-    # Summaries: default
+    # Summaries
+    _levels_all = [lvl for lvl in GameLevels().as_list() if lvl not in _levels_exclude]
     run_summary(
         "all",
         _levels_all
     )
     for level in _levels_all:
         run_summary(level, [level])
-
-    # Summaries: custom
-    run_summary(
-        "custom",
-        [
-            "l01_escape",
-            "l02_garbage",
-            "l03_agroprom",
-            "l04_darkvalley",
-            "l05_bar",
-            "l06_rostok",
-            "l07_military",
-            "l08_yantar",
-            "l08u_brainlab",
-            "l10_radar",
-            "l11_pripyat",
-            "l12_stancia",
-        ]
-    )
 
     # Other
     run(al.tm__count_by_levels, "tm-counts")
@@ -66,24 +39,11 @@ def main():
 # ----------------------------------------------------------------
 
 if __name__ == "__main__":
+    import sys
+    import traceback
     try:
-        import os
-        import sys
-        import traceback
-        from pathlib import Path
-        if (
-            "META_FILEPATH" in globals()
-            and isinstance(META_FILEPATH, str)
-            and len(META_FILEPATH) > 0
-        ):
-            os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())
-        if (
-            "HIDE_GAMEDATA_LTX_WARNINGS" in globals()
-            and isinstance(HIDE_GAMEDATA_LTX_WARNINGS, bool)
-        ):
-            os.environ["HIDE_GAMEDATA_LTX_WARNINGS"] = (
-                str(int(HIDE_GAMEDATA_LTX_WARNINGS))
-            )
+        from ip_ltx.utils import fill_environ
+        fill_environ(globals())
         main()
     except Exception:
         print("-"*80)

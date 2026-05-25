@@ -4,7 +4,8 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 
 from ..ini import system_ini
-from ..utils import SingletonBase, cast_safe, print_error, print_warning, read_xml
+from ..utils import SingletonBase, cast_safe, print_error
+from ..utils_xml import print_warning_xml, read_xml
 
 
 @dataclass(frozen=True)
@@ -44,7 +45,7 @@ class TextureDesc(SingletonBase):
             elem_fn = root.find("file_name")
             file_name = elem_fn.text if elem_fn is not None else None
             if file_name is None:
-                print_warning(f"[XML:{fp_from_config}] Can't find <file_name>")
+                print_warning_xml(f"[XML:{fp_from_config}] Can't find <file_name>")
                 file_name = ""
 
             # <texture>
@@ -54,7 +55,7 @@ class TextureDesc(SingletonBase):
                 if id is None:
                     continue
                 if id in self._data:
-                    print_warning(
+                    print_warning_xml(
                         f"[XML:{fp_from_config}] "
                         f"Duplicate <texture id=\"{id}\" ...>"
                     )
@@ -75,13 +76,13 @@ class TextureDesc(SingletonBase):
                         v = 0
                     area[k] = v
                 if len(missing) > 0:
-                    print_warning(
+                    print_warning_xml(
                         f"[XML:{fp_from_config}] "
                         f"Texture '{id}' has no attribute(s): "
                         f"{", ".join(missing)}"
                     )
                 if len(invalid) > 0:
-                    print_warning(
+                    print_warning_xml(
                         f"[XML:{fp_from_config}] "
                         f"Texture '{id}' has invalid attribute(s): "
                         f"{", ".join(invalid)}"

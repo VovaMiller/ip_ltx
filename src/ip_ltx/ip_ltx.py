@@ -26,7 +26,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Literal, NoReturn, Self, TextIO
 
-from .utils import cast_safe, print_warning, read_file
+from .utils import cast_safe, print_warning
 
 
 class Section:
@@ -641,10 +641,8 @@ class Ini:
     show_ltx_warnings: bool
     """Отображаются ли warning-сообщения при считывании ltx-файлов.
 
-    По умолчанию ``True``.
-
-    Отображение отключается для ltx-файлов из gamedata при
-    установке переменной окружения ``HIDE_GAMEDATA_LTX_WARNINGS``.
+    По умолчанию ``True``, если отображение не было отключено
+    переменной окружения ``HIDE_LTX_WARNINGS``.
     """
 
     class Error(Exception):
@@ -656,7 +654,10 @@ class Ini:
         self._name = name
         self.gdm = None
         self.gda = None
-        self.show_ltx_warnings = True
+
+        opt: str = os.environ.get("HIDE_LTX_WARNINGS", "off")
+        self.show_ltx_warnings = (Section.cast_bool(opt) is not True)
+
         if ini_meta is not None:
             if not ini_meta.section_exist("settings"):
                 raise Ini.Error("ini_meta doesn't have mandatory section [settings]")
@@ -696,16 +697,37 @@ class Ini:
                 ):
                     raise Ini.Error("gamedata paths can't be relative to each other")
 
-            # Указанная ini_meta - критерий того, что мы оперируем файлами из gamedata
-            str_opt = os.environ.get("HIDE_GAMEDATA_LTX_WARNINGS", "off")
-            if Section.cast_bool(str_opt) is True:
-                self.show_ltx_warnings = False
-
 
     def _raise(self, msg: str) -> NoReturn:
         raise Ini.Error(
             f"{self._name} | {msg}" if len(self._name) > 0 else msg
         )
+
+
+    def _read_ltx(self, fp: Path) -> str:
+        """Основная функция для считывания текстового содержимого ltx-файла.
+
+        При открытии пробует ряд основных кодировок:
+
+        * ``utf-8-sig`` (UTF-8, UTF-8-BOM)
+        * ``cp1251`` (Windows-1251)
+        * И стандартную для системы
+
+        Если ни одной кодировкой прочитать файл без ошибок не удалось, то
+        читает в кодировке *UTF-8*, заменяя проблемные символы на ``U+FFFD``.
+
+        :param fp: Путь до файла.
+        :raises OSError: при ошибке открытия файла.
+        :returns: Содержимое файла.
+        """
+        for encoding in ("utf-8-sig", "cp1251", None):
+            try:
+                return fp.read_text(encoding=encoding)
+            except UnicodeDecodeError:
+                continue
+        if self.show_ltx_warnings:
+            print_warning(f"[LTX] ({fp.name}) Unexpected encoding")
+        return fp.read_text(encoding="utf-8-sig", errors="replace")
 
 
     def _get_fptr(self, fp: Path, line_num: int | None) -> str:
@@ -757,7 +779,6 @@ class Ini:
             self,
             raw: str,
             fp_src: Path | None = None,
-            _current_section: Section | None = None,
             preserve_value_whitespaces: bool = False
     ) -> None:
         """Считывание данных о секциях непосредственно со строки (str).
@@ -772,9 +793,6 @@ class Ini:
         :param raw: Текст с данными.
         :param fp_src: Путь к файлу, откуда взят текст.
             Необходимо для поддержки ``#include``, а также ``Section._src``.
-        :param _current_section: Указатель на объект секции,
-            на которой остановилось чтение.
-            Используется самой функцией; в остальном, можно оставлять None.
         :param preserve_value_whitespaces: При чтении значения поля сохранить
             все его пробельные символы (кроме тех, что с краю).
             По умолчанию они сохраняются только если находятся между парой кавычек.
@@ -785,7 +803,9 @@ class Ini:
         def _wrn(ln: int, sid: str | None, msg: str) -> None:
             self._reader_warning(fp_src, ln, sid, msg)
 
+        _current_section: Section | None = None
         custom_data_buffer: str | None = None
+        include_occurrence: int | None = None
         for i, line in enumerate(raw.splitlines(), start=1):
             line = line.strip()
 
@@ -803,8 +823,15 @@ class Ini:
                 line = line[:semi]
 
             # Warning about C-style comment bug
-            if line.find("//") != -1:
+            if "//" in line:
                 _wrn(i, None, "C-style comment was not recognized due to xrEngine bug")
+
+            # Replacement character (decoding error during file read)
+            if "\uFFFD" in line:
+                _err(i,
+                     "Encountered replacement character"
+                     " (probably due to unexpected file encoding)"
+                )
 
             # custom_data processing
             if custom_data_buffer is not None:
@@ -886,11 +913,11 @@ class Ini:
                         ))
 
                 self.read_raw(
-                    raw=read_file(p_inc),
+                    raw=self._read_ltx(p_inc),
                     fp_src=p_inc,
-                    _current_section=_current_section,
                     preserve_value_whitespaces=preserve_value_whitespaces
                 )
+                include_occurrence = i
                 continue
 
             # New section
@@ -944,6 +971,7 @@ class Ini:
                 # Registrating
                 self._s[_id] = section
                 _current_section = self._s[_id]
+                include_occurrence = None
                 continue
 
             # Section's field
@@ -975,6 +1003,11 @@ class Ini:
                     _wrn(i, _id, f"Redeclaration of '{field}'")
                 _current_section._fields[field] = value
                 _current_section._fields_own.add(field)
+
+                # Extra warning
+                if include_occurrence is not None:
+                    _wrn(include_occurrence, _id, "#include among section's fields")
+                    include_occurrence = None
             else:
                 _wrn(i, None, "Ignoring redundant text")
                 continue
@@ -1010,7 +1043,7 @@ class Ini:
             if not fp.is_file():
                 self._raise(f"FILE DOES NOT EXIST (\"{fp}\")")
         self.read_raw(
-            raw=read_file(fp),
+            raw=self._read_ltx(fp),
             fp_src=fp,
             preserve_value_whitespaces=preserve_value_whitespaces
         )

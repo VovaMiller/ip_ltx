@@ -1,32 +1,21 @@
 META_FILEPATH = "_settings/meta.ltx"
-HIDE_GAMEDATA_LTX_WARNINGS = True
+HIDE_LTX_WARNINGS = False
+HIDE_XML_WARNINGS = False
+HIDE_EXTRA_WARNINGS = False
 
 def main():
     import ip_ltx.inspector as inspector
 
-    inspector.inspect(show_stderr=False, show_traceback=False)
+    inspector.inspect(show_stderr=True, show_traceback=False)
 
 # ----------------------------------------------------------------
 
 if __name__ == "__main__":
+    import sys
+    import traceback
     try:
-        import os
-        import sys
-        import traceback
-        from pathlib import Path
-        if (
-            "META_FILEPATH" in globals()
-            and isinstance(META_FILEPATH, str)
-            and len(META_FILEPATH) > 0
-        ):
-            os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())
-        if (
-            "HIDE_GAMEDATA_LTX_WARNINGS" in globals()
-            and isinstance(HIDE_GAMEDATA_LTX_WARNINGS, bool)
-        ):
-            os.environ["HIDE_GAMEDATA_LTX_WARNINGS"] = (
-                str(int(HIDE_GAMEDATA_LTX_WARNINGS))
-            )
+        from ip_ltx.utils import fill_environ
+        fill_environ(globals())
         main()
     except Exception:
         print("-"*80)

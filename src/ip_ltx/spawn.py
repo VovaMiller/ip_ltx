@@ -141,6 +141,8 @@ class SpawnObject:
             if len(self.name) > 0
             else "custom_data"
         )
+        if len(section._src) > 0:
+            self.custom_data._name = section._src + " | " + self.custom_data._name
         try:
             self.custom_data.read_raw(section.get_string("custom_data", ""))
         except Exception as e:

@@ -1,8 +1,7 @@
 import os
-import re
 import sys
 import traceback
-from collections.abc import Callable
+from collections.abc import Callable, MutableMapping
 from enum import StrEnum
 from pathlib import Path
 from typing import Any, ClassVar, Protocol
@@ -45,33 +44,6 @@ def print_error(msg, prefix: bool = True, color: bool = True):
         ANSIColorCode.DEF if color else "",
     )
     print(msg_fmt, file=sys.stderr)
-
-# ----------------------------------------------------------------
-
-def read_file(fp: Path) -> str:
-    """Основная функция для считывания содержимого файла.
-
-    При открытии пробует ряд основных кодировок:
-
-    * ``utf-8-sig`` (UTF-8, UTF-8-BOM)
-    * ``cp1251`` (Windows-1251)
-    * И стандартную для системы
-
-    :param fp: Путь до файла.
-    :raises OSError: при ошибке открытия файла.
-    :raises UnicodeDecodeError: если файл не удалось считать ни одной кодировкой.
-    :returns: Содержимое файла.
-    """
-    encodings = ("utf-8-sig", "cp1251", None)
-    for i, encoding in enumerate(encodings):
-        try:
-            with fp.open("r", encoding=encoding) as file:
-                return file.read()
-        except UnicodeDecodeError:
-            if i == (len(encodings) - 1):
-                raise
-            continue
-    return ""
 
 # ----------------------------------------------------------------
 
@@ -222,111 +194,52 @@ def is_gamedata_dir(
 
 # ----------------------------------------------------------------
 
-class _XMLPatterns:
-    COMMENT = re.compile(r"<!--.*?-->")
-    INVALID_COMMENT_LINE = re.compile(r"<!--.*--.*-->")
-    INVALID_CHARS = re.compile(
-        # Invalid character (XML 1.0)
-        r"[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\U00010000-\U0010FFFF]"
-    )
-    UNESCAPED_AMPERSAND = re.compile(
-        r"&(?!(amp|lt|gt|apos|quot|#\d+|#x[a-fA-F0-9]+);)"
-    )
+def fill_environ(globalns: MutableMapping) -> None:
+    """Заполнить переменные среды из глобальных перменных.
 
-def read_xml(
-        fp_from_config: str,
-        gd_path_main: Path | None,
-        gd_path_alt: Path | None
-) -> list[str]:
-    """Основная функция для чтения XML файлов из ресурсов игры
-    с поддержкой include-директив.
+    * ``META_FILEPATH``: ``str``
 
-    Также перед парсингом функция:
+        * Путь до основного конфигурационного файла.
+        * Значение по умолчанию: файл ``meta.ltx`` в текущей рабочей директории.
 
-    * Удаляет все комментарии. Это позволяет избежать ошибки из-за комментариев
-      с двумя или более дефисами внутри (``--``). С точки зрения XML формата
-      это невалидные комментарии, но в ресурсах игры они всё же нередко
-      встречаются, и движок на них не ругается, а просто игнорирует.
-    * Удаляет "голые" амперсанды (``&``). Это технический символ для XML формата,
-      который нельзя использовать как обычный символ. Тем не менее, в ресурсах игры
-      могут встретиться строки, использующие амперсанд как символ. Движок же на это
-      не ругается, а символы просто удаляет.
+    * ``HIDE_LTX_WARNINGS``: ``bool``
 
-    :param fp: Путь до XML-файла относительно ``"gamedata/config/"``.
-    :param gd_path_main: Путь до основной папки gamedata.
-    :param gd_path_alt: Путь до вспомогательной папки gamedata.
-        Например, до ресурсов оригинальной игры или распакованных db-архивов.
-    :return: Список строк прочитанного файла.
-        Может быть использован для передачи в ``xml.etree.ElementTree.fromstringlist``.
+        * Спрятать сообщения о некритических ошибках при чтении/парсинге ltx-файлов.
+        * Значение по умолчанию: ``False``
+
+    * ``HIDE_XML_WARNINGS``: ``bool``
+        * Спрятать сообщения о некритических ошибках при чтении/парсинге xml-файлов.
+        * Значение по умолчанию: ``False``
+
+    * ``HIDE_EXTRA_WARNINGS``: ``bool``
+        * Спрятать сообщения о других некритических ошибках
+          (например, при инициализации :class:`~ip_ltx.treasure_manager_ext.SpawnEntry`)
+        * Значение по умолчанию: ``False``
     """
-    def _warn(msg: str) -> None:
-        print_warning(f"[XML] ({fp_from_config}) {msg}")
+    gl = globalns
 
-    def _process_line(line: str) -> str:
-        # comments
-        if _XMLPatterns.INVALID_COMMENT_LINE.search(line):
-            _warn(f"Line {i+1}: 2+ hyphens inside a comment")
-        line = _XMLPatterns.COMMENT.sub("", line)
-
-        # invalid characters
-        if _XMLPatterns.INVALID_CHARS.search(line):
-            _warn(f"Line {i+1}: invalid character(s)")
-
-        # unescaped ampersand
-        if _XMLPatterns.UNESCAPED_AMPERSAND.search(line):
-            _warn(f"Line {i+1}: unescaped ampersand(s)")
-        line = _XMLPatterns.UNESCAPED_AMPERSAND.sub("", line)
-
-        return line
-
-    # Получаем реальный путь до файла
-    for gd_path in [gd_path_main, gd_path_alt]:
-        if gd_path is None:
-            continue
-        if (fp := gd_path.joinpath("config", fp_from_config)).is_file():
-            break
+    opt: str = "META_FILEPATH"
+    if (opt in gl) and isinstance(gl[opt], str) and (len(gl[opt]) > 0):
+        os.environ[opt] = str(Path(gl[opt]).resolve())
     else:
-        _warn("Not found")
-        return []
+        os.environ[opt] = str(Path.cwd().joinpath("meta.ltx"))
 
-    # Читаем файл
-    if Path(fp_from_config).is_relative_to("text\\rus\\"):
-        encodings = ["cp1251", "utf-8-sig", None]
-        decode_error_warn = True
+    opt: str = "HIDE_LTX_WARNINGS"
+    if (opt in gl) and isinstance(gl[opt], bool):
+        os.environ[opt] = str(int(gl[opt]))
     else:
-        encodings = ["utf-8-sig", "cp1251", None]
-        decode_error_warn = False
-    for encoding in encodings:
-        try:
-            with fp.open("r", encoding=encoding) as f:
-                lines_input = f.readlines()
-                break
-        except UnicodeDecodeError:
-            if decode_error_warn:
-                _warn(f"Can't be read with encoding='{encoding}'")
-            continue
-        except OSError as e:
-            _warn(f"Skipping due to OSError: {e}")
-            return []
+        os.environ[opt] = "0"
+
+    opt: str = "HIDE_XML_WARNINGS"
+    if (opt in gl) and isinstance(gl[opt], bool):
+        os.environ[opt] = str(int(gl[opt]))
     else:
-        _warn("Skipping: unexpected encoding")
-        return []
+        os.environ[opt] = "0"
 
-    # Обработка строк и поддержка include-директив
-    lines_output = []
-    for i, line in enumerate(lines_input):
-        if line.startswith("#include"):
-            parts = line.split('"')
-            if len(parts) > 1:
-                if len(parts) != 3:
-                    _warn(f"Strange #include syntax: line {i+1}")
-                part_fp = parts[1].strip()
-                lines_output.extend(read_xml(part_fp, gd_path_main, gd_path_alt))
-            else:
-                _warn(f"Invalid #include syntax: line {i+1}")
-        else:
-            lines_output.append(_process_line(line))
-
-    return lines_output
+    opt: str = "HIDE_EXTRA_WARNINGS"
+    if (opt in gl) and isinstance(gl[opt], bool):
+        os.environ[opt] = str(int(gl[opt]))
+    else:
+        os.environ[opt] = "0"
 
 # ----------------------------------------------------------------

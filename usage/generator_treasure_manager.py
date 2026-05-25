@@ -1,5 +1,7 @@
 META_FILEPATH = "_settings/meta.ltx"
-HIDE_GAMEDATA_LTX_WARNINGS = True
+HIDE_LTX_WARNINGS = True
+HIDE_XML_WARNINGS = True
+HIDE_EXTRA_WARNINGS = True
 
 def main():
     from ip_ltx.generator_treasure_manager import generate
@@ -16,24 +18,11 @@ def main():
 # ----------------------------------------------------------------
 
 if __name__ == "__main__":
+    import sys
+    import traceback
     try:
-        import os
-        import sys
-        import traceback
-        from pathlib import Path
-        if (
-            "META_FILEPATH" in globals()
-            and isinstance(META_FILEPATH, str)
-            and len(META_FILEPATH) > 0
-        ):
-            os.environ["META_FILEPATH"] = str(Path(META_FILEPATH).resolve())
-        if (
-            "HIDE_GAMEDATA_LTX_WARNINGS" in globals()
-            and isinstance(HIDE_GAMEDATA_LTX_WARNINGS, bool)
-        ):
-            os.environ["HIDE_GAMEDATA_LTX_WARNINGS"] = (
-                str(int(HIDE_GAMEDATA_LTX_WARNINGS))
-            )
+        from ip_ltx.utils import fill_environ
+        fill_environ(globals())
         main()
     except Exception:
         print("-"*80)

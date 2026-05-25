@@ -7,8 +7,9 @@ from pathlib import Path
 
 from .ini import meta_ini, system_ini
 from .ip_ltx import Section
-from .utils import print_warning
+from .utils import print_error, print_warning
 from .utils_meta import CLSIDs, ObjectType
+from .utils_system import get_multiscope_base, is_multiscope_section
 from .xml_data.string_table import StringTable
 
 # ----------------------------------------------------------------
@@ -22,7 +23,7 @@ def _is_ignored(section: Section) -> bool:
     return _is_ignored_id(section.id)
 
 def _is_multiscope(section: Section) -> bool:
-    return len(section.get_string("scope_respawn", "")) > 0
+    return is_multiscope_section(section)
 
 def is_inv_item__old(section: Section) -> bool:
     """Является ли секция инвентарным предметом.
@@ -281,7 +282,7 @@ def extract_fields(
                 file.write("\n")
         else:
             # Calculate tab offsets
-            tab_offset_0 = ((max([len(v) for v in d]) // 4) + 1) * 4
+            tab_offset_0 = ((max([len(v) for v in d], default=0) // 4) + 1) * 4
             max_lens = [
                 max([len(field)] + [len(str(v[field])) for v in d.values()])
                 for field in fields
@@ -331,7 +332,7 @@ def extract__ammo_to_wpn(
                 continue
             da.setdefault(ammo, []).append(section.id)
     das = dict(sorted(da.items(), key=lambda x: x[0]))
-    tab_offset = ((max([len(v) for v in das]) // 4) + 1) * 4
+    tab_offset = ((max([len(v) for v in das], default=0) // 4) + 1) * 4
     with Path(fn).open("w", encoding="utf-8") as file:
         for ammo, wpns in das.items():
             file.write("{}{}= {}\n".format(
@@ -363,10 +364,7 @@ def extract__addon_to_wpn(
             continue
         if not is_wpn(section):
             continue
-        wpn_sect_id = section.id
-        scope_respawn = section.get_string("scope_respawn", "")
-        if len(scope_respawn) > 0:
-            wpn_sect_id = scope_respawn
+        wpn_sect_id = get_multiscope_base(section)
         addon_fields = [
             ("scope_status", "scope_name"),
             ("silencer_status", "silencer_name"),
@@ -379,9 +377,8 @@ def extract__addon_to_wpn(
                 if addon_name not in d:
                     if not dont_ignore_sections and _is_ignored_id(addon_name):
                         continue
-                    print_warning(f"Unexpected addon: '{addon_name}'")
-                    d[addon_name] = []
-                if wpn_sect_id not in d[addon_name]:
+                    print_error(f"Unexpected addon '{addon_name}' in [{section.id}]")
+                elif wpn_sect_id not in d[addon_name]:
                     d[addon_name].append(wpn_sect_id)
     _class_last = ""
     with Path(fn).open("w", encoding="utf-8") as file:
@@ -416,6 +413,10 @@ def extract_monsters_health(
     """
     def _ceil(f: float) -> int:
         return math.ceil(round(f, 2))
+    def _fatal_amount_of_hits(damage: float) -> int | str:
+        if abs(damage) < 1e-6:
+            return "inf"
+        return _ceil(1.0 / damage)
 
     ini_system = system_ini()
     d = {}
@@ -426,55 +427,45 @@ def extract_monsters_health(
             continue
 
         # Extracting health_hit_part.
-        health_hit_part = section._fields.get("health_hit_part", None)
-        if health_hit_part is None:
-            print_warning(f"Skipping '{section.id}' as it has no 'health_hit_part'")
-            continue
-        health_hit_part = float(health_hit_part)
+        health_hit_part = section.get_float("health_hit_part", 1.0)
 
         # Extracting immunitiy.
-        immu_sect_id = section._fields.get("immunities_sect", None)
-        if immu_sect_id is None:
-            print_warning(f"Skipping '{section.id}' as it has no 'immunities_sect'")
+        immu_sect_id = section.get_string("immunities_sect", "").lower()
+        if len(immu_sect_id) == 0:
+            print_error(f"Skipping '{section.id}' as it has no 'immunities_sect'")
             continue
-        immu_sect_id = immu_sect_id.lower()
         if not ini_system.section_exist(immu_sect_id):
-            print_warning(
+            print_error(
                 f"Skipping '{section.id}': "
                 f"immunities section '{immu_sect_id}' doesn't exist"
             )
             continue
-        immu_sect = ini_system.section(immu_sect_id)
-        wound_immunity = immu_sect._fields.get("wound_immunity", None)
-        fire_wound_immunity = immu_sect._fields.get("fire_wound_immunity", None)
-        if wound_immunity is None:
-            print_warning(
-                f"Skipping '{section.id}': "
-                f"immunities section '{immu_sect_id}' has no 'wound_immunity'"
+        try:
+            wound_immunity = ini_system.get_float(
+                immu_sect_id, "wound_immunity"
             )
-            continue
-        if fire_wound_immunity is None:
-            print_warning(
-                f"Skipping '{section.id}': "
-                f"immunities section '{immu_sect_id}' has no 'fire_wound_immunity'"
+            fire_wound_immunity = ini_system.get_float(
+                immu_sect_id, "fire_wound_immunity"
             )
+        except Section.Error as e:
+            print_error(f"Skipping [{section.id}]:\n  {e}")
             continue
-        wound_immunity = float(wound_immunity)
-        fire_wound_immunity = float(fire_wound_immunity)
 
         # Extracting damage (bones).
-        dmg_sect_id = section._fields.get("damage", None)
-        if dmg_sect_id is None:
-            print_warning(f"Skipping '{section.id}' as it has no 'damage'")
-            continue
-        dmg_sect_id = dmg_sect_id.lower()
-        if not ini_system.section_exist(dmg_sect_id):
+        dmg_sect_id = section.get_string("damage", "").lower()
+        if len(dmg_sect_id) == 0:
+            print_warning(f"'damage' is not specified for [{section.id}]")
+            dmg_sect = Section("default_damage")
+            dmg_sect.add("default", "1.0, -1, 1.0")
+        elif not ini_system.section_exist(dmg_sect_id):
             print_warning(
-                f"Skipping '{section.id}': "
-                f"bone damage section '{dmg_sect_id}' doesn't exist"
+                f"'damage' section [{dmg_sect_id}] doesn't exist"
+                f" (specified for [{section.id}])"
             )
-            continue
-        dmg_sect = ini_system.section(dmg_sect_id)
+            dmg_sect = Section("default_damage")
+            dmg_sect.add("default", "1.0, -1, 1.0")
+        else:
+            dmg_sect = ini_system.section(dmg_sect_id)
 
         # Calculating.
         d[section.id] = {}
@@ -483,39 +474,39 @@ def extract_monsters_health(
                 values = [float(vv) for vv in dmg_sect.get_floats(k, True)]
             except ValueError:
                 del d[section.id]
-                print_warning(
+                print_error(
                     f"Skipping '{section.id}': "
                     f"bad format of bone values (section '{dmg_sect_id}', field '{k}')"
                 )
                 break
             if (len(values) != 3) and (len(values) != 4):
                 del d[section.id]
-                print_warning(
+                print_error(
                     f"Skipping '{section.id}': "
                     f"unexpected number of bone values"
                     f" (section '{dmg_sect_id}', field '{k}')"
                 )
                 break
             d[section.id][k] = {}
-            d[section.id][k]["wound"] = _ceil(1.0 / (
+            d[section.id][k]["wound"] = _fatal_amount_of_hits(
                 hit_power_wound
                 * wound_immunity
                 * values[0]
                 * health_hit_part
-            ))
-            d[section.id][k]["fire_wound"] = _ceil(1.0 / (
+            )
+            d[section.id][k]["fire_wound"] = _fatal_amount_of_hits(
                 hit_power_fire_wound
                 * fire_wound_immunity
                 * values[0]
                 * health_hit_part
-            ))
+            )
             if len(values) == 4:
-                d[section.id][k]["fire_wound_super"] = _ceil(1.0 / (
+                d[section.id][k]["fire_wound_super"] = _fatal_amount_of_hits(
                     hit_power_fire_wound
                     * fire_wound_immunity
                     * values[3]
                     * health_hit_part
-                ))
+                )
 
     default_offset_1 = 16
     default_offset_2 = 8

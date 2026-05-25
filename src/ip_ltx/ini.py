@@ -9,12 +9,7 @@ _INI_SPAWN = None
 _INI_GAME = None
 
 def _read_ini_meta():
-    meta_fp_environ: str = os.environ.get("META_FILEPATH", "")
-    meta_fp: Path = (
-        Path(meta_fp_environ)
-        if len(meta_fp_environ) > 0
-        else Path.cwd().joinpath("_meta.ltx")
-    )
+    meta_fp = Path(os.environ.get("META_FILEPATH", ""))
     if not meta_fp.is_file():
         raise FileNotFoundError(str(meta_fp))
     ini = Ini(name=meta_fp.name)

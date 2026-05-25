@@ -40,12 +40,25 @@ def _inspection_pipeline() -> None:
     with InspectorStep("Проверка базовых секций") as step:
         # [features]
         s = ini_meta.section("features")
-        lines = ["iPv20", "iPv30", "universal_acdc", "inspector_pedantic"]
+        lines = [
+            "iPv20", "iPv30", "universal_acdc", "inspector_pedantic",
+            "tm_vanilla_ammo_count",
+        ]
         for line in lines:
             if s.line_exist(line):
                 _ = s.get_bool(line)
             else:
                 step.warn(f"[{s.id}] Не хватает флага '{line}'")
+
+        # [cfg_path]
+        if ini_meta.section_exist("cfg_path"):
+            s = ini_meta.section("cfg_path")
+            lines = ["task_manager", "treasure_manager"]
+            for line in lines:
+                if not s.line_exist(line):
+                    step.warn(f"[{s.id}] Не хватает пути для '{line}'")
+        else:
+            step.warn("Не найдена секция [cfg_path]")
 
         # [is_anomaly2]
         s = ini_meta.section("is_anomaly2")
@@ -90,7 +103,7 @@ def _inspection_pipeline() -> None:
             ))
 
     with InspectorStep("Инициализация game_ini") as step:
-        _ = game_ini()
+        ini_game = game_ini()
 
     with InspectorStep("Инициализация таблицы переводов (string_table)") as step:
         _ = StringTable()
@@ -98,11 +111,31 @@ def _inspection_pipeline() -> None:
     with InspectorStep("Инициализация данных о локациях") as step:
         game_levels = GameLevels()
 
+    with InspectorStep("Проверка локаций") as step:
+        unk_levels: list[str] = [
+            level
+            for level in ini_game.section("level_maps_single").lines()
+            if level not in game_levels
+        ]
+        if len(unk_levels) > 0:
+            step.info(
+                "В конфигах игры обнаружены локации,",
+                "которые не зафиксированы в [level_gvids]"
+            )
+            step.info(
+                "Скорее всего, необходимо вручную обновить [level_gvids]",
+                "на основе данных game.graph из папки gamedata"
+            )
+            for level in unk_levels:
+                step.warn(level.lower())
+
     with InspectorStep("Инициализация данных о коэффициентах торговли") as step:
         _ = TradeBuy()
 
     with InspectorStep("Инициализация данных о тайниках") as step:
-        _ = TreasureManager()
+        treasure_manager = TreasureManager()
+        if len(treasure_manager) == 0:
+            step.warn("Нет данных о тайниках")
 
     with InspectorStep("Инициализация данных о спавне (all.spawn)") as step:
         ini_spawn = spawn_ini()
@@ -178,8 +211,23 @@ def _inspection_pipeline() -> None:
                     f"\n  [features] universal_acdc = {std_determined} ; определённый"
                 )
 
-    if len(ini_spawn.sections()) > 0:
-        with InspectorStep("Проверка секций из [ignore_sections]") as step:
+    with InspectorStep("Проверка секций из [ignore_sections]") as step:
+        # Поиск секций, не существующих в игре
+        unk_sections: list[str] = [
+            section_name
+            for section_name in ini_meta.section("ignore_sections").lines()
+            if not ini_system.section_exist(section_name)
+        ]
+        if len(unk_sections) > 0:
+            step.info(
+                "Секции из [ignore_sections], которых нет в конфигах игры:",
+                header=True
+            )
+            for section_name in unk_sections:
+                step.warn(section_name)
+
+        # Определение секций, которые возможно не стоит игнорировать
+        if len(ini_spawn.sections()) > 0:
             class SectionSource(Enum):
                 ALL_SPAWN           = "all.spawn"
                 DROP_BOX            = "drop_box"
@@ -214,7 +262,10 @@ def _inspection_pipeline() -> None:
                 collector.result.clear()
 
             if any((len(srcs) > 0) for srcs in ignored_src.values()):
-                step.info("Секции из [ignore_sections], которые встречаются в игре:")
+                step.info(
+                    "Секции из [ignore_sections], которые встречаются в игре:",
+                    header=True
+                )
                 for section_name, srcs in ignored_src.items():
                     if len(srcs) > 0:
                         step.warn("{}: {}".format(
@@ -222,13 +273,8 @@ def _inspection_pipeline() -> None:
                             ", ".join([src.value for src in srcs])
                         ))
 
-    with InspectorStep("Проверка заглушек для CLSID") as step:
-        @dataclass(slots=True, frozen=True)
-        class SectionWithDummyClass:
-            section_name: str
-            clsid: str
-
-        dummy_sections: list[SectionWithDummyClass] = []
+        # Секции с CLSID-заглушкой должны быть занесены в список
+        dummy_sections: list[tuple[str, str]] = []
         dummy_clsids: set[str] = {
             clsid
             for clsid in clsids
@@ -241,16 +287,14 @@ def _inspection_pipeline() -> None:
                 and (clsid in dummy_clsids)
                 and not ini_meta.line_exist("ignore_sections", s.id)
             ):
-                dummy_sections.append(SectionWithDummyClass(
-                    section_name=s.id,
-                    clsid=clsid
-                ))
+                dummy_sections.append((s.id, clsid))
         if len(dummy_sections) > 0:
             step.info(
-                "Секции с CLSID-заглушкой рекомендуется прописать в [ignore_sections]:"
+                "Секции с CLSID-заглушкой рекомендуется прописать в [ignore_sections]:",
+                header=True
             )
-            for data in dummy_sections:
-                step.warn(f"{data.section_name} (class = {data.clsid})")
+            for section_name, clsid in dummy_sections:
+                step.warn(f"{section_name} (class = {clsid})")
 
     with InspectorStep("Проверка правил определения типов объектов") as step:
         class InspectedType(Enum):
@@ -386,8 +430,10 @@ def _inspection_pipeline() -> None:
                 "panic_threshold",
             ],
             InspectedType.MONSTER: [
-                "attack_params", "max_hear_dist",
-                "SoundThreshold", "DamagedThreshold",
+                "attack_params",
+                # "max_hear_dist",
+                "SoundThreshold",
+                # "DamagedThreshold",
                 "RunAttack_PathDistance", "RunAttack_StartDistance",
                 "DayTime_Begin", "DayTime_End",
                 "distance_to_corpse", "satiety_threshold",
@@ -444,7 +490,9 @@ def _inspection_pipeline() -> None:
             ],
             InspectedType.ITEM_ART: [
                 # CArtefact
-                "particles", "hit_absorbation_sect", "artefact_spawn_zones",
+                "particles",
+                # "hit_absorbation_sect",
+                "artefact_spawn_zones",
             ],
             InspectedType.ITEM_WEAPON: [
                 # CWeapon
@@ -480,7 +528,8 @@ def _inspection_pipeline() -> None:
                 "radiation_protection", "telepatic_protection",
                 "chemical_burn_protection", "explosion_protection",
                 "fire_wound_protection",
-                "actor_visual", "ef_equipment_type", "power_loss",
+                # "actor_visual", "ef_equipment_type",
+                "power_loss",
             ],
         }
         for s in ini_system.sections():
@@ -497,7 +546,9 @@ def _inspection_pipeline() -> None:
         heuristic_sn: dict[InspectedType, re.Pattern] = {
             # InspectedType.ANOMALY:      re.compile(r"zone_.*|.*_zone"),
             InspectedType.ITEM_ART:     re.compile(r"af_.*"),
-            InspectedType.ITEM_WEAPON:  re.compile(r"wpn_(?!.*(addon|missile)).*"),
+            InspectedType.ITEM_WEAPON:  re.compile(
+                r"wpn_(?!.*(addon|missile|grenade|launcher|scope|sil_|sil$|silencer)).*"
+            ),
             InspectedType.ITEM_AMMO:    re.compile(r"ammo_.*"),
             InspectedType.ITEM_GRENADE: re.compile(r"grenade_(?!.*fake).*"),
             InspectedType.ITEM_ADDON:   re.compile(r"wpn_addon_.*"),
@@ -572,18 +623,48 @@ def _inspection_pipeline() -> None:
 
         # Вывод найденных расхождений
         if any((len(sdata.deviations) > 0) for sdata in sections_data.values()):
+            # Вычисление ширины для вывода
+            h_sname = "имя секции"
+            h_type_0 = "определённый тип"
+            h_type_1 = "возможный тип"
+            h_reason = "причина"
+            w_sname, w_type_0, w_type_1 = len(h_sname), len(h_type_0), len(h_type_1)
+            for sname, sdata in sections_data.items():
+                if len(sdata.deviations) > 0:
+                    w_sname = max(w_sname, len(sname))
+                    for dtype, _ in sdata.deviations:
+                        w_type_0 = max(
+                            w_type_0, len(clsids.get_object_type(sdata.clsid).name)
+                        )
+                        w_type_1 = max(
+                            w_type_1, len(dtype.type_label)
+                        )
+            line_template = (
+                f"{{0:<{w_sname}}}   {{1:<{w_type_0}}}   {{2:<{w_type_1}}}   ({{3}})"
+            )
+
+            # Вывод
             step.info(
                 "Возможно, для некоторых секций неправильно определяется тип объекта..."
             )
-            step.info("'имя секции': 'определённый тип' -> 'возможный тип' ('причина')")
+            step.info(
+                line_template.format(h_sname, h_type_0, h_type_1, h_reason),
+                header=True
+            )
             for sname, sdata in sections_data.items():
                 for dtype, dreason in sdata.deviations:
-                    step.warn("{}: {} -> {} ({})".format(
+                    step.warn(line_template.format(
                         sname,
                         clsids.get_object_type(sdata.clsid).name,
                         dtype.type_label,
                         dreason.value
                     ))
+            step.info(
+                "Вспомогательные секции "
+                "(например, содержащие 'test' или 'fake' в названии)",
+                "рекомендуется занести в [ignore_sections]",
+                header=True
+            )
 
 
 def inspect(show_stderr: bool = False, show_traceback: bool = False) -> None:

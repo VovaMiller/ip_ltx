@@ -4,7 +4,8 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 
 from ..ini import system_ini
-from ..utils import SingletonBase, print_error, print_warning, read_xml
+from ..utils import SingletonBase, print_error
+from ..utils_xml import print_warning_xml, read_xml
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,7 +52,7 @@ class InfoPortions(SingletonBase):
             if root is None:
                 # Пустые файлы просто пропускаем
                 if len(xml_lines) <= 1:
-                    print_warning(f"[XML:{fp_from_config}] Empty file")
+                    print_warning_xml(f"[XML:{fp_from_config}] Empty file")
                     continue
 
                 # Пробуем добавить закрывающий тег
@@ -62,7 +63,7 @@ class InfoPortions(SingletonBase):
                     print_error(fp_from_config)
                     raise
                 else:
-                    print_warning(f"[XML:{fp_from_config}] Closing tag is missing")
+                    print_warning_xml(f"[XML:{fp_from_config}] Closing tag is missing")
 
             for elem in root.iterfind("info_portion"):
                 # id
@@ -70,7 +71,7 @@ class InfoPortions(SingletonBase):
                 if id is None:
                     continue
                 if id in self._data:
-                    print_warning(
+                    print_warning_xml(
                         f"[XML:{fp_from_config}] "
                         f"Duplicate <info_portion id=\"{id}\" ...>"
                     )

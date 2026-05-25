@@ -3,7 +3,6 @@
 import itertools
 import math
 import traceback
-from collections import OrderedDict
 from collections.abc import Collection
 from pathlib import Path
 
@@ -19,6 +18,7 @@ from .utils import (
     validate_data,
 )
 from .utils_meta import CLSIDs
+from .utils_system import is_multiscope_section
 from .xml_data.string_table import StringTable
 
 # ----------------------------------------------------------------
@@ -95,7 +95,7 @@ def tm__count_by_levels(fn: str) -> None:
 
     # writing down
     with Path(fn).open("w", encoding="utf-8") as file:
-        offset = ((max([len(lvl) for lvl in cnt_by_lvl]) // 4) + 1) * 4
+        offset = ((max([len(lvl) for lvl in cnt_by_lvl], default=0) // 4) + 1) * 4
         for lvl, cnt in sorted(cnt_by_lvl.items(), key=lambda x: x[0]):
             file.write("{}{}{}\n".format(lvl, " "*(offset - len(lvl)), cnt))
         file.write("{}\n".format("-"*(offset+2)))
@@ -110,14 +110,14 @@ def tm__calculate_prob_w(fn: str) -> None:
     """
     tm = TreasureManager()
     spawn = get_spawn()
-    d = OrderedDict()
+    d = {}
     for treasure in tm:
         obj = spawn.story_object(treasure.target)
         cost = round(obj._loot.cost(in_trade=False))
         prob_w = 0 if (cost == 0) else math.ceil(1000000 / cost)
         d[treasure._id] = prob_w
-    offset_0 = ((max([len(k) for k in d]) // 4) + 1) * 4
-    offset_1 = ((max([len(str(v)) for v in d.values()]) // 4) + 1) * 4
+    offset_0 = ((max([len(k) for k in d], default=0) // 4) + 1) * 4
+    offset_1 = ((max([len(str(v)) for v in d.values()], default=0) // 4) + 1) * 4
     with Path(fn).open("w", encoding="utf-8") as file:
         file.write("# treasure_id, prob_w\n")
         for tid, prob_w in d.items():
@@ -236,10 +236,7 @@ def summary(
             if ini_meta.line_exist("ignore_sections", id):
                 # Пропускаем игнорируемые секции.
                 continue
-            if (
-                clsids.is_weapon(_class)
-                and (len(sect.get_string("scope_respawn", "")) > 0)
-            ):
+            if clsids.is_weapon(_class) and is_multiscope_section(sect):
                 # Пропускаем вспомогательные секции оружия для многоприцельности.
                 continue
             if not sect.get_bool("can_take", True):

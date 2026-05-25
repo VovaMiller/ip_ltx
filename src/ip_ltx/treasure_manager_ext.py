@@ -2,40 +2,67 @@
 """
 
 import copy
+import os
 import re
-from typing import Self
+from typing import NoReturn, Self
 
-from .ini import system_ini
-from .ip_ltx import Section
+from .ini import meta_ini, system_ini
+from .ip_ltx import Ini, Section
 from .misc.trade import TradeBuy
-from .utils import print_warning
+from .utils import print_error, print_warning
 from .utils_meta import CLSIDs, ObjectType
+from .utils_system import get_multiscope_base, is_multiscope_section
+
+# ----------------------------------------------------------------
+
+class SpawnEntryError(Exception):
+    """Базовое исключение при ошибке инициализации :class:`SpawnEntry`.
+
+    :param context: Контекст вхождения.
+    :param msg: Тело сообщения об ошибке.
+    """
+    def __init__(self, context: str, msg: str):
+        super().__init__(f"{context} | {msg}")
+        self.context = context
+        self.msg = msg
+
+class SpawnEntryNonItemError(SpawnEntryError):
+    """Исключение при попытке инициализации :class:`SpawnEntry`
+    по неинвентарному предмету.
+    """
+    pass
 
 # ----------------------------------------------------------------
 
 class SpawnEntry:
     """Класс, представляющий одну строчку секции спавна ``[spawn]``.
 
+    ``name = params``
+
     Например, ``wpn_ak74 = 1, cond=0.8 silencer``
 
-    Также поддерживается формат секции ``[spawn_tm]`` из *iP v3.0*
+    * Поддерживается формат секции ``[spawn_tm]`` из *iP v3.0*
+    * Поддерживаются нецелые ``count`` и ``box_size``.
+
+    :param name: Имя секции. Оно же - key из строки секции спавна.
+    :param params: Параметры спавна. Оно же - value из строки секции спавна.
+    :param context: Контекст данного вхождения.
+        Например, ``custom_data@mil_inventory_box_0033``,
+        ``all.spawn@mil_wpn_ak74u``.
+        Используется только в сообщениях об ошибках (warning, error).
+    :raises SpawnEntryNonItemError: при попытке инициализации
+        по неинвентарному предмету.
+    :raises SpawnEntryError: при ошибке инициализации.
     """
     _type: ObjectType
 
     def __init__(self, name: str, params: str | int | None, context: str = ""):
-        """Инициализация строки ``name = params``
-
-        Поддерживает нецелые ``count`` и ``box_size``.
-
-        :param name: Имя секции. Оно же - key из строки секции спавна.
-        :param params: Параметры спавна. Оно же - value из строки секции спавна.
-        :param context: Контекст данного вхождения.
-            Например, ``custom_data@mil_inventory_box_0033``,
-            ``all.spawn@mil_wpn_ak74u``.
-            Используется только в сообщениях об ошибках (warning, error).
-        """
+        def _raise(msg: str, err: type[SpawnEntryError] = SpawnEntryError) -> NoReturn:
+            raise err(self.context, msg)
         def _warn(msg: str) -> None:
-            print_warning(f"{context} | {msg}")
+            opt: str = os.environ.get("HIDE_EXTRA_WARNINGS", "off")
+            if Section.cast_bool(opt) is not True:
+                print_warning(f"{context} | {msg}")
 
         self.context = context
         self.name = name
@@ -51,14 +78,19 @@ class SpawnEntry:
         # pulling section data
         ini_system = system_ini()
         clsids = CLSIDs()
+        if not ini_system.section_exist(name):
+            _raise(f"section '{name}' doesn't exist")
         _section = ini_system.section(name)
         _class = _section.get_string("class", "")
         if len(_class) == 0:
-            raise Exception(f"section '{name}' has no 'class' field")
+            _raise(f"section '{name}' has no 'class' field")
         if _class not in clsids:
-            raise Exception(f"section '{name}' has unknown class ({_class})")
+            _raise(f"section '{name}' has unknown class ({_class})")
         if not clsids.is_item(_class):
-            raise Exception(f"section '{name}' has non-item class ({_class})")
+            _raise(
+                f"section '{name}' has non-item class ({_class})",
+                SpawnEntryNonItemError
+            )
         self._type = clsids.get_object_type(_class)
 
         # parsing params
@@ -74,9 +106,9 @@ class SpawnEntry:
                     try:
                         self.count = float(params)
                     except Exception as e:
-                        raise Exception("Invalid syntax") from e
+                        raise _raise("Invalid syntax") from e
             elif comma == 0:
-                raise Exception("Invalid syntax")
+                raise _raise("Invalid syntax")
             else:
                 # count
                 if params[:comma].isdecimal():
@@ -85,7 +117,7 @@ class SpawnEntry:
                     try:
                         self.count = float(params[:comma])
                     except Exception as e:
-                        raise Exception("Invalid syntax") from e
+                        raise _raise("Invalid syntax") from e
                 params = params[comma+1:]
 
                 # prob
@@ -94,7 +126,7 @@ class SpawnEntry:
                     tmp = tmp.group(1)
                     self.prob = int(100*float(tmp) + 0.5)
                     if not (0 <= self.prob <= 100):
-                        raise Exception("Invalid prob value")
+                        raise _raise("Invalid prob value")
 
                 # cond
                 tmp = re.search(r"cond=([0-9\.]+)", params)
@@ -102,7 +134,7 @@ class SpawnEntry:
                     tmp = tmp.group(1)
                     self.cond = int(100*float(tmp) + 0.5)
                     if not (0 <= self.cond <= 100):
-                        raise Exception("Invalid cond value")
+                        raise _raise("Invalid cond value")
 
                 # box_size
                 tmp = re.search(r"box_size=([0-9\.]+)", params)
@@ -170,7 +202,7 @@ class SpawnEntry:
                         "and is not supposed to have an attached scope."
                     )
             else:
-                if len(_section.get_string("scope_respawn", "")) > 0:
+                if is_multiscope_section(_section):
                     _warn(
                         f"Missing option 'scope' for [{name}]"
                         " (multiscope weapon section is supposed"
@@ -253,9 +285,17 @@ class SpawnEntry:
         base_cost = ini_system.get_uint(self.name, "cost")
         if self._type == ObjectType.ITEM_AMMO:
             base_box_size = ini_system.get_uint(self.name, "box_size")
-            box_size = self.box_size if (self.box_size is not None) else base_box_size
-            box_count = (count * box_size) / base_box_size
-            return base_cost * box_count * prob * cond * buy_k
+            if base_box_size > 0:
+                box_size = (
+                    self.box_size
+                    if (self.box_size is not None)
+                    else base_box_size
+                )
+                box_count = (count * box_size) / base_box_size
+                return base_cost * box_count * prob * cond * buy_k
+            else:
+                print_error(f"[{self.name}] Can't calculate cost: box_size = 0")
+                return 0
         elif self._type == ObjectType.ITEM_WEAPON:
             cost_sum = base_cost * count * prob * cond * buy_k
             addons = []
@@ -274,9 +314,10 @@ class SpawnEntry:
                 ammo_mag_size = ini_system.get_uint(self.name, "ammo_mag_size")
                 ammo_base_cost = ini_system.get_uint(ammo_class, "cost")
                 ammo_base_box_size = ini_system.get_uint(ammo_class, "box_size")
-                ammo_buy_k = 1.0 if not in_trade else trade.get_buy_k(ammo_class)
-                box_count = (count * ammo_mag_size) / ammo_base_box_size
-                cost_sum += ammo_base_cost * box_count * prob * ammo_buy_k
+                if ammo_base_box_size > 0:
+                    ammo_buy_k = 1.0 if not in_trade else trade.get_buy_k(ammo_class)
+                    box_count = (count * ammo_mag_size) / ammo_base_box_size
+                    cost_sum += ammo_base_cost * box_count * prob * ammo_buy_k
             return cost_sum
         return base_cost * count * prob * cond * buy_k
 
@@ -298,6 +339,7 @@ class SpawnEntriesPool:
     def from_items(cls: type[Self], section: Section) -> Self:
         """Конструктор по полю ``items`` из указанной секции.
         """
+        ammo_cnt_mode = meta_ini().get_bool("features", "tm_vanilla_ammo_count", True)
         clsids = CLSIDs()
         ini_system = system_ini()
         entries = cls()
@@ -309,14 +351,18 @@ class SpawnEntriesPool:
                 parsing_mode="vanilla_ext"
             )
             for item, cnt in items:
-                if (
-                    clsids.is_ammo(ini_system.get_string(item, "class"))
-                    and ini_system.get_uint(item, "box_size") != 1
-                ):
-                    se = SpawnEntry(item, f"1, box_size={cnt}", context)
-                else:
-                    se = SpawnEntry(item, cnt, context)
-                entries.add(se)
+                try:
+                    if (
+                        ammo_cnt_mode
+                        and clsids.is_ammo(ini_system.get_string(item, "class"))
+                        and ini_system.get_uint(item, "box_size") != 1
+                    ):
+                        se = SpawnEntry(item, f"1, box_size={cnt}", context)
+                    else:
+                        se = SpawnEntry(item, cnt, context)
+                    entries.add(se)
+                except (Ini.Error, SpawnEntryError) as e:
+                    print_error(f"Skipping item from [{section.id}]:\n  {e}")
         return entries
 
     def add(self, se: SpawnEntry):
@@ -408,42 +454,57 @@ class SpawnEntriesPool:
                 se.prob = None
             if se.scope:
                 addon_name = ini_system.get_string(se.name, "scope_name")
-                buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
-                se.scope = False
-                scope_respawn = ini_system.get_string(se.name, "scope_respawn", "")
-                if len(scope_respawn) > 0:
-                    se.name = scope_respawn
+                try:
+                    buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
+                    se.scope = False
+                    se.name = get_multiscope_base(ini_system.section(se.name))
+                except SpawnEntryError as e:
+                    print_error(f"Can't detach scope from '{se.name}':\n  {e}")
             if se.silencer:
                 addon_name = ini_system.get_string(se.name, "silencer_name")
-                buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
-                se.silencer = False
+                try:
+                    buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
+                    se.silencer = False
+                except SpawnEntryError as e:
+                    print_error(f"Can't detach silencer from '{se.name}':\n  {e}")
             if se.launcher:
                 addon_name = ini_system.get_string(se.name, "grenade_launcher_name")
-                buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
-                se.launcher = False
+                try:
+                    buffer.add(SpawnEntry(addon_name, str(se.count), se.context))
+                    se.launcher = False
+                except SpawnEntryError as e:
+                    print_error(f"Can't detach launcher from '{se.name}':\n  {e}")
             if not se.unload and (se._type == ObjectType.ITEM_WEAPON):
                 ammo_class = ini_system.get_strings(se.name, "ammo_class")[0]
                 ammo_mag_size = ini_system.get_uint(se.name, "ammo_mag_size")
-                if clsids.is_ammo(ini_system.get_string(ammo_class, "class")):
-                    buffer_ammo.add(SpawnEntry(
-                        ammo_class, str(ammo_mag_size * se.count), se.context
-                    ))
-                else:
-                    buffer.add(SpawnEntry(
-                        ammo_class, str(ammo_mag_size * se.count), se.context
-                    ))
-                se.unload = True
+                try:
+                    if ammo_mag_size > 0:
+                        if clsids.is_ammo(ini_system.get_string(ammo_class, "class")):
+                            buffer_ammo.add(SpawnEntry(
+                                ammo_class, str(ammo_mag_size * se.count), se.context
+                            ))
+                        else:
+                            buffer.add(SpawnEntry(
+                                ammo_class, str(ammo_mag_size * se.count), se.context
+                            ))
+                    se.unload = True
+                except (Ini.Error, SpawnEntryError) as e:
+                    print_error(f"Can't unload '{se.name}':\n  {e}")
             if se._type == ObjectType.ITEM_AMMO:
                 box_size = se.box_size
                 if box_size is None:
-                    box_size = ini_system.get_uint(se.name, "box_size")
+                    if ini_system.line_exist(se.name, "box_size"):
+                        box_size = ini_system.get_uint(se.name, "box_size")
+                    else:
+                        print_error(f"[{se.name}] has no 'box_size'")
+                        box_size = 0
                 se.count = se.count * box_size
                 se.box_size = None
                 buffer_ammo.add(se)
             else:
                 buffer.add(se)
         for se in buffer_ammo.pool.values():
-            if ini_system.get_uint(se.name, "box_size") != 1:
+            if ini_system.get_uint(se.name, "box_size", 0) != 1:
                 se.box_size = se.count
                 se.count = 1
         self.pool = buffer.pool

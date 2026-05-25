@@ -33,7 +33,7 @@ class GameLevels(SingletonBase):
         return len(self._level_gvids)
 
     def as_list(self) -> list[str]:
-        return list(self._level_gvids.keys())
+        return list(reversed(self._level_gvids.keys()))
 
     def get_lvl_by_gvid(self, gvid: int) -> str:
         """Получить имя уровня по ``game_vertex_id``
