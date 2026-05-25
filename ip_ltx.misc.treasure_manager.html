@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.xml_data package" href="ip_ltx.xml_data.html"><link rel="prev" title="ip_ltx.misc.trade module" href="ip_ltx.misc.trade.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.misc.treasure_manager module - ip-ltx (3.7.2) — Документация</title>
+        <title>ip_ltx.misc.treasure_manager module - ip-ltx (3.8.0) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.8.0) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.8.0) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -231,6 +231,8 @@
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html">ip_ltx.utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_inspector.html">ip_ltx.utils_inspector module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html">ip_ltx.utils_meta module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_system.html">ip_ltx.utils_system module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_xml.html">ip_ltx.utils_xml module</a></li>
 </ul>
 </li>
 </ul>
@@ -312,6 +314,8 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.misc.treasure_manager.</span></span><span class="sig-name descname"><span class="pre">TreasureManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.TreasureManager" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Базовые классы: <a class="reference internal" href="ip_ltx.utils.html#ip_ltx.utils.SingletonBase" title="ip_ltx.utils.SingletonBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></p>
 <p>Класс, хранящий данные о тайниках, зарегистрированных в <code class="docutils literal notranslate"><span class="pre">treasure_manager</span></code>.</p>
+<p>Путь до конфига указывается в настройках (<em>meta.ltx</em>):
+секция <code class="docutils literal notranslate"><span class="pre">[cfg_path]</span></code>, поле <code class="docutils literal notranslate"><span class="pre">treasure_manager</span></code>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.TreasureManager.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">treasure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defval</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.TreasureManager.get" title="Ссылка на это определение">¶</a></dt>
@@ -331,7 +335,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ip_ltx.misc.treasure_manager.TreasureManager.ini">
 <span class="sig-name descname"><span class="pre">ini</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Ini" title="ip_ltx.ip_ltx.Ini"><span class="pre">Ini</span></a></span><a class="headerlink" href="#ip_ltx.misc.treasure_manager.TreasureManager.ini" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Считанный файл treasure_manager.ltx</p>
+<dd><p>Считанный файл конфига (<em>treasure_manager.ltx</em>)</p>
 </dd></dl>
 
 </dd></dl>

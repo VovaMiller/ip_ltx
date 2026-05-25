@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.generator_character_desc module" href="ip_ltx.generator_character_desc.html"><link rel="prev" title="ip_ltx.analyzer_spawn module" href="ip_ltx.analyzer_spawn.html">
+<link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.utils_xml module" href="ip_ltx.utils_xml.html"><link rel="prev" title="ip_ltx.utils_meta module" href="ip_ltx.utils_meta.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.db module - ip-ltx (3.8.0) — Документация</title>
+        <title>ip_ltx.utils_system module - ip-ltx (3.8.0) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -216,7 +216,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_general.html">ip_ltx.analyzer_general module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_loot.html">ip_ltx.analyzer_loot module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_spawn.html">ip_ltx.analyzer_spawn module</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">ip_ltx.db module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.db.html">ip_ltx.db module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.generator_character_desc.html">ip_ltx.generator_character_desc module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.generator_export.html">ip_ltx.generator_export module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.generator_task_manager.html">ip_ltx.generator_task_manager module</a></li>
@@ -231,7 +231,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html">ip_ltx.utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_inspector.html">ip_ltx.utils_inspector module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html">ip_ltx.utils_meta module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_system.html">ip_ltx.utils_system module</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">ip_ltx.utils_system module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_xml.html">ip_ltx.utils_xml module</a></li>
 </ul>
 </li>
@@ -257,7 +257,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/ip_ltx.db.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/ip_ltx.utils_system.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -275,103 +275,51 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="module-ip_ltx.db">
-<span id="ip-ltx-db-module"></span><h1>ip_ltx.db module<a class="headerlink" href="#module-ip_ltx.db" title="Ссылка на этот заголовок">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="ip_ltx.db.AddonFlags">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.db.</span></span><span class="sig-name descname"><span class="pre">AddonFlags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.db.AddonFlags" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/enum.html#enum.IntEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.AddonFlags.launcher">
-<span class="sig-name descname"><span class="pre">launcher</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#ip_ltx.db.AddonFlags.launcher" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.AddonFlags.scope">
-<span class="sig-name descname"><span class="pre">scope</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#ip_ltx.db.AddonFlags.scope" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.AddonFlags.silencer">
-<span class="sig-name descname"><span class="pre">silencer</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#ip_ltx.db.AddonFlags.silencer" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
+          <section id="module-ip_ltx.utils_system">
+<span id="ip-ltx-utils-system-module"></span><h1>ip_ltx.utils_system module<a class="headerlink" href="#module-ip_ltx.utils_system" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Вспомогательные функции для работы с секциями из <code class="docutils literal notranslate"><span class="pre">system_ini</span></code> (<em>system.ltx</em>).</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_ltx.utils_system.get_multiscope_base">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.utils_system.</span></span><span class="sig-name descname"><span class="pre">get_multiscope_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_system.get_multiscope_base" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Получить имя базовой секции оружия
+по данной вспомогательной секции «многоприцельности».</p>
+<p>«Многоприцельность» - возможность прикреплять разные прицелы
+к одному и тому же оружию.</p>
+<p>Если дана не вспомогательная секция, то возвращается просто  её же имя.</p>
+<p>Примеры получения базовой секции:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wpn_ak74_pso</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">wpn_ak74</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wpn_mp5_acog</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">wpn_mp5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wpn_lr300_eotech</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">wpn_lr300</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wpn_groza</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">wpn_groza</span></code></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<a class="reference internal" href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.db.</span></span><span class="sig-name descname"><span class="pre">ObjectFlags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.db.ObjectFlags" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/enum.html#enum.IntEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flCanSave">
-<span class="sig-name descname"><span class="pre">flCanSave</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">512</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flCanSave" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flCheckForSeparator">
-<span class="sig-name descname"><span class="pre">flCheckForSeparator</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4096</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flCheckForSeparator" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flCorpseRemoval">
-<span class="sig-name descname"><span class="pre">flCorpseRemoval</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8192</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flCorpseRemoval" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flInteractive">
-<span class="sig-name descname"><span class="pre">flInteractive</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flInteractive" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flOfflineNoMove">
-<span class="sig-name descname"><span class="pre">flOfflineNoMove</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flOfflineNoMove" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flSwitchOffline">
-<span class="sig-name descname"><span class="pre">flSwitchOffline</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flSwitchOffline" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flSwitchOnline">
-<span class="sig-name descname"><span class="pre">flSwitchOnline</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flSwitchOnline" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flUseGroupBehaviour">
-<span class="sig-name descname"><span class="pre">flUseGroupBehaviour</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flUseGroupBehaviour" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flUseSmartTerrains">
-<span class="sig-name descname"><span class="pre">flUseSmartTerrains</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2048</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flUseSmartTerrains" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flUseSwitches">
-<span class="sig-name descname"><span class="pre">flUseSwitches</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flUseSwitches" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flUsedAI_Locations">
-<span class="sig-name descname"><span class="pre">flUsedAI_Locations</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flUsedAI_Locations" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flUsefulForAI">
-<span class="sig-name descname"><span class="pre">flUsefulForAI</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flUsefulForAI" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flVisibleForAI">
-<span class="sig-name descname"><span class="pre">flVisibleForAI</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flVisibleForAI" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ip_ltx.db.ObjectFlags.flVisibleForMap">
-<span class="sig-name descname"><span class="pre">flVisibleForMap</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1024</span></span><a class="headerlink" href="#ip_ltx.db.ObjectFlags.flVisibleForMap" title="Ссылка на это определение">¶</a></dt>
-<dd></dd></dl>
-
+<dl class="py function">
+<dt class="sig sig-object py" id="ip_ltx.utils_system.is_multiscope_section">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.utils_system.</span></span><span class="sig-name descname"><span class="pre">is_multiscope_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils_system.is_multiscope_section" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Является ли данная секция вспомогательной
+секцией оружия для поддержки «многоприцельности».</p>
+<p>«Многоприцельность» - возможность прикреплять разные прицелы
+к одному и тому же оружию.</p>
+<p>Обычно такие секции в имени имеют постфикс, обозначающий прицел, например:
+<code class="docutils literal notranslate"><span class="pre">wpn_ak74_pso</span></code>, <code class="docutils literal notranslate"><span class="pre">wpn_ak74u_kobra</span></code>, <code class="docutils literal notranslate"><span class="pre">wpn_mp5_acog</span></code>, <code class="docutils literal notranslate"><span class="pre">wpn_lr300_eotech</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<a class="reference internal" href="ip_ltx.ip_ltx.html#ip_ltx.ip_ltx.Section" title="ip_ltx.ip_ltx.Section"><em>Section</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -381,23 +329,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="ip_ltx.generator_character_desc.html">
+          <a class="next-page" href="ip_ltx.utils_xml.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">ip_ltx.generator_character_desc module</div>
+                <div class="title">ip_ltx.utils_xml module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="ip_ltx.analyzer_spawn.html">
+          <a class="prev-page" href="ip_ltx.utils_meta.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">ip_ltx.analyzer_spawn module</div>
+                <div class="title">ip_ltx.utils_meta module</div>
                 
               </div>
             </a>
@@ -431,30 +379,9 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">ip_ltx.db module</a><ul>
-<li><a class="reference internal" href="#ip_ltx.db.AddonFlags"><code class="docutils literal notranslate"><span class="pre">AddonFlags</span></code></a><ul>
-<li><a class="reference internal" href="#ip_ltx.db.AddonFlags.launcher"><code class="docutils literal notranslate"><span class="pre">AddonFlags.launcher</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.AddonFlags.scope"><code class="docutils literal notranslate"><span class="pre">AddonFlags.scope</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.AddonFlags.silencer"><code class="docutils literal notranslate"><span class="pre">AddonFlags.silencer</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags"><code class="docutils literal notranslate"><span class="pre">ObjectFlags</span></code></a><ul>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flCanSave"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flCanSave</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flCheckForSeparator"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flCheckForSeparator</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flCorpseRemoval"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flCorpseRemoval</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flInteractive"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flInteractive</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flOfflineNoMove"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flOfflineNoMove</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flSwitchOffline"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flSwitchOffline</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flSwitchOnline"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flSwitchOnline</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flUseGroupBehaviour"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUseGroupBehaviour</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flUseSmartTerrains"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUseSmartTerrains</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flUseSwitches"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUseSwitches</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flUsedAI_Locations"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUsedAI_Locations</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flUsefulForAI"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flUsefulForAI</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flVisibleForAI"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flVisibleForAI</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.db.ObjectFlags.flVisibleForMap"><code class="docutils literal notranslate"><span class="pre">ObjectFlags.flVisibleForMap</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">ip_ltx.utils_system module</a><ul>
+<li><a class="reference internal" href="#ip_ltx.utils_system.get_multiscope_base"><code class="docutils literal notranslate"><span class="pre">get_multiscope_base()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils_system.is_multiscope_section"><code class="docutils literal notranslate"><span class="pre">is_multiscope_section()</span></code></a></li>
 </ul>
 </li>
 </ul>

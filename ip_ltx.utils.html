@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.utils_inspector module" href="ip_ltx.utils_inspector.html"><link rel="prev" title="ip_ltx.treasure_manager_ext module" href="ip_ltx.treasure_manager_ext.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.utils module - ip-ltx (3.7.2) — Документация</title>
+        <title>ip_ltx.utils module - ip-ltx (3.8.0) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.8.0) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.8.0) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -231,6 +231,8 @@
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">ip_ltx.utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_inspector.html">ip_ltx.utils_inspector module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html">ip_ltx.utils_meta module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_system.html">ip_ltx.utils_system module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_xml.html">ip_ltx.utils_xml module</a></li>
 </ul>
 </li>
 </ul>
@@ -362,6 +364,55 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ip_ltx.utils.fill_environ">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">fill_environ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">globalns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils.fill_environ" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Заполнить переменные среды из глобальных перменных.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">META_FILEPATH</span></code>: <code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Путь до основного конфигурационного файла.</p></li>
+<li><p>Значение по умолчанию: файл <code class="docutils literal notranslate"><span class="pre">meta.ltx</span></code> в текущей рабочей директории.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HIDE_LTX_WARNINGS</span></code>: <code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Спрятать сообщения о некритических ошибках при чтении/парсинге ltx-файлов.</p></li>
+<li><p>Значение по умолчанию: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HIDE_XML_WARNINGS</span></code>: <code class="docutils literal notranslate"><span class="pre">bool</span></code></dt><dd><ul class="simple">
+<li><p>Спрятать сообщения о некритических ошибках при чтении/парсинге xml-файлов.</p></li>
+<li><p>Значение по умолчанию: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">HIDE_EXTRA_WARNINGS</span></code>: <code class="docutils literal notranslate"><span class="pre">bool</span></code></dt><dd><ul class="simple">
+<li><p>Спрятать сообщения о других некритических ошибках
+(например, при инициализации <a class="reference internal" href="ip_ltx.treasure_manager_ext.html#ip_ltx.treasure_manager_ext.SpawnEntry" title="ip_ltx.treasure_manager_ext.SpawnEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpawnEntry</span></code></a>)</p></li>
+<li><p>Значение по умолчанию: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>globalns</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/collections.abc.html#collections.abc.MutableMapping" title="(in Python v3.12)"><em>MutableMapping</em></a>)</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ip_ltx.utils.is_gamedata_dir">
 <span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">is_gamedata_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gd_path_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gd_path_alt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils.is_gamedata_dir" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Проверка, существует ли папка в ресурсах игры (gamedata).</p>
@@ -445,71 +496,6 @@
 <li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
 <li><p><strong>color</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>)</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ip_ltx.utils.read_file">
-<span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils.read_file" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Основная функция для считывания содержимого файла.</p>
-<p>При открытии пробует ряд основных кодировок:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> (UTF-8, UTF-8-BOM)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cp1251</span></code> (Windows-1251)</p></li>
-<li><p>И стандартную для системы</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>fp</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a>) – Путь до файла.</p>
-</dd>
-<dt class="field-even">Исключение<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#OSError" title="(in Python v3.12)"><strong>OSError</strong></a> – при ошибке открытия файла.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#UnicodeDecodeError" title="(in Python v3.12)"><strong>UnicodeDecodeError</strong></a> – если файл не удалось считать ни одной кодировкой.</p></li>
-</ul>
-</dd>
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Содержимое файла.</p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ip_ltx.utils.read_xml">
-<span class="sig-prename descclassname"><span class="pre">ip_ltx.utils.</span></span><span class="sig-name descname"><span class="pre">read_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp_from_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gd_path_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gd_path_alt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils.read_xml" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Основная функция для чтения XML файлов из ресурсов игры
-с поддержкой include-директив.</p>
-<p>Также перед парсингом функция:</p>
-<ul class="simple">
-<li><p>Удаляет все комментарии. Это позволяет избежать ошибки из-за комментариев
-с двумя или более дефисами внутри (<code class="docutils literal notranslate"><span class="pre">--</span></code>). С точки зрения XML формата
-это невалидные комментарии, но в ресурсах игры они всё же нередко
-встречаются, и движок на них не ругается, а просто игнорирует.</p></li>
-<li><p>Удаляет «голые» амперсанды (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>). Это технический символ для XML формата,
-который нельзя использовать как обычный символ. Тем не менее, в ресурсах игры
-могут встретиться строки, использующие амперсанд как символ. Движок же на это
-не ругается, а символы просто удаляет.</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fp</strong> – Путь до XML-файла относительно <code class="docutils literal notranslate"><span class="pre">&quot;gamedata/config/&quot;</span></code>.</p></li>
-<li><p><strong>gd_path_main</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a><em> | </em><em>None</em>) – Путь до основной папки gamedata.</p></li>
-<li><p><strong>gd_path_alt</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><em>Path</em></a><em> | </em><em>None</em>) – Путь до вспомогательной папки gamedata.
-Например, до ресурсов оригинальной игры или распакованных db-архивов.</p></li>
-<li><p><strong>fp_from_config</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Список строк прочитанного файла.
-Может быть использован для передачи в <code class="docutils literal notranslate"><span class="pre">xml.etree.ElementTree.fromstringlist</span></code>.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -629,13 +615,12 @@
 <li><a class="reference internal" href="#ip_ltx.utils.SingletonBase"><code class="docutils literal notranslate"><span class="pre">SingletonBase</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.SingletonMeta"><code class="docutils literal notranslate"><span class="pre">SingletonMeta</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.cast_safe"><code class="docutils literal notranslate"><span class="pre">cast_safe()</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.utils.fill_environ"><code class="docutils literal notranslate"><span class="pre">fill_environ()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.is_gamedata_dir"><code class="docutils literal notranslate"><span class="pre">is_gamedata_dir()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.is_gamedata_file"><code class="docutils literal notranslate"><span class="pre">is_gamedata_file()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.preinit_singletons"><code class="docutils literal notranslate"><span class="pre">preinit_singletons()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.print_error"><code class="docutils literal notranslate"><span class="pre">print_error()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.print_warning"><code class="docutils literal notranslate"><span class="pre">print_warning()</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.read_file"><code class="docutils literal notranslate"><span class="pre">read_file()</span></code></a></li>
-<li><a class="reference internal" href="#ip_ltx.utils.read_xml"><code class="docutils literal notranslate"><span class="pre">read_xml()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
 <li><a class="reference internal" href="#ip_ltx.utils.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
 </ul>

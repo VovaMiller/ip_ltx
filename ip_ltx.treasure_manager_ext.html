@@ -6,7 +6,7 @@
 <link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.utils module" href="ip_ltx.utils.html"><link rel="prev" title="ip_ltx.spawn_entries_collector module" href="ip_ltx.spawn_entries_collector.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.treasure_manager_ext module - ip-ltx (3.7.2) — Документация</title>
+        <title>ip_ltx.treasure_manager_ext module - ip-ltx (3.8.0) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">ip-ltx (3.7.2) — Документация</div></a>
+      <a href="index.html"><div class="brand">ip-ltx (3.8.0) — Документация</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">ip-ltx (3.7.2) — Документация</span>
+  <span class="sidebar-brand-text">ip-ltx (3.8.0) — Документация</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
@@ -231,6 +231,8 @@
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html">ip_ltx.utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_inspector.html">ip_ltx.utils_inspector module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html">ip_ltx.utils_meta module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_system.html">ip_ltx.utils_system module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_xml.html">ip_ltx.utils_xml module</a></li>
 </ul>
 </li>
 </ul>
@@ -432,14 +434,28 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.treasure_manager_ext.</span></span><span class="sig-name descname"><span class="pre">SpawnEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.treasure_manager_ext.SpawnEntry" title="Ссылка на это определение">¶</a></dt>
 <dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Класс, представляющий одну строчку секции спавна <code class="docutils literal notranslate"><span class="pre">[spawn]</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">params</span></code></p>
 <p>Например, <code class="docutils literal notranslate"><span class="pre">wpn_ak74</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">cond=0.8</span> <span class="pre">silencer</span></code></p>
-<p>Также поддерживается формат секции <code class="docutils literal notranslate"><span class="pre">[spawn_tm]</span></code> из <em>iP v3.0</em></p>
+<ul class="simple">
+<li><p>Поддерживается формат секции <code class="docutils literal notranslate"><span class="pre">[spawn_tm]</span></code> из <em>iP v3.0</em></p></li>
+<li><p>Поддерживаются нецелые <code class="docutils literal notranslate"><span class="pre">count</span></code> и <code class="docutils literal notranslate"><span class="pre">box_size</span></code>.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
-<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>)</p></li>
-<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Имя секции. Оно же - key из строки секции спавна.</p></li>
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>) – Параметры спавна. Оно же - value из строки секции спавна.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Контекст данного вхождения.
+Например, <code class="docutils literal notranslate"><span class="pre">custom_data&#64;mil_inventory_box_0033</span></code>,
+<code class="docutils literal notranslate"><span class="pre">all.spawn&#64;mil_wpn_ak74u</span></code>.
+Используется только в сообщениях об ошибках (warning, error).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntryNonItemError" title="ip_ltx.treasure_manager_ext.SpawnEntryNonItemError"><strong>SpawnEntryNonItemError</strong></a> – при попытке инициализации
+по неинвентарному предмету.</p></li>
+<li><p><a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntryError" title="ip_ltx.treasure_manager_ext.SpawnEntryError"><strong>SpawnEntryError</strong></a> – при ошибке инициализации.</p></li>
 </ul>
 </dd>
 </dl>
@@ -480,6 +496,37 @@
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ip_ltx.treasure_manager_ext.SpawnEntryError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.treasure_manager_ext.</span></span><span class="sig-name descname"><span class="pre">SpawnEntryError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.treasure_manager_ext.SpawnEntryError" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference external" href="https://docs.python.org/3.12/library/exceptions.html#Exception" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Базовое исключение при ошибке инициализации <a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntry" title="ip_ltx.treasure_manager_ext.SpawnEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpawnEntry</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Контекст вхождения.</p></li>
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Тело сообщения об ошибке.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ip_ltx.treasure_manager_ext.SpawnEntryNonItemError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">ip_ltx.treasure_manager_ext.</span></span><span class="sig-name descname"><span class="pre">SpawnEntryNonItemError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.treasure_manager_ext.SpawnEntryNonItemError" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntryError" title="ip_ltx.treasure_manager_ext.SpawnEntryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpawnEntryError</span></code></a></p>
+<p>Исключение при попытке инициализации <a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntry" title="ip_ltx.treasure_manager_ext.SpawnEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpawnEntry</span></code></a>
+по неинвентарному предмету.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -558,6 +605,8 @@
 <li><a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntry.signature"><code class="docutils literal notranslate"><span class="pre">SpawnEntry.signature()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntryError"><code class="docutils literal notranslate"><span class="pre">SpawnEntryError</span></code></a></li>
+<li><a class="reference internal" href="#ip_ltx.treasure_manager_ext.SpawnEntryNonItemError"><code class="docutils literal notranslate"><span class="pre">SpawnEntryNonItemError</span></code></a></li>
 </ul>
 </li>
 </ul>
