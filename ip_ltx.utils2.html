@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.analyzer_general module" href="ip_ltx.analyzer_general.html"><link rel="prev" title="ip_ltx.xml_data.texture_desc module" href="ip_ltx.xml_data.texture_desc.html">
+<link rel="index" title="Алфавитный указатель" href="genindex.html"><link rel="search" title="Поиск" href="search.html"><link rel="next" title="ip_ltx.utils_inspector module" href="ip_ltx.utils_inspector.html"><link rel="prev" title="ip_ltx.utils module" href="ip_ltx.utils.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>ip_ltx.analyzer_compare module - ip-ltx (3.8.1) — Документация</title>
+        <title>ip_ltx.utils2 module - ip-ltx (3.8.1) — Документация</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -212,7 +212,7 @@
 <li class="toctree-l4"><a class="reference internal" href="ip_ltx.xml_data.texture_desc.html">ip_ltx.xml_data.texture_desc module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">ip_ltx.analyzer_compare module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_compare.html">ip_ltx.analyzer_compare module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_general.html">ip_ltx.analyzer_general module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_loot.html">ip_ltx.analyzer_loot module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.analyzer_spawn.html">ip_ltx.analyzer_spawn module</a></li>
@@ -229,7 +229,7 @@
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.spawn_entries_collector.html">ip_ltx.spawn_entries_collector module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.treasure_manager_ext.html">ip_ltx.treasure_manager_ext module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils.html">ip_ltx.utils module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils2.html">ip_ltx.utils2 module</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">ip_ltx.utils2 module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_inspector.html">ip_ltx.utils_inspector module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_meta.html">ip_ltx.utils_meta module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ip_ltx.utils_system.html">ip_ltx.utils_system module</a></li>
@@ -258,7 +258,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/ip_ltx.analyzer_compare.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/ip_ltx.utils2.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -276,26 +276,16 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="module-ip_ltx.analyzer_compare">
-<span id="ip-ltx-analyzer-compare-module"></span><h1>ip_ltx.analyzer_compare module<a class="headerlink" href="#module-ip_ltx.analyzer_compare" title="Ссылка на этот заголовок">¶</a></h1>
-<p>Функции для сравнения секций</p>
+          <section id="module-ip_ltx.utils2">
+<span id="ip-ltx-utils2-module"></span><h1>ip_ltx.utils2 module<a class="headerlink" href="#module-ip_ltx.utils2" title="Ссылка на этот заголовок">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="ip_ltx.analyzer_compare.compare">
-<span class="sig-prename descclassname"><span class="pre">ip_ltx.analyzer_compare.</span></span><span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.analyzer_compare.compare" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Обёртка для запуска функции <code class="docutils literal notranslate"><span class="pre">_compare_sections</span></code>.</p>
-<ul class="simple">
-<li><p>Безопасный запуск: все исключения будут перехвачены.</p></li>
-<li><p>Имя выходного файла составляется из ID сравниваемых секций.</p></li>
-</ul>
+<dt class="sig sig-object py" id="ip_ltx.utils2.print_warning_extra">
+<span class="sig-prename descclassname"><span class="pre">ip_ltx.utils2.</span></span><span class="sig-name descname"><span class="pre">print_warning_extra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ip_ltx.utils2.print_warning_extra" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Сообщение о некритической ошибке, отображение которой
+регулируется переменной среды <code class="docutils literal notranslate"><span class="pre">HIDE_EXTRA_WARNINGS</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>s1_id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – ID первой секции.</p></li>
-<li><p><strong>s2_id</strong> (<a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – ID второй секции.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -307,23 +297,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="ip_ltx.analyzer_general.html">
+          <a class="next-page" href="ip_ltx.utils_inspector.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">ip_ltx.analyzer_general module</div>
+                <div class="title">ip_ltx.utils_inspector module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="ip_ltx.xml_data.texture_desc.html">
+          <a class="prev-page" href="ip_ltx.utils.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">ip_ltx.xml_data.texture_desc module</div>
+                <div class="title">ip_ltx.utils module</div>
                 
               </div>
             </a>
@@ -357,8 +347,8 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">ip_ltx.analyzer_compare module</a><ul>
-<li><a class="reference internal" href="#ip_ltx.analyzer_compare.compare"><code class="docutils literal notranslate"><span class="pre">compare()</span></code></a></li>
+<li><a class="reference internal" href="#">ip_ltx.utils2 module</a><ul>
+<li><a class="reference internal" href="#ip_ltx.utils2.print_warning_extra"><code class="docutils literal notranslate"><span class="pre">print_warning_extra()</span></code></a></li>
 </ul>
 </li>
 </ul>

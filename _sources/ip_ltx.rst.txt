@@ -39,6 +39,7 @@ Submodules
    ip_ltx.spawn_entries_collector
    ip_ltx.treasure_manager_ext
    ip_ltx.utils
+   ip_ltx.utils2
    ip_ltx.utils_inspector
    ip_ltx.utils_meta
    ip_ltx.utils_system
