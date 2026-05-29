@@ -37,9 +37,9 @@ class Dialogs(SingletonBase):
                         ini_system.gda
                     )
                 )
-            except Exception:
-                print_error(fp_from_config)
-                raise
+            except Exception as e:
+                print_error(f"[dialogs] Ignoring '{fp_from_config}':\n  {e}")
+                continue
 
             # <dialog>
             for elem in root.iterfind("dialog"):

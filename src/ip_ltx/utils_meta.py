@@ -6,6 +6,7 @@ import networkx as nx
 
 from .ini import meta_ini
 from .utils import SingletonBase, print_error, print_warning
+from .utils2 import print_warning_extra
 
 # ----------------------------------------------------------------
 
@@ -256,7 +257,7 @@ class CLSIDs(SingletonBase):
         for clsid in sect.lines():
             # Проверка: длина CLSID
             if len(clsid) > 8:
-                print_warning(f"[{sn}] len('{clsid}') > 8")
+                print_warning_extra(f"[{sn}] len('{clsid}') > 8")
 
             # Получение классов
             pair = sect.get_pair_str(clsid)

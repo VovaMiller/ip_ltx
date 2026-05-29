@@ -2,14 +2,14 @@
 """
 
 import copy
-import os
 import re
 from typing import NoReturn, Self
 
 from .ini import meta_ini, system_ini
 from .ip_ltx import Ini, Section
 from .misc.trade import TradeBuy
-from .utils import print_error, print_warning
+from .utils import print_error
+from .utils2 import print_warning_extra
 from .utils_meta import CLSIDs, ObjectType
 from .utils_system import get_multiscope_base, is_multiscope_section
 
@@ -60,9 +60,7 @@ class SpawnEntry:
         def _raise(msg: str, err: type[SpawnEntryError] = SpawnEntryError) -> NoReturn:
             raise err(self.context, msg)
         def _warn(msg: str) -> None:
-            opt: str = os.environ.get("HIDE_EXTRA_WARNINGS", "off")
-            if Section.cast_bool(opt) is not True:
-                print_warning(f"{context} | {msg}")
+            print_warning_extra(f"{context} | {msg}")
 
         self.context = context
         self.name = name

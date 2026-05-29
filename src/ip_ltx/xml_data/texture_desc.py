@@ -37,9 +37,9 @@ class TextureDesc(SingletonBase):
                         ini_system.gda
                     )
                 )
-            except Exception:
-                print_error(fp_from_config)
-                raise
+            except Exception as e:
+                print_error(f"[texture_desc] Ignoring '{fp_from_config}':\n  {e}")
+                continue
 
             # <file_name>
             elem_fn = root.find("file_name")

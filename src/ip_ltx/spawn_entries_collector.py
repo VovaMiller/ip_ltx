@@ -1,9 +1,7 @@
-import os
 from collections.abc import Container
 
 from .db import AddonFlags
 from .ini import spawn_ini, system_ini
-from .ip_ltx import Section
 from .misc.treasure_manager import TreasureManager
 from .spawn import get_spawn
 from .treasure_manager_ext import (
@@ -12,17 +10,9 @@ from .treasure_manager_ext import (
     SpawnEntryError,
     SpawnEntryNonItemError,
 )
-from .utils import print_error, print_warning
+from .utils import print_error
+from .utils2 import print_warning_extra
 from .utils_meta import ObjectType
-
-
-def _print_warning_extra(msg) -> None:
-    """Сообщение о некритической ошибке, отображение которой
-    регулируется переменной среды ``HIDE_EXTRA_WARNINGS``.
-    """
-    opt: str = os.environ.get("HIDE_EXTRA_WARNINGS", "off")
-    if Section.cast_bool(opt) is not True:
-        print_warning(msg)
 
 
 class SpawnEntriesCollector:
@@ -111,7 +101,7 @@ class SpawnEntriesCollector:
                     except SpawnEntryNonItemError:
                         # Иногда через [drop_box] нарочно спавнится,
                         #  например, какой-нибудь мутант.
-                        _print_warning_extra(
+                        print_warning_extra(
                             f"[drop_box] ({context}) Skipping non-item section [{item}]"
                         )
                     except SpawnEntryError as e:

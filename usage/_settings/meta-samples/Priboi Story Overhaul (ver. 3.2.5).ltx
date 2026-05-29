@@ -1,0 +1,313 @@
+[settings]
+gamedata_path_mod = "C:\iP\Games\S.T.A.L.K.E.R. - Priboi Story Overhaul (ver. 3.2.5)\gamedata"
+gamedata_path_alt = "C:\iP\Games\S.T.A.L.K.E.R. - Priboi Story Overhaul (ver. 3.2.5)\UEgamedata"
+
+; ----------------------------------------------------------------
+
+[features]
+iPv20               = False ; Использовать особенности ИП v2.0
+iPv30               = False ; Использовать особенности ИП v3.0
+universal_acdc      = True  ; Файлы, указанные в [spawn], были получены декомпиляцией через Universal ACDC
+inspector_pedantic  = False ; Скрупулёзный режим inspector.py
+
+; (treasure_manager)
+; Указанное в поле items кол-во для боеприпасов
+;  интерпретировать как кол-во патронов, а не единиц предмета
+tm_vanilla_ammo_count = True
+
+; ----------------------------------------------------------------
+
+[spawn]
+; Получилось декомпилировать только после удаления двух объектов (через xrSpawner):
+;   - agr_quest_case_02
+;   - rad_stalker_dead
+spawns\_ACDC_iP\alife_l01_escape.ltx
+spawns\_ACDC_iP\alife_l02_garbage.ltx
+spawns\_ACDC_iP\alife_l03_agroprom.ltx
+spawns\_ACDC_iP\alife_l03u_agr_underground.ltx
+spawns\_ACDC_iP\alife_l04_darkvalley.ltx
+spawns\_ACDC_iP\alife_l04u_labx18.ltx
+spawns\_ACDC_iP\alife_l05_bar.ltx
+spawns\_ACDC_iP\alife_l06_rostok.ltx
+spawns\_ACDC_iP\alife_l07_military.ltx
+spawns\_ACDC_iP\alife_l08_yantar.ltx
+spawns\_ACDC_iP\alife_l08u_brainlab.ltx
+spawns\_ACDC_iP\alife_l10_radar.ltx
+spawns\_ACDC_iP\alife_l10u_bunker.ltx
+spawns\_ACDC_iP\alife_l11_pripyat.ltx
+spawns\_ACDC_iP\alife_l12_stancia.ltx
+spawns\_ACDC_iP\alife_l12_stancia_2.ltx
+spawns\_ACDC_iP\alife_l12u_control_monolith.ltx
+spawns\_ACDC_iP\alife_l12u_sarcofag.ltx
+
+; ----------------------------------------------------------------
+
+[cfg_path]
+task_manager        = "config/misc/task_manager.ltx"
+treasure_manager    = "config/misc/treasure_manager.ltx"
+
+[trade]
+; Секция с коэффициентами покупки торговцами предметов.
+file_path = config\misc\trade_barman.ltx
+buy_section = barman_buy
+
+; ----------------------------------------------------------------
+
+[level_gvids]
+; Данные о локациях и их game_vertex_id из game.graph
+l01_escape              = 0
+l02_garbage             = 252
+l03_agroprom            = 416
+l03u_agr_underground    = 703
+l04_darkvalley          = 811
+l04u_labx18             = 1109
+l05_bar                 = 1168
+l06_rostok              = 1308
+l08_yantar              = 1438
+l08u_brainlab           = 1529
+l07_military            = 1545
+l10_radar               = 1862
+l11_pripyat             = 2117
+l12_stancia             = 2273
+l12u_sarcofag           = 2402
+l12u_control_monolith   = 2467
+l12_stancia_2           = 2517
+l10u_bunker             = 2661
+;stohe_selo              = 2792
+;ai_test                 = 2798
+;ai_test2                = 2841
+;jim_dark                = 2885
+;slipch_al_test          = 2890
+;plecha_selo             = 2929
+;ai_test_new             = 2931
+;koan_test               = 2959
+;l05_bar_hw              = 2964
+;l03_agroprom_hw         = 3115
+;l03u_agr_underground_hw = 3403
+
+; ----------------------------------------------------------------
+
+#include "base_SoC.ltx"
+
+[server_classes]:server_classes@soc
+[clsid_to_classes]:clsid_to_classes@soc
+
+; Определение типов объектов.
+;  Принадлежность к типу определяется принадлежностью хотя бы к одному из перечисленных классов.
+;  Принадлежность к серверному классу (cse_class) определяется прямым совпадением или наследованием от него.
+;  Принадлежность к клиентскому классу (CClass) определяется прямым совпадением без учёта наследования.
+[object_types]
+is_monster      = se_monster
+is_stalker      = se_stalker
+is_anomaly      = cse_alife_anomalous_zone, cse_alife_torrid_zone
+is_item         = cse_alife_item
+is_item_art     = cse_alife_item_artefact               ; T_ART
+is_item_weapon  = cse_alife_item_weapon                 ; T_WPN
+is_item_ammo    = cse_alife_item_ammo                   ; T_AMMO
+is_item_grenade = cse_alife_item_grenade                ; T_GREN
+is_item_addon   = CScope, CSilencer, CGrenadeLauncher   ; T_ADDON
+is_item_outfit  = cse_alife_item_custom_outfit          ; T_OUTFIT
+
+; ----------------------------------------------------------------
+
+; Список CLSID реальных аномалий
+; В отличие от 'is_anomaly' из [object_types]
+;   не должен включать костры, радиацию и т.п.
+; Используется только в analyzer_spawn
+[is_anomaly2]
+ZS_BFUZZ
+ZS_MBALD
+ZS_GALAN
+ZS_MINCE
+
+; ----------------------------------------------------------------
+
+[ignore_sections]
+
+; --multiplayer--
+mp_actor
+mp_ammo_9x18_fmj
+mp_ammo_9x18_pmm
+mp_ammo_9x18_pbp
+mp_ammo_9x19_fmj
+mp_ammo_9x19_pbp
+mp_ammo_5.45x39_fmj
+mp_ammo_5.45x39_ap
+mp_ammo_5.56x45_ss190
+mp_ammo_5.56x45_ap
+mp_ammo_7.62x54_7h1
+mp_ammo_7.62x54_ap
+mp_ammo_7.62x54_7h14
+mp_ammo_9x39_pab9
+mp_ammo_9x39_ap
+mp_ammo_9x39_sp5
+mp_ammo_11.43x23_fmj
+mp_ammo_11.43x23_hydro
+mp_ammo_12x70_buck
+mp_ammo_12x76_zhekan
+mp_ammo_12x76_dart
+mp_ammo_gauss
+mp_wpn_pb
+mp_wpn_pm
+mp_wpn_fort
+mp_wpn_hpsa
+mp_wpn_walther
+mp_wpn_beretta
+mp_wpn_colt1911
+mp_wpn_usp
+mp_wpn_sig220
+mp_wpn_desert_eagle
+mp_wpn_bm16
+mp_wpn_toz34
+mp_wpn_wincheaster1300
+mp_wpn_spas12
+mp_wpn_ak74u
+mp_wpn_ak74
+mp_wpn_mp5
+mp_wpn_l85
+mp_wpn_lr300
+mp_wpn_abakan
+mp_wpn_sig550
+mp_wpn_groza
+mp_wpn_g36
+mp_wpn_fn2000
+mp_wpn_val
+mp_wpn_vintorez
+mp_wpn_svd
+mp_wpn_svu
+mp_wpn_gauss
+mp_wpn_binoc
+mp_wpn_knife
+mp_wpn_rg-6
+mp_wpn_rpg7
+mp_wpn_rpg7_missile
+mp_wpn_addon_scope
+mp_wpn_addon_scope_susat
+mp_wpn_addon_silencer
+mp_wpn_addon_grenade_launcher
+mp_wpn_addon_grenade_launcher_m203
+mp_grenade_f1
+mp_grenade_rgd5
+mp_grenade_gd-05
+mp_ammo_vog-25
+mp_ammo_vog-25p
+mp_ammo_m209
+mp_ammo_og-7b
+mp_scientific_outfit
+mp_military_stalker_outfit
+mp_exo_outfit
+mp_af_electra_flash
+mp_medkit
+mp_antirad
+mp_detector_advances
+mp_device_torch
+mp_players_rukzak
+
+; --not in use--
+m_izgoy
+ammo_9x18_pbp
+ammo_5.7x28_fmj
+ammo_5.7x28_ap
+zone_teleport_monolith
+device_atifact_merger
+mil_svoboda_leader_pda
+dar_pass_flash
+military_stalker_outfit
+military_commander_outfit
+document
+
+; --dummy clsids--
+rat_group
+??tg_event
+spawn_group_zone
+spawn_group
+new_attachable_item
+custom_script_object
+
+; --auxiliary sections--
+ammo_12x76_zhekan_heli
+bread_a
+kolbasa_a
+vodka_a
+guitar_a
+harmonica_a
+binocular_a
+attachable_item
+
+; --extra items--
+hand_radio
+
+; --special items--
+wpn_knife
+bolt
+wpn_binoc
+device_pda
+device_torch
+
+; --build monsters--
+m_burer_e
+m_cat_e
+m_chimera_e
+m_fracture_e
+m_rat_e
+
+; --Priboi Story--
+wpn_type_teg
+wpn_type_hbgteg
+
+; ----------------------------------------------------------------
+
+; Настройки генерации таблицы для ACDC (11.10.2007)
+
+[acdc@ignore]
+SPECT
+AI_FLE_G
+AI_DOG_F
+O_SWITCH
+
+[acdc@conversion]
+cse_alife_mounted_weapon    = cse_alife_dynamic_object_visual
+cse_alife_stationary_mgun   = cse_alife_mounted_weapon
+se_artefact                 = cse_alife_item_artefact
+se_car                      = cse_alife_car
+se_heli                     = cse_alife_helicopter
+se_outfit                   = cse_alife_item_custom_outfit
+se_weapon                   = cse_alife_item_weapon
+se_weapon_shotgun           = cse_alife_item_weapon_shotgun
+se_weapon_magazined         = cse_alife_item_weapon_magazined
+se_weapon_magazined_w_gl    = cse_alife_item_weapon_magazined_w_gl
+se_item                     = cse_alife_item
+se_item_torch               = cse_alife_item_torch
+se_physic                   = cse_alife_object_physic
+se_trader                   = cse_alife_trader
+se_restrictor               = cse_alife_space_restrictor
+
+; ----------------------------------------------------------------
+
+; Настройки генерации таблиц для Universal ACDC (v1.38)
+
+[universal_acdc@ignore]
+T_ASS
+T_CS
+
+[universal_acdc@conversion]
+cse_temporary               = unknown
+cse_alife_level_changer     = se_level_changer
+cse_alife_psydog_phantom    = cse_alife_psy_dog_phantom
+cse_alife_group_template<cse_alife_monster_base> = cse_alife_flesh_group
+cse_switcher                = unknown
+se_artefact                 = cse_alife_item_artefact
+se_car                      = cse_alife_car
+se_heli                     = cse_alife_helicopter
+se_outfit                   = cse_alife_item_custom_outfit
+se_weapon                   = cse_alife_item_weapon
+se_weapon_shotgun           = cse_alife_item_weapon_shotgun
+se_weapon_magazined         = cse_alife_item_weapon_magazined
+se_weapon_magazined_w_gl    = cse_alife_item_weapon_magazined_w_gl
+se_item                     = cse_alife_item
+se_item_torch               = cse_alife_item_torch
+se_physic                   = cse_alife_object_physic
+se_trader                   = cse_alife_trader
+se_restrictor               = cse_alife_space_restrictor
+
+; ----------------------------------------------------------------

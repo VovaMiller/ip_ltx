@@ -31,9 +31,9 @@ class StringTable(SingletonBase):
                         ini_system.gda
                     )
                 )
-            except Exception:
-                print_error(fp_from_config)
-                raise
+            except Exception as e:
+                print_error(f"[string_table] Ignoring '{fp_from_config}':\n  {e}")
+                continue
             else:
                 for elem in root.iterfind("string"):
                     if (id := elem.attrib.get("id", None)) is None:
@@ -42,7 +42,7 @@ class StringTable(SingletonBase):
                         continue
                     if id in self._data:
                         print_warning_xml(
-                            f"localization: duplicate string with id=\"{id}\""
+                            f"[string_table] duplicate string with id=\"{id}\""
                         )
                     self._data[id] = str(elem_text.text)
 

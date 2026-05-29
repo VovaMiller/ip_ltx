@@ -4,6 +4,7 @@ from pathlib import Path
 from ..ini import meta_ini
 from ..ip_ltx import Ini, Section
 from ..utils import SingletonBase, print_error
+from ..utils2 import print_warning_extra
 
 
 class TradeBuyImpl:
@@ -35,9 +36,20 @@ class TradeBuyImpl:
             else:
                 try:
                     v = sum(buy_section.get_pair_float(k)) / 2.0
-                except Section.Error as e:
-                    print_error(str(e))
-                    v = 0.0  # assuming zero (NO TRADE)
+                except Section.Error:
+                    try:
+                        v = buy_section.get_float(k) / 2.0
+                    except Section.Error:
+                        print_error(
+                            f"({buy_section._src}) [{buy_section.id}] "
+                            f"field '{k}' has invalid value format"
+                        )
+                        v = 0.0  # assuming zero (NO TRADE)
+                    else:
+                        print_warning_extra(
+                            f"({buy_section._src}) [{buy_section.id}] "
+                            f"field '{k}' is missing the second value (default is 0)"
+                        )
             if (len(k) > 2) and k.startswith("/") and k.endswith("/"):
                 self._buy_k_regex[k[1:-1]] = v
             else:

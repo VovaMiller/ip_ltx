@@ -59,9 +59,9 @@ class InfoPortions(SingletonBase):
                 xml_lines.append("</game_information_portions>")
                 try:
                     root = ET.fromstringlist(xml_lines)
-                except ET.ParseError:
-                    print_error(fp_from_config)
-                    raise
+                except ET.ParseError as e:
+                    print_error(f"[info_portions] Ignoring '{fp_from_config}':\n  {e}")
+                    continue
                 else:
                     print_warning_xml(f"[XML:{fp_from_config}] Closing tag is missing")
 
