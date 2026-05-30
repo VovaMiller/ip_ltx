@@ -1,5 +1,6 @@
 -- Name: Генератор характеристик NPC
 -- Author: Vova Miller (vovamiller_97@mail.ru)
+-- Date: 30.05.2026
 
 --##############
 --#### ПОЛЯ ####

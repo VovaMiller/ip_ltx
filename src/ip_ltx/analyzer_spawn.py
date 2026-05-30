@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .ini import meta_ini, spawn_ini
+from .ip_ltx import Ini
 from .spawn import get_spawn
 from .utils import print_error, print_warning, validate_data
 from .utils_meta import ObjectType
@@ -126,6 +127,18 @@ def extract_mobs(
             continue
         ss = ini_spawn.section(obj._id)
 
+        # Отдельно считываем custom_data, чтобы сохранить исходные пробелы в значениях
+        custom_data = Ini(f"custom_data@{obj.name}")
+        if ss.line_exist("custom_data"):
+            try:
+                custom_data.read_raw(
+                    ss.get_string("custom_data", ""),
+                    preserve_value_whitespaces=True
+                )
+            except Ini.Error:
+                print_warning(f"Unable to manually read custom_data of '{obj.name}'")
+                custom_data = obj.custom_data
+
         health = None
         g_team, g_squad, g_group = None, None, None
         try:
@@ -141,17 +154,17 @@ def extract_mobs(
             continue
 
         spawner = ""
-        if obj.custom_data.section_exist("spawner"):
-            if obj.custom_data.line_exist("spawner", "cond"):
-                spawner = obj.custom_data.get_string("spawner", "cond")
+        if custom_data.section_exist("spawner"):
+            if custom_data.line_exist("spawner", "cond"):
+                spawner = custom_data.get_string("spawner", "cond")
             else:
                 print_warning(
                     f"Creature '{obj.name}' has [spawner], but no 'cond' in it"
                 )
 
         gulag = ""
-        if obj.custom_data.section_exist("smart_terrains"):
-            gulag = ", ".join(list(obj.custom_data.section("smart_terrains").lines()))
+        if custom_data.section_exist("smart_terrains"):
+            gulag = ", ".join(list(custom_data.section("smart_terrains").lines()))
 
         info[obj._type].append(MobInfo(
             spawn_id=obj.spawn_id,
