@@ -17,8 +17,8 @@ def _test(tmp_path, runnable, tag, **kwargs) -> None:
 
 # ----------------------------------------------------------------
 
-def test_ip_test_static_tables(tmp_path):
-    _test(tmp_path, ge._ip_test_static_tables, "ip_test")
+def test_ip_cmd_static_tables(tmp_path):
+    _test(tmp_path, ge._ip_cmd_static_tables, "ip_cmd")
 
 def test_acdc_tables(tmp_path):
     _test(tmp_path, ge._acdc_tables, "acdc")

@@ -10,7 +10,7 @@ from .utils_system import is_multiscope_section
 
 # ----------------------------------------------------------------
 
-def _ip_test_static_tables(fn: str) -> None:
+def _ip_cmd_static_tables(fn: str) -> None:
     @dataclass
     class SectionGroup:
         name: str
@@ -252,7 +252,7 @@ def generate() -> None:
 
     Генерирует:
 
-    * Статические таблицы для **ip_test** (``ip_test_db.script``)
+    * Статические таблицы для **ip_cmd** (``ip_cmd_db.script``)
     * Таблицу ``section_to_class`` для **ACDC**
     * Таблицы ``section_to_clsid`` и ``clsid_to_class`` для **Universal ACDC**
     """
@@ -261,7 +261,7 @@ def generate() -> None:
     print("MOD:", ini_system.gdm)
     print("ALT:", ini_system.gda or "--")
     print("-"*80)
-    run(_ip_test_static_tables, "ip_test")
+    run(_ip_cmd_static_tables,  "ip_cmd")
     run(_acdc_tables,           "acdc")
     run(_universal_acdc_tables, "universal_acdc")
     print("-"*80)
